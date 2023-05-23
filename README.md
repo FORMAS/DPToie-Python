@@ -1,19 +1,19 @@
-# DptOIE 2
-DptOIE 2 is an Open Information Extractor for Portuguese language that employs Dependence Parser and Part of Speech Tagger models with Stanford CoreNLP.
+# PTOIE-Dep
+PTOIE-Dep is an Open Information Extractor for Portuguese language that employs Dependence Parser and Part of Speech Tagger models with Stanford CoreNLP.
 
 ## This project contains:
-- DptOIE 2 source code is in Python.
+- PTOIE-Dep source code is in Python.
 - Dependence Parser and Part of Speech Tagger models trained with Stanford CoreNLP.
 
 ## Prerequisites to run from source code
 - [Dataset CETEN200, WIKI200 and models](https://drive.google.com/file/d/11ktTybvwMBAVWch4ZKaGSkO22q_iTBKK/view?usp=sharing)
 
 ## How to use
-To run the DptOIE 2
+To run the PTOIE-Dep
 ```
-DptOIE is independent of dependency parser, so it can receive annotated sentences with other dependency parsers, as long as they are in ConLL-U format with the same tagsets of [the Google treebank Treebanks Universal V2,1](https://lindat.mff.cuni.cz/repository/xmlui/handle/11234/1-2515#show-files).
+PTOIE-Dep is independent of dependency parser, so it can receive annotated sentences with other dependency parsers, as long as they are in ConLL-U format with the same tagsets of [the Google treebank Treebanks Universal V2,1](https://lindat.mff.cuni.cz/repository/xmlui/handle/11234/1-2515#show-files).
 
-To run DptOIE from a dependency tree in ConLL-U format
+To run PTOIE-Dep from a dependency tree in ConLL-U format
 ```
 py ...
 ```
