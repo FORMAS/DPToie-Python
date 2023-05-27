@@ -10,15 +10,17 @@ PTOIE-Dep is an Open Information Extractor for Portuguese language that employs 
 
 ## How to use
 To run the PTOIE-Dep
+```bash
+# TODO
 ```
 PTOIE-Dep is independent of dependency parser, so it can receive annotated sentences with other dependency parsers, as long as they are in ConLL-U format with the same tagsets of [the Google treebank Treebanks Universal V2,1](https://lindat.mff.cuni.cz/repository/xmlui/handle/11234/1-2515#show-files).
 
 To run PTOIE-Dep from a dependency tree in ConLL-U format
-```
-py ...
+```bash
+# TODO
 ```
 ## Contributing
-[Please use the GitHub issue tracker](https://github.com/FORMAS/DptOIE/issues)
+[Please use the GitHub issue tracker](https://github.com/FORMAS/PTOIE-Dep/issues)
 
 ## Authors
 * Rafael Glauber
