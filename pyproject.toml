@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "ptoie_dep"
+version = "0.1.0"
+description = "PTOIE-Dep is an Open Information Extractor for Portuguese language that employs Dependence Parser and Part of Speech Tagger models with Stanford CoreNLP."
+authors = ["Rafael Glauber <rafaelglauber@gmail.com>", "Daniela Barreiro Claro <dclaro.@ufba.br>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+urllib3 = "1.26.15"
+spacy_stanza = "^1.0.0"
+spacy = "^3.5.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
