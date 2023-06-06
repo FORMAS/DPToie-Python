@@ -15,4 +15,4 @@ COPY . /ptoie_dep
 
 ENV PYTHONPATH="$PYTHONPATH:/ptoie_dep"
 
-CMD [ "poetry", "run", "python3", "src/noie.py" ]
+ENTRYPOINT [ "poetry", "run", "python3", "src/main.py" ]

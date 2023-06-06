@@ -1,0 +1,26 @@
+name: extrai_fatos
+
+on: [push]
+
+jobs:
+  extrai_fatos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build container
+        run: DOCKER_BUILDKIT=1 docker build --tag ptoie_dep .
+      - name: Run CETEN200
+        run: | 
+          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep -path ./inputs/ceten-200.txt
+          mv ./out.txt ./outputs/ceten-200.txt
+      - name: Run WIKI200
+        run: | 
+          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep -path ./inputs/wiki-200.txt
+          mv ./out.txt ./outputs/wiki-200.txt
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: fatos
+          path: |
+            ./outputs/ceten-200.txt
+            ./outputs/wiki-200.txt
