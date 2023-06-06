@@ -440,12 +440,12 @@ if __name__ == "__main__":
     path = args.path
 
     with open(path, 'r') as f:
-        sentences = f.read()
+        sentences = f.readlines()
 
     with open('out.txt', 'w') as output:
-        for line in sentences.split('\n'):
-            line = line.strip()
-            doc = nlp(line)
-            output.write(line + '\n')
+        for sentence in sentences:
+            print(f"SENTENÇA: \"{sentence}\"")
+            doc = nlp(sentence)
+            output.write(sentence + '\n')
             for prop in doc._.clauses:
                 output.write('\t' + str(prop.to_propositions(inflect=None)) + '\n')
