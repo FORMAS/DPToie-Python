@@ -11,8 +11,10 @@ RUN python3 -m pip install poetry==1.5.0
 RUN poetry config virtualenvs.create false
 RUN poetry install
 
+RUN poetry run python3 -c "import spacy_stanza; spacy_stanza.load_pipeline('pt')"
+
 COPY . /ptoie_dep
 
 ENV PYTHONPATH="$PYTHONPATH:/ptoie_dep"
 
-ENTRYPOINT [ "poetry", "run", "python3", "src/main.py" ]
+ENTRYPOINT [ "poetry", "run", "python3", "src/noie.py" ]

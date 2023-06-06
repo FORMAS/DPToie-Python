@@ -1,3 +1,4 @@
+import argparse
 import typing
 import logging
 import spacy_stanza
@@ -432,27 +433,19 @@ if __name__ == "__main__":
     nlp = spacy_stanza.load_pipeline("pt")
     nlp.add_pipe("openie")
 
-    text = [
-        "Pinoquio disse que o heroi Super-man nasceu na extinta Kripton.",
-        "Em 21 de maio de 2013, os proprietários da NFL em suas reuniões de primavera em Boston votaram e premiaram o jogo no Levi's Stadium.",
-        "EA morreu em Princeton em 1995.",
-        "O diretor do filme, Mohsen Makhmalbaf, decide realizar uma chamada aberta para escalar os atores de seu próximo filme através de um anúncio de jornal.",
-        "No imenso desacerto que foi a defesa do Penafiel, o capitão Vasco foi o homem que ainda segurou as pontas.",
-        "Daniela Barreiro Claro é professora da UFBA e ensina Banco de Dados.",
-        "Os alunos querem aprender Matemática.",
-        "A intervenção de Pequim é, possivelmente, a de maior alcance, desde a entrega de Hong Kong pelo Reino Unido em 1997.",
-        "O dono da fazenda viajou para Salvador ontem.",
-        "Eu compro, empresto e vendo ouro.",
-        "Eu gosto de banana, pera e maça."
-    ]
+    parser = argparse.ArgumentParser(description='Extract clauses from a text file.')
+    parser.add_argument('-path', metavar='path', type=str, help='path to the text file')
+    args = parser.parse_args()
+
+    path = args.path
+
+    with open(path, 'r') as f:
+        sentences = f.read()
 
     with open('out.txt', 'w') as output:
-
-        for s in text:
-            doc = nlp(s)
-            # explacy.print_parse_info(nlp, s)
-            output.write(s + '\n')
+        for line in sentences.split('\n'):
+            line = line.strip()
+            doc = nlp(line)
+            output.write(line + '\n')
             for prop in doc._.clauses:
                 output.write('\t' + str(prop.to_propositions(inflect=None)) + '\n')
-
-        output.close()
