@@ -8,7 +8,7 @@ if __name__ == '__main__':
     nlp.add_pipe("openie")
 
     parser = argparse.ArgumentParser(description='Extract clauses from a text file.')
-    parser.add_argument('path', metavar='path', type=str, help='path to the text file')
+    parser.add_argument('-path', metavar='path', type=str, help='path to the text file')
     args = parser.parse_args()
 
     path = args.path
