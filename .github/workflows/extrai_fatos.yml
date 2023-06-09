@@ -9,13 +9,17 @@ jobs:
       - uses: actions/checkout@v3
       - name: Build container
         run: DOCKER_BUILDKIT=1 docker build --tag ptoie_dep .
+      - name: Run teste
+        run: |
+          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep -path ./inputs/teste.txt || true
+          mv ./out.txt ./outputs/teste.txt
       - name: Run CETEN200
         run: | 
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep -path ./inputs/ceten-200.txt
+          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep -path ./inputs/ceten-200.txt || true
           mv ./out.txt ./outputs/ceten-200.txt
       - name: Run WIKI200
         run: | 
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep -path ./inputs/wiki-200.txt
+          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep -path ./inputs/wiki-200.txt || true
           mv ./out.txt ./outputs/wiki-200.txt
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
@@ -24,3 +28,4 @@ jobs:
           path: |
             ./outputs/ceten-200.txt
             ./outputs/wiki-200.txt
+            ./outputs/teste.txt
