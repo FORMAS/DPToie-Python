@@ -338,6 +338,8 @@ def extract_clauses(span):
         if not subject:
             continue
 
+        complement = None
+
         # Check if there are phrases of the form, "AE, a scientist of ..."
         # If so, add a new clause of the form:
         # <AE, is, a scientist>
