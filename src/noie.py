@@ -126,9 +126,11 @@ class Clause:
     ):
 
         if inflect and not as_text:
-            logging.warning("`inflect' argument is ignored when `as_text==False'. To suppress this warning call `to_propositions' with the argument `inflect=None'")
+            logging.warning(
+                "`inflect' argument is ignored when `as_text==False'. To suppress this warning call `to_propositions' with the argument `inflect=None'")
         if capitalize and not as_text:
-            logging.warning("`capitalize' argument is ignored when `as_text==False'. To suppress this warning call `to_propositions' with the argument `capitalize=False")
+            logging.warning(
+                "`capitalize' argument is ignored when `as_text==False'. To suppress this warning call `to_propositions' with the argument `capitalize=False")
 
         propositions = []
 
@@ -323,7 +325,8 @@ def _find_matching_child(root, allowed_types):
 
 def _find_matching_parent(root, allowed_types):
     sub_tree = _find_matching_child(root.head, allowed_types=allowed_types)
-    if root.head.i > sub_tree.end:
+
+    if sub_tree is None or root.head.i > sub_tree.end:
         return None
     else:
         return Span(root.doc, root.head.i, sub_tree.end)
@@ -342,7 +345,7 @@ def extract_clauses(span):
 
         # Check if there are phrases of the form, "AE, a scientist of ..."
         # If so, add a new clause of the form:
-        # <AE, is, a scientist>
+        #
         for c in subject.root.children:
             if c.dep_ in APPOSITIVE_DEPREL:
                 appos = extract_span_from_entity(c)
@@ -400,7 +403,7 @@ def extract_span_from_entity_no_appos(token):
     ent_subtree = sorted(
         [token] + [c for c in token.children if c.dep_ not in APPOSITIVE_DEPREL],
         key=lambda x: x.i,
-        )
+    )
     return Span(token.doc, start=ent_subtree[0].i, end=ent_subtree[-1].i + 1)
 
 
@@ -428,7 +431,6 @@ def find_verb_subject(v):
             return c
         elif c.dep_ in ["advcl", "acl", "acl:relcl"] and v.head.dep_ != "root":
             return find_verb_subject(v.head)
-
 
 if __name__ == "__main__":
 
