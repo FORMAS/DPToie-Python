@@ -446,6 +446,7 @@ if __name__ == "__main__":
 
     with open('out.txt', 'w') as output:
         for sentence in sentences:
+            sentence = sentence.strip()
             print(f"SENTENÇA: \"{sentence}\"")
             doc = nlp(sentence)
             output.write(sentence + '\n')
