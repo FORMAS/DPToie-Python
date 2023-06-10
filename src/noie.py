@@ -446,10 +446,14 @@ if __name__ == "__main__":
     with open(path, 'r') as f:
         sentences = f.readlines()
 
+    output = ''
     for sentence in sentences:
         sentence = sentence.strip()
         doc = nlp(sentence)
-        with open('out.txt', 'w') as output:
-            output.write(sentence + '\n')
-            for prop in doc._.clauses:
-                output.write('\t' + str(prop.to_propositions(inflect=None)) + '\n')
+
+        output += sentence + '\n'
+        for prop in doc._.clauses:
+            output += '\t' + str(prop.to_propositions(inflect=None)) + '\n'
+
+    with open('out.txt', 'w') as f:
+        f.write(output)
