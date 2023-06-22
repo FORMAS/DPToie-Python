@@ -450,15 +450,16 @@ if __name__ == "__main__":
 
     import time
     start = time.time()
-    for sentence in sentences:
-        sentence = sentence.strip()
-        doc = nlp(sentence)
 
-        output += sentence + '\n'
+    docs = list(nlp.pipe(sentences))
+
+    for doc in docs:
+        output += doc.text + '\n'
         for prop in doc._.clauses:
             output += '\t' + str(prop.to_propositions(inflect=None)) + '\n'
 
     end = time.time()
     print(f'Time: {int(end - start)}')
+
     with open('out.txt', 'w') as f:
         f.write(output)
