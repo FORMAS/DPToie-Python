@@ -447,6 +447,9 @@ if __name__ == "__main__":
         sentences = f.readlines()
 
     output = ''
+
+    import time
+    start = time.time()
     for sentence in sentences:
         sentence = sentence.strip()
         doc = nlp(sentence)
@@ -455,5 +458,7 @@ if __name__ == "__main__":
         for prop in doc._.clauses:
             output += '\t' + str(prop.to_propositions(inflect=None)) + '\n'
 
+    end = time.time()
+    print(f'Time: {int(end - start)}')
     with open('out.txt', 'w') as f:
         f.write(output)
