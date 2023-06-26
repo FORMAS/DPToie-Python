@@ -2,6 +2,7 @@ import argparse
 import typing
 import logging
 import spacy_stanza
+import stanza
 
 from spacy.language import Language
 from spacy.tokens import Span, Doc
@@ -434,7 +435,7 @@ def find_verb_subject(v):
 
 if __name__ == "__main__":
 
-    nlp = spacy_stanza.load_pipeline("pt")
+    nlp = spacy_stanza.load_pipeline("pt", tokenize_pretokenized=True)
     nlp.add_pipe("openie")
 
     parser = argparse.ArgumentParser(description='Extract clauses from a text file.')
@@ -454,6 +455,12 @@ if __name__ == "__main__":
     import time
     start = time.time()
 
+    # call stanza tokenizer
+    tokenizer = stanza.Pipeline(lang='pt', processors='tokenize, mwt')
+    docs = tokenizer.bulk_process(sentences)
+    sentences = []
+    for doc in docs:
+        sentences.extend([' '.join([t.text for t in sent.tokens]) for sent in doc.sentences])
     docs = list(nlp.pipe(sentences))
 
     for doc in docs:
