@@ -438,7 +438,10 @@ if __name__ == "__main__":
     nlp.add_pipe("openie")
 
     parser = argparse.ArgumentParser(description='Extract clauses from a text file.')
+
     parser.add_argument('-path', metavar='path', type=str, help='path to the text file')
+    parser.add_argument('-out', metavar='out', type=str, help='path to the output file')
+
     args = parser.parse_args()
 
     path = args.path
@@ -456,10 +459,13 @@ if __name__ == "__main__":
     for doc in docs:
         output += doc.text + '\n'
         for prop in doc._.clauses:
-            output += '\t' + str(prop.to_propositions(inflect=None)) + '\n'
+            propositions = prop.to_propositions(inflect=None, as_text=True)
+            for proposition in propositions:
+                output += '\t' + proposition + '\n'
 
     end = time.time()
     print(f'Time: {int(end - start)}')
 
-    with open('out.txt', 'w') as f:
+    output_file = args.out if args.out else 'out.txt'
+    with open(output_file, 'w') as f:
         f.write(output)
