@@ -455,12 +455,14 @@ if __name__ == "__main__":
     import time
     start = time.time()
 
-    # call stanza tokenizer
     tokenizer = stanza.Pipeline(lang='pt', processors='tokenize, mwt')
-    docs = tokenizer.bulk_process(sentences)
+    tokenized_docs = tokenizer.bulk_process(sentences)
+
     sentences = []
-    for doc in docs:
-        sentences.extend([' '.join([t.text for t in sent.tokens]) for sent in doc.sentences])
+    for tokenized_doc in tokenized_docs:
+        for sentence in tokenized_doc.sentences:
+            sentences.append(' '.join([token.text for token in sentence.tokens]))
+
     docs = list(nlp.pipe(sentences))
 
     for doc in docs:
