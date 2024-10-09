@@ -7,3 +7,5 @@ services:
     volumes:
       - .:/ptoie_dep
     command: poetry run python3 src/noie.py -path ./inputs/teste.txt
+    environment:
+      - STANZA_RESOURCES_DIR=/ptoie_dep/.stanza_resources
