@@ -1,0 +1,9 @@
+services:
+  ptoie_dep:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ptoie_dep
+    volumes:
+      - .:/ptoie_dep
+    command: poetry run python3 src/noie.py -path ./inputs/teste.txt

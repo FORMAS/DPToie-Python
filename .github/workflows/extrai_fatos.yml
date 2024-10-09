@@ -13,15 +13,15 @@ jobs:
         run: mkdir outputs
       - name: Run TESTE
         run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep -path ./inputs/teste.txt || true
+          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/noie.py -path ./inputs/teste.txt || true
           mv ./out.txt ./outputs/teste.txt
       - name: Run CETEN200
         run: | 
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep -path ./inputs/ceten-200.txt || true
+          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/noie.py -path ./inputs/ceten-200.txt || true
           mv ./out.txt ./outputs/ceten-200.txt
       - name: Run WIKI200
         run: | 
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep -path ./inputs/wiki-200.txt || true
+          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/noie.py -path ./inputs/wiki-200.txt || true
           mv ./out.txt ./outputs/wiki-200.txt
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
