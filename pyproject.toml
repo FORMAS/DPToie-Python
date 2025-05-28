@@ -4,11 +4,13 @@ version = "0.1.0"
 description = "PTOIE-Dep is an Open Information Extractor for Portuguese language that employs Dependence Parser and Part of Speech Tagger models with Stanford CoreNLP."
 authors = ["Rafael Glauber <rafaelglauber@gmail.com>", "Daniela Barreiro Claro <dclaro.@ufba.br>"]
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
 spacy_stanza = "1.0.4"
-torch = {version = "^2.4.1+cpu", source = "pytorch_cpu"}
+torch = {version = "2.4.1+cpu", source = "pytorch_cpu"}
+spacy-conll = "^4.0.1"
 
 [[tool.poetry.source]]
 name = "pytorch_cpu"

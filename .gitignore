@@ -3,3 +3,5 @@
 .hypothesis
 .stanza_resources
 out.txt
+/outputs/
+!/outputs/.gitkeep

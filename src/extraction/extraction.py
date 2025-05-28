@@ -3,7 +3,6 @@ from typing import List
 
 from spacy.tokens import Span, Doc, Token
 
-
 class Extraction:
 
     def __init__(self):
@@ -18,7 +17,7 @@ class Extraction:
         stack = deque()
 
         for token in sentence:
-            if token.dep_ in ["nsubj", "nsubj:pass"]:
+            if token.dep_ in ["nsubj", "nsubj:pass"] and token.text not in ["que", "a", "o"]:
                 self.add_subject(token)
                 stack.append(token)
                 visited_tokens[token.i] = True

@@ -1,19 +1,15 @@
 FROM python:3.12-slim
 
-RUN pip install poetry==1.8.0
-
 WORKDIR /ptoie_dep
 
-RUN poetry config virtualenvs.create false
-
-COPY pyproject.toml /ptoie_dep/pyproject.toml
-COPY poetry.lock /ptoie_dep/poetry.lock
-
-RUN poetry install --no-root --no-directory
-
+COPY pyproject.toml poetry.lock /ptoie_dep/
+RUN pip install poetry  \
+    && poetry config virtualenvs.create false \
+    && poetry install --only main --no-root --no-directory
 COPY . /ptoie_dep
+RUN poetry install --only main
 
-RUN poetry install --no-dev
+RUN poetry run python3 -m spacy download pt_core_news_sm
 
 ENV PYTHONPATH="$PYTHONPATH:/ptoie_dep"
 

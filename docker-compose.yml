@@ -6,6 +6,6 @@ services:
     container_name: ptoie_dep
     volumes:
       - .:/ptoie_dep
-    command: poetry run python3 src/main.py -path ./inputs/wiki-200.txt -out ./out.json
+    command: poetry run python3 src/main.py -path /ptoie_dep/inputs/ceten-200.conll -conll
     environment:
       - STANZA_RESOURCES_DIR=/ptoie_dep/.stanza_resources
