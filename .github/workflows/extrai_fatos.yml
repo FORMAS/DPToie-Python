@@ -11,15 +11,15 @@ jobs:
         run: DOCKER_BUILDKIT=1 docker build --tag ptoie_dep .
       - name: Run TESTE
         run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/noie.py -path ./inputs/teste.txt || true
+          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -path ./inputs/teste.txt || true
           mv ./outputs/extractions.json ./outputs/teste.txt
       - name: Run CETEN200
         run: | 
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/noie.py -path ./inputs/ceten-200.conll -conll || true
+          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -path ./inputs/ceten-200.conll -conll || true
           mv ./outputs/extractions.json ./outputs/ceten-200.txt
       - name: Run WIKI200
         run: | 
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/noie.py -path ./inputs/wiki-200.conll -conll || true
+          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -path ./inputs/wiki-200.conll -conll || true
           mv ./outputs/extractions.json ./outputs/wiki-200.txt
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
