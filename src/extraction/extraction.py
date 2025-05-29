@@ -3,13 +3,15 @@ from typing import List
 
 from spacy.tokens import Span, Doc, Token
 
+from src.extraction.subject import Subject
+
 class Extraction:
 
     def __init__(self):
 
-        self.subject: List[Span] = []
+        self.subject: List[Subject] = []
 
-    def add_subject(self, subject):
+    def add_subject(self, subject: Subject):
         self.subject.append(subject)
 
     def extract_subject_from_sentence(self, sentence: Span):
@@ -18,7 +20,7 @@ class Extraction:
 
         for token in sentence:
             if token.dep_ in ["nsubj", "nsubj:pass"] and token.text not in ["que", "a", "o"]:
-                self.add_subject(token)
+                sbj = Subject(token)
                 stack.append(token)
                 visited_tokens[token.i] = True
 
@@ -29,11 +31,11 @@ class Extraction:
                             if child.dep_ in ["nummod", "advmod", "appos", "nmod", "amod", "dep", "obj", "det", "case", "punct", "conj"] and (child.dep_ != "conj" or child.pos_ != "VERB"):
                                 if child.dep_ == "punct" and not self.pontuacao_valida_sujeito(child):
                                     continue
-                                self.add_subject(child)
+                                sbj.add_piece(child)
                                 stack.append(child)
                                 visited_tokens[child.i] = True
 
-        self.subject.sort(key=lambda s: s.i)  # Ordena os tokens de sujeito pela posição na sentença
+                self.add_subject(sbj)
 
     def pontuacao_valida_sujeito(self, token: Token) -> bool:
         valid_punctuation = {"(", ")", "{", "}", "\"", "'", "[", "]", ","}

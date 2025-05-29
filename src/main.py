@@ -52,9 +52,10 @@ def main(input_file: str, output_file: str, conll_format: bool = False):
             'extractions': []
         }
         for extraction in doc._.extractions:
-            sentence['extractions'].append({
-                'subject': ' '.join([token.text for token in extraction.subject]),
-            })
+            for subject in extraction.subject:
+                sentence['extractions'].append({
+                    'subject': str(subject)
+                })
         extractions['sentences'].append(sentence)
 
     with open(output_file, 'w', encoding='utf-8') as f:
