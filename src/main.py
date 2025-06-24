@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.INFO)
 
 Doc.set_extension("extractions", getter=Extraction.get_extractions_from_doc)
 
-def main(input_file: str, output_file: str, conll_format: bool = False):
+def main(input_file: str, output_file: str, conll_format: bool = False, debug: bool = False):
 
     if not conll_format:
         nlp = init_parser("pt",
@@ -48,14 +48,22 @@ def main(input_file: str, output_file: str, conll_format: bool = False):
         doc = nlp.parse_conll_text_as_spacy(sentence)
 
         sentence = {
-            'text': doc.text,
+            'sentence': doc.text,
             'extractions': []
         }
         for extraction in doc._.extractions:
             for subject in extraction.subject:
                 sentence['extractions'].append({
-                    'subject': str(subject)
+                    'arg1': str(subject),
+                    'rel': subject.get_relation_text(),
+                    'arg2': subject.get_complement_text(),
                 })
+                if debug:
+                    logging.debug(f'Sentence {i}: token: {subject.token.text}, pieces: {[piece.text for piece in subject.pieces]}')
+                    sentence['extractions'].append({
+                        'token': subject.token.text,
+                        'pieces': [piece.text for piece in subject.pieces]
+                    })
         extractions['sentences'].append(sentence)
 
     with open(output_file, 'w', encoding='utf-8') as f:
@@ -109,7 +117,8 @@ if __name__ == "__main__":
     parser.add_argument('-path', metavar='path', type=str, help='path to the text file', default='./inputs/teste.txt')
     parser.add_argument('-out', metavar='out', type=str, help='path to the output file', default='./outputs/extractions.json')
     parser.add_argument('-conll', action='store_true', help='input file is in CONLL format')
+    parser.add_argument('-debug', action='store_true', help='enable debug mode')
 
     args = parser.parse_args()
 
-    main(input_file=args.path, output_file=args.out, conll_format=args.conll)
+    main(input_file=args.path, output_file=args.out, conll_format=args.conll, debug=args.debug)
