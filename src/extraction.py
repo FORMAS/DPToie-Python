@@ -24,6 +24,25 @@ class Extraction:
         self.complement: Optional[TripleElement] = None
 
     @staticmethod
+    def get_extractions_from_doc(doc: Doc) -> List['Extraction']:
+        extractions = []
+        for sentence in doc.sents:
+            extractions.extend(Extraction.get_extractions_from_sentence(sentence))
+        return extractions
+
+    @staticmethod
+    def get_extractions_from_sentence(sentence: Span) -> list['Extraction']:
+        final_extractions = []
+
+        initial_extractions = Extraction.__extract_subject_from_sentence(sentence)
+
+        for e1 in initial_extractions:
+            for e2 in Extraction.extract_relation(e1):
+                final_extractions.extend(Extraction.extract_complements(e2))
+
+        return final_extractions
+
+    @staticmethod
     def __extract_subject_from_sentence(sentence: Span) -> List['Extraction']:
         visited_tokens = set()
         extractions = []
@@ -270,25 +289,6 @@ class Extraction:
         """Verifica se a pontuação é válida para compor um elemento."""
         valid_punctuation = {"(", ")", "{", "}", "\"", "'", "[", "]", ","}
         return token.text in valid_punctuation
-
-    @staticmethod
-    def get_extractions_from_doc(doc: Doc) -> List['Extraction']:
-        extractions = []
-        for sentence in doc.sents:
-            extractions.extend(Extraction.get_extractions_from_sentence(sentence))
-        return extractions
-
-    @staticmethod
-    def get_extractions_from_sentence(sentence: Span) -> list['Extraction']:
-        final_extractions = []
-
-        initial_extractions = Extraction.__extract_subject_from_sentence(sentence)
-
-        for e1 in initial_extractions:
-            for e2 in Extraction.extract_relation(e1):
-                final_extractions.extend(Extraction.extract_complements(e2))
-
-        return final_extractions
 
     def __iter__(self):
         yield 'arg1', str(self.subject) if self.subject else None
