@@ -109,56 +109,98 @@ class Extraction:
         extractions.append(extraction)
         return extractions
 
+    # Substitua os métodos extract_complement e extract_broken_clauses por este único método.
+    # A função auxiliar __dfs_for_complement continua sendo necessária.
+
     @staticmethod
-    def extract_complement(extraction: 'Extraction') -> List['Extraction']:
-
-        extractions: list['Extraction'] = []
-
+    def extract_complements(extraction: 'Extraction') -> List['Extraction']:
         if extraction.relation is None or extraction.relation.core is None:
             return [extraction]
 
-        # Consolida os índices de tokens já visitados do sujeito e da relação
-        visited_indices = {extraction.subject.core.i, extraction.relation.core.i}
-        visited_indices.update(p.i for p in extraction.subject.pieces)
-        visited_indices.update(r.i for r in extraction.relation.pieces)
+        # Conjunto de todos os índices já usados no sujeito e na relação.
+        base_visited_indices = {extraction.subject.core.i, extraction.relation.core.i}
+        base_visited_indices.update(p.i for p in extraction.subject.pieces)
+        base_visited_indices.update(r.i for r in extraction.relation.pieces)
 
-        # Pilha para a busca em profundidade (DFS)
-        stack = deque()
-        extraction.complement = TripleElement()
-
-        # Identifica todos os filhos diretos da relação que são partes válidas do complemento
-        initial_complement_parts = sorted(
+        # Passo 1: Encontra todos os filhos do verbo que são candidatos a iniciar um complemento.
+        potential_starts = sorted(
             [child for child in extraction.relation.core.children if
-             child.i not in visited_indices and extraction.__is_complement_part(child)],
+             child.i not in base_visited_indices and extraction.__is_complement_part(child)],
             key=lambda t: t.i
         )
 
-        if not initial_complement_parts:
-            return [extraction]
+        if not potential_starts:
+            return [extraction]  # Retorna a extração original sem complemento.
 
-        # O primeiro token válido é definido como o núcleo do complemento
-        extraction.complement.core = initial_complement_parts[0]
-        visited_indices.add(extraction.complement.core.i)
-        stack.append(extraction.complement.core)
+        # Lista final de extrações que será retornada.
+        final_extractions = []
 
-        # Adiciona os outros tokens iniciais às peças e à pilha para a travessia
-        for token in initial_complement_parts[1:]:
-            extraction.complement.add_piece(token)
-            visited_indices.add(token.i)
-            stack.append(token)
+        # Clona a extração original para não modificar a referência passada.
+        main_extraction = Extraction()
+        main_extraction.subject = extraction.subject
+        main_extraction.relation = extraction.relation
 
-        # Realiza a busca em profundidade (DFS) a partir dos tokens iniciais
+        # --- Passo 2: Extrai o Complemento Principal ---
+        # O primeiro candidato é o início do complemento principal.
+        main_complement_start = potential_starts[0]
+
+        # Realiza a DFS para construir o complemento principal completo.
+        main_complement = Extraction.__dfs_for_complement(main_complement_start, base_visited_indices, extraction)
+        main_extraction.complement = main_complement
+        final_extractions.append(main_extraction)
+
+        # Atualiza o conjunto de tokens visitados com os usados no complemento principal.
+        all_visited_indices = base_visited_indices.copy()
+        if main_complement.core:
+            all_visited_indices.add(main_complement.core.i)
+            all_visited_indices.update(p.i for p in main_complement.pieces)
+
+        # --- Passo 3: Extrai as Cláusulas Quebradas (Restantes) ---
+        # Itera sobre os mesmos candidatos novamente.
+        for start_token in potential_starts:
+            # Se o candidato já foi incluído no complemento principal (ou outro), pula.
+            if start_token.i in all_visited_indices:
+                continue
+
+            # Se não foi usado, é o início de uma cláusula quebrada.
+            broken_clause = Extraction.__dfs_for_complement(start_token, all_visited_indices, extraction)
+
+            if broken_clause.core:
+                # Cria uma NOVA extração para a cláusula quebrada.
+                new_extraction = Extraction()
+                new_extraction.subject = extraction.subject
+                new_extraction.relation = extraction.relation
+                new_extraction.complement = broken_clause
+                final_extractions.append(new_extraction)
+
+                # Marca os tokens desta cláusula como visitados para as próximas iterações.
+                all_visited_indices.add(broken_clause.core.i)
+                all_visited_indices.update(p.i for p in broken_clause.pieces)
+
+        return final_extractions
+
+    @staticmethod
+    def __dfs_for_complement(start_token: Token, visited_indices: set, extraction: 'Extraction') -> TripleElement:
+        """
+        Realiza uma busca em profundidade (DFS) a partir de um token inicial
+        para construir um elemento de tripla (sujeito, relação ou complemento).
+        """
+        complement = TripleElement(start_token)
+        stack = deque([start_token])
+
+        # Adiciona o token inicial ao conjunto de visitados para esta busca específica
+        local_visited = visited_indices.copy()
+        local_visited.add(start_token.i)
+
         while stack:
             current_token = stack.pop()
-            # Explora os filhos do token atual em ordem
             for child in sorted(current_token.children, key=lambda t: t.i):
-                if child.i not in visited_indices and extraction.__is_complement_part(child):
-                    extraction.complement.add_piece(child)
-                    visited_indices.add(child.i)
+                if child.i not in local_visited and extraction.__is_complement_part(child):
+                    complement.add_piece(child)
+                    local_visited.add(child.i)
                     stack.append(child)
 
-        extractions.append(extraction)
-        return extractions
+        return complement
 
     @staticmethod
     def __is_complement_part(token: Token) -> bool:
@@ -222,11 +264,15 @@ class Extraction:
 
     @staticmethod
     def get_extractions_from_sentence(sentence: Span) -> list['Extraction']:
-        extractions: list['Extraction'] = []
-        for e1 in Extraction.__extract_subject_from_sentence(sentence):
+        final_extractions = []
+
+        initial_extractions = Extraction.__extract_subject_from_sentence(sentence)
+
+        for e1 in initial_extractions:
             for e2 in Extraction.extract_relation(e1):
-                 extractions.extend(Extraction.extract_complement(e2))
-        return extractions
+                final_extractions.extend(Extraction.extract_complements(e2))
+
+        return final_extractions
 
     def __iter__(self):
         yield 'arg1', str(self.subject) if self.subject else None
