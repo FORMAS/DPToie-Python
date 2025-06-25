@@ -227,9 +227,6 @@ class Extraction:
         """
         Verifica se um token pode ser parte de um complemento.
         """
-        # Exclui conjunções subordinativas como 'que'.
-        if token.pos_ == "SCONJ":
-            return False
 
         # Exclui pronomes relativos como 'que' de serem parte do complemento.
         if token.pos_ == "PRON" and "Rel" in token.morph.get("PronType", []):
@@ -238,7 +235,7 @@ class Extraction:
         # verificar se o token está na lista de dependências válidas
         if token.dep_ in [
             "nmod", "xcomp", "dobj", "obj", "acl:relcl", "iobj", "acl:part",
-            "nummod", "advmod", "appos", "amod", "dep", "case", "mark", "det", "flat", "fixed", "obl"
+            "nummod", "advmod", "appos", "amod", "dep", "case", "mark", "det", "flat", "fixed", "obl", "cop", "aux"
         ]:
             return True
 

@@ -48,7 +48,7 @@ def main(input_file: str, output_file: str, conll_format: bool = False, debug: b
         doc = nlp.parse_conll_text_as_spacy(sentence)
 
         sentence = {
-            'sentence': doc.text,
+            'sentence': doc.text.strip(),
             'extractions': []
         }
         for extraction in doc._.extractions:
@@ -57,16 +57,16 @@ def main(input_file: str, output_file: str, conll_format: bool = False, debug: b
                 sentence['extractions'].append({
                     'debug': {
                         'subject': {
-                            'token': extraction.subject.core.text,
-                            'pieces': [token.text for token in extraction.subject.pieces],
+                            'token': extraction.subject.core.text.strip(),
+                            'pieces': [token.text.strip() for token in extraction.subject.pieces],
                         },
                         'relation': {
-                            'token': extraction.relation.core.text,
-                            'pieces': [token.text for token in extraction.relation.pieces],
+                            'token': extraction.relation.core.text.strip(),
+                            'pieces': [token.text.strip() for token in extraction.relation.pieces],
                         },
                         'complement': {
-                            'token': extraction.complement.core.text if extraction.complement.core else None,
-                            'pieces': [token.text for token in extraction.complement.pieces],
+                            'token': extraction.complement.core.text.strip() if extraction.complement.core else None,
+                            'pieces': [token.text.strip() for token in extraction.complement.pieces],
                         }
                     }
                 })
