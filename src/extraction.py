@@ -24,9 +24,9 @@ class Extraction:
         self.complement: Optional[TripleElement] = None
 
     @staticmethod
-    def __extract_subject_from_sentence(sentence: Span) -> List[TripleElement]:
+    def __extract_subject_from_sentence(sentence: Span) -> List['Extraction']:
         visited_tokens = set()
-        subjects = []
+        extractions = []
 
         for token in sentence:
             if token.dep_ in ["nsubj", "nsubj:pass"] and token.text.lower() not in ["que", "a", "o"]:
@@ -52,28 +52,33 @@ class Extraction:
                                 stack.append(child)
                                 visited_tokens.add(child.i)
                                 current_subject_tokens.add(child)
+                extraction = Extraction()
+                extraction.subject = sbj
+                extractions.append(extraction)
 
-                subjects.append(sbj)
+        return extractions
 
-        return subjects
+    @staticmethod
+    def extract_relation(extraction: 'Extraction') -> List['Extraction']:
 
-    def extract_relation_from_sentence(self):
-        if not self.subject or not self.subject.core:
-            return
+        extractions: list['Extraction'] = []
+
+        if not extraction.subject or not extraction.subject.core:
+            return [extraction]
 
         stack = deque()
         deprel_valid = ["aux:pass", "obj", "iobj", "advmod", "cop", "aux", "expl:pv", "mark"]
         deprel_valid_for_after_subject = ["flat", "expl:pv"]
         punct_invalid = [",", "--"]
 
-        visited_tokens = {p.i for p in self.subject.pieces}
-        visited_tokens.add(self.subject.core.i)
+        visited_tokens = {p.i for p in extraction.subject.pieces}
+        visited_tokens.add(extraction.subject.core.i)
 
-        head_subject = self.subject.core.head
+        head_subject = extraction.subject.core.head
         if head_subject is None:
-            return
+            return [extraction]
 
-        self.relation = TripleElement(head_subject)
+        extraction.relation = TripleElement(head_subject)
         visited_tokens.add(head_subject.i)
 
         stack.append(head_subject)
@@ -81,57 +86,64 @@ class Extraction:
             current_token = stack.pop()
             for child in current_token.children:
                 if child.i not in visited_tokens:
-                    is_between = (min(self.subject.core.i, self.relation.core.i) < child.i < max(self.subject.core.i,
-                                                                                                 self.relation.core.i))
+                    is_between = (min(extraction.subject.core.i, extraction.relation.core.i) < child.i < max(extraction.subject.core.i,
+                                                                                                 extraction.relation.core.i))
 
                     is_deprel_valid = child.dep_ in deprel_valid
                     is_punct_valid = child.dep_ == "punct" and child.text not in punct_invalid
                     is_deprel_valid_for_after_subject = child.dep_ in deprel_valid_for_after_subject
                     is_punct_hyphen = child.dep_ == "punct" and child.text == "-"
-                    is_aclpart_valid = child.dep_ == "acl:part" and self.__acl_part_first_child(child)
+                    is_aclpart_valid = child.dep_ == "acl:part" and extraction.__acl_part_first_child(child)
 
                     if (is_between and (is_deprel_valid or is_punct_valid)) or \
                         (child.i > head_subject.i and (
                             is_deprel_valid_for_after_subject or is_punct_hyphen or is_aclpart_valid)):
 
-                        self.relation.add_piece(child)
+                        extraction.relation.add_piece(child)
                         stack.append(child)
                         visited_tokens.add(child.i)
 
                         if is_aclpart_valid:
-                            self.relation.core = child
+                            extraction.relation.core = child
 
-    def extract_complement_from_sentence(self):
-        if self.relation is None or self.relation.core is None:
-            return
+        extractions.append(extraction)
+        return extractions
+
+    @staticmethod
+    def extract_complement(extraction: 'Extraction') -> List['Extraction']:
+
+        extractions: list['Extraction'] = []
+
+        if extraction.relation is None or extraction.relation.core is None:
+            return [extraction]
 
         # Consolida os índices de tokens já visitados do sujeito e da relação
-        visited_indices = {self.subject.core.i, self.relation.core.i}
-        visited_indices.update(p.i for p in self.subject.pieces)
-        visited_indices.update(r.i for r in self.relation.pieces)
+        visited_indices = {extraction.subject.core.i, extraction.relation.core.i}
+        visited_indices.update(p.i for p in extraction.subject.pieces)
+        visited_indices.update(r.i for r in extraction.relation.pieces)
 
         # Pilha para a busca em profundidade (DFS)
         stack = deque()
-        self.complement = TripleElement()
+        extraction.complement = TripleElement()
 
         # Identifica todos os filhos diretos da relação que são partes válidas do complemento
         initial_complement_parts = sorted(
-            [child for child in self.relation.core.children if
-             child.i not in visited_indices and self.__is_complement_part(child)],
+            [child for child in extraction.relation.core.children if
+             child.i not in visited_indices and extraction.__is_complement_part(child)],
             key=lambda t: t.i
         )
 
         if not initial_complement_parts:
-            return
+            return [extraction]
 
         # O primeiro token válido é definido como o núcleo do complemento
-        self.complement.core = initial_complement_parts[0]
-        visited_indices.add(self.complement.core.i)
-        stack.append(self.complement.core)
+        extraction.complement.core = initial_complement_parts[0]
+        visited_indices.add(extraction.complement.core.i)
+        stack.append(extraction.complement.core)
 
         # Adiciona os outros tokens iniciais às peças e à pilha para a travessia
         for token in initial_complement_parts[1:]:
-            self.complement.add_piece(token)
+            extraction.complement.add_piece(token)
             visited_indices.add(token.i)
             stack.append(token)
 
@@ -140,10 +152,13 @@ class Extraction:
             current_token = stack.pop()
             # Explora os filhos do token atual em ordem
             for child in sorted(current_token.children, key=lambda t: t.i):
-                if child.i not in visited_indices and self.__is_complement_part(child):
-                    self.complement.add_piece(child)
+                if child.i not in visited_indices and extraction.__is_complement_part(child):
+                    extraction.complement.add_piece(child)
                     visited_indices.add(child.i)
                     stack.append(child)
+
+        extractions.append(extraction)
+        return extractions
 
     @staticmethod
     def __is_complement_part(token: Token) -> bool:
@@ -207,17 +222,10 @@ class Extraction:
 
     @staticmethod
     def get_extractions_from_sentence(sentence: Span) -> list['Extraction']:
-        subject_list = Extraction.__extract_subject_from_sentence(sentence)
-        extractions = []
-        for subject in subject_list:
-            extraction = Extraction()
-            extraction.subject = subject
-
-            extraction.extract_relation_from_sentence()
-            extraction.extract_complement_from_sentence()
-
-            extractions.append(extraction)
-
+        extractions: list['Extraction'] = []
+        for e1 in Extraction.__extract_subject_from_sentence(sentence):
+            for e2 in Extraction.extract_relation(e1):
+                 extractions.extend(Extraction.extract_complement(e2))
         return extractions
 
     def __iter__(self):
