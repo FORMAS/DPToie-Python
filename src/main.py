@@ -10,7 +10,7 @@ from spacy_conll import init_parser
 from spacy_conll.parser import ConllParser
 
 from spacy.tokens import Doc
-from src.extraction.extraction import Extraction
+from src.extraction import Extraction
 
 logging.basicConfig(level=logging.INFO)
 
