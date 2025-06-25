@@ -105,17 +105,7 @@ class Extraction:
             if child.i in visited_indices:
                 continue
 
-            is_complement_start = False
-            if child.dep_ in ["nmod", "xcomp", "dobj", "obj", "acl:relcl", "iobj", "nummod", "advmod", "appos", "amod", "dep", "acl:part"]:
-                is_complement_start = True
-            elif child.dep_ == "conj" and child.pos_ != 'VERB':
-                is_complement_start = True
-            elif child.dep_ in ["ccomp", "advcl"] and not any(c.dep_.startswith("nsubj") for c in child.children):
-                is_complement_start = True
-            elif child.dep_ == "punct" and self.__valid_punct_subject(child) and child.i > child.head.i:
-                is_complement_start = True
-
-            if is_complement_start:
+            if self.__is_complement_part(child):
                 stack.append(child)
                 visited_indices.add(child.i)
                 self.complement.core = child
@@ -124,20 +114,25 @@ class Extraction:
                     token = stack.pop()
                     for t_child in token.children:
                         if t_child.i not in visited_indices:
-                            is_complement_part = False
-                            if t_child.dep_ in ["nmod", "xcomp", "dobj", "obj", "acl:relcl", "iobj", "nummod", "advmod", "appos", "amod", "dep", "acl:part"]:
-                                is_complement_part = True
-                            elif t_child.dep_ == "conj" and t_child.pos_ != 'VERB':
-                                is_complement_part = True
-                            elif t_child.dep_ in ["ccomp", "advcl"] and not any(c.dep_.startswith("nsubj") for c in t_child.children):
-                                is_complement_part = True
-                            elif t_child.dep_ == "punct" and self.__valid_punct_subject(t_child) and t_child.i > t_child.head.i:
-                                is_complement_part = True
-
-                            if is_complement_part:
+                            if self.__is_complement_part(t_child):
                                 stack.append(t_child)
                                 visited_indices.add(t_child.i)
                                 self.complement.pieces.append(t_child)
+
+    @staticmethod
+    def __is_complement_part(token: Token) -> bool:
+        is_complement_start = False
+        if token.dep_ in ["nmod", "xcomp", "dobj", "obj", "acl:relcl", "iobj", "nummod", "advmod", "appos", "amod",
+                          "dep", "acl:part"]:
+            is_complement_start = True
+        elif token.dep_ == "conj" and token.pos_ != 'VERB':
+            is_complement_start = True
+        elif token.dep_ in ["ccomp", "advcl"] and not any(c.dep_.startswith("nsubj") for c in token.children):
+            is_complement_start = True
+        elif token.dep_ == "punct" and Extraction.__valid_punct_subject(token) and token.i > token.head.i:
+            is_complement_start = True
+
+        return is_complement_start
 
     @staticmethod
     def __acl_part_first_child(token: Token) -> bool:
