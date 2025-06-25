@@ -4,21 +4,19 @@ from spacy.tokens import Span, Doc, Token
 
 class TripleElement:
     def __init__(self, token: Token = None):
-        self.token: Token = token
+        self.core: Token = token
         self.pieces: List[Token] = []
 
     def __str__(self):
         # print the subject as a string ordered by the token index
         return ' '.join([token.text for token in
-                         sorted([t for t in [self.token] + self.pieces if t is not None], key=lambda x: x.i)])
+                         sorted([t for t in [self.core] + self.pieces if t is not None], key=lambda x: x.i)])
 
     def add_piece(self, piece: Token):
         self.pieces.append(piece)
 
 
-
 class Extraction:
-
     def __init__(self):
         self.subject: Optional[TripleElement] = None
         self.relation: Optional[TripleElement] = None
@@ -60,9 +58,9 @@ class Extraction:
         punct_invalid = [",", "--"]
 
         visited_tokens = [False] * len(sentence)
-        head_subject = self.subject.token.head
+        head_subject = self.subject.core.head
 
-        self.relation.token = head_subject
+        self.relation.core = head_subject
         visited_tokens[head_subject.i] = True
 
         stack.append(head_subject)
@@ -70,10 +68,10 @@ class Extraction:
             current_token = stack.pop()
             for child in current_token.children:
                 if not visited_tokens[child.i]:
-                    between_subject_and_relation = (child.i < self.relation.token.i
+                    between_subject_and_relation = (child.i < self.relation.core.i
                                                     and (
-                                                        (child.i > self.subject.token.i and self.subject.token.i < self.relation.token.i)
-                                                        or (child.i < self.subject.token.i and self.subject.token.i > self.relation.token.i)))
+                                                        (child.i > self.subject.core.i and self.subject.core.i < self.relation.core.i)
+                                                        or (child.i < self.subject.core.i and self.subject.core.i > self.relation.core.i)))
 
                     is_deprel_valid = child.dep_ in deprel_valid
                     is_punct_valid = child.dep_ == "punct" and child.text not in punct_invalid
@@ -86,15 +84,15 @@ class Extraction:
                         stack.append(child)
                         visited_tokens[child.i] = True
                         if is_aclpart_valid:
-                            self.relation.token = child
+                            self.relation.core = child
 
     def extract_complement_from_sentence(self, sentence: Span):
-        if self.relation.token is None:
+        if self.relation.core is None:
             return
 
         visited_indices = set()
-        visited_indices.add(self.subject.token.i)
-        visited_indices.add(self.relation.token.i)
+        visited_indices.add(self.subject.core.i)
+        visited_indices.add(self.relation.core.i)
 
         for p in self.subject.pieces:
             visited_indices.add(p.i)
@@ -103,7 +101,7 @@ class Extraction:
 
         stack = deque()
 
-        for child in self.relation.token.children:
+        for child in self.relation.core.children:
             if child.i in visited_indices:
                 continue
 
@@ -120,7 +118,7 @@ class Extraction:
             if is_complement_start:
                 stack.append(child)
                 visited_indices.add(child.i)
-                self.complement.token = child
+                self.complement.core = child
 
                 while stack:
                     token = stack.pop()
@@ -162,12 +160,12 @@ class Extraction:
         extractions = []
 
         for sentence in doc.sents:
-            extractions.extend(Extraction.from_sentence(sentence))
+            extractions.extend(Extraction.get_extractions_from_sentence(sentence))
 
         return extractions
 
     @staticmethod
-    def from_sentence(sentence: Span) -> list['Extraction']:
+    def get_extractions_from_sentence(sentence: Span) -> list['Extraction']:
 
         subject_list = Extraction.__extract_subject_from_sentence(sentence)
 
@@ -189,4 +187,4 @@ class Extraction:
     def __iter__(self):
         yield 'arg1', str(self.subject)
         yield 'rel', str(self.relation)
-        yield 'arg2', str(self.complement) if self.complement.token else None
+        yield 'arg2', str(self.complement) if self.complement.core else None

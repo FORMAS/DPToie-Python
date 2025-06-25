@@ -57,15 +57,15 @@ def main(input_file: str, output_file: str, conll_format: bool = False, debug: b
                 sentence['extractions'].append({
                     'debug': {
                         'subject': {
-                            'token': extraction.subject.token.text,
+                            'token': extraction.subject.core.text,
                             'pieces': [token.text for token in extraction.subject.pieces],
                         },
                         'relation': {
-                            'token': extraction.relation.token.text,
+                            'token': extraction.relation.core.text,
                             'pieces': [token.text for token in extraction.relation.pieces],
                         },
                         'complement': {
-                            'token': extraction.complement.token.text if extraction.complement.token else None,
+                            'token': extraction.complement.core.text if extraction.complement.core else None,
                             'pieces': [token.text for token in extraction.complement.pieces],
                         }
                     }
