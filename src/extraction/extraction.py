@@ -1,25 +1,39 @@
 from collections import deque
-from typing import List
-
+from typing import List, Optional
 from spacy.tokens import Span, Doc, Token
-from src.extraction.subject import Subject
+
+class TripleElement:
+    def __init__(self, token: Token = None):
+        self.token: Token = token
+        self.pieces: List[Token] = []
+
+    def __str__(self):
+        # print the subject as a string ordered by the token index
+        return ' '.join([token.text for token in
+                         sorted([t for t in [self.token] + self.pieces if t is not None], key=lambda x: x.i)])
+
+    def add_piece(self, piece: Token):
+        self.pieces.append(piece)
+
+
 
 class Extraction:
 
     def __init__(self):
+        self.subject: Optional[TripleElement] = None
+        self.relation: Optional[TripleElement] = None
+        self.complement: Optional[TripleElement] = None
 
-        self.subject: List[Subject] = []
-
-    def add_subject(self, subject: Subject):
-        self.subject.append(subject)
-
-    def extract_subject_from_sentence(self, sentence: Span):
+    @staticmethod
+    def __extract_subject_from_sentence(sentence: Span) -> List[TripleElement]:
         visited_tokens = [False] * len(sentence)
         stack = deque()
 
+        subjects = []
+
         for token in sentence:
             if token.dep_ in ["nsubj", "nsubj:pass"] and token.text not in ["que", "a", "o"]:
-                sbj = Subject(token)
+                sbj = TripleElement(token)
                 stack.append(token)
                 visited_tokens[token.i] = True
 
@@ -28,13 +42,15 @@ class Extraction:
                     for child in current_token.children:
                         if not visited_tokens[child.i]:
                             if child.dep_ in ["nummod", "advmod", "appos", "nmod", "amod", "dep", "obj", "det", "case", "punct", "conj"] and (child.dep_ != "conj" or child.pos_ != "VERB"):
-                                if child.dep_ == "punct" and not self.valid_punct_subject(child):
+                                if child.dep_ == "punct" and not Extraction.__valid_punct_subject(child):
                                     continue
                                 sbj.add_piece(child)
                                 stack.append(child)
                                 visited_tokens[child.i] = True
 
-                self.add_subject(sbj)
+                subjects.append(sbj)
+
+        return subjects
 
     def extract_relation_from_sentence(self, sentence: Span):
         stack = deque()
@@ -43,93 +59,90 @@ class Extraction:
         deprel_valid_for_after_subject = ["flat", "expl:pv"]
         punct_invalid = [",", "--"]
 
-        for subject in self.subject:
-            visited_tokens = [False] * len(sentence)
-            head_subject = subject.token.head
+        visited_tokens = [False] * len(sentence)
+        head_subject = self.subject.token.head
 
-            subject.relation_nucleus = head_subject
-            subject.add_relation(head_subject)
-            visited_tokens[head_subject.i] = True
+        self.relation.token = head_subject
+        visited_tokens[head_subject.i] = True
 
-            stack.append(head_subject)
-            while stack:
-                current_token = stack.pop()
-                for child in current_token.children:
-                    if not visited_tokens[child.i]:
-                        between_subject_and_relation = (child.i < subject.relation_nucleus.i
-                                                        and (
-                                                            (child.i > subject.token.i and subject.token.i < subject.relation_nucleus.i)
-                                                            or (child.i < subject.token.i and subject.token.i > subject.relation_nucleus.i)))
+        stack.append(head_subject)
+        while stack:
+            current_token = stack.pop()
+            for child in current_token.children:
+                if not visited_tokens[child.i]:
+                    between_subject_and_relation = (child.i < self.relation.token.i
+                                                    and (
+                                                        (child.i > self.subject.token.i and self.subject.token.i < self.relation.token.i)
+                                                        or (child.i < self.subject.token.i and self.subject.token.i > self.relation.token.i)))
 
-                        is_deprel_valid = child.dep_ in deprel_valid
-                        is_punct_valid = child.dep_ == "punct" and child.text not in punct_invalid
-                        is_deprel_valid_for_after_subject = child.dep_ in deprel_valid_for_after_subject
-                        is_punct_hyphen = child.dep_ == "punct" and child.text == "-"
-                        is_aclpart_valid = child.dep_ == "acl:part" and self._acl_part_first_child(child)
+                    is_deprel_valid = child.dep_ in deprel_valid
+                    is_punct_valid = child.dep_ == "punct" and child.text not in punct_invalid
+                    is_deprel_valid_for_after_subject = child.dep_ in deprel_valid_for_after_subject
+                    is_punct_hyphen = child.dep_ == "punct" and child.text == "-"
+                    is_aclpart_valid = child.dep_ == "acl:part" and self.__acl_part_first_child(child)
 
-                        if (between_subject_and_relation and (is_deprel_valid or is_punct_valid)) or (child.i > head_subject.i and (is_deprel_valid_for_after_subject or is_punct_hyphen or is_aclpart_valid)):
-                            subject.add_relation(child)
-                            stack.append(child)
-                            visited_tokens[child.i] = True
-                            if is_aclpart_valid:
-                                subject.relation_nucleus = child
+                    if (between_subject_and_relation and (is_deprel_valid or is_punct_valid)) or (child.i > head_subject.i and (is_deprel_valid_for_after_subject or is_punct_hyphen or is_aclpart_valid)):
+                        self.relation.add_piece(child)
+                        stack.append(child)
+                        visited_tokens[child.i] = True
+                        if is_aclpart_valid:
+                            self.relation.token = child
 
     def extract_complement_from_sentence(self, sentence: Span):
-        visited_indices = set()
-        for s in self.subject:
-            visited_indices.add(s.token.i)
-            for p in s.pieces:
-                visited_indices.add(p.i)
-            for r in s.relations:
-                visited_indices.add(r.i)
+        if self.relation.token is None:
+            return
 
-        for subject in self.subject:
-            if subject.relation_nucleus is None:
+        visited_indices = set()
+        visited_indices.add(self.subject.token.i)
+        visited_indices.add(self.relation.token.i)
+
+        for p in self.subject.pieces:
+            visited_indices.add(p.i)
+        for r in self.relation.pieces:
+            visited_indices.add(r.i)
+
+        stack = deque()
+
+        for child in self.relation.token.children:
+            if child.i in visited_indices:
                 continue
 
-            relation_nucleus = sentence.doc[subject.relation_nucleus.i]
-            stack = deque()
+            is_complement_start = False
+            if child.dep_ in ["nmod", "xcomp", "dobj", "obj", "acl:relcl", "iobj", "nummod", "advmod", "appos", "amod", "dep", "acl:part"]:
+                is_complement_start = True
+            elif child.dep_ == "conj" and child.pos_ != 'VERB':
+                is_complement_start = True
+            elif child.dep_ in ["ccomp", "advcl"] and not any(c.dep_.startswith("nsubj") for c in child.children):
+                is_complement_start = True
+            elif child.dep_ == "punct" and self.__valid_punct_subject(child) and child.i > child.head.i:
+                is_complement_start = True
 
-            for child in relation_nucleus.children:
-                if child.i in visited_indices:
-                    continue
+            if is_complement_start:
+                stack.append(child)
+                visited_indices.add(child.i)
+                self.complement.token = child
 
-                is_complement_start = False
-                if child.dep_ in ["nmod", "xcomp", "dobj", "obj", "acl:relcl", "iobj", "nummod", "advmod", "appos", "amod", "dep", "acl:part"]:
-                    is_complement_start = True
-                elif child.dep_ == "conj" and child.pos_ != 'VERB':
-                    is_complement_start = True
-                elif child.dep_ in ["ccomp", "advcl"] and not any(c.dep_.startswith("nsubj") for c in child.children):
-                    is_complement_start = True
-                elif child.dep_ == "punct" and self.valid_punct_subject(child) and child.i > child.head.i:
-                    is_complement_start = True
+                while stack:
+                    token = stack.pop()
+                    for t_child in token.children:
+                        if t_child.i not in visited_indices:
+                            is_complement_part = False
+                            if t_child.dep_ in ["nmod", "xcomp", "dobj", "obj", "acl:relcl", "iobj", "nummod", "advmod", "appos", "amod", "dep", "acl:part"]:
+                                is_complement_part = True
+                            elif t_child.dep_ == "conj" and t_child.pos_ != 'VERB':
+                                is_complement_part = True
+                            elif t_child.dep_ in ["ccomp", "advcl"] and not any(c.dep_.startswith("nsubj") for c in t_child.children):
+                                is_complement_part = True
+                            elif t_child.dep_ == "punct" and self.__valid_punct_subject(t_child) and t_child.i > t_child.head.i:
+                                is_complement_part = True
 
-                if is_complement_start:
-                    stack.append(child)
-                    visited_indices.add(child.i)
-                    subject.add_complement(child)
-
-                    while stack:
-                        token = stack.pop()
-                        for t_child in token.children:
-                            if t_child.i not in visited_indices:
-                                is_complement_part = False
-                                if t_child.dep_ in ["nmod", "xcomp", "dobj", "obj", "acl:relcl", "iobj", "nummod", "advmod", "appos", "amod", "dep", "acl:part"]:
-                                    is_complement_part = True
-                                elif t_child.dep_ == "conj" and t_child.pos_ != 'VERB':
-                                    is_complement_part = True
-                                elif t_child.dep_ in ["ccomp", "advcl"] and not any(c.dep_.startswith("nsubj") for c in t_child.children):
-                                    is_complement_part = True
-                                elif t_child.dep_ == "punct" and self.valid_punct_subject(t_child) and t_child.i > t_child.head.i:
-                                    is_complement_part = True
-
-                                if is_complement_part:
-                                    stack.append(t_child)
-                                    visited_indices.add(t_child.i)
-                                    subject.add_complement(t_child)
+                            if is_complement_part:
+                                stack.append(t_child)
+                                visited_indices.add(t_child.i)
+                                self.complement.pieces.append(t_child)
 
     @staticmethod
-    def _acl_part_first_child(token: Token) -> bool:
+    def __acl_part_first_child(token: Token) -> bool:
         token_head = token.head
         for token_child in token_head.children:
             if token_child.i > token_head.i:
@@ -140,7 +153,7 @@ class Extraction:
         return False
 
     @staticmethod
-    def valid_punct_subject(token: Token) -> bool:
+    def __valid_punct_subject(token: Token) -> bool:
         valid_punctuation = {"(", ")", "{", "}", "\"", "'", "[", "]", ","}
         return token.text in valid_punctuation
 
@@ -149,16 +162,31 @@ class Extraction:
         extractions = []
 
         for sentence in doc.sents:
-            extractions.append(Extraction.from_sentence(sentence))
+            extractions.extend(Extraction.from_sentence(sentence))
 
         return extractions
 
     @staticmethod
-    def from_sentence(sentence: Span):
-        extraction = Extraction()
+    def from_sentence(sentence: Span) -> list['Extraction']:
 
-        extraction.extract_subject_from_sentence(sentence)
-        extraction.extract_relation_from_sentence(sentence)
-        extraction.extract_complement_from_sentence(sentence)
+        subject_list = Extraction.__extract_subject_from_sentence(sentence)
 
-        return extraction
+        extractions = []
+        for subject in subject_list:
+            extraction = Extraction()
+            extraction.subject = subject
+            extraction.relation = TripleElement()
+            extraction.complement = TripleElement()
+
+            extraction.extract_relation_from_sentence(sentence)
+            extraction.extract_complement_from_sentence(sentence)
+
+
+            extractions.append(extraction)
+
+        return extractions
+
+    def __iter__(self):
+        yield 'arg1', str(self.subject)
+        yield 'rel', str(self.relation)
+        yield 'arg2', str(self.complement) if self.complement.token else None

@@ -52,22 +52,28 @@ def main(input_file: str, output_file: str, conll_format: bool = False, debug: b
             'extractions': []
         }
         for extraction in doc._.extractions:
-            for subject in extraction.subject:
+            sentence['extractions'].append(dict(extraction))
+            if debug:
                 sentence['extractions'].append({
-                    'arg1': str(subject),
-                    'rel': subject.get_relation_text(),
-                    'arg2': subject.get_complement_text(),
+                    'debug': {
+                        'subject': {
+                            'token': extraction.subject.token.text,
+                            'pieces': [token.text for token in extraction.subject.pieces],
+                        },
+                        'relation': {
+                            'token': extraction.relation.token.text,
+                            'pieces': [token.text for token in extraction.relation.pieces],
+                        },
+                        'complement': {
+                            'token': extraction.complement.token.text if extraction.complement.token else None,
+                            'pieces': [token.text for token in extraction.complement.pieces],
+                        }
+                    }
                 })
-                if debug:
-                    logging.debug(f'Sentence {i}: token: {subject.token.text}, pieces: {[piece.text for piece in subject.pieces]}')
-                    sentence['extractions'].append({
-                        'token': subject.token.text,
-                        'pieces': [piece.text for piece in subject.pieces]
-                    })
         extractions['sentences'].append(sentence)
 
     with open(output_file, 'w', encoding='utf-8') as f:
-        f.write(json.dumps(extractions, indent=4, ensure_ascii=False))
+        f.write(json.dumps(extractions, indent=2, ensure_ascii=False))
 
 
 def read_conll_sentences(file_path: str) -> Generator[str, Any, None]:
