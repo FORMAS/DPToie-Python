@@ -109,20 +109,18 @@ class Extraction:
         extractions.append(extraction)
         return extractions
 
-    # Substitua os métodos extract_complement e extract_broken_clauses por este único método.
-    # A função auxiliar __dfs_for_complement continua sendo necessária.
-
     @staticmethod
     def extract_complements(extraction: 'Extraction') -> List['Extraction']:
+        """
+        extrai complementos individuais e combinados.
+        """
         if extraction.relation is None or extraction.relation.core is None:
             return [extraction]
 
-        # Conjunto de todos os índices já usados no sujeito e na relação.
         base_visited_indices = {extraction.subject.core.i, extraction.relation.core.i}
         base_visited_indices.update(p.i for p in extraction.subject.pieces)
         base_visited_indices.update(r.i for r in extraction.relation.pieces)
 
-        # Passo 1: Encontra todos os filhos do verbo que são candidatos a iniciar um complemento.
         potential_starts = sorted(
             [child for child in extraction.relation.core.children if
              child.i not in base_visited_indices and extraction.__is_complement_part(child)],
@@ -130,54 +128,76 @@ class Extraction:
         )
 
         if not potential_starts:
-            return [extraction]  # Retorna a extração original sem complemento.
+            return [extraction]
 
-        # Lista final de extrações que será retornada.
         final_extractions = []
-
-        # Clona a extração original para não modificar a referência passada.
-        main_extraction = Extraction()
-        main_extraction.subject = extraction.subject
-        main_extraction.relation = extraction.relation
-
-        # --- Passo 2: Extrai o Complemento Principal ---
-        # O primeiro candidato é o início do complemento principal.
-        main_complement_start = potential_starts[0]
-
-        # Realiza a DFS para construir o complemento principal completo.
-        main_complement = Extraction.__dfs_for_complement(main_complement_start, base_visited_indices, extraction)
-        main_extraction.complement = main_complement
-        final_extractions.append(main_extraction)
-
-        # Atualiza o conjunto de tokens visitados com os usados no complemento principal.
         all_visited_indices = base_visited_indices.copy()
-        if main_complement.core:
-            all_visited_indices.add(main_complement.core.i)
-            all_visited_indices.update(p.i for p in main_complement.pieces)
 
-        # --- Passo 3: Extrai as Cláusulas Quebradas (Restantes) ---
-        # Itera sobre os mesmos candidatos novamente.
+        # --- Lógica de Acumulação e Clonagem ---
+
+        # 1. Primeiro, encontre todos os complementos independentes (cláusulas quebradas)
+        independent_complements = []
         for start_token in potential_starts:
-            # Se o candidato já foi incluído no complemento principal (ou outro), pula.
             if start_token.i in all_visited_indices:
                 continue
 
-            # Se não foi usado, é o início de uma cláusula quebrada.
-            broken_clause = Extraction.__dfs_for_complement(start_token, all_visited_indices, extraction)
+            # Realiza a DFS para cada cláusula independente
+            clause = Extraction.__dfs_for_complement(start_token, all_visited_indices, extraction)
+            independent_complements.append(clause)
 
-            if broken_clause.core:
-                # Cria uma NOVA extração para a cláusula quebrada.
-                new_extraction = Extraction()
-                new_extraction.subject = extraction.subject
-                new_extraction.relation = extraction.relation
-                new_extraction.complement = broken_clause
-                final_extractions.append(new_extraction)
+            # Marca os tokens desta cláusula como visitados para não pegá-los novamente
+            all_visited_indices.add(clause.core.i)
+            all_visited_indices.update(p.i for p in clause.pieces)
 
-                # Marca os tokens desta cláusula como visitados para as próximas iterações.
-                all_visited_indices.add(broken_clause.core.i)
-                all_visited_indices.update(p.i for p in broken_clause.pieces)
+        if not independent_complements:
+            return [extraction]
 
-        return final_extractions
+        # 2. Gere as extrações baseadas na lógica de acumulação
+
+        # O acumulador que irá crescer a cada passo
+        accumulator_complement = TripleElement()
+
+        for clause in independent_complements:
+            # Adiciona a cláusula atual ao acumulador
+            if accumulator_complement.core is None:
+                accumulator_complement.core = clause.core
+            else:
+                accumulator_complement.add_piece(clause.core)
+
+            for piece in clause.pieces:
+                accumulator_complement.add_piece(piece)
+
+            # Tira um "snapshot" (clone) do estado atual e cria uma extração
+            snapshot_extraction = Extraction()
+            snapshot_extraction.subject = extraction.subject
+            snapshot_extraction.relation = extraction.relation
+
+            # Clona o acumulador para o snapshot
+            snapshot_complement = TripleElement(accumulator_complement.core)
+            snapshot_complement.pieces = accumulator_complement.pieces[:]  # Cópia da lista
+
+            snapshot_extraction.complement = snapshot_complement
+            final_extractions.append(snapshot_extraction)
+
+        # 3. Adicione também as extrações individuais.
+        # O resultado é uma combinação de extrações individuais e acumuladas.
+        # Para garantir que tenhamos as extrações separadas, podemos adicioná-las se houver mais de uma.
+        if len(independent_complements) > 1:
+            for clause in independent_complements:
+                individual_extraction = Extraction()
+                individual_extraction.subject = extraction.subject
+                individual_extraction.relation = extraction.relation
+                individual_extraction.complement = clause
+
+                # Evita adicionar duplicatas exatas das acumuladas
+                if not any(str(ex.complement) == str(individual_extraction.complement) for ex in final_extractions):
+                    final_extractions.append(individual_extraction)
+
+        # Garante que a extração original sem complemento não seja retornada se encontrarmos algum
+        if final_extractions:
+            return final_extractions
+        else:
+            return [extraction]
 
     @staticmethod
     def __dfs_for_complement(start_token: Token, visited_indices: set, extraction: 'Extraction') -> TripleElement:
@@ -205,8 +225,7 @@ class Extraction:
     @staticmethod
     def __is_complement_part(token: Token) -> bool:
         """
-        Verifica se um token pode ser parte de um complemento, com base nas regras
-        do código Java e ajustes para capturar construções completas.
+        Verifica se um token pode ser parte de um complemento.
         """
         # Exclui conjunções subordinativas como 'que'.
         if token.pos_ == "SCONJ":
@@ -219,7 +238,7 @@ class Extraction:
         # verificar se o token está na lista de dependências válidas
         if token.dep_ in [
             "nmod", "xcomp", "dobj", "obj", "acl:relcl", "iobj", "acl:part",
-            "nummod", "advmod", "appos", "amod", "dep", "case", "mark", "det", "flat", "fixed"
+            "nummod", "advmod", "appos", "amod", "dep", "case", "mark", "det", "flat", "fixed", "obl"
         ]:
             return True
 
