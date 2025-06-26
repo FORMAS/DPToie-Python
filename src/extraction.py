@@ -39,10 +39,10 @@ class Extraction:
         self.complement: Optional[TripleElement] = None
 
     def __iter__(self):
-        yield 'arg1', str(self.subject) if self.subject else None
-        yield 'rel', str(self.relation) if self.relation else None
+        yield 'arg1', str(self.subject) if self.subject else ''
+        yield 'rel', str(self.relation) if self.relation else ''
         yield 'arg2', str(self.complement) if self.complement and (
-            self.complement.core or self.complement.pieces) else None
+            self.complement.core or self.complement.pieces) else ''
 
 
 class ExtractorConfig:
@@ -94,121 +94,166 @@ class Extractor:
 
         return unique_extractions
 
+    def __build_relation_element(self, start_token: Token, visited_tokens: Set[int]) -> (Optional[TripleElement], Optional[Token]):
+        relation = TripleElement(start_token)
+        effective_verb = start_token
+
+        # Pilha para busca na frase verbal
+        stack = deque([start_token])
+        # Mantém o controle local para não adicionar o mesmo token várias vezes
+        local_visited = visited_tokens.copy()
+        local_visited.add(start_token.i)
+
+        while stack:
+            current = stack.pop()
+            relation.add_piece(current)
+
+            # Procura por filhos que compõem a frase verbal
+            for child in current.children:
+                if child.i in local_visited:
+                    continue
+
+                # Lógica para xcomp: anexa apenas se não for o início de um pedaço de complemento
+                if child.dep_ == 'xcomp' and child.pos_ == 'VERB':
+                    # Verifica se o xcomp tem uma marca (como 'de', 'para'), indicando um complemento
+                    has_marker = any(c.dep_ == 'mark' for c in child.children)
+                    if not has_marker:
+                        effective_verb = child
+                        stack.append(child)
+                        local_visited.add(child.i)
+                # Anexa outros modificadores verbais
+                elif child.dep_ in ["aux:pass", "aux", "cop", "expl", "expl:pv"]:
+                    relation.add_piece(child)
+                    local_visited.add(child.i)
+
+        has_verb = any(t.pos_ in ['VERB', 'AUX'] for t in relation.get_all_tokens())
+        return (relation, effective_verb) if has_verb else (None, None)
+
+    def extract_relation(self, extraction: 'Extraction') -> List['Extraction']:
+        if not extraction.subject or not extraction.subject.core:
+            return []
+        subject_tokens = {p.i for p in extraction.subject.get_all_tokens()}
+        relation_head = extraction.subject.core.head
+        if relation_head is None or relation_head.i in subject_tokens:
+            return []
+
+        base_relation, effective_verb = self.__build_relation_element(relation_head, subject_tokens)
+        if not base_relation:
+            return []
+
+        extraction.relation = base_relation
+        extractions_found = [extraction]
+
+        relation_tokens = {p.i for p in base_relation.get_all_tokens()}
+        visited_for_conj = subject_tokens.union(relation_tokens)
+
+        for child in effective_verb.children:
+            if child.dep_ == 'conj' and child.pos_ in ['VERB', 'AUX']:
+                new_relation, _ = self.__build_relation_element(child, visited_for_conj)
+                if new_relation:
+                    new_extraction = Extraction()
+                    new_extraction.subject = extraction.subject
+                    new_extraction.relation = new_relation
+                    extractions_found.append(new_extraction)
+        return extractions_found
+
     def extract_complements(self, extraction: 'Extraction') -> List['Extraction']:
-        """
-        Extrai complementos. Para conjunções, gera:
-        1. Extrações "mínimas" para cada item, SEM conectores (vírgulas, 'e').
-        2. Uma única extração "completa" com todos os itens E conectores.
-        """
         if not extraction.relation or not extraction.relation.core:
             return [extraction] if not any(str(e.complement) for e in [extraction]) else []
 
         base_visited_indices = {tok.i for tok in extraction.subject.get_all_tokens()}
         base_visited_indices.update(tok.i for tok in extraction.relation.get_all_tokens())
-        component_clauses: List[TripleElement] = []
+
+        complement_components: List[TripleElement] = []
         processed_in_chain = set()
         relation_children = sorted(extraction.relation.core.children, key=lambda t: t.i)
+
         for child in relation_children:
             if child.i in base_visited_indices or child.i in processed_in_chain:
                 continue
-            is_conjunction_head = any(c.dep_ == 'conj' for c in child.children)
+
             if self.__is_complement_part(child):
+                is_conjunction_head = any(c.dep_ == 'conj' for c in child.children)
                 if is_conjunction_head and self.config.coordinating_conjunctions:
                     components_found = self.__find_conjunction_components(child, base_visited_indices)
-                    component_clauses.extend(components_found)
+                    complement_components.extend(components_found)
                     for comp in components_found:
                         processed_in_chain.update(tok.i for tok in comp.get_all_tokens())
                 else:
-                    single_component = self.__dfs_for_complement(child, base_visited_indices)
-                    component_clauses.append(single_component)
+                    single_component = self.__dfs_for_complement(child, base_visited_indices, ignore_conj=False)
+                    complement_components.append(single_component)
                     processed_in_chain.update(tok.i for tok in single_component.get_all_tokens())
 
-        if not component_clauses:
-            return [extraction] if not any(str(e.complement) for e in [extraction]) else []
+        if not complement_components:
+            return [extraction]
 
         final_extractions = []
-
-        if len(component_clauses) > 1:
-            # 1. Gerar extrações mínimas (limpando os conectores)
-            for clause in component_clauses:
-                # Usa uma versão limpa do complemento
-                cleaned_clause = self.__clean_connectors(clause)
-
+        if len(complement_components) > 1:
+            for component in complement_components:
+                cleaned_component = self.__clean_connectors(component)
                 new_extraction = Extraction()
                 new_extraction.subject = extraction.subject
                 new_extraction.relation = extraction.relation
-                new_extraction.complement = cleaned_clause  # Usa a versão limpa
+                new_extraction.complement = cleaned_component
                 final_extractions.append(new_extraction)
-
-            # 2. Gerar UMA extração completa com todos os componentes (sem limpar)
             complete_complement = TripleElement()
-            for clause in component_clauses:  # Usa as cláusulas originais
-                complete_complement.merge(clause)
-
+            for component in complement_components:
+                complete_complement.merge(component)
             complete_extraction = Extraction()
             complete_extraction.subject = extraction.subject
             complete_extraction.relation = extraction.relation
             complete_extraction.complement = complete_complement
             final_extractions.append(complete_extraction)
         else:
-            # Se houver apenas um componente, não há conectores para limpar.
             single_extraction = Extraction()
             single_extraction.subject = extraction.subject
             single_extraction.relation = extraction.relation
-            single_extraction.complement = component_clauses[0]
+            single_extraction.complement = complement_components[0]
             final_extractions.append(single_extraction)
-
         return final_extractions
 
     @staticmethod
-    def __clean_connectors(element: TripleElement) -> TripleElement:
+    def __is_complement_part(token: Token) -> bool:
         """
-        Cria uma nova versão de um TripleElement removendo conectores
-        como pontuação (punct) e conjunções coordenativas (cc).
+        Verifica se um token pode ser parte de um complemento.
         """
-        cleaned_element = TripleElement()
+        if token.dep_ == 'conj' and token.pos_ in ['VERB', 'AUX']:
+            return False
 
-        # Mantém o mesmo 'core' se ele não for um conector
-        if element.core and element.core.dep_ not in ['punct', 'cc']:
-            cleaned_element.core = element.core
-
-        # Adiciona apenas as peças que não são conectores
-        for piece in element.pieces:
-            if piece.dep_ not in ['punct', 'cc']:
-                cleaned_element.add_piece(piece)
-
-        # Se o core original era um conector, mas há outras peças,
-        # tenta eleger um novo core para não ficar vazio.
-        if not cleaned_element.core and cleaned_element.pieces:
-            cleaned_element.core = cleaned_element.pieces.pop(0)
-
-        return cleaned_element
-
-    def __is_complement_part(self, token: Token) -> bool:
-        """Verifica se um token pode ser parte de um complemento."""
         if token.pos_ == "PRON" and "Rel" in token.morph.get("PronType", []):
             return False
 
         valid_deps = [
-            "nmod", "xcomp", "dobj", "obj", "acl:relcl", "iobj", "acl:part",
+            "nmod", "xcomp", "dobj", "obj", "acl:relcl", "iobj", "acl:part", "acl",
             "nummod", "advmod", "appos", "amod", "dep", "case", "mark", "det",
-            "flat", "fixed", "obl", "cop", "aux",
-            "cc"  # <-- BUG 1 CORRIGIDO: Adicionada a dependência 'cc'
+            "flat", "fixed", "obl", "obl:agent", "cc"
         ]
         if token.dep_ in valid_deps:
             return True
 
+        # Trata conjunções não-verbais
         if token.dep_ == "conj":
             return True
 
         if token.dep_ in ["ccomp", "advcl"] and not any(c.dep_.startswith("nsubj") for c in token.children):
             return True
 
-        # BUG 2 CORRIGIDO: Removida a condição "token.i > token.head.i"
-        if token.dep_ == "punct" and self.__valid_punct(token):
+        if token.dep_ == "punct" and Extractor.__valid_punct(token):
             return True
 
         return False
+
+    @staticmethod
+    def __clean_connectors(element: TripleElement) -> TripleElement:
+        cleaned_element = TripleElement()
+        if element.core and element.core.dep_ not in ['punct', 'cc']:
+            cleaned_element.core = element.core
+        for piece in element.pieces:
+            if piece.dep_ not in ['punct', 'cc']:
+                cleaned_element.add_piece(piece)
+        if not cleaned_element.core and cleaned_element.pieces:
+            cleaned_element.core = cleaned_element.pieces.pop(0)
+        return cleaned_element
 
     @staticmethod
     def __extract_subject_from_sentence(sentence: Span) -> List['Extraction']:
@@ -239,50 +284,12 @@ class Extractor:
         return extractions
 
     @staticmethod
-    def extract_relation(extraction: 'Extraction') -> List['Extraction']:
-        if not extraction.subject or not extraction.subject.core:
-            return [extraction]
-        stack = deque()
-        deprel_valid = ["aux:pass", "obj", "iobj", "advmod", "cop", "aux", "expl:pv", "mark"]
-        deprel_valid_for_after_subject = ["flat", "expl:pv"]
-        punct_invalid = [",", "--"]
-        visited_tokens = {p.i for p in extraction.subject.get_all_tokens()}
-        head_subject = extraction.subject.core.head
-        if head_subject is None or head_subject.i in visited_tokens:
-            return []
-        extraction.relation = TripleElement(head_subject)
-        visited_tokens.add(head_subject.i)
-        stack.append(head_subject)
-        while stack:
-            current_token = stack.pop()
-            for child in current_token.children:
-                if child.i not in visited_tokens:
-                    is_between = (min(extraction.subject.core.i, extraction.relation.core.i) < child.i < max(
-                        extraction.subject.core.i, extraction.relation.core.i))
-                    is_deprel_valid = child.dep_ in deprel_valid
-                    is_punct_valid = child.dep_ == "punct" and child.text not in punct_invalid
-                    is_deprel_valid_for_after_subject = child.dep_ in deprel_valid_for_after_subject
-                    is_punct_hyphen = child.dep_ == "punct" and child.text == "-"
-                    is_aclpart_valid = child.dep_ == "acl:part" and Extractor.__acl_part_first_child(child)
-                    if (is_between and (is_deprel_valid or is_punct_valid)) or \
-                        (child.i > head_subject.i and (
-                            is_deprel_valid_for_after_subject or is_punct_hyphen or is_aclpart_valid)):
-                        extraction.relation.add_piece(child)
-                        stack.append(child)
-                        visited_tokens.add(child.i)
-                        if is_aclpart_valid:
-                            extraction.relation.core = child
-        has_verb = any(t.pos_ == 'VERB' or t.pos_ == 'AUX' for t in extraction.relation.get_all_tokens())
-        if not has_verb:
-            return []
-        return [extraction]
-
-    def __find_conjunction_components(self, start_token: Token, visited_indices: set) -> List[TripleElement]:
+    def __find_conjunction_components(start_token: Token, visited_indices: set) -> List[TripleElement]:
         components: List[TripleElement] = []
         shared_modifiers = [child for child in start_token.children if child.dep_ in ['case', 'det']]
 
         def create_component_with_mods(token: Token) -> TripleElement:
-            component = self.__dfs_for_complement(token, visited_indices)
+            component = Extractor.__dfs_for_complement(token, visited_indices, ignore_conj=True)
             for mod in shared_modifiers:
                 component.add_piece(mod)
             return component
@@ -299,16 +306,25 @@ class Extractor:
                     stack.append(child)
         return components
 
-    def __dfs_for_complement(self, start_token: Token, visited_indices: set) -> TripleElement:
+    @staticmethod
+    def __dfs_for_complement(start_token: Token, visited_indices: set, ignore_conj: bool = True) -> TripleElement:
+        """
+        Realiza uma busca em profundidade para construir um único elemento de complemento.
+        """
         complement = TripleElement(start_token)
         stack = deque([start_token])
         local_visited = visited_indices.copy()
         local_visited.add(start_token.i)
-        ignore_deps = {'conj', 'case', 'det'}
+
+        ignore_deps = {}
+        if ignore_conj:
+            ignore_deps['conj'] = True
+
         while stack:
             current_token = stack.pop()
             for child in sorted(current_token.children, key=lambda t: t.i):
-                if child.i not in local_visited and child.dep_ not in ignore_deps and self.__is_complement_part(child):
+                if child.i not in local_visited and child.dep_ not in ignore_deps and Extractor.__is_complement_part(
+                        child):
                     complement.add_piece(child)
                     local_visited.add(child.i)
                     stack.append(child)

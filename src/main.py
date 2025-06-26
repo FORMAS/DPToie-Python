@@ -43,6 +43,7 @@ def main(input_file: str, output_file: str, conll_format: bool = False, coordina
     nlp = ConllParser(init_parser("pt_core_news_sm", "spacy"))
 
     extractions = {
+        'config': dict(extractor.config),
         'sentences': []
     }
 
