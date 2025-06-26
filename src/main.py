@@ -2,21 +2,23 @@ import argparse
 import json
 import logging
 from typing import Any, Generator
-
-import spacy_stanza
-import stanza
-
 from spacy_conll import init_parser
 from spacy_conll.parser import ConllParser
-
 from spacy.tokens import Doc
-from src.extraction import Extraction
+from src.extraction import Extractor, ExtractorConfig
 
 logging.basicConfig(level=logging.INFO)
 
-Doc.set_extension("extractions", getter=Extraction.get_extractions_from_doc)
+def main(input_file: str, output_file: str, conll_format: bool = False, coordinating_conjunctions: bool = True, subordinating_conjunctions: bool = True, appositive: bool = True, transitive: bool = True, debug: bool = False):
+    extractor = Extractor(ExtractorConfig(
+        coordinating_conjunctions=coordinating_conjunctions,
+        subordinating_conjunctions=subordinating_conjunctions,
+        appositive=appositive,
+        transitive=transitive,
+        debug=debug,
+    ))
 
-def main(input_file: str, output_file: str, conll_format: bool = False, debug: bool = False):
+    Doc.set_extension("extractions", getter=extractor.get_extractions_from_doc)
 
     if not conll_format:
         nlp = init_parser("pt",
@@ -123,8 +125,12 @@ if __name__ == "__main__":
     parser.add_argument('-path', metavar='path', type=str, help='path to the text file', default='./inputs/teste.txt')
     parser.add_argument('-out', metavar='out', type=str, help='path to the output file', default='./outputs/extractions.json')
     parser.add_argument('-conll', action='store_true', help='input file is in CONLL format')
+    parser.add_argument('-cc', '--coordinating_conjunctions', dest='coordinating_conjunctions', action='store_true', help='enable coordinating conjunctions extraction')
+    parser.add_argument('-sc', '--subordinating_conjunctions', dest='subordinating_conjunctions', action='store_true', help='enable subordinating conjunctions extraction')
+    parser.add_argument('-a', '--appositive', dest='appositive', action='store_true', help='enable appositive extraction')
+    parser.add_argument('-t', '--transitive', dest='transitive', action='store_true', help='enable transitive extraction(only for appositive)')
     parser.add_argument('-debug', action='store_true', help='enable debug mode')
 
     args = parser.parse_args()
 
-    main(input_file=args.path, output_file=args.out, conll_format=args.conll, debug=args.debug)
+    main(input_file=args.path, output_file=args.out, conll_format=args.conll, coordinating_conjunctions=args.coordinating_conjunctions, subordinating_conjunctions=args.subordinating_conjunctions, appositive=args.appositive, transitive=args.transitive, debug=args.debug)

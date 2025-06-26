@@ -16,29 +16,56 @@ class TripleElement:
         if piece not in self.pieces:
             self.pieces.append(piece)
 
-
 class Extraction:
     def __init__(self):
         self.subject: Optional[TripleElement] = None
         self.relation: Optional[TripleElement] = None
         self.complement: Optional[TripleElement] = None
 
+    def __iter__(self):
+        yield 'arg1', str(self.subject) if self.subject else None
+        yield 'rel', str(self.relation) if self.relation else None
+        yield 'arg2', str(self.complement) if self.complement and self.complement.core else None
+
+class ExtractorConfig:
+    def __init__(self, coordinating_conjunctions: bool = True, subordinating_conjunctions: bool = True, appositive: bool = True, transitive: bool = True, debug: bool = False):
+        self.coordinating_conjunctions = coordinating_conjunctions
+        self.subordinating_conjunctions = subordinating_conjunctions
+        self.appositive = appositive
+        self.transitive = transitive
+        self.debug = debug
+
+    def __str__(self):
+        return f"ExtractorConfig(coordinating_conjunctions={self.coordinating_conjunctions}, " \
+               f"subordinating_conjunctions={self.subordinating_conjunctions}, " \
+               f"appositive={self.appositive}, transitive={self.transitive}, debug={self.debug})"
+
+    def __iter__(self):
+        yield 'coordinating_conjunctions', self.coordinating_conjunctions
+        yield 'subordinating_conjunctions', self.subordinating_conjunctions
+        yield 'appositive', self.appositive
+        yield 'transitive', self.transitive
+
+class Extractor:
+    def __init__(self, config: ExtractorConfig = None):
+        self.config = config if config else ExtractorConfig()
+
     @staticmethod
     def get_extractions_from_doc(doc: Doc) -> List['Extraction']:
         extractions = []
         for sentence in doc.sents:
-            extractions.extend(Extraction.get_extractions_from_sentence(sentence))
+            extractions.extend(Extractor.get_extractions_from_sentence(sentence))
         return extractions
 
     @staticmethod
     def get_extractions_from_sentence(sentence: Span) -> list['Extraction']:
         final_extractions = []
 
-        initial_extractions = Extraction.__extract_subject_from_sentence(sentence)
+        initial_extractions = Extractor.__extract_subject_from_sentence(sentence)
 
         for e1 in initial_extractions:
-            for e2 in Extraction.extract_relation(e1):
-                final_extractions.extend(Extraction.extract_complements(e2))
+            for e2 in Extractor.extract_relation(e1):
+                final_extractions.extend(Extractor.extract_complements(e2))
 
         return final_extractions
 
@@ -65,7 +92,7 @@ class Extraction:
                             # Lógica para expansão do sujeito
                             if child.dep_ in ["nummod", "advmod", "appos", "nmod", "amod", "dep", "det", "case",
                                               "punct", "conj"] and (child.dep_ != "conj" or child.pos_ != "VERB"):
-                                if child.dep_ == "punct" and not Extraction.__valid_punct(child):
+                                if child.dep_ == "punct" and not Extractor.__valid_punct(child):
                                     continue
                                 sbj.add_piece(child)
                                 stack.append(child)
@@ -112,7 +139,7 @@ class Extraction:
                     is_punct_valid = child.dep_ == "punct" and child.text not in punct_invalid
                     is_deprel_valid_for_after_subject = child.dep_ in deprel_valid_for_after_subject
                     is_punct_hyphen = child.dep_ == "punct" and child.text == "-"
-                    is_aclpart_valid = child.dep_ == "acl:part" and extraction.__acl_part_first_child(child)
+                    is_aclpart_valid = child.dep_ == "acl:part" and Extractor.__acl_part_first_child(child)
 
                     if (is_between and (is_deprel_valid or is_punct_valid)) or \
                         (child.i > head_subject.i and (
@@ -142,7 +169,7 @@ class Extraction:
 
         potential_starts = sorted(
             [child for child in extraction.relation.core.children if
-             child.i not in base_visited_indices and extraction.__is_complement_part(child)],
+             child.i not in base_visited_indices and Extractor.__is_complement_part(child)],
             key=lambda t: t.i
         )
 
@@ -161,7 +188,7 @@ class Extraction:
                 continue
 
             # Realiza a DFS para cada cláusula independente
-            clause = Extraction.__dfs_for_complement(start_token, all_visited_indices, extraction)
+            clause = Extractor.__dfs_for_complement(start_token, all_visited_indices, extraction)
             independent_complements.append(clause)
 
             # Marca os tokens desta cláusula como visitados para não pegá-los novamente
@@ -234,7 +261,7 @@ class Extraction:
         while stack:
             current_token = stack.pop()
             for child in sorted(current_token.children, key=lambda t: t.i):
-                if child.i not in local_visited and extraction.__is_complement_part(child):
+                if child.i not in local_visited and Extractor.__is_complement_part(child):
                     complement.add_piece(child)
                     local_visited.add(child.i)
                     stack.append(child)
@@ -267,7 +294,7 @@ class Extraction:
             return True
 
         # 'punct' é válida sob condições específicas (pontuação permitida e posição)
-        if token.dep_ == "punct" and Extraction.__valid_punct(token) and token.i > token.head.i:
+        if token.dep_ == "punct" and Extractor.__valid_punct(token) and token.i > token.head.i:
             return True
 
         return False
@@ -289,8 +316,3 @@ class Extraction:
         """Verifica se a pontuação é válida para compor um elemento."""
         valid_punctuation = {"(", ")", "{", "}", "\"", "'", "[", "]", ","}
         return token.text in valid_punctuation
-
-    def __iter__(self):
-        yield 'arg1', str(self.subject) if self.subject else None
-        yield 'rel', str(self.relation) if self.relation else None
-        yield 'arg2', str(self.complement) if self.complement and self.complement.core else None
