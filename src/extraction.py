@@ -147,14 +147,15 @@ class Extractor:
         relation_tokens = {p.i for p in base_relation.get_all_tokens()}
         visited_for_conj = subject_tokens.union(relation_tokens)
 
-        for child in effective_verb.children:
-            if child.dep_ == 'conj' and child.pos_ in ['VERB', 'AUX']:
-                new_relation, _ = self.__build_relation_element(child, visited_for_conj)
-                if new_relation:
-                    new_extraction = Extraction()
-                    new_extraction.subject = extraction.subject
-                    new_extraction.relation = new_relation
-                    extractions_found.append(new_extraction)
+        if self.config.coordinating_conjunctions:
+            for child in effective_verb.children:
+                if child.dep_ == 'conj' and child.pos_ in ['VERB', 'AUX']:
+                    new_relation, _ = self.__build_relation_element(child, visited_for_conj)
+                    if new_relation:
+                        new_extraction = Extraction()
+                        new_extraction.subject = extraction.subject
+                        new_extraction.relation = new_relation
+                        extractions_found.append(new_extraction)
         return extractions_found
 
     def extract_complements(self, extraction: 'Extraction') -> List['Extraction']:
