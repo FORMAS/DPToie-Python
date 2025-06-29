@@ -94,7 +94,8 @@ class Extractor:
 
         return unique_extractions
 
-    def __build_relation_element(self, start_token: Token, visited_tokens: Set[int]) -> (Optional[TripleElement], Optional[Token]):
+    @staticmethod
+    def __build_relation_element(start_token: Token, visited_tokens: Set[int]) -> (Optional[TripleElement], Optional[Token]):
         relation = TripleElement(start_token)
         effective_verb = start_token
 
@@ -122,7 +123,7 @@ class Extractor:
                         stack.append(child)
                         local_visited.add(child.i)
                 # Anexa outros modificadores verbais
-                elif child.dep_ in ["aux:pass", "aux", "cop", "expl", "expl:pv"]:
+                elif child.dep_ in ["aux:pass", "aux", "cop", "expl", "expl:pv", "advmod"]:
                     relation.add_piece(child)
                     local_visited.add(child.i)
 
@@ -150,12 +151,18 @@ class Extractor:
         if self.config.coordinating_conjunctions:
             for child in effective_verb.children:
                 if child.dep_ == 'conj' and child.pos_ in ['VERB', 'AUX']:
-                    new_relation, _ = self.__build_relation_element(child, visited_for_conj)
-                    if new_relation:
-                        new_extraction = Extraction()
-                        new_extraction.subject = extraction.subject
-                        new_extraction.relation = new_relation
-                        extractions_found.append(new_extraction)
+                    # Verifica se o verbo da conjunção (child) já tem seu próprio sujeito.
+                    has_own_subject = any(c.dep_.startswith("nsubj") for c in child.children)
+
+                    # Só cria a nova extração com o sujeito herdado se o verbo NÃO tiver um sujeito próprio.
+                    if not has_own_subject:
+                        new_relation, _ = self.__build_relation_element(child, visited_for_conj)
+                        if new_relation:
+                            new_extraction = Extraction()
+                            new_extraction.subject = extraction.subject
+                            new_extraction.relation = new_relation
+                            extractions_found.append(new_extraction)
+
         return extractions_found
 
     def extract_complements(self, extraction: 'Extraction') -> List['Extraction']:
@@ -169,11 +176,17 @@ class Extractor:
         processed_in_chain = set()
         relation_children = sorted(extraction.relation.core.children, key=lambda t: t.i)
 
+
+        # Define as dependências que não devem iniciar um complemento sozinhas.
+        non_initiator_deps = {'mark', 'case', 'cop'}
+
         for child in relation_children:
             if child.i in base_visited_indices or child.i in processed_in_chain:
                 continue
 
-            if self.__is_complement_part(child):
+            # O token deve ser uma parte de complemento VÁLIDA,
+            # mas não pode ser apenas um marcador funcional se for um dependente direto do verbo.
+            if self.__is_complement_part(child) and child.dep_ not in non_initiator_deps:
                 is_conjunction_head = any(c.dep_ == 'conj' for c in child.children)
                 if is_conjunction_head and self.config.coordinating_conjunctions:
                     components_found = self.__find_conjunction_components(child, base_visited_indices)
@@ -226,8 +239,8 @@ class Extractor:
 
         valid_deps = [
             "nmod", "xcomp", "dobj", "obj", "acl:relcl", "iobj", "acl:part", "acl",
-            "nummod", "advmod", "appos", "amod", "dep", "case", "mark", "det",
-            "flat", "fixed", "obl", "obl:agent", "cc"
+            "nummod", "advmod", "appos", "amod", "dep", "case", "det",
+            "flat", "fixed", "obl", "obl:agent", "cc", "cop", "mark"
         ]
         if token.dep_ in valid_deps:
             return True
