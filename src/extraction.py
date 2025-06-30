@@ -76,64 +76,46 @@ class Extractor:
             extractions.extend(self.get_extractions_from_sentence(sentence))
         return extractions
 
-    # Em get_extractions_from_sentence
     def get_extractions_from_sentence(self, sentence: Span) -> list['Extraction']:
-        extractions = []
+        final_extractions = []
         processed_verbs = set()
 
+        # Extrai a partir de sujeitos explícitos (nsubj, nsubj:pass) ---
+        subject_based_extractions = self.__extract_subject_from_sentence(sentence)
+        for extr in subject_based_extractions:
+            # Completa a extração com relação e complementos
+            for rel_extr in self.extract_relation(extr):
+                final_extractions.extend(self.extract_complements(rel_extr))
+
+            # Adiciona o verbo principal desta extração à lista de processados
+            if extr.relation and extr.relation.core:
+                processed_verbs.add(extr.relation.core.i)
+                # Adiciona também os verbos em conjunção que herdam o sujeito
+                for t in extr.relation.get_all_tokens():
+                    if t.dep_ == 'conj' and t.head == extr.relation.core:
+                        processed_verbs.add(t.i)
+
+        # Extrai a partir de verbos com sujeito oculto ---
         for token in sentence:
-            # Só inicia a extração se for um verbo finito e não processado.
-            is_finite_verb = token.pos_ == 'VERB' and token.morph.get("VerbForm") == ["Fin"]
-            if not is_finite_verb or token.i in processed_verbs:
+            # A condição agora é mais restrita e segura
+            is_main_verb = token.dep_.lower() == 'root' and token.pos_ == 'VERB'
+            if not is_main_verb or token.i in processed_verbs:
                 continue
+
+            # Cria a extração com sujeito nulo
+            extraction = Extraction()
+            extraction.subject = None
+
+            # Completa a extração
+            for rel_extr in self.extract_relation(extraction, start_node=token):
+                final_extractions.extend(self.extract_complements(rel_extr))
 
             processed_verbs.add(token.i)
 
-            subjects = [child for child in token.children if child.dep_.startswith('nsubj')]
-
-            seed_extractions = []
-            if subjects:
-                for subj_token in subjects:
-                    extraction = Extraction()
-                    extraction.subject = self.__dfs_for_subject(subj_token)
-                    seed_extractions.append(extraction)
-            else:
-                # Apenas cria uma extração de sujeito nulo se não for uma conjunção de um verbo já visto
-                is_conj_of_processed = token.dep_ == 'conj' and token.head.i in processed_verbs
-                if not is_conj_of_processed:
-                    extraction = Extraction()
-                    extraction.subject = None
-                    seed_extractions.append(extraction)
-
-            for seed in seed_extractions:
-                base_relation, effective_verb = self.__build_relation_element(token, set(
-                    p.i for p in seed.subject.get_all_tokens()) if seed.subject else set())
-                if not base_relation:
-                    continue
-                seed.relation = base_relation
-
-                relation_extractions = [seed]
-                if self.config.coordinating_conjunctions:
-                    for conj_verb in effective_verb.children:
-                        if conj_verb.dep_ == 'conj' and conj_verb.pos_ == 'VERB' and conj_verb.i not in processed_verbs:
-                            has_own_subject = any(c.dep_.startswith("nsubj") for c in conj_verb.children)
-                            if not has_own_subject:
-                                new_rel, _ = self.__build_relation_element(conj_verb, set())
-                                if new_rel:
-                                    new_extr = Extraction()
-                                    new_extr.subject = seed.subject
-                                    new_extr.relation = new_rel
-                                    relation_extractions.append(new_extr)
-                                    # Marca o verbo da conjunção como processado aqui
-                                    processed_verbs.add(conj_verb.i)
-
-                for rel_extr in relation_extractions:
-                    extractions.extend(self.extract_complements(rel_extr))
-
-        # Lógica de unificação
+        # --- Unificação e Limpeza ---
         unique_extractions = []
         seen = set()
-        for extr in extractions:
+        for extr in final_extractions:
             representation = (str(extr.subject), str(extr.relation), str(extr.complement))
             if representation not in seen:
                 seen.add(representation)
@@ -141,22 +123,72 @@ class Extractor:
 
         return unique_extractions
 
-    def __dfs_for_subject(self, start_token: Token) -> TripleElement:
-        sbj = TripleElement(start_token)
-        stack = deque([start_token])
-        local_visited = {start_token.i}
-        while stack:
-            current_token = stack.pop()
-            for child in current_token.children:
-                if child.i not in local_visited:
-                    if child.dep_ in ["nummod", "advmod", "appos", "nmod", "amod", "dep", "det", "case", "flat",
-                                      "punct", "conj"] and (child.dep_ != "conj" or child.pos_ != "VERB"):
-                        if child.dep_ == "punct" and not self.__valid_punct(child):
-                            continue
-                        sbj.add_piece(child)
-                        stack.append(child)
-                        local_visited.add(child.i)
-        return sbj
+    def extract_relation(self, extraction: 'Extraction', start_node: Token = None) -> List['Extraction']:
+        if start_node:
+            relation_head = start_node
+            subject_tokens = set()
+        elif extraction.subject and extraction.subject.core:
+            relation_head = extraction.subject.core.head
+            subject_tokens = {p.i for p in extraction.subject.get_all_tokens()}
+            if relation_head is None or relation_head.i in subject_tokens:
+                return []
+        else:
+            return []
+
+        base_relation, effective_verb = self.__build_relation_element(relation_head, subject_tokens)
+        if not base_relation:
+            return []
+
+        extraction.relation = base_relation
+        extractions_found = [extraction]
+
+        relation_tokens = {p.i for p in base_relation.get_all_tokens()}
+        visited_for_conj = subject_tokens.union(relation_tokens)
+
+        if self.config.coordinating_conjunctions:
+            for child in effective_verb.children:
+                if child.dep_ == 'conj' and child.pos_ in ['VERB', 'AUX']:
+                    # Verifica se o verbo da conjunção (child) já tem seu próprio sujeito.
+                    has_own_subject = any(c.dep_.startswith("nsubj") for c in child.children)
+
+                    # Só cria a nova extração com o sujeito herdado se o verbo NÃO tiver um sujeito próprio.
+                    if not has_own_subject:
+                        new_relation, _ = self.__build_relation_element(child, visited_for_conj)
+                        if new_relation:
+                            new_extraction = Extraction()
+                            new_extraction.subject = extraction.subject
+                            new_extraction.relation = new_relation
+                            extractions_found.append(new_extraction)
+
+        return extractions_found
+
+    @staticmethod
+    def __extract_subject_from_sentence(sentence: Span) -> List['Extraction']:
+        visited_tokens = set()
+        extractions = []
+        for token in sentence:
+            if token.dep_ in ["nsubj", "nsubj:pass"] and token.text.lower() not in ["que", "a", "o"]:
+                if token.i in visited_tokens:
+                    continue
+                sbj = TripleElement(token)
+                stack = deque([token])
+                local_visited = {token.i}
+                while stack:
+                    current_token = stack.pop()
+                    for child in current_token.children:
+                        if child.i not in local_visited:
+                            if child.dep_ in ["nummod", "advmod", "appos", "nmod", "amod", "dep", "det", "case", "flat",
+                                              "punct", "conj"] and (child.dep_ != "conj" or child.pos_ != "VERB"):
+                                if child.dep_ == "punct" and not Extractor.__valid_punct(child):
+                                    continue
+                                sbj.add_piece(child)
+                                stack.append(child)
+                                local_visited.add(child.i)
+                extraction = Extraction()
+                extraction.subject = sbj
+                extractions.append(extraction)
+                visited_tokens.update(local_visited)
+        return extractions
 
     @staticmethod
     def __build_relation_element(start_token: Token, visited_tokens: Set[int]) -> (Optional[TripleElement], Optional[Token]):
