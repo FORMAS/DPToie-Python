@@ -1,15 +1,36 @@
 from collections import deque
 from typing import List, Optional, Set
 from spacy.tokens import Span, Doc, Token
+from sympy.plotting.textplot import is_valid
 
 
 class TripleElement:
-    def __init__(self, token: Token = None):
+    def __init__(self, token: Token = None, text: Optional[str] = None):
         self.core: Optional[Token] = token
         self.pieces: List[Token] = []
+        self._text: Optional[str] = text  # Adicione este atributo
 
     def __str__(self):
-        return ' '.join([token.text for token in self.get_all_tokens()])
+        # Priorize o texto sintético se ele existir
+        if self._text:
+            return self._text
+        return ' '.join([token.text for token in self.get_output_tokens()])
+
+    def get_output_tokens(self) -> List[Token]:
+        tokens = self.get_all_tokens()
+        # remove virgulas do final e do começo
+        if tokens and tokens[0].text == ',':
+            tokens.pop(0)
+        if tokens and tokens[-1].text == ',':
+            tokens.pop(-1)
+
+        # remove pontos finais e 'e' do começo
+        if tokens and tokens[0].text == '.':
+            tokens.pop(0)
+        if tokens and tokens[0].text == 'e':
+            tokens.pop(0)
+
+        return tokens
 
     def get_all_tokens(self) -> List[Token]:
         tokens = [t for t in [self.core] + self.pieces if t is not None]
@@ -115,6 +136,10 @@ class Extractor:
 
                 processed_verbs.add(token.i)
 
+        # --- Extração de Apostos ---
+        if self.config.appositive:
+            final_extractions.extend(self.__extract_from_appositive(sentence))
+
         # --- Unificação e Limpeza ---
         unique_extractions = []
         seen = set()
@@ -125,6 +150,41 @@ class Extractor:
                 unique_extractions.append(extr)
 
         return unique_extractions
+
+    def __extract_from_appositive(self, sentence: Span) -> List['Extraction']:
+        """
+        Extrai triplas de relações de aposto, criando uma relação sintética "é".
+        """
+        extractions = []
+        for token in sentence:
+            # A dependência 'appos' marca a relação de aposto.
+            if token.dep_ == 'appos':
+
+                # O sujeito da nova tripla é o token do qual o aposto depende.
+                subject_head = token.head
+                # O complemento (arg2) é o próprio token de aposto.
+                complement_head = token
+
+                # Evita extrações de apostos dentro de cláusulas subordinadas complexas.
+                if subject_head.dep_ in ['ccomp', 'xcomp']:
+                    continue
+
+                subject = self.__dfs_for_nominal_phrase(subject_head, is_subject=True, ignore_conj=True)
+
+                # Cria a relação sintética. "é"
+                relation = TripleElement(text="é")
+
+                # O complemento é construído a partir do token de aposto e seus filhos.
+                complement = self.__dfs_for_complement(complement_head, set(), ignore_conj=False)
+
+                # Montamos a extração
+                extraction = Extraction()
+                extraction.subject = subject
+                extraction.relation = relation
+                extraction.complement = complement
+                extractions.append(extraction)
+
+        return extractions
 
     def extract_relation(self, extraction: 'Extraction', start_node: Token = None) -> List['Extraction']:
         if start_node:
@@ -173,25 +233,58 @@ class Extractor:
             if token.dep_ in ["nsubj", "nsubj:pass"] and token.text.lower() not in ["que", "a", "o"]:
                 if token.i in visited_tokens:
                     continue
-                sbj = TripleElement(token)
-                stack = deque([token])
-                local_visited = {token.i}
-                while stack:
-                    current_token = stack.pop()
-                    for child in current_token.children:
-                        if child.i not in local_visited:
-                            if child.dep_ in ["nummod", "advmod", "appos", "nmod", "amod", "dep", "det", "case", "flat",
-                                              "punct", "conj"] and (child.dep_ != "conj" or child.pos_ != "VERB"):
-                                if child.dep_ == "punct" and not Extractor.__valid_punct(child):
-                                    continue
-                                sbj.add_piece(child)
-                                stack.append(child)
-                                local_visited.add(child.i)
+                sbj = Extractor.__dfs_for_nominal_phrase(token, is_subject=True)
+
                 extraction = Extraction()
                 extraction.subject = sbj
                 extractions.append(extraction)
-                visited_tokens.update(local_visited)
+
+                # Atualizamos os tokens visitados para evitar reprocessamento.
+                # É importante fazer isso para lidar com sujeitos compostos.
+                visited_tokens.update(t.i for t in sbj.get_all_tokens())
+
         return extractions
+
+        # Dentro da classe Extractor, atualize este método
+
+    @staticmethod
+    def __dfs_for_nominal_phrase(start_token: Token, is_subject: bool = False,
+                                 ignore_conj: bool = False) -> TripleElement:  # Adicione ignore_conj
+        """
+        Realiza uma busca em profundidade (DFS) para construir um elemento nominal.
+        Se 'is_subject' for True, ignora a preposição ('case') do token inicial.
+        Se 'ignore_conj' for True, ignora as conjunções.
+        """
+        element = TripleElement(start_token)
+        stack = deque([start_token])
+        local_visited = {start_token.i}
+
+        valid_deps = {"nummod", "advmod", "nmod", "amod", "dep", "det", "case", "flat", "flat:name", "punct",
+                      "conj", "cc"}
+
+        while stack:
+            current_token = stack.pop()
+            for child in sorted(current_token.children, key=lambda t: t.i):
+                if child.i in local_visited:
+                    continue
+
+                if is_subject and current_token.i == start_token.i and child.dep_ == 'case':
+                    continue
+
+                # Se devemos ignorar conjunções, pulamos o filho.
+                if ignore_conj and child.dep_ == 'conj':
+                    continue
+
+                is_valid_dep = child.dep_ in valid_deps
+                is_non_verbal_conj = not (child.dep_ == "conj" and child.pos_ == "VERB")
+                is_valid_punct = not (child.dep_ == "punct" and not Extractor.__valid_punct(child))
+
+                if is_valid_dep and is_non_verbal_conj and is_valid_punct:
+                    element.add_piece(child)
+                    local_visited.add(child.i)
+                    stack.append(child)
+
+        return element
 
     @staticmethod
     def __build_relation_element(start_token: Token, visited_tokens: Set[int]) -> (Optional[TripleElement], Optional[Token]):
@@ -312,7 +405,7 @@ class Extractor:
         valid_deps = [
             "nmod", "xcomp", "dobj", "obj", "acl:relcl", "iobj", "acl:part", "acl",
             "nummod", "advmod", "appos", "amod", "dep", "case", "det",
-            "flat", "fixed", "obl", "obl:agent", "cc", "cop", "mark",
+            "flat", "flat:name", "fixed", "obl", "obl:agent", "cc", "cop", "mark",
             "nsubj", "nsubj:pass"
 
         ]
