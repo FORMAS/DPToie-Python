@@ -292,7 +292,7 @@ class Extractor:
             valid_deps.add("conj")
             valid_deps.add("cc")
 
-        # Apostos são tratadas separadamente, então não são incluídas aqui.
+        # A inclusão de 'appos' é condicional.
         if not ignore_appos:
             valid_deps.add("appos")
 
@@ -333,6 +333,9 @@ class Extractor:
             if current not in relation.get_all_tokens():
                 relation.add_piece(current)
 
+            # Adverbios que são tipicamente parte da própria locução verbal (negação, etc.)
+            relation_adverbs = {"não", "ja", "ainda", "também", "nunca"}
+
             for child in current.children:
                 if child.i in local_visited: continue
                 # Expande para auxiliares e orações abertas (xcomp)
@@ -341,8 +344,9 @@ class Extractor:
                     local_visited.add(child.i)
                     if child.i > effective_verb.i:
                         effective_verb = child
-                # Captura modificadores adverbiais (ex: "não", "já", "também")
-                elif child.dep_ == 'advmod':
+                # Captura modificadores adverbiais que são parte da relação, como negação.
+                # Outros advérbios (tempo, lugar) serão tratados como complementos.
+                elif child.dep_ == 'advmod' and child.lemma_.lower() in relation_adverbs:
                     relation.add_piece(child)
                     local_visited.add(child.i)
 
