@@ -9,10 +9,11 @@ from src.extraction import Extractor, ExtractorConfig
 
 logging.basicConfig(level=logging.INFO)
 
-def main(input_file: str, output_file: str, conll_format: bool = False, coordinating_conjunctions: bool = True, subordinating_conjunctions: bool = True, appositive: bool = True, transitive: bool = True, debug: bool = False):
+def main(input_file: str, output_file: str, conll_format: bool = False, coordinating_conjunctions: bool = True, subordinating_conjunctions: bool = True, hidden_subjects: bool = True, appositive: bool = True, transitive: bool = True, debug: bool = False):
     extractor = Extractor(ExtractorConfig(
         coordinating_conjunctions=coordinating_conjunctions,
         subordinating_conjunctions=subordinating_conjunctions,
+        hidden_subjects=hidden_subjects,
         appositive=appositive,
         transitive=transitive,
         debug=debug,
@@ -128,10 +129,11 @@ if __name__ == "__main__":
     parser.add_argument('-conll', action='store_true', help='input file is in CONLL format')
     parser.add_argument('-cc', '--coordinating_conjunctions', dest='coordinating_conjunctions', action='store_true', help='enable coordinating conjunctions extraction')
     parser.add_argument('-sc', '--subordinating_conjunctions', dest='subordinating_conjunctions', action='store_true', help='enable subordinating conjunctions extraction')
+    parser.add_argument('-hs', '--hidden_subjects', dest='hidden_subjects', action='store_true', help='enable hidden subjects extraction')
     parser.add_argument('-a', '--appositive', dest='appositive', action='store_true', help='enable appositive extraction')
     parser.add_argument('-t', '--transitive', dest='transitive', action='store_true', help='enable transitive extraction(only for appositive)')
     parser.add_argument('-debug', action='store_true', help='enable debug mode')
 
     args = parser.parse_args()
 
-    main(input_file=args.path, output_file=args.out, conll_format=args.conll, coordinating_conjunctions=args.coordinating_conjunctions, subordinating_conjunctions=args.subordinating_conjunctions, appositive=args.appositive, transitive=args.transitive, debug=args.debug)
+    main(input_file=args.path, output_file=args.out, conll_format=args.conll, coordinating_conjunctions=args.coordinating_conjunctions, subordinating_conjunctions=args.subordinating_conjunctions, hidden_subjects=args.hidden_subjects, appositive=args.appositive, transitive=args.transitive, debug=args.debug)

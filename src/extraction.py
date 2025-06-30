@@ -47,21 +47,24 @@ class Extraction:
 
 class ExtractorConfig:
     def __init__(self, coordinating_conjunctions: bool = True, subordinating_conjunctions: bool = True,
-                 appositive: bool = True, transitive: bool = True, debug: bool = False):
+                 appositive: bool = True, transitive: bool = True, hidden_subjects: bool = False, debug: bool = False):
         self.coordinating_conjunctions = coordinating_conjunctions
         self.subordinating_conjunctions = subordinating_conjunctions
         self.appositive = appositive
         self.transitive = transitive
+        self.hidden_subjects = hidden_subjects
         self.debug = debug
 
     def __str__(self):
         return f"ExtractorConfig(coordinating_conjunctions={self.coordinating_conjunctions}, " \
                f"subordinating_conjunctions={self.subordinating_conjunctions}, " \
+               f"hidden_subjects={self.hidden_subjects}, " \
                f"appositive={self.appositive}, transitive={self.transitive}, debug={self.debug})"
 
     def __iter__(self):
         yield 'coordinating_conjunctions', self.coordinating_conjunctions
         yield 'subordinating_conjunctions', self.subordinating_conjunctions
+        yield 'hidden_subjects', self.hidden_subjects
         yield 'appositive', self.appositive
         yield 'transitive', self.transitive
 
@@ -95,22 +98,22 @@ class Extractor:
                     if t.dep_ == 'conj' and t.head == extr.relation.core:
                         processed_verbs.add(t.i)
 
-        # Extrai a partir de verbos com sujeito oculto ---
-        for token in sentence:
-            # A condição agora é mais restrita e segura
-            is_main_verb = token.dep_.lower() == 'root' and token.pos_ == 'VERB'
-            if not is_main_verb or token.i in processed_verbs:
-                continue
+        # Extrai a partir de verbos com sujeito oculto
+        if self.config.hidden_subjects:
+            for token in sentence:
+                is_main_verb = token.dep_.lower() == 'root' and token.pos_ == 'VERB'
+                if not is_main_verb or token.i in processed_verbs:
+                    continue
 
-            # Cria a extração com sujeito nulo
-            extraction = Extraction()
-            extraction.subject = None
+                # Cria a extração com sujeito nulo
+                extraction = Extraction()
+                extraction.subject = None
 
-            # Completa a extração
-            for rel_extr in self.extract_relation(extraction, start_node=token):
-                final_extractions.extend(self.extract_complements(rel_extr))
+                # Completa a extração
+                for rel_extr in self.extract_relation(extraction, start_node=token):
+                    final_extractions.extend(self.extract_complements(rel_extr))
 
-            processed_verbs.add(token.i)
+                processed_verbs.add(token.i)
 
         # --- Unificação e Limpeza ---
         unique_extractions = []
@@ -219,7 +222,12 @@ class Extractor:
                         stack.append(child)
                         local_visited.add(child.i)
                 # Anexa outros modificadores verbais
-                elif child.dep_ in ["aux:pass", "aux", "cop", "expl", "expl:pv", "advmod"]:
+                elif child.dep_ in ["aux:pass", "aux", "cop", "expl", "expl:pv"]:
+                    relation.add_piece(child)
+                    local_visited.add(child.i)
+
+                # condição específica para manter a negação na relação
+                elif child.dep_ == 'advmod' and child.morph.get("Polarity") == ["Neg"]:
                     relation.add_piece(child)
                     local_visited.add(child.i)
 
@@ -242,7 +250,7 @@ class Extractor:
 
 
         # Define as dependências que não devem iniciar um complemento sozinhas.
-        non_initiator_deps = {'mark', 'case', 'cop'}
+        non_initiator_deps = {'mark', 'case', 'cop', 'punct'}
 
         for child in relation_children:
             if child.i in base_visited_indices or child.i in processed_in_chain:
@@ -304,7 +312,9 @@ class Extractor:
         valid_deps = [
             "nmod", "xcomp", "dobj", "obj", "acl:relcl", "iobj", "acl:part", "acl",
             "nummod", "advmod", "appos", "amod", "dep", "case", "det",
-            "flat", "fixed", "obl", "obl:agent", "cc", "cop", "mark"
+            "flat", "fixed", "obl", "obl:agent", "cc", "cop", "mark",
+            "nsubj", "nsubj:pass"
+
         ]
         if token.dep_ in valid_deps:
             return True
