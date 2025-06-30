@@ -5,37 +5,47 @@ from spacy.tokens import Span, Doc, Token
 
 class TripleElement:
     """
-    Represents a component of an extraction (subject, relation, or complement).
-    It is built around a core token and can include additional related tokens.
+    Representa um componente de uma extração (sujeito, relação ou complemento).
+    É construído em torno de um token principal e pode incluir tokens relacionados adicionais.
     """
 
     def __init__(self, token: Token = None, text: Optional[str] = None):
+        """
+        Inicializa o elemento.
+        Args:
+            token (Token, optional): O token principal do elemento.
+            text (Optional[str], optional): Um texto pré-definido para o elemento (útil para relações sintéticas como "é").
+        """
         self.core: Optional[Token] = token
         self.pieces: List[Token] = []
         self._text: Optional[str] = text
 
     def __str__(self):
+        """Retorna a representação em string do elemento, limpando pontuações e conectores nas bordas."""
         if self._text:
             return self._text
         text = ' '.join([token.text for token in self.get_output_tokens()])
         return text.strip()
 
     def get_output_tokens(self) -> List[Token]:
-        """Returns the list of tokens, cleaned of leading/trailing punctuation."""
+        """Retorna a lista de tokens, limpa de pontuações e conjunções coordenativas no início e no fim."""
         tokens = self.get_all_tokens()
         if not tokens:
             return []
-        while tokens and tokens[0].text in [',', '.', 'e']:
+        # Remove conectores e pontuações do início
+        while tokens and (tokens[0].pos_ == 'PUNCT' or tokens[0].dep_ == 'cc'):
             tokens.pop(0)
-        while tokens and tokens[-1].text in [',', '.']:
+        # Remove pontuações do final
+        while tokens and tokens[-1].pos_ == 'PUNCT':
             tokens.pop(-1)
         return tokens
 
     def get_all_tokens(self) -> List[Token]:
-        """Returns all unique tokens of the element, sorted by their position in the sentence."""
+        """Retorna todos os tokens únicos do elemento, ordenados por sua posição na sentença."""
         tokens = [t for t in [self.core] + self.pieces if t is not None]
         seen_ids = set()
         unique_tokens = []
+        # Ordena os tokens pela sua posição (índice 'i') na sentença
         for token in sorted(tokens, key=lambda x: x.i):
             if token.i not in seen_ids:
                 unique_tokens.append(token)
@@ -43,12 +53,16 @@ class TripleElement:
         return unique_tokens
 
     def add_piece(self, piece: Token):
-        """Adds a token to the element's pieces."""
+        """Adiciona um token às peças do elemento, se ainda não estiver presente."""
         if piece and piece not in self.pieces:
             self.pieces.append(piece)
 
     def merge(self, other_element: 'TripleElement'):
-        """Merges another TripleElement into this one."""
+        """
+        Mescla outro TripleElement neste, adicionando seu núcleo e peças.
+        Args:
+            other_element (TripleElement): O outro elemento a ser mesclado.
+        """
         if other_element.core:
             self.add_piece(other_element.core)
         for piece in other_element.pieces:
@@ -56,7 +70,7 @@ class TripleElement:
 
 
 class Extraction:
-    """Represents a single Subject-Relation-Complement triple."""
+    """Representa uma única tripla Sujeito-Relação-Complemento."""
 
     def __init__(self):
         self.subject: Optional[TripleElement] = None
@@ -64,14 +78,19 @@ class Extraction:
         self.complement: Optional[TripleElement] = None
 
     def __iter__(self):
+        """Permite a conversão da extração para um dicionário ou iterável."""
         yield 'arg1', str(self.subject) if self.subject else ''
         yield 'rel', str(self.relation) if self.relation else ''
         yield 'arg2', str(self.complement) if self.complement and (
             self.complement.core or self.complement.pieces) else ''
 
+    def is_valid(self) -> bool:
+        """Verifica se a extração é válida (pelo menos um dos componentes não está vazio)."""
+        return bool(str(self.subject) or str(self.relation) or str(self.complement))
+
 
 class ExtractorConfig:
-    """Configuration class to control the extractor's behavior."""
+    """Classe de configuração para controlar o comportamento do extrator."""
 
     def __init__(self, coordinating_conjunctions: bool = True, subordinating_conjunctions: bool = True,
                  appositive: bool = True, transitive: bool = True, hidden_subjects: bool = False, debug: bool = False):
@@ -95,9 +114,9 @@ class ExtractorConfig:
 
 class Extractor:
     """
-    Main class to perform open information extraction from a spaCy Doc.
-    It works by iterating through sentences and applying a set of rules
-    to identify subjects, relations, and complements.
+    Classe principal para realizar a extração de informação aberta de um Doc do spaCy.
+    Funciona iterando através das sentenças e aplicando um conjunto de regras
+    para identificar sujeitos, relações e complementos.
     """
 
     def __init__(self, config: ExtractorConfig = None):
@@ -105,13 +124,7 @@ class Extractor:
 
     def get_extractions_from_doc(self, doc: Doc) -> List['Extraction']:
         """
-        Processes a spaCy Doc and returns a list of all found extractions.
-
-        Args:
-            doc (Doc): The spaCy Doc to process.
-
-        Returns:
-            List[Extraction]: A list of Extraction objects.
+        Processa um Doc do spaCy e retorna uma lista de todas as extrações encontradas.
         """
         extractions = []
         for sentence in doc.sents:
@@ -120,17 +133,9 @@ class Extractor:
 
     def get_extractions_from_sentence(self, sentence: Span) -> list['Extraction']:
         """
-        Extracts triples from a single sentence.
-
-        The main strategy is "verb-centric": it iterates through tokens, identifies potential
-        main verbs or predicates of a clause, and then searches for their corresponding
-        subjects and complements.
-
-        Args:
-            sentence (Span): The spaCy Span representing the sentence.
-
-        Returns:
-            list[Extraction]: A list of extractions found in the sentence.
+        Extrai triplas de uma única sentença. A estratégia principal é "centrada no verbo":
+        itera através dos tokens, identifica potenciais verbos principais ou predicados
+        de uma oração e, em seguida, busca por seus sujeitos e complementos correspondentes.
         """
         final_extractions = []
         processed_tokens = set()
@@ -140,13 +145,13 @@ class Extractor:
                 continue
 
             start_node = token
+            # Identifica se o token é um verbo ou um predicado nominal (ex: "O céu é *azul*")
             is_verb_head = token.pos_ in ['VERB', 'AUX']
             is_nominal_predicate_root = token.dep_ == 'ROOT' and token.pos_ in ['ADJ', 'NOUN'] and any(
                 c.dep_ == 'cop' for c in token.children)
 
             if is_verb_head or is_nominal_predicate_root:
-                # In sentences like "O céu é azul", the root is "azul" (ADJ).
-                # The extraction process must start from its verb of connection (copula), "é".
+                # Em construções com verbo de ligação (copula), o processo começa a partir do verbo.
                 if is_nominal_predicate_root:
                     copula_candidates = [c for c in token.children if c.dep_ == 'cop']
                     if not copula_candidates: continue
@@ -157,6 +162,7 @@ class Extractor:
                 if subject_element is None and not self.config.hidden_subjects:
                     continue
 
+                # Extrai a relação e o verbo efetivo (o verbo principal da ação)
                 for rel_extr, effective_verb in self.extract_relation(subject_element, start_node=start_node):
                     final_extractions.extend(self.extract_complements(rel_extr, effective_verb))
 
@@ -164,15 +170,16 @@ class Extractor:
                         for t in rel_extr.relation.get_all_tokens():
                             processed_tokens.add(t.i)
 
+        # Módulo específico para extrair de aposições (ex: "João, *o carpinteiro*...")
         if self.config.appositive:
             final_extractions.extend(self.__extract_from_appositive(sentence))
 
+        # Remove extrações duplicadas ou inválidas
         unique_extractions = []
         seen = set()
         for extr in final_extractions:
             representation = (str(extr.subject), str(extr.relation), str(extr.complement))
-            is_valid = representation[0] or representation[1] or representation[2]
-            if representation not in seen and is_valid:
+            if representation not in seen and extr.is_valid():
                 seen.add(representation)
                 unique_extractions.append(extr)
 
@@ -180,40 +187,30 @@ class Extractor:
 
     def __find_subject(self, verb_token: Token) -> Optional[TripleElement]:
         """
-        Finds the subject of a given verb, handling direct, passive, post-verbal,
-        and clausal subjects.
-
-        Args:
-            verb_token (Token): The verb token whose subject is to be found.
-
-        Returns:
-            Optional[TripleElement]: The found subject, or None.
+        Encontra o sujeito de um determinado verbo, tratando sujeitos diretos, passivos e oracionais.
         """
         search_node = verb_token
-        # In a verb phrase, the subject is syntactically linked to the head of the phrase,
-        # not necessarily the auxiliary verb itself.
+        # Em locuções verbais, o sujeito está ligado ao verbo principal, não ao auxiliar.
         if verb_token.dep_ in ['cop', 'aux', 'aux:pass']:
             search_node = verb_token.head
 
         for child in search_node.children:
-            # Clausal subject (csubj): "Comemorar é difícil" -> "Comemorar" is the subject.
+            # Sujeito oracional (csubj): "Comemorar é difícil" -> "Comemorar" é o sujeito.
             if child.dep_ == "csubj":
                 return self.__dfs_for_complement(child, set())
 
-            # Nominal subject (nsubj) or passive nominal subject (nsubj:pass).
+            # Sujeito nominal (nsubj) ou passivo (nsubj:pass).
             if child.dep_ in ["nsubj", "nsubj:pass"]:
-                # Handles relative clauses, finding the antecedent of the pronoun "que".
-                # Ex: "... a cidade QUE foi centro..." -> subject of "foi" is "cidade".
+                # Trata orações relativas, encontrando o antecedente de pronomes como "que".
                 if child.pos_ == 'PRON' and 'Rel' in child.morph.get("PronType", []):
                     return self.__dfs_for_nominal_phrase(child.head, is_subject=True)
                 return self.__dfs_for_nominal_phrase(child, is_subject=True)
 
-        # Subject of an adjectival clause (acl).
+        # Sujeito de uma oração adjetiva (acl).
         if search_node.dep_ in ['acl', 'acl:relcl']:
             return self.__dfs_for_nominal_phrase(search_node.head, is_subject=True)
 
-        # Post-verbal subject, common with verbs like "haver", "ocorrer".
-        # Ex: "Houve uma homenagem" -> "uma homenagem" is the subject.
+        # Sujeito posposto, comum com verbos existenciais.
         for child in verb_token.children:
             if child.dep_ == 'obj' and verb_token.lemma_ in ['haver', 'ocorrer', 'acontecer', 'existir', 'surgir']:
                 return self.__dfs_for_nominal_phrase(child, is_subject=False)
@@ -222,44 +219,35 @@ class Extractor:
 
     def __extract_from_appositive(self, sentence: Span) -> List['Extraction']:
         """
-        Extracts synthetic triples from appositions, creating an "is" relation.
+        Extrai triplas sintéticas de aposições, criando uma relação "é".
         Ex: "João, o carpinteiro, ..." -> (João, é, o carpinteiro)
-
-        Args:
-            sentence (Span): The sentence to process.
-
-        Returns:
-            List[Extraction]: A list of extractions from appositions.
         """
         extractions = []
         for token in sentence:
+            # só considera o token com a dependência 'appos'
             if token.dep_ == 'appos':
                 subject_head = token.head
+                # Ignora aposições em orações subordinadas para evitar extrações incorretas.
                 if subject_head.dep_ in ['ccomp', 'xcomp']: continue
 
-                subject = self.__dfs_for_nominal_phrase(subject_head, is_subject=True, ignore_conj=True)
-                relation = TripleElement(text="é")
+                # Ao construir o sujeito, ignora o próprio aposto para não incluí-lo.
+                subject = self.__dfs_for_nominal_phrase(subject_head, is_subject=True, ignore_conj=True,
+                                                        ignore_appos=True)
+                # O complemento é construído a partir do aposto.
                 complement = self.__dfs_for_nominal_phrase(token, is_subject=False, ignore_conj=False)
+                relation = TripleElement(text="é")
 
-                extraction = Extraction()
-                extraction.subject = subject
-                extraction.relation = relation
-                extraction.complement = complement
-                extractions.append(extraction)
+                if subject and complement:
+                    extraction = Extraction()
+                    extraction.subject = subject
+                    extraction.relation = relation
+                    extraction.complement = complement
+                    extractions.append(extraction)
         return extractions
 
     def extract_relation(self, subject: Optional[TripleElement], start_node: Token) -> List[Tuple['Extraction', Token]]:
         """
-        Extracts the relation starting from a verb token. It also handles
-        coordinated verbs (e.g., "comeu e bebeu").
-
-        Args:
-            subject (Optional[TripleElement]): The subject of the relation.
-            start_node (Token): The initial verb token.
-
-        Returns:
-            List[Tuple[Extraction, Token]]: A list of tuples, where each contains
-                                             an extraction and its effective verb.
+        Extrai a relação a partir de um verbo. Também trata verbos coordenados (ex: "comeu e bebeu").
         """
         subject_tokens = {p.i for p in subject.get_all_tokens()} if subject else set()
 
@@ -272,11 +260,11 @@ class Extractor:
         extraction.relation = base_relation
         extractions_found = [(extraction, effective_verb)]
 
-        # Handles verb coordination (e.g., "ele comeu E bebeu").
+        # Trata coordenação de verbos (ex: "ele comeu E bebeu").
         if self.config.coordinating_conjunctions:
             for child in effective_verb.children:
                 if child.dep_ == 'conj' and child.pos_ in ['VERB', 'AUX']:
-                    # Ensures the coordinated verb doesn't have its own subject.
+                    # Garante que o verbo coordenado não tenha seu próprio sujeito explícito.
                     has_own_subject = any(c.dep_.startswith("nsubj") for c in child.children)
                     if not has_own_subject:
                         new_relation, new_effective_verb = self.__build_relation_element(child, set())
@@ -289,32 +277,31 @@ class Extractor:
 
     @staticmethod
     def __dfs_for_nominal_phrase(start_token: Token, is_subject: bool = False,
-                                 ignore_conj: bool = False) -> TripleElement:
+                                 ignore_conj: bool = False, ignore_appos: bool = False) -> TripleElement:
         """
-        Performs a Depth-First Search starting from a token to build a complete nominal phrase.
-
-        Args:
-            start_token (Token): The token to start the search from (usually a NOUN or PROPN).
-            is_subject (bool): Flag indicating if it's a subject, to apply specific rules.
-            ignore_conj (bool): Flag to ignore conjunctions.
-
-        Returns:
-            TripleElement: The constructed nominal phrase.
+        Executa uma Busca em Profundidade (DFS) para construir uma frase nominal completa.
+        A nova flag 'ignore_appos' previne a inclusão de aposições quando necessário.
         """
         element = TripleElement(start_token)
         stack = deque([start_token])
         local_visited = {start_token.i}
-        # A specific rule to prevent relative clauses ('acl', 'acl:relcl') from being part of the nominal phrase itself.
-        # This avoids capturing verbs from sub-clauses in the subject. Ex: "O homem QUE CORREU..."
-        valid_deps = {"nummod", "advmod", "nmod", "amod", "dep", "det", "case", "flat", "flat:name", "punct", "conj",
-                      "cc"}
+
+        # Define as dependências válidas para a expansão.
+        valid_deps = {"nummod", "advmod", "nmod", "amod", "dep", "det", "case", "flat", "flat:name", "punct"}
+        if not ignore_conj:
+            valid_deps.add("conj")
+            valid_deps.add("cc")
+
+        # Apostos são tratadas separadamente, então não são incluídas aqui.
+        if not ignore_appos:
+            valid_deps.add("appos")
 
         while stack:
             current_token = stack.pop()
             for child in sorted(current_token.children, key=lambda t: t.i):
                 if child.i in local_visited: continue
+
                 if is_subject and current_token.i == start_token.i and child.dep_ == 'case': continue
-                if ignore_conj and child.dep_ == 'conj': continue
 
                 is_valid_dep = child.dep_ in valid_deps
                 is_non_verbal_conj = not (child.dep_ == "conj" and child.pos_ == "VERB")
@@ -326,18 +313,10 @@ class Extractor:
         return element
 
     @staticmethod
-    def __build_relation_element(start_token: Token, visited_tokens: Set[int]) -> (Optional[TripleElement],
-                                                                                   Optional[Token]):
+    def __build_relation_element(start_token: Token, visited_tokens: Set[int]) -> Tuple[
+        Optional[TripleElement], Optional[Token]]:
         """
-        Constructs the relation element by gathering auxiliary verbs, negation, and other modifiers.
-
-        Args:
-            start_token (Token): The verb token to start from.
-            visited_tokens (Set[int]): A set of token indices already processed.
-
-        Returns:
-            A tuple containing the relation (TripleElement) and the effective verb (Token)
-            which is the main action verb in a verb phrase.
+        Constrói o elemento da relação, reunindo verbos auxiliares, negação e outros modificadores.
         """
         relation = TripleElement(start_token)
         effective_verb = start_token
@@ -345,8 +324,7 @@ class Extractor:
         local_visited = visited_tokens.copy()
         local_visited.add(start_token.i)
 
-        # In copular constructions ("ser", "estar"), the effective "verb" for finding
-        # complements is the predicative (adjective or noun).
+        # Em construções com copula, o "verbo efetivo" para encontrar complementos é o predicativo.
         if start_token.dep_ == 'cop':
             effective_verb = start_token.head
 
@@ -357,13 +335,13 @@ class Extractor:
 
             for child in current.children:
                 if child.i in local_visited: continue
-                if child.dep_ in ["aux", "aux:pass", "xcomp"]:
-                    if child.pos_ in ['VERB', 'AUX']:
-                        stack.append(child)
-                        local_visited.add(child.i)
-                        if child.i > effective_verb.i:
-                            effective_verb = child
-                # Generalization to capture adverbial modifiers of the verb, like "não", "já", "também".
+                # Expande para auxiliares e orações abertas (xcomp)
+                if child.dep_ in ["aux", "aux:pass", "xcomp"] and child.pos_ in ['VERB', 'AUX']:
+                    stack.append(child)
+                    local_visited.add(child.i)
+                    if child.i > effective_verb.i:
+                        effective_verb = child
+                # Captura modificadores adverbiais (ex: "não", "já", "também")
                 elif child.dep_ == 'advmod':
                     relation.add_piece(child)
                     local_visited.add(child.i)
@@ -373,62 +351,53 @@ class Extractor:
 
     def extract_complements(self, extraction: 'Extraction', complement_root: Token) -> List['Extraction']:
         """
-        Extracts all complements associated with a given verb/relation.
-
-        Args:
-            extraction (Extraction): The extraction object being built.
-            complement_root (Token): The token from which to start searching for complements.
-                                     This is the "effective verb" of the relation.
-        Returns:
-            List[Extraction]: A list of complete extractions (with complements).
+        Extrai todos os complementos associados a uma dada relação/verbo.
+        Esta é uma das lógicas mais complexas, pois lida com múltiplos complementos e coordenação.
         """
         if not extraction.relation or not extraction.relation.core:
             return [extraction] if extraction.subject else []
 
-        base_visited_indices: Set[int] = set()
-        if extraction.subject is not None:
-            base_visited_indices.update(tok.i for tok in extraction.subject.get_all_tokens())
+        base_visited_indices = {tok.i for tok in extraction.subject.get_all_tokens()} if extraction.subject else set()
         base_visited_indices.update(tok.i for tok in extraction.relation.get_all_tokens())
 
         complement_components: List[TripleElement] = []
         processed_in_chain = set()
 
-        # If the root is not a verb (it's a predicative), it is the complement itself.
-        # Ex: In "é brasileiro", "brasileiro" is the root and the complement.
+        # Se a raiz do complemento não for um verbo (é um predicativo), ele é o próprio complemento.
         if complement_root.pos_ not in ['VERB', 'AUX']:
-            component = self.__dfs_for_complement(complement_root, base_visited_indices, ignore_conj=False)
+            component = self.__dfs_for_complement(complement_root, base_visited_indices)
             if str(component):
                 complement_components.append(component)
                 processed_in_chain.update(tok.i for tok in component.get_all_tokens())
 
-        # Also checks the children of the complement root for more complements (e.g., objects, adverbial clauses).
-        relation_children = sorted(complement_root.children, key=lambda t: t.i)
-
-        # Defines dependencies that do not start a new complement, like subject or markers.
+        # Define dependências que não iniciam um novo complemento (ex: 'mark', 'case', 'nsubj').
         non_initiator_deps = {'mark', 'case', 'cop', 'punct', 'aux', 'aux:pass', 'expl:pv'}
-        if extraction.subject is not None:
+        if extraction.subject:
             non_initiator_deps.update({'nsubj', 'nsubj:pass', 'csubj'})
 
-        for child in relation_children:
-            if child.i in base_visited_indices or child.i in processed_in_chain: continue
+        # Itera sobre os filhos do verbo efetivo para encontrar todos os complementos.
+        for child in sorted(complement_root.children, key=lambda t: t.i):
+            if child.i in base_visited_indices or child.i in processed_in_chain:
+                continue
 
             if self.__is_complement_part(child, non_initiator_deps):
+                # Se encontrar uma conjunção, extrai todos os componentes coordenados.
                 if any(c.dep_ == 'conj' for c in child.children) and self.config.coordinating_conjunctions:
                     components_found = self.__find_conjunction_components(child, base_visited_indices)
                     complement_components.extend(components_found)
                     for comp in components_found:
                         processed_in_chain.update(tok.i for tok in comp.get_all_tokens())
                 else:
-                    single_component = self.__dfs_for_complement(child, base_visited_indices, ignore_conj=False)
+                    single_component = self.__dfs_for_complement(child, base_visited_indices)
                     if str(single_component):
                         complement_components.append(single_component)
                         processed_in_chain.update(tok.i for tok in single_component.get_all_tokens())
 
         if not complement_components:
-            return [extraction] if extraction.subject else []
+            return [extraction] if extraction.subject and extraction.is_valid() else []
 
         final_extractions = []
-        # Creates one extraction for the full complement.
+        # Cria uma extração para o complemento completo (todos os componentes juntos).
         full_complement = TripleElement()
         for component in complement_components:
             full_complement.merge(component)
@@ -440,11 +409,10 @@ class Extractor:
             complete_extraction.complement = full_complement
             final_extractions.append(complete_extraction)
 
-        # Creates fragmented extractions if enabled by the config.
-        # This is controlled by 'coordinating_conjunctions' because multiple complements
-        # are usually a result of coordination.
+        # Se houver múltiplos componentes e a configuração permitir, cria extrações fragmentadas.
         if len(complement_components) > 1 and self.config.coordinating_conjunctions:
             for component in complement_components:
+                # Limpa conectores (como 'e', 'ou') do início do fragmento.
                 cleaned_component = self.__clean_connectors(component)
                 if not str(cleaned_component): continue
                 new_extraction = Extraction()
@@ -453,27 +421,23 @@ class Extractor:
                 new_extraction.complement = cleaned_component
                 final_extractions.append(new_extraction)
 
-        return final_extractions or ([extraction] if extraction.subject else [])
+        return final_extractions or ([extraction] if extraction.subject and extraction.is_valid() else [])
 
-    def __is_complement_part(self, token: Token, non_initiator_deps: Set[str]) -> bool:
-        """Checks if a token can be part of a complement based on its dependency."""
+    @staticmethod
+    def __is_complement_part(token: Token, non_initiator_deps: Set[str]) -> bool:
+        """Verifica se um token pode ser parte de um complemento com base em sua dependência."""
         if token.dep_ in non_initiator_deps:
             return False
+        # Verbos coordenados são tratados separadamente.
         if token.dep_ == 'conj' and token.pos_ in ['VERB', 'AUX']: return False
+        # Pronomes relativos iniciam novas cláusulas.
         if token.pos_ == "PRON" and "Rel" in token.morph.get("PronType", []): return False
 
-        valid_deps = {"obj", "iobj", "obl", "obl:agent", "xcomp", "ccomp", "advcl", "advmod", "nmod", "amod", "nummod",
-                      "appos", "dep", "case", "det", "flat", "flat:name", "fixed", "cop", "mark", "cc", "nsubj",
-                      "nsubj:pass", "acl", "acl:relcl"}
-
-        if token.dep_ in valid_deps: return True
-        if token.dep_ == "conj": return True
-        if token.dep_ == "punct" and self.__valid_punct(token): return True
-        return False
+        return True
 
     @staticmethod
     def __clean_connectors(element: TripleElement) -> TripleElement:
-        """Removes leading coordinating conjunctions from a complement piece."""
+        """Remove conjunções coordenativas ('e', 'ou') do início de um complemento."""
         cleaned_element = TripleElement()
         tokens = element.get_all_tokens()
         if not tokens: return cleaned_element
@@ -481,23 +445,25 @@ class Extractor:
         if tokens[0].dep_ == 'cc':
             tokens.pop(0)
 
-        for piece in tokens:
-            cleaned_element.add_piece(piece)
+        # Reconstrói o elemento sem o conector inicial.
+        if tokens:
+            cleaned_element.core = tokens.pop(0)
+            cleaned_element.pieces = tokens
 
-        if not cleaned_element.core and cleaned_element.pieces:
-            cleaned_element.core = cleaned_element.pieces.pop(0)
         return cleaned_element
 
     @staticmethod
     def __find_conjunction_components(start_token: Token, visited_indices: set) -> List[TripleElement]:
-        """Finds all components linked by a conjunction."""
+        """Encontra todos os componentes ligados por uma conjunção."""
         components: List[TripleElement] = []
 
         def create_component(token: Token) -> TripleElement:
             return Extractor.__dfs_for_complement(token, visited_indices, ignore_conj=True)
 
+        # Adiciona o componente inicial
         components.append(create_component(start_token))
 
+        # Adiciona todos os outros componentes coordenados
         for child in start_token.children:
             if child.dep_ == 'conj':
                 components.append(create_component(child))
@@ -505,15 +471,13 @@ class Extractor:
 
     @staticmethod
     def __dfs_for_complement(start_token: Token, visited_indices: set, ignore_conj: bool = False) -> TripleElement:
-        """Generic DFS to build a complement phrase."""
+        """DFS genérico para construir uma frase de complemento."""
         complement = TripleElement(start_token)
         stack = deque([start_token])
         local_visited = visited_indices.copy()
         local_visited.add(start_token.i)
 
-        extractor_instance = Extractor()
-
-        ignore_deps = set()
+        ignore_deps = {'nsubj', 'nsubj:pass', 'csubj'}  # Sujeitos não fazem parte do complemento
         if ignore_conj:
             ignore_deps.add('conj')
 
@@ -521,15 +485,9 @@ class Extractor:
             current_token = stack.pop()
             for child in sorted(current_token.children, key=lambda t: t.i):
                 if child.i not in local_visited and child.dep_ not in ignore_deps:
-                    # Uses an empty set for non_initiator_deps to capture all valid children.
-                    if extractor_instance.__is_complement_part(child, set()):
+                    # Usa um conjunto vazio para non_initiator_deps para capturar todos os filhos válidos.
+                    if Extractor.__is_complement_part(child, set()):
                         complement.add_piece(child)
                         local_visited.add(child.i)
                         stack.append(child)
         return complement
-
-    @staticmethod
-    def __valid_punct(token: Token) -> bool:
-        """Checks if a punctuation token is valid to be included in an element."""
-        valid_punctuation = {"(", ")", "{", "}", "\"", "'", "[", "]", ","}
-        return token.text in valid_punctuation
