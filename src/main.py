@@ -1,7 +1,10 @@
 import argparse
 import json
 import logging
+import spacy_stanza
 from typing import Any, Generator
+
+import stanza
 from spacy_conll import init_parser
 from spacy_conll.parser import ConllParser
 from spacy.tokens import Doc
@@ -21,12 +24,11 @@ def main(input_file: str, output_file: str, conll_format: bool = False, coordina
 
     Doc.set_extension("extractions", getter=extractor.get_extractions_from_doc)
 
+    tokenizer = stanza.Pipeline(lang='pt', processors='tokenize, mwt')
+    nlp = spacy_stanza.load_pipeline("pt", tokenize_pretokenized=True)
+    nlp.add_pipe("conll_formatter", last=True)
+
     if not conll_format:
-        nlp = init_parser("pt",
-                          "stanza",
-                          parser_opts={"use_gpu": True, "verbose": False},
-                          include_headers=True
-                          )
         connl_file = './outputs/input.conll'
         # clean the file if it exists
         with open(connl_file, 'w') as f:
@@ -35,13 +37,16 @@ def main(input_file: str, output_file: str, conll_format: bool = False, coordina
         with open(input_file, 'r', encoding='utf-8') as f:
             for line in f:
                 if line.strip():
-                    doc = nlp(line.strip())
+                    sentence = line.strip()
+                    # Process the sentence with Stanza tokenizer
+                    doc = tokenizer(sentence)
+                    # Convert Stanza Doc to SpaCy Doc
+                    spacy_doc = nlp(' '.join([word.text for sent in doc.sentences for word in sent.words]))
+
                     with open(connl_file, 'a', encoding='utf-8') as fout:
-                        fout.write(doc._.conll_str)
+                        fout.write(spacy_doc._.conll_str)
                         fout.write('\n')  # Adiciona uma linha em branco entre sentenças
         input_file = connl_file
-
-    nlp = ConllParser(init_parser("pt_core_news_sm", "spacy"))
 
     extractions = {
         'config': dict(extractor.config),
@@ -49,8 +54,7 @@ def main(input_file: str, output_file: str, conll_format: bool = False, coordina
     }
 
     for i, sentence in enumerate(read_conll_sentences(input_file), 1):
-        doc = nlp.parse_conll_text_as_spacy(sentence)
-
+        doc = ConllParser(nlp).parse_conll_text_as_spacy(sentence)
         sentence = {
             'sentence': doc.text.strip(),
             'extractions': []

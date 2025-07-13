@@ -9,8 +9,6 @@ RUN pip install poetry  \
 COPY . /ptoie_dep
 RUN poetry install --only main
 
-RUN poetry run python3 -m spacy download pt_core_news_sm
-
 ENV PYTHONPATH="$PYTHONPATH:/ptoie_dep"
 
 CMD [ "poetry", "run", "python3", "src/noie.py" ]

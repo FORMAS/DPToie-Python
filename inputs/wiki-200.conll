@@ -1,5 +1,3 @@
-# sent_id = 1
-# text = O show ainda conta com as participações especiais de os cantores Zeca Pagodinho ( apenas em o DVD ) e Dominguinhos .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	show	show	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj	_	_
 3	ainda	ainda	ADV	ADV	_	4	advmod	_	_
@@ -21,10 +19,8 @@
 19	)	)	PUNCT	PUNCT	_	18	punct	_	_
 20	e	e	CCONJ	CCONJ	_	21	cc	_	_
 21	Dominguinhos	Dominguinhos	PROPN	PROPN	Gender=Masc|Number=Sing	12	conj	_	_
-22	.	.	PUNCT	PUNCT	_	4	punct	_	_
+22	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Esse asteróide foi descoberto em 24 de Maio de 1931 por Cyril Jackson.
 1	Esse	esse	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	2	det	_	_
 2	asteróide	asteróide	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj:pass	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
@@ -37,11 +33,9 @@
 10	1931	1931	NUM	NUM	NumType=Card	8	nmod	_	_
 11	por	por	ADP	ADP	_	12	case	_	_
 12	Cyril	Cyril	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	4	obl:agent	_	_
-13	Jackson	Jackson	PROPN	PROPN	Number=Sing	12	flat:name	_	SpaceAfter=No
+13	Jackson	Jackson	PROPN	PROPN	Number=Sing	12	flat:name	_	_
 14	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = A Bélgica participou em o Festival Eurovisão de a Canção em 1983 .
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
 2	Bélgica	Bélgica	PROPN	PROPN	Gender=Fem|Number=Sing	3	nsubj	_	_
 3	participou	participar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
@@ -54,14 +48,12 @@
 10	Canção	Canção	PROPN	PROPN	Number=Sing	6	nmod	_	_
 11	em	em	ADP	ADP	_	12	case	_	_
 12	1983	1983	NUM	NUM	NumType=Card	3	obl	_	_
-13	.	.	PUNCT	PUNCT	_	3	punct	_	_
+13	.	.	PUNCT	PUNCT	_	3	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O Association Sportive d'Origine Arménienne de Valence foi um clube de futebol francês.
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	Association	Association	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	11	nsubj	_	_
 3	Sportive	Sportive	PROPN	PROPN	Number=Sing	2	flat:name	_	_
-4	d'	d'	PROPN	PROPN	Number=Sing	2	flat:name	_	SpaceAfter=No
+4	d'	d'	PROPN	PROPN	Number=Sing	2	flat:name	_	_
 5	Origine	Origine	PROPN	PROPN	Number=Sing	2	flat:name	_	_
 6	Arménienne	Arménienne	PROPN	PROPN	Number=Sing	2	flat:name	_	_
 7	de	de	ADP	ADP	_	8	case	_	_
@@ -71,11 +63,9 @@
 11	clube	clube	NOUN	NOUN	Gender=Masc|Number=Sing	0	root	_	_
 12	de	de	ADP	ADP	_	13	case	_	_
 13	futebol	futebol	NOUN	NOUN	Gender=Masc|Number=Sing	11	nmod	_	_
-14	francês	francês	ADJ	ADJ	Gender=Masc|Number=Sing	13	amod	_	SpaceAfter=No
+14	francês	francês	ADJ	ADJ	Gender=Masc|Number=Sing	13	amod	_	_
 15	.	.	PUNCT	PUNCT	_	11	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Em tempos pré-históricos as cavernas protegiam os nossos antepassados de as intempérides e de os animais selvagens .
 1	Em	em	ADP	ADP	_	2	case	_	_
 2	tempos	tempo	NOUN	NOUN	Gender=Masc|Number=Plur	6	obl	_	_
 3	pré-históricos	pré-histórico	ADJ	ADJ	Gender=Masc|Number=Plur	2	amod	_	_
@@ -93,10 +83,8 @@
 15	os	o	DET	DET	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	16	det	_	_
 16	animais	animal	NOUN	NOUN	Gender=Masc|Number=Plur	12	conj	_	_
 17	selvagens	selvagem	ADJ	ADJ	Gender=Masc|Number=Plur	16	amod	_	_
-18	.	.	PUNCT	PUNCT	_	6	punct	_	_
+18	.	.	PUNCT	PUNCT	_	6	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Hirsch ( asteróide 14214 ) é um asteróide de a cintura principal , a 2,0188447 UA .
 1	Hirsch	Hirsch	PROPN	PROPN	Gender=Masc|Number=Sing	8	nsubj	_	_
 2	(	(	PUNCT	PUNCT	_	3	punct	_	_
 3	asteróide	asteróide	NOUN	NOUN	Gender=Masc|Number=Sing	1	appos	_	_
@@ -113,10 +101,8 @@
 14	a	a	ADP	ADP	_	15	case	_	_
 15	2,0188447	2,0188447	NUM	NUM	NumType=Card	8	nmod	_	_
 16	UA	UA	PROPN	PROPN	Gender=Masc|Number=Sing	15	appos	_	_
-17	.	.	PUNCT	PUNCT	_	8	punct	_	_
+17	.	.	PUNCT	PUNCT	_	8	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O Webster's Dictionary também define um enfant terrible como uma pessoa que geralmente tem sucesso e que é fortemente não ortodoxo, inovador ou de vanguarda.
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	Webster's	Webster's	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	5	nsubj	_	_
 3	Dictionary	Dictionary	PROPN	PROPN	Number=Sing	2	flat:name	_	_
@@ -137,25 +123,23 @@
 18	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	21	cop	_	_
 19	fortemente	fortemente	ADV	ADV	_	21	advmod	_	_
 20	não	não	ADV	ADV	Polarity=Neg	21	advmod	_	_
-21	ortodoxo	ortodoxo	ADJ	ADJ	Gender=Masc|Number=Sing	14	conj	_	SpaceAfter=No
+21	ortodoxo	ortodoxo	ADJ	ADJ	Gender=Masc|Number=Sing	14	conj	_	_
 22	,	,	PUNCT	PUNCT	_	23	punct	_	_
 23	inovador	inovador	ADJ	ADJ	Gender=Masc|Number=Sing	21	conj	_	_
 24	ou	ou	CCONJ	CCONJ	_	26	cc	_	_
 25	de	de	ADP	ADP	_	26	case	_	_
-26	vanguarda	vanguarda	NOUN	NOUN	Gender=Fem|Number=Sing	21	conj	_	SpaceAfter=No
+26	vanguarda	vanguarda	NOUN	NOUN	Gender=Fem|Number=Sing	21	conj	_	_
 27	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Luis Alfredo López (29 de agosto de 1986) é um futebolista profissional hondurenho que atua como atacante.
 1	Luis	Luis	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	13	nsubj	_	_
 2	Alfredo	Alfredo	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	López	López	PROPN	PROPN	Number=Sing	1	flat:name	_	_
-4	(	(	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
+4	(	(	PUNCT	PUNCT	_	5	punct	_	_
 5	29	29	NUM	NUM	NumType=Card	1	appos	_	_
 6	de	de	ADP	ADP	_	7	case	_	_
 7	agosto	agosto	NOUN	NOUN	Gender=Masc|Number=Sing	5	nmod	_	_
 8	de	de	ADP	ADP	_	9	case	_	_
-9	1986	1986	NUM	NUM	NumType=Card	7	nmod	_	SpaceAfter=No
+9	1986	1986	NUM	NUM	NumType=Card	7	nmod	_	_
 10	)	)	PUNCT	PUNCT	_	5	punct	_	_
 11	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	13	cop	_	_
 12	um	um	DET	DET	Definite=Ind|Gender=Masc|Number=Sing|PronType=Art	13	det	_	_
@@ -165,22 +149,20 @@
 16	que	que	PRON	PRON	Gender=Masc|Number=Sing|PronType=Rel	17	nsubj	_	_
 17	atua	atuar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	13	acl:relcl	_	_
 18	como	como	ADP	ADP	_	19	case	_	_
-19	atacante	atacante	NOUN	NOUN	Gender=Fem|Number=Sing	17	obl	_	SpaceAfter=No
+19	atacante	atacante	NOUN	NOUN	Gender=Fem|Number=Sing	17	obl	_	_
 20	.	.	PUNCT	PUNCT	_	13	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Joanna Dove Hayes (Williamsport, 23 de dezembro de 1976) é um atleta barreirista e campeã olímpica norte-americana.
 1	Joanna	Joanna	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	15	nsubj	_	_
 2	Dove	Dove	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	Hayes	Hayes	PROPN	PROPN	Number=Sing	1	flat:name	_	_
-4	(	(	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
-5	Williamsport	Williamsport	PROPN	PROPN	Gender=Masc|Number=Sing	1	parataxis	_	SpaceAfter=No
+4	(	(	PUNCT	PUNCT	_	5	punct	_	_
+5	Williamsport	Williamsport	PROPN	PROPN	Gender=Masc|Number=Sing	1	parataxis	_	_
 6	,	,	PUNCT	PUNCT	_	7	punct	_	_
 7	23	23	NUM	NUM	NumType=Card	5	appos	_	_
 8	de	de	ADP	ADP	_	9	case	_	_
 9	dezembro	dezembro	NOUN	NOUN	Gender=Masc|Number=Sing	7	nmod	_	_
 10	de	de	ADP	ADP	_	11	case	_	_
-11	1976	1976	NUM	NUM	NumType=Card	9	nmod	_	SpaceAfter=No
+11	1976	1976	NUM	NUM	NumType=Card	9	nmod	_	_
 12	)	)	PUNCT	PUNCT	_	5	punct	_	_
 13	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	15	cop	_	_
 14	um	um	DET	DET	Definite=Ind|Gender=Masc|Number=Sing|PronType=Art	15	det	_	_
@@ -189,11 +171,9 @@
 17	e	e	CCONJ	CCONJ	_	18	cc	_	_
 18	campeã	campeã	NOUN	NOUN	Gender=Fem|Number=Sing	16	conj	_	_
 19	olímpica	olímpico	ADJ	ADJ	Gender=Fem|Number=Sing	18	amod	_	_
-20	norte-americana	norte-americano	ADJ	ADJ	Gender=Fem|Number=Sing	15	amod	_	SpaceAfter=No
+20	norte-americana	norte-americano	ADJ	ADJ	Gender=Fem|Number=Sing	15	amod	_	_
 21	.	.	PUNCT	PUNCT	_	15	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O álbum segue a mesma linha lançada por o artista em o álbum Retropolis , e seguida em Stardust We Are .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	álbum	álbum	NOUN	NOUN	Gender=Masc|Number=Sing	3	nsubj	_	_
 3	segue	seguir	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
@@ -215,10 +195,8 @@
 19	Stardust	Stardust	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	17	obl	_	_
 20	We	We	PROPN	PROPN	Number=Sing	19	flat:name	_	_
 21	Are	Are	PROPN	PROPN	Number=Sing	19	flat:name	_	_
-22	.	.	PUNCT	PUNCT	_	3	punct	_	_
+22	.	.	PUNCT	PUNCT	_	3	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Vojnik ( em alemão : Hoheneck ) é um município de a Eslovênia .
 1	Vojnik	Vojnik	PROPN	PROPN	Gender=Masc|Number=Sing	10	nsubj	_	_
 2	(	(	PUNCT	PUNCT	_	4	punct	_	_
 3	em	em	ADP	ADP	_	4	case	_	_
@@ -232,10 +210,8 @@
 11	de	de	ADP	ADP	_	13	case	_	_
 12	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	13	det	_	_
 13	Eslovênia	Eslovênia	PROPN	PROPN	Gender=Fem|Number=Sing	10	nmod	_	_
-14	.	.	PUNCT	PUNCT	_	10	punct	_	_
+14	.	.	PUNCT	PUNCT	_	10	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = São seis formas que Elta pode transformar dependendo de a combinação de os orbs .
 1	São	ser	AUX	AUX	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	3	cop	_	_
 2	seis	seis	NUM	NUM	NumType=Card	3	nummod	_	_
 3	formas	forma	NOUN	NOUN	Gender=Fem|Number=Plur	0	root	_	_
@@ -250,10 +226,8 @@
 12	de	de	ADP	ADP	_	14	case	_	_
 13	os	o	DET	DET	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	14	det	_	_
 14	orbs	orb	NOUN	NOUN	Gender=Masc|Number=Plur	11	nmod	_	_
-15	.	.	PUNCT	PUNCT	_	3	punct	_	_
+15	.	.	PUNCT	PUNCT	_	3	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = A autoridade científica de a espécie é Fairmaire , tendo sido descrita em o ano de 1857 .
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
 2	autoridade	autoridade	NOUN	NOUN	Gender=Fem|Number=Sing	8	nsubj	_	_
 3	científica	científico	ADJ	ADJ	Gender=Fem|Number=Sing	2	amod	_	_
@@ -271,10 +245,8 @@
 15	ano	ano	NOUN	NOUN	Gender=Masc|Number=Sing	12	obl	_	_
 16	de	de	ADP	ADP	_	17	case	_	_
 17	1857	1857	NUM	NUM	NumType=Card	15	nmod	_	_
-18	.	.	PUNCT	PUNCT	_	8	punct	_	_
+18	.	.	PUNCT	PUNCT	_	8	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Sua menor audiência foi alcançada em 31 de dezembro de 2004, quando marcou apenas 17 pontos.
 1	Sua	seu	DET	DET	Gender=Fem|Number=Sing|PronType=Prs	3	det	_	_
 2	menor	menor	ADJ	ADJ	Gender=Fem|Number=Sing	3	amod	_	_
 3	audiência	audiência	NOUN	NOUN	Gender=Fem|Number=Sing	5	nsubj:pass	_	_
@@ -285,17 +257,15 @@
 8	de	de	ADP	ADP	_	9	case	_	_
 9	dezembro	dezembro	NOUN	NOUN	Gender=Masc|Number=Sing	7	nmod	_	_
 10	de	de	ADP	ADP	_	11	case	_	_
-11	2004	2004	NUM	NUM	NumType=Card	9	nmod	_	SpaceAfter=No
+11	2004	2004	NUM	NUM	NumType=Card	9	nmod	_	_
 12	,	,	PUNCT	PUNCT	_	5	punct	_	_
 13	quando	quando	ADV	ADV	_	14	advmod	_	_
 14	marcou	marcar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	5	advcl	_	_
 15	apenas	apenas	ADV	ADV	_	16	advmod	_	_
 16	17	17	NUM	NUM	NumType=Card	17	nummod	_	_
-17	pontos	ponto	NOUN	NOUN	Gender=Masc|Number=Plur	14	obj	_	SpaceAfter=No
+17	pontos	ponto	NOUN	NOUN	Gender=Masc|Number=Plur	14	obj	_	_
 18	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Pierre começou a jogar Futsal em 1985 em as escolinhas de o clube Álvares Cabral em Vitória , ES .
 1	Pierre	Pierre	PROPN	PROPN	Gender=Masc|Number=Sing	2	nsubj	_	_
 2	começou	começar	VERB	VERB	ExtPos=AUX|Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
 3	a	a	SCONJ	SCONJ	_	4	mark	_	_
@@ -315,10 +285,8 @@
 17	Vitória	Vitória	PROPN	PROPN	Gender=Masc|Number=Sing	4	obl	_	_
 18	,	,	PUNCT	PUNCT	_	19	punct	_	_
 19	ES	ES	PROPN	PROPN	Gender=Masc|Number=Sing	17	appos	_	_
-20	.	.	PUNCT	PUNCT	_	4	punct	_	_
+20	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Richarnold ( asteróide 20306 ) é um asteróide de a cintura principal , a 2,2952118 UA .
 1	Richarnold	Richarnold	PROPN	PROPN	Gender=Masc|Number=Sing	8	nsubj	_	_
 2	(	(	PUNCT	PUNCT	_	3	punct	_	_
 3	asteróide	asteróide	NOUN	NOUN	Gender=Masc|Number=Sing	1	appos	_	_
@@ -335,10 +303,8 @@
 14	a	a	ADP	ADP	_	15	case	_	_
 15	2,2952118	2,2952118	NUM	NUM	NumType=Card	8	nmod	_	_
 16	UA	UA	PROPN	PROPN	Gender=Masc|Number=Sing	15	appos	_	_
-17	.	.	PUNCT	PUNCT	_	8	punct	_	_
+17	.	.	PUNCT	PUNCT	_	8	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O WWE Judgment Day foi um evento Pay-Per-View de a WWE .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	WWE	WWE	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	7	nsubj	_	_
 3	Judgment	Judgment	PROPN	PROPN	Number=Sing	2	flat:name	_	_
@@ -350,10 +316,8 @@
 9	de	de	ADP	ADP	_	11	case	_	_
 10	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	11	det	_	_
 11	WWE	WWE	PROPN	PROPN	Gender=Fem|Number=Sing	7	nmod	_	_
-12	.	.	PUNCT	PUNCT	_	7	punct	_	_
+12	.	.	PUNCT	PUNCT	_	7	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O primeiro serviço de o MD-11 em os Estados Unidos ocorreu ainda em 1990 e foi inaugurado por a Delta Airlines .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	3	det	_	_
 2	primeiro	primeiro	ADJ	ADJ	Gender=Masc|NumType=Ord|Number=Sing	3	amod	_	_
 3	serviço	serviço	NOUN	NOUN	Gender=Masc|Number=Sing	11	nsubj	_	_
@@ -375,10 +339,8 @@
 19	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	20	det	_	_
 20	Delta	Delta	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	17	obl:agent	_	_
 21	Airlines	Airlines	PROPN	PROPN	Number=Sing	20	flat:name	_	_
-22	.	.	PUNCT	PUNCT	_	11	punct	_	_
+22	.	.	PUNCT	PUNCT	_	11	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Este asteroide foi descoberto em o dia 31 de agosto de 2000 por LINEAR em Socorro .
 1	Este	este	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	2	det	_	_
 2	asteroide	asteroide	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj:pass	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
@@ -395,10 +357,8 @@
 14	LINEAR	Linear	PROPN	PROPN	Gender=Masc|Number=Sing	4	obl:agent	_	_
 15	em	em	ADP	ADP	_	16	case	_	_
 16	Socorro	Socorro	PROPN	PROPN	Gender=Masc|Number=Sing	4	obl	_	_
-17	.	.	PUNCT	PUNCT	_	4	punct	_	_
+17	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Havana é uma cidade localizada em o estado americano de Illinois , em o Condado de Mason .
 1	Havana	Havana	PROPN	PROPN	Gender=Masc|Number=Sing	4	nsubj	_	_
 2	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
 3	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
@@ -416,10 +376,8 @@
 15	Condado	Condado	PROPN	PROPN	Gender=Masc|Number=Sing	5	obl	_	_
 16	de	de	ADP	ADP	_	17	case	_	_
 17	Mason	Mason	PROPN	PROPN	Number=Sing	15	nmod	_	_
-18	.	.	PUNCT	PUNCT	_	4	punct	_	_
+18	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = A Universidade Flinders ( em inglês : Flinders University ou The Flinders University of South Australia ) é uma universidade localizada em a Austrália Meridional , Austrália .
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
 2	Universidade	Universidade	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	20	nsubj	_	_
 3	Flinders	Flinders	PROPN	PROPN	Number=Sing	2	flat:name	_	_
@@ -447,10 +405,8 @@
 25	Meridional	Meridional	PROPN	PROPN	Number=Sing	24	flat:name	_	_
 26	,	,	PUNCT	PUNCT	_	27	punct	_	_
 27	Austrália	Austrália	PROPN	PROPN	Gender=Fem|Number=Sing	24	appos	_	_
-28	.	.	PUNCT	PUNCT	_	20	punct	_	_
+28	.	.	PUNCT	PUNCT	_	20	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O KS era uma mesa com uma matriz de chaves, que o operador usava para comutar os troncos e ramais.
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	KS	KS	PROPN	PROPN	Gender=Masc|Number=Sing	5	nsubj	_	_
 3	era	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Imp|VerbForm=Fin	5	cop	_	_
@@ -460,7 +416,7 @@
 7	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	8	det	_	_
 8	matriz	matriz	NOUN	NOUN	Gender=Fem|Number=Sing	5	nmod	_	_
 9	de	de	ADP	ADP	_	10	case	_	_
-10	chaves	chave	NOUN	NOUN	Gender=Fem|Number=Plur	8	nmod	_	SpaceAfter=No
+10	chaves	chave	NOUN	NOUN	Gender=Fem|Number=Plur	8	nmod	_	_
 11	,	,	PUNCT	PUNCT	_	15	punct	_	_
 12	que	que	PRON	PRON	Gender=Fem|Number=Sing|PronType=Rel	15	obj	_	_
 13	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	14	det	_	_
@@ -471,11 +427,9 @@
 18	os	o	DET	DET	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	19	det	_	_
 19	troncos	tronco	NOUN	NOUN	Gender=Masc|Number=Plur	17	obj	_	_
 20	e	e	CCONJ	CCONJ	_	21	cc	_	_
-21	ramais	ramal	NOUN	NOUN	Gender=Masc|Number=Plur	19	conj	_	SpaceAfter=No
+21	ramais	ramal	NOUN	NOUN	Gender=Masc|Number=Plur	19	conj	_	_
 22	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Ahillones é um município de a Espanha em a província de Badajoz , comunidade autónoma de a Estremadura , de área 21,5 km ² .
 1	Ahillones	Ahillones	PROPN	PROPN	Gender=Masc|Number=Sing	4	nsubj	_	_
 2	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
 3	um	um	DET	DET	Definite=Ind|Gender=Masc|Number=Sing|PronType=Art	4	det	_	_
@@ -500,10 +454,8 @@
 22	21,5	21,5	NUM	NUM	NumType=Card	23	nummod	_	_
 23	km	km	NOUN	NOUN	Gender=Masc|Number=Plur	21	nmod	_	_
 24	²	²	PUNCT	PUNCT	_	23	nummod	_	_
-25	.	.	PUNCT	PUNCT	_	4	punct	_	_
+25	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Salleri é uma cidade de o Nepal .
 1	Salleri	Salleri	PROPN	PROPN	Gender=Masc|Number=Sing	4	nsubj	_	_
 2	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
 3	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
@@ -511,10 +463,8 @@
 5	de	de	ADP	ADP	_	7	case	_	_
 6	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	7	det	_	_
 7	Nepal	Nepal	PROPN	PROPN	Gender=Masc|Number=Sing	4	nmod	_	_
-8	.	.	PUNCT	PUNCT	_	4	punct	_	_
+8	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = A galáxia NGC 3158 foi descoberta em 17 de Março de 1787 por William Herschel.
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
 2	galáxia	galáxia	NOUN	NOUN	Gender=Fem|Number=Sing	6	nsubj:pass	_	_
 3	NGC	NGC	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	2	appos	_	_
@@ -529,11 +479,9 @@
 12	1787	1787	NUM	NUM	NumType=Card	10	nmod	_	_
 13	por	por	ADP	ADP	_	14	case	_	_
 14	William	William	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	6	obl:agent	_	_
-15	Herschel	Herschel	PROPN	PROPN	Number=Sing	14	flat:name	_	SpaceAfter=No
+15	Herschel	Herschel	PROPN	PROPN	Number=Sing	14	flat:name	_	_
 16	.	.	PUNCT	PUNCT	_	6	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Em o Xuxa Park , " Ilariê " voltou a ser executada em 1996 por o bloco Xuxa Hits .
 1	Em	em	ADP	ADP	_	3	case	_	_
 2	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	3	det	_	_
 3	Xuxa	Xuxa	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	12	obl	_	_
@@ -553,10 +501,8 @@
 17	bloco	bloco	NOUN	NOUN	Gender=Masc|Number=Sing	12	obl:agent	_	_
 18	Xuxa	Xuxa	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	17	appos	_	_
 19	Hits	Hits	PROPN	PROPN	Number=Sing	18	flat:name	_	_
-20	.	.	PUNCT	PUNCT	_	12	punct	_	_
+20	.	.	PUNCT	PUNCT	_	12	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Horntown é uma cidade localizada em o estado norte-americano de Oklahoma , em o Condado de Hughes .
 1	Horntown	Horntown	PROPN	PROPN	Gender=Masc|Number=Sing	4	nsubj	_	_
 2	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
 3	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
@@ -574,10 +520,8 @@
 15	Condado	Condado	PROPN	PROPN	Gender=Masc|Number=Sing	5	obl	_	_
 16	de	de	ADP	ADP	_	17	case	_	_
 17	Hughes	Hughes	PROPN	PROPN	Number=Sing	15	nmod	_	_
-18	.	.	PUNCT	PUNCT	_	4	punct	_	_
+18	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O Afogadense foi eliminado por não ter pago as taxas de inscrição por completo impostas por a Federação .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	Afogadense	Afogadense	PROPN	PROPN	Gender=Masc|Number=Sing	4	nsubj:pass	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
@@ -596,10 +540,8 @@
 16	por	por	ADP	ADP	_	18	case	_	_
 17	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	18	det	_	_
 18	Federação	federação	NOUN	NOUN	Gender=Fem|Number=Sing	15	obl:agent	_	_
-19	.	.	PUNCT	PUNCT	_	4	punct	_	_
+19	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O Tenente Niki , de a Guarda Real austríaca , está de serviço em a Viena de o século XIX , em uma parada militar que saúda o Rei Adolf e a Princesa Anna , sua filha , de o vizinho reino de Flausenshaum .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	Tenente	Tenente	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	13	nsubj	_	_
 3	Niki	Niki	PROPN	PROPN	Number=Sing	2	flat:name	_	_
@@ -644,10 +586,8 @@
 42	reino	reino	NOUN	NOUN	Gender=Masc|Number=Sing	33	nmod	_	_
 43	de	de	ADP	ADP	_	44	case	_	_
 44	Flausenshaum	Flausenshaum	PROPN	PROPN	Number=Sing	42	nmod	_	_
-45	.	.	PUNCT	PUNCT	_	13	punct	_	_
+45	.	.	PUNCT	PUNCT	_	13	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Naganuma ( asteróide 15350 ) é um asteróide de a cintura principal , a 1,7205248 UA .
 1	Naganuma	Naganuma	PROPN	PROPN	Gender=Masc|Number=Sing	8	nsubj	_	_
 2	(	(	PUNCT	PUNCT	_	3	punct	_	_
 3	asteróide	asteróide	NOUN	NOUN	Gender=Masc|Number=Sing	1	appos	_	_
@@ -664,20 +604,18 @@
 14	a	a	ADP	ADP	_	15	case	_	_
 15	1,7205248	1,7205248	NUM	NUM	NumType=Card	8	nmod	_	_
 16	UA	UA	PROPN	PROPN	Gender=Masc|Number=Sing	15	appos	_	_
-17	.	.	PUNCT	PUNCT	_	8	punct	_	_
+17	.	.	PUNCT	PUNCT	_	8	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Louis François Élisabeth Ramond, barão de Carbonnières (Strasbourg, 4 de janeiro de 1755 – Paris, 14 de maio de 1827) foi um político, geólogo, explorador e botânico francês.
 1	Louis	Louis	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	28	nsubj	_	_
 2	François	François	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	Élisabeth	Élisabeth	PROPN	PROPN	Number=Sing	1	flat:name	_	_
-4	Ramond	Ramond	PROPN	PROPN	Number=Sing	1	flat:name	_	SpaceAfter=No
+4	Ramond	Ramond	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 5	,	,	PUNCT	PUNCT	_	6	punct	_	_
 6	barão	barão	NOUN	NOUN	Gender=Masc|Number=Sing	1	appos	_	_
 7	de	de	ADP	ADP	_	8	case	_	_
 8	Carbonnières	Carbonnières	PROPN	PROPN	Gender=Masc|Number=Sing	6	nmod	_	_
-9	(	(	PUNCT	PUNCT	_	10	punct	_	SpaceAfter=No
-10	Strasbourg	Strasbourg	PROPN	PROPN	Gender=Masc|Number=Sing	8	parataxis	_	SpaceAfter=No
+9	(	(	PUNCT	PUNCT	_	10	punct	_	_
+10	Strasbourg	Strasbourg	PROPN	PROPN	Gender=Masc|Number=Sing	8	parataxis	_	_
 11	,	,	PUNCT	PUNCT	_	12	punct	_	_
 12	4	4	NUM	NUM	NumType=Card	10	appos	_	_
 13	de	de	ADP	ADP	_	14	case	_	_
@@ -685,28 +623,26 @@
 15	de	de	ADP	ADP	_	16	case	_	_
 16	1755	1755	NUM	NUM	NumType=Card	14	nmod	_	_
 17	–	–	PUNCT	PUNCT	_	18	punct	_	_
-18	Paris	Paris	PROPN	PROPN	Gender=Masc|Number=Sing	10	conj	_	SpaceAfter=No
+18	Paris	Paris	PROPN	PROPN	Gender=Masc|Number=Sing	10	conj	_	_
 19	,	,	PUNCT	PUNCT	_	20	punct	_	_
 20	14	14	NUM	NUM	NumType=Card	10	appos	_	_
 21	de	de	ADP	ADP	_	22	case	_	_
 22	maio	maio	NOUN	NOUN	Gender=Masc|Number=Sing	20	nmod	_	_
 23	de	de	ADP	ADP	_	24	case	_	_
-24	1827	1827	NUM	NUM	NumType=Card	22	nmod	_	SpaceAfter=No
+24	1827	1827	NUM	NUM	NumType=Card	22	nmod	_	_
 25	)	)	PUNCT	PUNCT	_	10	punct	_	_
 26	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	28	cop	_	_
 27	um	um	DET	DET	Definite=Ind|Gender=Masc|Number=Sing|PronType=Art	28	det	_	_
-28	político	político	NOUN	NOUN	Gender=Masc|Number=Sing	0	root	_	SpaceAfter=No
+28	político	político	NOUN	NOUN	Gender=Masc|Number=Sing	0	root	_	_
 29	,	,	PUNCT	PUNCT	_	30	punct	_	_
-30	geólogo	geólogo	NOUN	NOUN	Gender=Masc|Number=Sing	28	conj	_	SpaceAfter=No
+30	geólogo	geólogo	NOUN	NOUN	Gender=Masc|Number=Sing	28	conj	_	_
 31	,	,	PUNCT	PUNCT	_	32	punct	_	_
 32	explorador	explorador	NOUN	NOUN	Gender=Masc|Number=Sing	28	conj	_	_
 33	e	e	CCONJ	CCONJ	_	34	cc	_	_
 34	botânico	botânico	ADJ	ADJ	Gender=Masc|Number=Sing	30	conj	_	_
-35	francês	francês	ADJ	ADJ	Gender=Masc|Number=Sing	28	amod	_	SpaceAfter=No
+35	francês	francês	ADJ	ADJ	Gender=Masc|Number=Sing	28	amod	_	_
 36	.	.	PUNCT	PUNCT	_	28	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = A Assembleia Legislativa de o Estado de Goiás é o órgão de representação de o Poder Legislativo através de os deputados estaduais de o Estado de Goiás .
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
 2	Assembleia	Assembleia	PROPN	PROPN	Gender=Fem|Number=Sing	11	nsubj	_	_
 3	Legislativa	Legislativa	PROPN	PROPN	Number=Sing	2	flat:name	_	_
@@ -734,10 +670,8 @@
 25	Estado	estado	NOUN	NOUN	Gender=Masc|Number=Sing	21	nmod	_	_
 26	de	de	ADP	ADP	_	27	case	_	_
 27	Goiás	Goiás	PROPN	PROPN	Gender=Masc|Number=Sing	25	nmod	_	_
-28	.	.	PUNCT	PUNCT	_	11	punct	_	_
+28	.	.	PUNCT	PUNCT	_	11	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Exemplos são o já falecido pregador inglês Smith Wigglesworth que ajudou em muito em o avivamento em a Nova Zelândia em o início de o século passado , Paul David Cull , neo-zeolandês líder de o ministério Avivamento Já ! .
 1	Exemplos	exemplo	NOUN	NOUN	Gender=Masc|Number=Plur	6	nsubj	_	_
 2	são	ser	AUX	AUX	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	6	cop	_	_
 3	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	6	det	_	_
@@ -778,10 +712,8 @@
 38	Avivamento	Avivamento	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	37	appos	_	_
 39	Já	já	PROPN	PROPN	Number=Sing	38	flat:name	_	_
 40	!	!	PUNCT	PUNCT	_	6	punct	_	_
-41	.	.	PUNCT	PUNCT	_	6	punct	_	_
+41	.	.	PUNCT	PUNCT	_	6	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Marshall foi expulso de as próprias terras por a onda resultante de garimpeiros e nunca obteve lucro com sua descoberta .
 1	Marshall	Marshall	PROPN	PROPN	Gender=Masc|Number=Sing	3	nsubj:pass	_	_
 2	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	3	aux:pass	_	_
 3	expulso	expuldar	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part|Voice=Pass	0	root	_	_
@@ -802,10 +734,8 @@
 18	com	com	ADP	ADP	_	20	case	_	_
 19	sua	seu	DET	DET	Gender=Fem|Number=Sing|PronType=Prs	20	det	_	_
 20	descoberta	descoberta	NOUN	NOUN	Gender=Fem|Number=Sing	16	obl	_	_
-21	.	.	PUNCT	PUNCT	_	3	punct	_	_
+21	.	.	PUNCT	PUNCT	_	3	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Os filhos legítimos de um par vitalício recebem os privilégios de os filhos de os barões hereditários , podendo preceder seus nomes com o título the Honourable .
 1	Os	o	DET	DET	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	2	det	_	_
 2	filhos	filho	NOUN	NOUN	Gender=Masc|Number=Plur	8	nsubj	_	_
 3	legítimos	legítimo	ADJ	ADJ	Gender=Masc|Number=Plur	2	amod	_	_
@@ -833,10 +763,8 @@
 25	título	título	NOUN	NOUN	Gender=Masc|Number=Sing	20	obl	_	_
 26	the	the	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	25	appos	_	_
 27	Honourable	Honourable	PROPN	PROPN	Number=Sing	26	flat:name	_	_
-28	.	.	PUNCT	PUNCT	_	8	punct	_	_
+28	.	.	PUNCT	PUNCT	_	8	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Esse asteróide foi descoberto em 17 de Novembro de 1938 por Karl Reinmuth.
 1	Esse	esse	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	2	det	_	_
 2	asteróide	asteróide	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj:pass	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
@@ -849,11 +777,9 @@
 10	1938	1938	NUM	NUM	NumType=Card	8	nmod	_	_
 11	por	por	ADP	ADP	_	12	case	_	_
 12	Karl	Karl	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	4	obl:agent	_	_
-13	Reinmuth	Reinmuth	PROPN	PROPN	Number=Sing	12	flat:name	_	SpaceAfter=No
+13	Reinmuth	Reinmuth	PROPN	PROPN	Number=Sing	12	flat:name	_	_
 14	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Homem-Serpente é uma raça humanoide fictícia criado por o texano Robert E.
 1	Homem-Serpente	Homem-Serpente	PROPN	PROPN	Gender=Masc|Number=Sing	4	nsubj	_	_
 2	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
 3	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
@@ -865,10 +791,8 @@
 9	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	10	det	_	_
 10	texano	texano	NOUN	NOUN	Gender=Masc|Number=Sing	7	obl:agent	_	_
 11	Robert	Robert	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	10	appos	_	_
-12	E.	E.	PROPN	PROPN	Abbr=Yes|Number=Sing	11	flat:name	_	_
+12	E.	E.	PROPN	PROPN	Abbr=Yes|Number=Sing	11	flat:name	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Twin Shadow é o nome artístico de músico americano George Lewis Jr nascido em a República Dominicana em 1983 e cresceu em o Brooklyn em Nova Iorque , Estados Unidos .
 1	Twin	Twin	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	5	nsubj	_	_
 2	Shadow	Shadow	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
@@ -899,10 +823,8 @@
 28	,	,	PUNCT	PUNCT	_	29	punct	_	_
 29	Estados	Estados	PROPN	PROPN	Gender=Masc|Number=Plur	26	appos	_	_
 30	Unidos	Unidos	PROPN	PROPN	Number=Sing	29	flat:name	_	_
-31	.	.	PUNCT	PUNCT	_	5	punct	_	_
+31	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = A Serra de a Argemela é rica em minerais e mesmo antes de a chegada de os romanos foi explorada em a sua busca .
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
 2	Serra	Serra	PROPN	PROPN	Gender=Fem|Number=Sing	7	nsubj	_	_
 3	de	de	ADP	ADP	_	5	case	_	_
@@ -927,10 +849,8 @@
 22	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	24	det	_	_
 23	sua	seu	DET	DET	Gender=Fem|Number=Sing|PronType=Prs	24	det	_	_
 24	busca	busca	NOUN	NOUN	Gender=Fem|Number=Sing	20	obl	_	_
-25	.	.	PUNCT	PUNCT	_	7	punct	_	_
+25	.	.	PUNCT	PUNCT	_	7	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Como Galbatorix era muito poderoso ele matou muitos e convenceu 12 Cavaleiros a se aliarem a ele, junto com Morzan eles ficaram conhecidos como Os Renegados.
 1	Como	como	SCONJ	SCONJ	_	5	mark	_	_
 2	Galbatorix	Galbatorix	PROPN	PROPN	Gender=Masc|Number=Sing	5	nsubj	_	_
 3	era	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Imp|VerbForm=Fin	5	cop	_	_
@@ -947,7 +867,7 @@
 14	se	se	PRON	PRON	Case=Acc|Gender=Masc|Number=Plur|Person=3|PronType=Prs	15	expl	_	_
 15	aliarem	aliar	VERB	VERB	Number=Plur|Person=3|VerbForm=Inf	10	xcomp	_	_
 16	a	a	ADP	ADP	_	17	case	_	_
-17	ele	ele	PRON	PRON	Gender=Masc|Number=Sing|Person=3|PronType=Prs	15	obj	_	SpaceAfter=No
+17	ele	ele	PRON	PRON	Gender=Masc|Number=Sing|Person=3|PronType=Prs	15	obj	_	_
 18	,	,	PUNCT	PUNCT	_	15	punct	_	_
 19	junto	junto	ADV	ADV	_	23	advmod	_	_
 20	com	com	ADP	ADP	_	21	case	_	_
@@ -957,11 +877,9 @@
 24	conhecidos	conhecer	VERB	VERB	Gender=Masc|Number=Plur|VerbForm=Part	23	xcomp	_	_
 25	como	como	ADP	ADP	_	27	case	_	_
 26	Os	o	DET	DET	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	27	det	_	_
-27	Renegados	Renegados	PROPN	PROPN	Number=Plur	24	obl	_	SpaceAfter=No
+27	Renegados	Renegados	PROPN	PROPN	Number=Plur	24	obl	_	_
 28	.	.	PUNCT	PUNCT	_	7	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Até a edição 22 , a história era focada majoritariamente em o protagonista Matthew Roth , retratando o primeiro ano de ele como fotojornalista em a cidade , assim como certos aspectos de a zona desmilitarizada , através de quatro arcos e quatro histórias contidas .
 1	Até	até	ADP	ADP	_	3	case	_	_
 2	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	3	det	_	_
 3	edição	edição	NOUN	NOUN	Gender=Fem|Number=Sing	9	obl	_	_
@@ -1007,10 +925,8 @@
 43	quatro	quatro	NUM	NUM	NumType=Card	44	nummod	_	_
 44	histórias	história	NOUN	NOUN	Gender=Fem|Number=Plur	41	conj	_	_
 45	contidas	conter	VERB	VERB	Gender=Fem|Number=Plur|VerbForm=Part	44	acl	_	_
-46	.	.	PUNCT	PUNCT	_	9	punct	_	_
+46	.	.	PUNCT	PUNCT	_	9	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Com a tripulação exausta , o capitão-de-mar-e-guerra Christopher Parker , comandante de o navio , ordena que este seja encalhado em a Calheta para evitar a sua perda e avaliar os estragos .
 1	Com	com	ADP	ADP	_	3	case	_	_
 2	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	3	det	_	_
 3	tripulação	tripulação	NOUN	NOUN	Gender=Fem|Number=Sing	16	obl	_	_
@@ -1043,10 +959,8 @@
 30	avaliar	avaliar	VERB	VERB	VerbForm=Inf	25	conj	_	_
 31	os	o	DET	DET	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	32	det	_	_
 32	estragos	estrago	NOUN	NOUN	Gender=Masc|Number=Plur	30	obj	_	_
-33	.	.	PUNCT	PUNCT	_	16	punct	_	_
+33	.	.	PUNCT	PUNCT	_	16	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Mohanpur Mohammadpur é uma vila em o distrito de Hardwar , em o estado indiano de Uttaranchal .
 1	Mohanpur	Mohanpur	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	5	nsubj	_	_
 2	Mohammadpur	Mohammadpur	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
@@ -1064,10 +978,8 @@
 15	indiano	indiano	ADJ	ADJ	Gender=Masc|Number=Sing	14	amod	_	_
 16	de	de	ADP	ADP	_	17	case	_	_
 17	Uttaranchal	Uttaranchal	PROPN	PROPN	Number=Sing	14	nmod	_	_
-18	.	.	PUNCT	PUNCT	_	5	punct	_	_
+18	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Este pertência a o Rei de Soleanna , um homem que almejava o poder para viajar através de o tempo .
 1	Este	este	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	2	det	_	_
 2	pertência	pertencer	NOUN	NOUN	Gender=Masc|Number=Sing	0	root	_	_
 3	a	a	ADP	ADP	_	5	case	_	_
@@ -1088,35 +1000,33 @@
 18	de	de	ADP	ADP	_	20	case	_	_
 19	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	20	det	_	_
 20	tempo	tempo	NOUN	NOUN	Gender=Masc|Number=Sing	17	obl	_	_
-21	.	.	PUNCT	PUNCT	_	2	punct	_	_
+21	.	.	PUNCT	PUNCT	_	2	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Sua população estimada em 2004 era de 3 528 habitantes e em 2007 de 3 570 habitantes , segundo dados de o IBGE .
 1	Sua	seu	DET	DET	Gender=Fem|Number=Sing|PronType=Prs	2	det	_	_
-2	população	população	NOUN	NOUN	Gender=Fem|Number=Sing	9	nsubj	_	_
+2	população	população	NOUN	NOUN	Gender=Fem|Number=Sing	10	nsubj	_	_
 3	estimada	estimar	VERB	VERB	Gender=Fem|Number=Sing|VerbForm=Part	2	acl	_	_
 4	em	em	ADP	ADP	_	5	case	_	_
 5	2004	2004	NUM	NUM	NumType=Card	3	obl	_	_
-6	era	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Imp|VerbForm=Fin	9	cop	_	_
-7	de	de	ADP	ADP	_	9	case	_	_
-8	3 528	3 528	NUM	NUM	NumType=Card	9	nummod	_	_
-9	habitantes	habitante	NOUN	NOUN	Gender=Masc|Number=Plur	0	root	_	_
-10	e	e	CCONJ	CCONJ	_	12	cc	_	_
-11	em	em	ADP	ADP	_	12	case	_	_
-12	2007	2007	NUM	NUM	NumType=Card	9	conj	_	_
-13	de	de	ADP	ADP	_	15	case	_	_
-14	3 570	3 570	NUM	NUM	NumType=Card	15	nummod	_	_
-15	habitantes	habitante	NOUN	NOUN	Gender=Masc|Number=Plur	12	nmod	_	_
-16	,	,	PUNCT	PUNCT	_	9	punct	_	_
-17	segundo	segundo	ADP	ADP	_	18	case	_	_
-18	dados	dado	NOUN	NOUN	Gender=Masc|Number=Plur	9	nmod	_	_
-19	de	de	ADP	ADP	_	21	case	_	_
-20	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	21	det	_	_
-21	IBGE	IBGE	PROPN	PROPN	Gender=Masc|Number=Sing	18	nmod	_	_
-22	.	.	PUNCT	PUNCT	_	9	punct	_	_
+6	era	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Imp|VerbForm=Fin	10	cop	_	_
+7	de	de	ADP	ADP	_	10	case	_	_
+8	3	3	NUM	NUM	NumType=Card	10	nummod	_	_
+9	528	528	NUM	NUM	NumType=Card	10	nummod	_	_
+10	habitantes	habitante	NOUN	NOUN	Gender=Masc|Number=Plur	0	root	_	_
+11	e	e	CCONJ	CCONJ	_	13	cc	_	_
+12	em	em	ADP	ADP	_	13	case	_	_
+13	2007	2007	NUM	NUM	NumType=Card	10	conj	_	_
+14	de	de	ADP	ADP	_	17	case	_	_
+15	3	3	NUM	NUM	NumType=Card	17	nummod	_	_
+16	570	570	NUM	NUM	NumType=Card	17	nummod	_	_
+17	habitantes	habitante	NOUN	NOUN	Gender=Masc|Number=Plur	13	nmod	_	_
+18	,	,	PUNCT	PUNCT	_	10	punct	_	_
+19	segundo	segundo	ADP	ADP	_	20	case	_	_
+20	dados	dado	NOUN	NOUN	Gender=Masc|Number=Plur	10	nmod	_	_
+21	de	de	ADP	ADP	_	23	case	_	_
+22	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	23	det	_	_
+23	IBGE	IBGE	PROPN	PROPN	Gender=Masc|Number=Sing	20	nmod	_	_
+24	.	.	PUNCT	PUNCT	_	10	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Foi desenvolvido como parte de o programa Oko de satélites artificiais .
 1	Foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	2	aux:pass	_	_
 2	desenvolvido	desenvolver	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part|Voice=Pass	0	root	_	_
 3	como	como	ADP	ADP	_	4	case	_	_
@@ -1128,10 +1038,8 @@
 9	de	de	ADP	ADP	_	10	case	_	_
 10	satélites	satélite	NOUN	NOUN	Gender=Masc|Number=Plur	7	nmod	_	_
 11	artificiais	artificial	ADJ	ADJ	Gender=Masc|Number=Plur	10	amod	_	_
-12	.	.	PUNCT	PUNCT	_	2	punct	_	_
+12	.	.	PUNCT	PUNCT	_	2	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Após a extinção de o BNH , aquelas que eram suas atribuições foram assumidas por a CAIXA - Caixa Econômica Federal .
 1	Após	após	ADP	ADP	_	3	case	_	_
 2	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	3	det	_	_
 3	extinção	extinção	NOUN	NOUN	Gender=Fem|Number=Sing	14	obl	_	_
@@ -1153,10 +1061,8 @@
 19	Caixa	Caixa	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	17	appos	_	_
 20	Econômica	Econômica	PROPN	PROPN	Number=Sing	19	flat:name	_	_
 21	Federal	Federal	PROPN	PROPN	Number=Sing	19	flat:name	_	_
-22	.	.	PUNCT	PUNCT	_	14	punct	_	_
+22	.	.	PUNCT	PUNCT	_	14	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Desde então , os clubes vencedores de as taças nacionais passaram a qualificar se para a Taça UEFA , entretanto rebatizada de Liga Europa .
 1	Desde	desde	ADP	ADP	_	2	case	_	_
 2	então	então	NOUN	NOUN	Gender=Masc|Number=Sing	13	obl	_	_
 3	,	,	PUNCT	PUNCT	_	2	punct	_	_
@@ -1181,10 +1087,8 @@
 22	de	de	ADP	ADP	_	23	case	_	_
 23	Liga	Liga	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	21	obl	_	_
 24	Europa	Europa	PROPN	PROPN	Number=Sing	23	flat:name	_	_
-25	.	.	PUNCT	PUNCT	_	13	punct	_	_
+25	.	.	PUNCT	PUNCT	_	13	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Estes espíritos eram mais frequentemente descritos como espectros de animais ou pessoas injustiçadas por o portador , os ritos de exorcismo geralmente eram compostos de ofertas respeitosas ou ofertas de sacrifício .
 1	Estes	este	DET	DET	Gender=Masc|Number=Plur|PronType=Dem	2	det	_	_
 2	espíritos	espírito	NOUN	NOUN	Gender=Masc|Number=Plur	6	nsubj	_	_
 3	eram	ser	AUX	AUX	Mood=Ind|Number=Plur|Person=3|Tense=Imp|VerbForm=Fin	6	cop	_	_
@@ -1216,10 +1120,8 @@
 29	ofertas	oferta	NOUN	NOUN	Gender=Fem|Number=Plur	26	conj	_	_
 30	de	de	ADP	ADP	_	31	case	_	_
 31	sacrifício	sacrifício	NOUN	NOUN	Gender=Masc|Number=Sing	29	nmod	_	_
-32	.	.	PUNCT	PUNCT	_	6	punct	_	_
+32	.	.	PUNCT	PUNCT	_	6	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Similares espíritos divinos também são encontrados em as tradições de a África Central e África Ocidental de onde eles derivam - o Orixá de a cultura Yoruba , o nkisi de os tradições Bantu ( Congo ) , e o vodou de o Dahomey ( Benin ) , Togo , sul de Ghana , e Burkina Faso .
 1	Similares	similar	ADJ	ADJ	Gender=Masc|Number=Plur	2	amod	_	_
 2	espíritos	espírito	NOUN	NOUN	Gender=Masc|Number=Plur	6	nsubj:pass	_	_
 3	divinos	divino	ADJ	ADJ	Gender=Masc|Number=Plur	2	amod	_	_
@@ -1277,10 +1179,8 @@
 55	e	e	CCONJ	CCONJ	_	56	cc	_	_
 56	Burkina	Burkina	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	44	conj	_	_
 57	Faso	Faso	PROPN	PROPN	Number=Sing	56	flat:name	_	_
-58	.	.	PUNCT	PUNCT	_	6	punct	_	_
+58	.	.	PUNCT	PUNCT	_	6	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Este asteróide foi descoberto em 14 de Agosto de 1977 por Nikolai Chernykh.
 1	Este	este	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	2	det	_	_
 2	asteróide	asteróide	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj:pass	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
@@ -1293,11 +1193,9 @@
 10	1977	1977	NUM	NUM	NumType=Card	8	nmod	_	_
 11	por	por	ADP	ADP	_	12	case	_	_
 12	Nikolai	Nikolai	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	4	obl:agent	_	_
-13	Chernykh	Chernykh	PROPN	PROPN	Number=Sing	12	flat:name	_	SpaceAfter=No
+13	Chernykh	Chernykh	PROPN	PROPN	Number=Sing	12	flat:name	_	_
 14	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Grande Oriente são federações ou confederações de , em o mínimo , três Lojas maçônicas que , inicialmente , não trabalhavam em o mesmo rito maçonico , como eram exigidos por as Grande Lojas .
 1	Grande	Grande	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	4	nsubj	_	_
 2	Oriente	Oriente	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	são	ser	AUX	AUX	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
@@ -1332,15 +1230,13 @@
 32	as	o	DET	DET	Definite=Def|Gender=Fem|Number=Plur|PronType=Art	33	det	_	_
 33	Grande	Grande	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Plur	30	obl:agent	_	_
 34	Lojas	Lojas	PROPN	PROPN	Number=Sing	33	flat:name	_	_
-35	.	.	PUNCT	PUNCT	_	4	punct	_	_
+35	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Johannes Jacob Hegetschweiler (Rifferswil, 14 de dezembro de 1789 — Zurique, 9 de setembro de 1839) foi um médico, botânico e político suiço.
 1	Johannes	Johannes	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	23	nsubj	_	_
 2	Jacob	Jacob	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	Hegetschweiler	Hegetschweiler	PROPN	PROPN	Number=Sing	1	flat:name	_	_
-4	(	(	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
-5	Rifferswil	Rifferswil	PROPN	PROPN	Gender=Masc|Number=Sing	1	appos	_	SpaceAfter=No
+4	(	(	PUNCT	PUNCT	_	5	punct	_	_
+5	Rifferswil	Rifferswil	PROPN	PROPN	Gender=Masc|Number=Sing	1	appos	_	_
 6	,	,	PUNCT	PUNCT	_	7	punct	_	_
 7	14	14	NUM	NUM	NumType=Card	5	appos	_	_
 8	de	de	ADP	ADP	_	9	case	_	_
@@ -1348,37 +1244,33 @@
 10	de	de	ADP	ADP	_	11	case	_	_
 11	1789	1789	NUM	NUM	NumType=Card	9	nmod	_	_
 12	—	—	PUNCT	PUNCT	_	13	punct	_	_
-13	Zurique	Zurique	PROPN	PROPN	Gender=Masc|Number=Sing	5	appos	_	SpaceAfter=No
+13	Zurique	Zurique	PROPN	PROPN	Gender=Masc|Number=Sing	5	appos	_	_
 14	,	,	PUNCT	PUNCT	_	15	punct	_	_
 15	9	9	NUM	NUM	NumType=Card	13	appos	_	_
 16	de	de	ADP	ADP	_	17	case	_	_
 17	setembro	setembro	NOUN	NOUN	Gender=Masc|Number=Sing	15	nmod	_	_
 18	de	de	ADP	ADP	_	19	case	_	_
-19	1839	1839	NUM	NUM	NumType=Card	17	nmod	_	SpaceAfter=No
+19	1839	1839	NUM	NUM	NumType=Card	17	nmod	_	_
 20	)	)	PUNCT	PUNCT	_	5	punct	_	_
 21	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	23	cop	_	_
 22	um	um	DET	DET	Definite=Ind|Gender=Masc|Number=Sing|PronType=Art	23	det	_	_
-23	médico	médico	NOUN	NOUN	Gender=Masc|Number=Sing	0	root	_	SpaceAfter=No
+23	médico	médico	NOUN	NOUN	Gender=Masc|Number=Sing	0	root	_	_
 24	,	,	PUNCT	PUNCT	_	25	punct	_	_
 25	botânico	botânico	ADJ	ADJ	Gender=Masc|Number=Sing	23	amod	_	_
 26	e	e	CCONJ	CCONJ	_	27	cc	_	_
 27	político	político	ADJ	ADJ	Gender=Masc|Number=Sing	25	conj	_	_
-28	suiço	suiço	ADJ	ADJ	Gender=Masc|Number=Sing	23	amod	_	SpaceAfter=No
+28	suiço	suiço	ADJ	ADJ	Gender=Masc|Number=Sing	23	amod	_	_
 29	.	.	PUNCT	PUNCT	_	23	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Sua capital é a cidade de Tarata.
 1	Sua	seu	DET	DET	Gender=Fem|Number=Sing|PronType=Prs	2	det	_	_
 2	capital	capital	NOUN	NOUN	Gender=Fem|Number=Sing	5	nsubj	_	_
 3	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
 4	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	5	det	_	_
 5	cidade	cidade	NOUN	NOUN	Gender=Fem|Number=Sing	0	root	_	_
 6	de	de	ADP	ADP	_	7	case	_	_
-7	Tarata	Tarata	PROPN	PROPN	Number=Sing	5	nmod	_	SpaceAfter=No
+7	Tarata	Tarata	PROPN	PROPN	Number=Sing	5	nmod	_	_
 8	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Conus tabidus é uma espécie de gastrópode de o gênero Conus , pertencente a família Conidae .
 1	Conus	conus	NOUN	NOUN	Gender=Masc|Number=Sing	5	nsubj	_	_
 2	tabidus	tabidus	X	X	_	1	flat:foreign	_	_
 3	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
@@ -1395,10 +1287,8 @@
 14	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	15	det	_	_
 15	família	família	NOUN	NOUN	Gender=Fem|Number=Sing	13	obl	_	_
 16	Conidae	Conidae	PROPN	PROPN	Gender=Fem|Number=Sing	15	appos	_	_
-17	.	.	PUNCT	PUNCT	_	5	punct	_	_
+17	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Este asteroide foi descoberto em o dia 16 de setembro de 1988 por Schelte J.
 1	Este	este	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	2	det	_	_
 2	asteroide	asteroide	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj:pass	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
@@ -1413,10 +1303,8 @@
 12	1988	1988	NUM	NUM	NumType=Card	10	nmod	_	_
 13	por	por	ADP	ADP	_	14	case	_	_
 14	Schelte	Schelte	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	4	obl:agent	_	_
-15	J.	J.	PROPN	PROPN	Abbr=Yes|Number=Sing	14	flat:name	_	_
+15	J.	J.	PROPN	PROPN	Abbr=Yes|Number=Sing	14	flat:name	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Walter Hofmann ( Sömmerda , Turíngia , 26 de setembro de 1949 ) é um canoísta de slalom alemão em a modalidade de canoagem .
 1	Walter	Walter	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	16	nsubj	_	_
 2	Hofmann	Hofmann	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	(	(	PUNCT	PUNCT	_	4	punct	_	_
@@ -1441,10 +1329,8 @@
 22	modalidade	modalidade	NOUN	NOUN	Gender=Fem|Number=Sing	16	nmod	_	_
 23	de	de	ADP	ADP	_	24	case	_	_
 24	canoagem	canoagem	NOUN	NOUN	Gender=Fem|Number=Sing	22	nmod	_	_
-25	.	.	PUNCT	PUNCT	_	16	punct	_	_
+25	.	.	PUNCT	PUNCT	_	16	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Qualquer célula viva aumenta de tamanho , por absorção e metabolização de nutrientes , desde o momento em que separa de a sua célula-irmã até atingir um tamanho a partir de o qual a célula , ou se divide para dar origem a duas células-filhas ( ver ciclo celular ) , ou exerce a sua função específica ( em o caso de ser uma célula diferenciada ) até a o momento de a sua morte .
 1	Qualquer	qualquer	DET	DET	Gender=Fem|Number=Sing|PronType=Ind	2	det	_	_
 2	célula	célula	NOUN	NOUN	Gender=Fem|Number=Sing	4	nsubj	_	_
 3	viva	vivo	ADJ	ADJ	Gender=Fem|Number=Sing	2	amod	_	_
@@ -1520,10 +1406,8 @@
 73	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	75	det	_	_
 74	sua	seu	DET	DET	Gender=Fem|Number=Sing|PronType=Prs	75	det	_	_
 75	morte	morte	NOUN	NOUN	Gender=Fem|Number=Sing	71	nmod	_	_
-76	.	.	PUNCT	PUNCT	_	4	punct	_	_
+76	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Os cientistas não usaram a tecnologia de transferência de os " genes de ouro " juntamente com o gene " repórter ß-Glucuronidase " para produzir a planta .
 1	Os	o	DET	DET	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	2	det	_	_
 2	cientistas	cientista	NOUN	NOUN	Gender=Masc|Number=Plur	4	nsubj	_	_
 3	não	não	ADV	ADV	Polarity=Neg	4	advmod	_	_
@@ -1551,10 +1435,8 @@
 25	produzir	produzir	VERB	VERB	VerbForm=Inf	19	acl	_	_
 26	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	27	det	_	_
 27	planta	planta	NOUN	NOUN	Gender=Fem|Number=Sing	25	obj	_	_
-28	.	.	PUNCT	PUNCT	_	4	punct	_	_
+28	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Don't Panic debutou em a sexta posição de a Billboard 200 , por a venda de 48 mil cópias em sua primeira semana em os Estados Unidos , e foi bem recebido por os críticos especializados .
 1	Don't	Don't	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	3	nsubj	_	_
 2	Panic	Panic	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	debutou	debutar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
@@ -1591,10 +1473,8 @@
 34	os	o	DET	DET	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	35	det	_	_
 35	críticos	crítico	NOUN	NOUN	Gender=Masc|Number=Plur	32	obl:agent	_	_
 36	especializados	especializar	VERB	VERB	Gender=Masc|Number=Plur|VerbForm=Part	35	acl	_	_
-37	.	.	PUNCT	PUNCT	_	3	punct	_	_
+37	.	.	PUNCT	PUNCT	_	3	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O diagrama seguinte representa as localidades em um raio de 8 km a o redor de Muniz .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	diagrama	diagrama	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj	_	_
 3	seguinte	seguinte	ADJ	ADJ	Gender=Masc|Number=Sing	2	amod	_	_
@@ -1612,10 +1492,8 @@
 15	redor	redor	NOUN	NOUN	Gender=Masc|Number=Sing	9	nmod	_	_
 16	de	de	ADP	ADP	_	17	case	_	_
 17	Muniz	Muniz	PROPN	PROPN	Gender=Masc|Number=Sing	15	nmod	_	_
-18	.	.	PUNCT	PUNCT	_	4	punct	_	_
+18	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = As construções modernas para a medida de Lebesgue partem de o conceito de esta medida exterior .
 1	As	o	DET	DET	Definite=Def|Gender=Fem|Number=Plur|PronType=Art	2	det	_	_
 2	construções	construção	NOUN	NOUN	Gender=Fem|Number=Plur	9	nsubj	_	_
 3	modernas	moderno	ADJ	ADJ	Gender=Fem|Number=Plur	2	amod	_	_
@@ -1632,40 +1510,33 @@
 14	esta	este	DET	DET	Gender=Fem|Number=Sing|PronType=Dem	15	det	_	_
 15	medida	medida	NOUN	NOUN	Gender=Fem|Number=Sing	12	nmod	_	_
 16	exterior	exterior	ADJ	ADJ	Gender=Fem|Number=Sing	15	amod	_	_
-17	.	.	PUNCT	PUNCT	_	9	punct	_	_
+17	.	.	PUNCT	PUNCT	_	9	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O CSKA venceu 5
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	CSKA	CSKA	PROPN	PROPN	Gender=Masc|Number=Sing	3	nsubj	_	_
 3	venceu	vencer	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
-4	5	5	NUM	NUM	NumType=Card	3	obj	_	_
-
-# sent_id = 2
-# text = Campeonatos Russos , sete Campeonatos Soviéticos , sete Copas de a Rússia e cinco Copas de a União Soviética .
-1	Campeonatos	Campeonatos	PROPN	PROPN	Gender=Masc|Number=Plur	0	root	_	_
-2	Russos	Russos	PROPN	PROPN	Number=Sing	1	flat:name	_	_
-3	,	,	PUNCT	PUNCT	_	5	punct	_	_
-4	sete	sete	NUM	NUM	NumType=Card	5	nummod	_	_
-5	Campeonatos	Campeonatos	PROPN	PROPN	Gender=Masc|Number=Plur	1	conj	_	_
-6	Soviéticos	Soviéticos	PROPN	PROPN	Number=Sing	5	flat:name	_	_
+4	5	5	NUM	NUM	NumType=Card	5	nummod	_	_
+5	Campeonatos	Campeonatos	PROPN	PROPN	Gender=Masc|Number=Plur	3	obj	_	_
+6	Russos	Russos	PROPN	PROPN	Number=Sing	5	flat:name	_	_
 7	,	,	PUNCT	PUNCT	_	9	punct	_	_
 8	sete	sete	NUM	NUM	NumType=Card	9	nummod	_	_
-9	Copas	copa	NOUN	NOUN	Gender=Fem|Number=Plur	1	conj	_	_
-10	de	de	ADP	ADP	_	12	case	_	_
-11	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	12	det	_	_
-12	Rússia	Rússia	PROPN	PROPN	Gender=Fem|Number=Sing	9	nmod	_	_
-13	e	e	CCONJ	CCONJ	_	15	cc	_	_
-14	cinco	cinco	NUM	NUM	NumType=Card	15	nummod	_	_
-15	Copas	Copas	PROPN	PROPN	Gender=Fem|Number=Plur	1	conj	_	_
-16	de	de	ADP	ADP	_	18	case	_	_
-17	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	18	det	_	_
-18	União	União	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	15	nmod	_	_
-19	Soviética	Soviética	PROPN	PROPN	Number=Sing	18	flat:name	_	_
-20	.	.	PUNCT	PUNCT	_	1	punct	_	_
+9	Campeonatos	Campeonatos	PROPN	PROPN	Gender=Masc|Number=Plur	5	conj	_	_
+10	Soviéticos	Soviéticos	PROPN	PROPN	Number=Sing	9	flat:name	_	_
+11	,	,	PUNCT	PUNCT	_	13	punct	_	_
+12	sete	sete	NUM	NUM	NumType=Card	13	nummod	_	_
+13	Copas	Copas	PROPN	PROPN	Gender=Fem|Number=Plur	5	conj	_	_
+14	de	de	ADP	ADP	_	16	case	_	_
+15	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	16	det	_	_
+16	Rússia	Rússia	PROPN	PROPN	Gender=Fem|Number=Sing	13	nmod	_	_
+17	e	e	CCONJ	CCONJ	_	19	cc	_	_
+18	cinco	cinco	NUM	NUM	NumType=Card	19	nummod	_	_
+19	Copas	Copas	PROPN	PROPN	Gender=Fem|Number=Plur	5	conj	_	_
+20	de	de	ADP	ADP	_	22	case	_	_
+21	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	22	det	_	_
+22	União	União	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	19	nmod	_	_
+23	Soviética	Soviética	PROPN	PROPN	Number=Sing	22	flat:name	_	_
+24	.	.	PUNCT	PUNCT	_	3	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O Presidente de a África de o Sul é o chefe de Estado e de governo de a nação sul-africana .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	Presidente	Presidente	PROPN	PROPN	Gender=Masc|Number=Sing	11	nsubj	_	_
 3	de	de	ADP	ADP	_	5	case	_	_
@@ -1686,10 +1557,8 @@
 18	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	19	det	_	_
 19	nação	nação	NOUN	NOUN	Gender=Fem|Number=Sing	11	nmod	_	_
 20	sul-africana	sul-africano	ADJ	ADJ	Gender=Fem|Number=Sing	19	amod	_	_
-21	.	.	PUNCT	PUNCT	_	11	punct	_	_
+21	.	.	PUNCT	PUNCT	_	11	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Segundo informações oficiais , o objetivo de a missão era apenas aproximar se de a Soyuz 2 como um teste , sem acoplamento .
 1	Segundo	segundo	ADP	ADP	_	2	case	_	_
 2	informações	informação	NOUN	NOUN	Gender=Fem|Number=Plur	12	obl	_	_
 3	oficiais	oficial	ADJ	ADJ	Gender=Fem|Number=Plur	2	amod	_	_
@@ -1713,10 +1582,8 @@
 21	,	,	PUNCT	PUNCT	_	23	punct	_	_
 22	sem	sem	ADP	ADP	_	23	case	_	_
 23	acoplamento	acoplamento	NOUN	NOUN	Gender=Masc|Number=Sing	20	nmod	_	_
-24	.	.	PUNCT	PUNCT	_	12	punct	_	_
+24	.	.	PUNCT	PUNCT	_	12	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Ambystoma mavortium é uma espécie de anfíbio caudado pertencente a a família Ambystomatidae .
 1	Ambystoma	Ambystoma	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	5	nsubj	_	_
 2	mavortium	mavortium	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
@@ -1730,10 +1597,8 @@
 11	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	12	det	_	_
 12	família	família	NOUN	NOUN	Gender=Fem|Number=Sing	9	obl	_	_
 13	Ambystomatidae	Ambystomatidae	PROPN	PROPN	Gender=Fem|Number=Sing	12	appos	_	_
-14	.	.	PUNCT	PUNCT	_	5	punct	_	_
+14	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = A citação pode realmente ser atribuída a Voltaire , que escreveu em 1733 :
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
 2	citação	citação	NOUN	NOUN	Gender=Fem|Number=Sing	3	nsubj:pass	_	_
 3	pode	poder	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
@@ -1747,32 +1612,27 @@
 11	escreveu	escrever	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	8	acl:relcl	_	_
 12	em	em	ADP	ADP	_	13	case	_	_
 13	1733	1733	NUM	NUM	NumType=Card	11	obl	_	_
-14	:	:	PUNCT	PUNCT	_	6	punct	_	_
+14	:	:	PUNCT	PUNCT	_	17	punct	_	_
+15	"	«	PUNCT	PUNCT	_	17	punct	_	_
+16	Eu	eu	PRON	PRON	Case=Nom|Gender=Masc|Number=Sing|Person=1|PronType=Prs	17	nsubj	_	_
+17	gostaria	gostar	VERB	VERB	Mood=Cnd|Number=Sing|Person=1|VerbForm=Fin	8	acl:relcl	_	_
+18	de	de	SCONJ	SCONJ	_	19	mark	_	_
+19	ver	ver	VERB	VERB	VerbForm=Inf	17	xcomp	_	_
+20	...	...	PUNCT	PUNCT	_	23	punct	_	_
+21	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	23	det	_	_
+22	último	último	ADJ	ADJ	Gender=Masc|NumType=Ord|Number=Sing	23	amod	_	_
+23	rei	rei	NOUN	NOUN	Gender=Masc|Number=Sing	19	obj	_	_
+24	estrangulado	estrangular	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part	23	acl	_	_
+25	com	com	ADP	ADP	_	27	case	_	_
+26	as	o	DET	DET	Definite=Def|Gender=Fem|Number=Plur|PronType=Art	27	det	_	_
+27	tripas	tripa	NOUN	NOUN	Gender=Fem|Number=Plur	24	obl	_	_
+28	de	de	ADP	ADP	_	31	case	_	_
+29	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	31	det	_	_
+30	último	último	ADJ	ADJ	Gender=Masc|NumType=Ord|Number=Sing	31	amod	_	_
+31	padre	padre	NOUN	NOUN	Gender=Masc|Number=Sing	27	nmod	_	_
+32	"	«	PUNCT	PUNCT	_	17	punct	_	_
+33	.	.	PUNCT	PUNCT	_	6	punct	_	SpaceAfter=No
 
-# sent_id = 2
-# text = " Eu gostaria de ver ... o último rei estrangulado com as tripas de o último padre " .
-1	"	«	PUNCT	PUNCT	_	3	punct	_	_
-2	Eu	eu	PRON	PRON	Case=Nom|Gender=Masc|Number=Sing|Person=1|PronType=Prs	3	nsubj	_	_
-3	gostaria	gostar	VERB	VERB	Mood=Cnd|Number=Sing|Person=1|VerbForm=Fin	0	root	_	_
-4	de	de	SCONJ	SCONJ	_	5	mark	_	_
-5	ver	ver	VERB	VERB	VerbForm=Inf	3	xcomp	_	_
-6	...	...	PUNCT	PUNCT	_	9	punct	_	_
-7	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	9	det	_	_
-8	último	último	ADJ	ADJ	Gender=Masc|NumType=Ord|Number=Sing	9	amod	_	_
-9	rei	rei	NOUN	NOUN	Gender=Masc|Number=Sing	5	obj	_	_
-10	estrangulado	estrangular	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part	9	acl	_	_
-11	com	com	ADP	ADP	_	13	case	_	_
-12	as	o	DET	DET	Definite=Def|Gender=Fem|Number=Plur|PronType=Art	13	det	_	_
-13	tripas	tripa	NOUN	NOUN	Gender=Fem|Number=Plur	10	obl	_	_
-14	de	de	ADP	ADP	_	17	case	_	_
-15	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	17	det	_	_
-16	último	último	ADJ	ADJ	Gender=Masc|NumType=Ord|Number=Sing	17	amod	_	_
-17	padre	padre	NOUN	NOUN	Gender=Masc|Number=Sing	13	nmod	_	_
-18	"	«	PUNCT	PUNCT	_	9	punct	_	_
-19	.	.	PUNCT	PUNCT	_	3	punct	_	_
-
-# sent_id = 1
-# text = Passa por muitas praias de a Costa de a Prata , entre elas : Valadares , Espinho , Esmoriz , Ovar , Mira , Figueira de a Foz e Termas de Monte Real .
 1	Passa	passar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
 2	por	por	ADP	ADP	_	4	case	_	_
 3	muitas	muito	DET	DET	Gender=Fem|Number=Plur|PronType=Ind	4	det	_	_
@@ -1806,10 +1666,8 @@
 31	de	de	ADP	ADP	_	32	case	_	_
 32	Monte	Monte	PROPN	PROPN	ExtPos=PROPN|Number=Sing	30	nmod	_	_
 33	Real	Real	PROPN	PROPN	Number=Sing	32	flat:name	_	_
-34	.	.	PUNCT	PUNCT	_	1	punct	_	_
+34	.	.	PUNCT	PUNCT	_	1	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Esta é uma lista de as emissoras de a Rede Família , uma rede de televisão brasileira .
 1	Esta	este	PRON	PRON	Gender=Fem|Number=Sing|PronType=Dem	4	nsubj	_	_
 2	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
 3	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
@@ -1827,10 +1685,8 @@
 15	de	de	ADP	ADP	_	16	case	_	_
 16	televisão	televisão	NOUN	NOUN	Gender=Fem|Number=Sing	14	nmod	_	_
 17	brasileira	brasileiro	ADJ	ADJ	Gender=Fem|Number=Sing	14	amod	_	_
-18	.	.	PUNCT	PUNCT	_	4	punct	_	_
+18	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O ' Revenge Is Sweeter Tour DVD ' é um CD e DVD a o vivo , de a banda australiana The Veronicas .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	3	det	_	_
 2	'	'	PUNCT	PUNCT	_	3	punct	_	_
 3	Revenge	Revenge	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	11	nsubj	_	_
@@ -1854,10 +1710,8 @@
 21	australiana	australiano	ADJ	ADJ	Gender=Fem|Number=Sing	20	amod	_	_
 22	The	The	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	20	appos	_	_
 23	Veronicas	Veronicas	PROPN	PROPN	Number=Sing	22	flat:name	_	_
-24	.	.	PUNCT	PUNCT	_	11	punct	_	_
+24	.	.	PUNCT	PUNCT	_	11	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Nicéforo significa em grego : " portador de a vitória " , e este justificou o seu nome com uma série de vitórias que permitiram estender a fronteira para leste com a tomada de umas 60 cidades fronteiriças , entre elas Alepo .
 1	Nicéforo	Nicéforo	PROPN	PROPN	Gender=Masc|Number=Sing	2	nsubj	_	_
 2	significa	significar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
 3	em	em	ADP	ADP	_	4	case	_	_
@@ -1900,10 +1754,8 @@
 40	entre	entre	ADP	ADP	_	41	case	_	_
 41	elas	ele	PRON	PRON	Gender=Fem|Number=Plur|Person=3|PronType=Prs	42	nmod	_	_
 42	Alepo	Alepo	PROPN	PROPN	Gender=Masc|Number=Sing	37	appos	_	_
-43	.	.	PUNCT	PUNCT	_	2	punct	_	_
+43	.	.	PUNCT	PUNCT	_	2	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Mauranthemum é um género botânico pertencente a a família Asteraceae .
 1	Mauranthemum	Mauranthemum	PROPN	PROPN	Gender=Masc|Number=Sing	4	nsubj	_	_
 2	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
 3	um	um	DET	DET	Definite=Ind|Gender=Masc|Number=Sing|PronType=Art	4	det	_	_
@@ -1914,12 +1766,10 @@
 8	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	9	det	_	_
 9	família	família	NOUN	NOUN	Gender=Fem|Number=Sing	6	obl	_	_
 10	Asteraceae	Asteraceae	PROPN	PROPN	Gender=Fem|Number=Sing	9	appos	_	_
-11	.	.	PUNCT	PUNCT	_	4	punct	_	_
+11	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = A Meribérica, que a certa altura teve a designação comercial Meribérica/Líber, é uma editora portuguesa, com sede em Lisboa.
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
-2	Meribérica	Meribérica	PROPN	PROPN	Gender=Fem|Number=Sing	17	nsubj	_	SpaceAfter=No
+2	Meribérica	Meribérica	PROPN	PROPN	Gender=Fem|Number=Sing	17	nsubj	_	_
 3	,	,	PUNCT	PUNCT	_	2	punct	_	_
 4	que	que	PRON	PRON	Gender=Fem|Number=Sing|PronType=Rel	8	nsubj	_	_
 5	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	7	det	_	_
@@ -1929,22 +1779,20 @@
 9	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	10	det	_	_
 10	designação	designação	NOUN	NOUN	Gender=Fem|Number=Sing	8	obj	_	_
 11	comercial	comercial	ADJ	ADJ	Gender=Fem|Number=Sing	10	amod	_	_
-12	Meribérica	Meribérica	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	10	appos	_	SpaceAfter=No
-13	/Líber	/Líber	PROPN	PROPN	Number=Sing	12	flat:name	_	SpaceAfter=No
+12	Meribérica	Meribérica	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	10	appos	_	_
+13	/Líber	/Líber	PROPN	PROPN	Number=Sing	12	flat:name	_	_
 14	,	,	PUNCT	PUNCT	_	8	punct	_	_
 15	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	17	cop	_	_
 16	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	17	det	_	_
 17	editora	editora	NOUN	NOUN	Gender=Fem|Number=Sing	0	root	_	_
-18	portuguesa	português	ADJ	ADJ	Gender=Fem|Number=Sing	17	amod	_	SpaceAfter=No
+18	portuguesa	português	ADJ	ADJ	Gender=Fem|Number=Sing	17	amod	_	_
 19	,	,	PUNCT	PUNCT	_	21	punct	_	_
 20	com	com	ADP	ADP	_	21	case	_	_
 21	sede	sede	NOUN	NOUN	Gender=Fem|Number=Sing	17	nmod	_	_
 22	em	em	ADP	ADP	_	23	case	_	_
-23	Lisboa	Lisboa	PROPN	PROPN	Gender=Fem|Number=Sing	21	nmod	_	SpaceAfter=No
+23	Lisboa	Lisboa	PROPN	PROPN	Gender=Fem|Number=Sing	21	nmod	_	_
 24	.	.	PUNCT	PUNCT	_	17	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = De início recebido com frieza por a família , Marcondes conquista logo a afeição de Pedroca “ procurando contentá lo em todos os desejos , prestando se a as suas pequenas exigências ” e , com seu jeito de boêmio , seus ares “ dramáticos de d.
 1	De	de	ADP	ADP	_	2	case	_	_
 2	início	início	NOUN	NOUN	Gender=Masc|Number=Sing	11	obl	_	_
 3	recebido	receber	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part	2	acl	_	_
@@ -1991,10 +1839,8 @@
 44	“	»	PUNCT	PUNCT	_	43	punct	_	_
 45	dramáticos	dramático	ADJ	ADJ	Gender=Masc|Number=Plur	43	amod	_	_
 46	de	de	ADP	ADP	_	47	case	_	_
-47	d.	d.	PROPN	PROPN	Abbr=Yes|Gender=Masc|Number=Sing	43	nmod	_	_
+47	d.	d.	PROPN	PROPN	Abbr=Yes|Gender=Masc|Number=Sing	43	nmod	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Didogobius kochi é uma espécie de peixe de a família Gobiidae e de a ordem Perciformes .
 1	Didogobius	Didogobius	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	5	nsubj	_	_
 2	kochi	kochi	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
@@ -2011,21 +1857,17 @@
 14	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	15	det	_	_
 15	ordem	ordem	NOUN	NOUN	Gender=Fem|Number=Sing	10	conj	_	_
 16	Perciformes	Perciformes	PROPN	PROPN	Gender=Fem|Number=Sing	15	appos	_	_
-17	.	.	PUNCT	PUNCT	_	5	punct	_	_
+17	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Em 2012 a dupla anunciou a volta.
 1	Em	em	ADP	ADP	_	2	case	_	_
 2	2012	2012	NUM	NUM	NumType=Card	5	obl	_	_
 3	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
 4	dupla	dupla	NOUN	NOUN	Gender=Fem|Number=Sing	5	nsubj	_	_
 5	anunciou	anunciar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
 6	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	7	det	_	_
-7	volta	volta	NOUN	NOUN	Gender=Fem|Number=Sing	5	obj	_	SpaceAfter=No
+7	volta	volta	NOUN	NOUN	Gender=Fem|Number=Sing	5	obj	_	_
 8	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = De acordo com o United States Census Bureau tem uma área de 30,4 km² , de os quais 30,4 km ² cobertos por terra e 0,0 km ² cobertos por água .
 1	De	de	ADP	ADP	_	2	case	_	_
 2	acordo	acordo	NOUN	NOUN	Gender=Masc|Number=Sing	9	obl	_	_
 3	com	com	ADP	ADP	_	5	case	_	_
@@ -2057,10 +1899,8 @@
 29	cobertos	cobrir	VERB	VERB	Gender=Masc|Number=Plur|VerbForm=Part|Voice=Pass	20	acl	_	_
 30	por	por	ADP	ADP	_	31	case	_	_
 31	água	água	NOUN	NOUN	Gender=Fem|Number=Sing	29	obl:agent	_	_
-32	.	.	PUNCT	PUNCT	_	9	punct	_	_
+32	.	.	PUNCT	PUNCT	_	9	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O califa o perseguiu até Mosul e o cercou ali , mas sem conseguir prendê lo por os próximos três meses .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	califa	califa	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj	_	_
 3	o	o	PRON	PRON	Case=Acc|Gender=Masc|Number=Sing|Person=3|PronType=Prs	4	obj	_	_
@@ -2082,10 +1922,8 @@
 19	próximos	próximo	ADJ	ADJ	Gender=Masc|Number=Plur	21	amod	_	_
 20	três	três	NUM	NUM	NumType=Card	21	nummod	_	_
 21	meses	mês	NOUN	NOUN	Gender=Masc|Number=Plur	15	obl	_	_
-22	.	.	PUNCT	PUNCT	_	4	punct	_	_
+22	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Pode ser encontrada em os seguintes países : Hong Kong , Japão , Taiwan e Vietname .
 1	Pode	poder	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
 2	ser	ser	AUX	AUX	VerbForm=Inf	3	aux:pass	_	_
 3	encontrada	encontrar	VERB	VERB	Gender=Fem|Number=Sing|VerbForm=Part|Voice=Pass	1	xcomp	_	_
@@ -2102,10 +1940,8 @@
 14	Taiwan	Taiwan	PROPN	PROPN	Gender=Masc|Number=Sing	9	conj	_	_
 15	e	e	CCONJ	CCONJ	_	16	cc	_	_
 16	Vietname	Vietname	PROPN	PROPN	Gender=Masc|Number=Sing	9	conj	_	_
-17	.	.	PUNCT	PUNCT	_	3	punct	_	_
+17	.	.	PUNCT	PUNCT	_	3	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Estavam equipados com o equipamento em uso em o Exército Português , mas também utilizavam muito armamento capturado a os guerrilheiros , nomeadamente em as Operações Pseudo-Terroristas .
 1	Estavam	estar	AUX	AUX	Mood=Ind|Number=Plur|Person=3|Tense=Imp|VerbForm=Fin	2	cop	_	_
 2	equipados	equipado	ADJ	ADJ	Gender=Masc|Number=Plur	0	root	_	_
 3	com	com	ADP	ADP	_	5	case	_	_
@@ -2133,34 +1969,27 @@
 25	as	o	DET	DET	Definite=Def|Gender=Fem|Number=Plur|PronType=Art	26	det	_	_
 26	Operações	Operações	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Plur	15	obl	_	_
 27	Pseudo-Terroristas	Pseudo-Terroristas	PROPN	PROPN	Number=Sing	26	flat:name	_	_
-28	.	.	PUNCT	PUNCT	_	2	punct	_	_
+28	.	.	PUNCT	PUNCT	_	2	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Serie
-1	Serie	serie	NOUN	NOUN	Gender=Fem|Number=Sing	0	root	_	_
+1	Serie	Serie	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	7	nsubj	_	_
+2	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	3	case	_	_
+3	2006-07	2006-07	NUM	NUM	NumType=Card	1	nmod	_	_
+4	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	cop	_	_
+5	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	7	det	_	_
+6	LXXV	lxxv	ADJ	ADJ	Gender=Fem|NumType=Ord|Number=Sing	7	amod	_	_
+7	edição	edição	NOUN	NOUN	Gender=Fem|Number=Sing	0	root	_	_
+8	de	de	ADP	ADP	_	10	case	_	_
+9	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	10	det	_	_
+10	Seria	ser	PROPN	PROPN	Gender=Fem|Number=Sing	7	nmod	_	_
+11	A	A	PROPN	PROPN	Number=Sing	10	flat:name	_	_
+12	de	de	ADP	ADP	_	14	case	_	_
+13	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	14	det	_	_
+14	Campeonato	Campeonato	PROPN	PROPN	Gender=Masc|Number=Sing	7	nmod	_	_
+15	Italiano	Italiano	PROPN	PROPN	Number=Sing	14	flat:name	_	_
+16	de	de	ADP	ADP	_	17	case	_	_
+17	Futebol	Futebol	PROPN	PROPN	Number=Sing	14	nmod	_	_
+18	.	.	PUNCT	PUNCT	_	7	punct	_	SpaceAfter=No
 
-# sent_id = 2
-# text = A 2006-07 é a LXXV edição de a Seria A de o Campeonato Italiano de Futebol .
-1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
-2	2006-07	2006-07	NUM	NUM	NumType=Card	6	nsubj	_	_
-3	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	6	cop	_	_
-4	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	6	det	_	_
-5	LXXV	lxxv	ADJ	ADJ	Gender=Fem|NumType=Ord|Number=Sing	6	amod	_	_
-6	edição	edição	NOUN	NOUN	Gender=Fem|Number=Sing	0	root	_	_
-7	de	de	ADP	ADP	_	9	case	_	_
-8	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	9	det	_	_
-9	Seria	ser	PROPN	PROPN	Gender=Fem|Number=Sing	6	nmod	_	_
-10	A	A	PROPN	PROPN	Number=Sing	9	flat:name	_	_
-11	de	de	ADP	ADP	_	13	case	_	_
-12	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	13	det	_	_
-13	Campeonato	Campeonato	PROPN	PROPN	Gender=Masc|Number=Sing	9	nmod	_	_
-14	Italiano	Italiano	PROPN	PROPN	Number=Sing	13	flat:name	_	_
-15	de	de	ADP	ADP	_	16	case	_	_
-16	Futebol	Futebol	PROPN	PROPN	Number=Sing	13	nmod	_	_
-17	.	.	PUNCT	PUNCT	_	6	punct	_	_
-
-# sent_id = 1
-# text = A Liga Celta de Rugby de 2009-10 foi a IX edição de a Celtic League , a liga europea de rugby de os países célticos envolvendo times de a Irlanda , Escócia e País de Gales .
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
 2	Liga	Liga	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	11	nsubj	_	_
 3	Celta	Celta	PROPN	PROPN	Number=Sing	2	flat:name	_	_
@@ -2197,10 +2026,8 @@
 34	País	País	PROPN	PROPN	Gender=Masc|Number=Sing	30	conj	_	_
 35	de	de	ADP	ADP	_	36	case	_	_
 36	Gales	Gales	PROPN	PROPN	Number=Sing	34	nmod	_	_
-37	.	.	PUNCT	PUNCT	_	11	punct	_	_
+37	.	.	PUNCT	PUNCT	_	11	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Kappiyarai é uma panchayat ( vila ) em o distrito de Kanniyakumari , em o estado indiano de Tamil Nadu .
 1	Kappiyarai	Kappiyarai	PROPN	PROPN	Gender=Masc|Number=Sing	4	nsubj	_	_
 2	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
 3	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
@@ -2221,10 +2048,8 @@
 18	de	de	ADP	ADP	_	19	case	_	_
 19	Tamil	Tamil	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	16	nmod	_	_
 20	Nadu	Nadu	PROPN	PROPN	Number=Sing	19	flat:name	_	_
-21	.	.	PUNCT	PUNCT	_	4	punct	_	_
+21	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O Lago de Lecco , é em a realidade o braço Sudeste de o Lago de Como que banha a comuna italiana de Lecco em a província de Lecco , e em a região de a Lombardia ,
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	Lago	Lago	PROPN	PROPN	Gender=Masc|Number=Sing	9	nsubj	_	_
 3	de	de	ADP	ADP	_	4	case	_	_
@@ -2262,10 +2087,8 @@
 35	de	de	ADP	ADP	_	37	case	_	_
 36	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	37	det	_	_
 37	Lombardia	Lombardia	PROPN	PROPN	Gender=Fem|Number=Sing	34	nmod	_	_
-38	,	,	PUNCT	PUNCT	_	9	punct	_	_
+38	,	,	PUNCT	PUNCT	_	9	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = É em este braço que se encontra a cidade de Lecco , e em o cruzamento de este braço com o braço de Sudoeste , a parte Sudoeste de o lago de Como , que se encontra Bellagio .
 1	É	é	SCONJ	SCONJ	_	7	mark	_	_
 2	em	em	ADP	ADP	_	4	case	_	_
 3	este	este	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	4	det	_	_
@@ -2304,10 +2127,8 @@
 36	se	se	PRON	PRON	Case=Acc|Gender=Fem|Number=Sing|Person=3|PronType=Prs	37	expl	_	_
 37	encontra	encontrar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	22	acl:relcl	_	_
 38	Bellagio	Bellagio	PROPN	PROPN	Gender=Masc|Number=Sing	37	nsubj	_	_
-39	.	.	PUNCT	PUNCT	_	7	punct	_	_
+39	.	.	PUNCT	PUNCT	_	7	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Esta técnica não seria aplicável a grandes dicionários por ser muito lenta - complexidade O(nc*np){\displaystyle O(nc*np)}, onde nc é o número de palavras chaves e np é o número de palavras.
 1	Esta	este	DET	DET	Gender=Fem|Number=Sing|PronType=Dem	2	det	_	_
 2	técnica	técnica	NOUN	NOUN	Gender=Fem|Number=Sing	5	nsubj	_	_
 3	não	não	ADV	ADV	Polarity=Neg	5	advmod	_	_
@@ -2322,15 +2143,15 @@
 12	lenta	lento	ADJ	ADJ	Gender=Fem|Number=Sing	5	amod	_	_
 13	-	-	PUNCT	PUNCT	_	14	punct	_	_
 14	complexidade	complexidade	NOUN	NOUN	Gender=Fem|Number=Sing	12	conj	_	_
-15	O(	O(	PUNCT	PUNCT	_	16	punct	_	SpaceAfter=No
-16	nc*np	nc*np	NOUN	NOUN	Gender=Masc|Number=Sing	12	appos	_	SpaceAfter=No
-17	)	)	PUNCT	PUNCT	_	16	punct	_	SpaceAfter=No
-18	{	{	PUNCT	PUNCT	_	19	punct	_	SpaceAfter=No
+15	O(	O(	PUNCT	PUNCT	_	16	punct	_	_
+16	nc*np	nc*np	NOUN	NOUN	Gender=Masc|Number=Sing	12	appos	_	_
+17	)	)	PUNCT	PUNCT	_	16	punct	_	_
+18	{	{	PUNCT	PUNCT	_	19	punct	_	_
 19	\displaystyle	\displaystyle	X	X	ExtPos=ADJ|Number=Sing	12	appos	_	_
-20	O(	o(	X	X	Number=Sing	19	flat:foreign	_	SpaceAfter=No
-21	nc*np	nc*np	X	X	Number=Sing	19	flat:foreign	_	SpaceAfter=No
-22	)	)	PUNCT	PUNCT	_	19	punct	_	SpaceAfter=No
-23	}	}	PUNCT	PUNCT	_	12	punct	_	SpaceAfter=No
+20	O(	o(	X	X	Number=Sing	19	flat:foreign	_	_
+21	nc*np	nc*np	X	X	Number=Sing	19	flat:foreign	_	_
+22	)	)	PUNCT	PUNCT	_	19	punct	_	_
+23	}	}	PUNCT	PUNCT	_	12	punct	_	_
 24	,	,	PUNCT	PUNCT	_	37	punct	_	_
 25	onde	onde	PRON	PRON	Number=Sing|PronType=Rel	37	obl	_	_
 26	nc	nc	X	X	_	25	fixed	_	_
@@ -2346,11 +2167,9 @@
 36	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	37	det	_	_
 37	número	número	NOUN	NOUN	Gender=Masc|Number=Sing	12	conj	_	_
 38	de	de	ADP	ADP	_	39	case	_	_
-39	palavras	palavra	NOUN	NOUN	Gender=Fem|Number=Plur	37	nmod	_	SpaceAfter=No
+39	palavras	palavra	NOUN	NOUN	Gender=Fem|Number=Plur	37	nmod	_	_
 40	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Este asteroide foi descoberto em o dia 30 de novembro de 1999 por LINEAR em Socorro .
 1	Este	este	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	2	det	_	_
 2	asteroide	asteroide	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj:pass	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
@@ -2367,10 +2186,8 @@
 14	LINEAR	Linear	PROPN	PROPN	Gender=Masc|Number=Sing	4	obl:agent	_	_
 15	em	em	ADP	ADP	_	16	case	_	_
 16	Socorro	Socorro	PROPN	PROPN	Gender=Masc|Number=Sing	4	obl	_	_
-17	.	.	PUNCT	PUNCT	_	4	punct	_	_
+17	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Este asteróide foi descoberto em 27 de Agosto de 1979 por Nikolai Chernykh.
 1	Este	este	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	2	det	_	_
 2	asteróide	asteróide	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj:pass	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
@@ -2383,11 +2200,9 @@
 10	1979	1979	NUM	NUM	NumType=Card	8	nmod	_	_
 11	por	por	ADP	ADP	_	12	case	_	_
 12	Nikolai	Nikolai	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	4	obl:agent	_	_
-13	Chernykh	Chernykh	PROPN	PROPN	Number=Sing	12	flat:name	_	SpaceAfter=No
+13	Chernykh	Chernykh	PROPN	PROPN	Number=Sing	12	flat:name	_	_
 14	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Rock In Rio - Cássia Eller é um álbum a o vivo de a cantora Cássia Eller , lançado em 2006 .
 1	Rock	Rock	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	9	nsubj	_	_
 2	In	In	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	Rio	Rio	PROPN	PROPN	Number=Sing	1	flat:name	_	_
@@ -2409,10 +2224,8 @@
 19	lançado	lançar	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part	15	acl	_	_
 20	em	em	ADP	ADP	_	21	case	_	_
 21	2006	2006	NUM	NUM	NumType=Card	19	obl	_	_
-22	.	.	PUNCT	PUNCT	_	9	punct	_	_
+22	.	.	PUNCT	PUNCT	_	9	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Semidecídua , heliófita , aparece em dispersão irregular e descontínua : por exemplo , em o Parque Estadual Vassununga aparece em a forma de um grupo .
 1	Semidecídua	semidecídua	NOUN	NOUN	Gender=Fem|Number=Sing	5	nsubj	_	_
 2	,	,	PUNCT	PUNCT	_	3	punct	_	_
 3	heliófita	heliófita	NOUN	NOUN	Gender=Fem|Number=Sing	1	appos	_	_
@@ -2439,10 +2252,8 @@
 24	de	de	ADP	ADP	_	26	case	_	_
 25	um	um	DET	DET	Definite=Ind|Gender=Masc|Number=Sing|PronType=Art	26	det	_	_
 26	grupo	grupo	NOUN	NOUN	Gender=Masc|Number=Sing	23	nmod	_	_
-27	.	.	PUNCT	PUNCT	_	5	punct	_	_
+27	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Formado em engenharia aeroespacial , Onizuka serviu como engenheiro de vôo em a Força Aérea trabalhando com diversos tipos de aviões militares .
 1	Formado	formar	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part	7	advcl	_	_
 2	em	em	ADP	ADP	_	3	case	_	_
 3	engenharia	engenharia	NOUN	NOUN	Gender=Fem|Number=Sing	1	obj	_	_
@@ -2465,10 +2276,8 @@
 20	de	de	ADP	ADP	_	21	case	_	_
 21	aviões	avião	NOUN	NOUN	Gender=Masc|Number=Plur	19	nmod	_	_
 22	militares	militar	ADJ	ADJ	Gender=Masc|Number=Plur	21	amod	_	_
-23	.	.	PUNCT	PUNCT	_	7	punct	_	_
+23	.	.	PUNCT	PUNCT	_	7	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Localiza se em o departamento de Santa Rosa , Município de Chiquimulilla .
 1	Localiza	Localiza	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
 2	se	se	PRON	PRON	Case=Acc|Gender=Fem|Number=Sing|Person=3|PronType=Prs	1	expl	_	_
 3	em	em	ADP	ADP	_	5	case	_	_
@@ -2481,10 +2290,8 @@
 10	Município	Município	PROPN	PROPN	Gender=Masc|Number=Sing	7	appos	_	_
 11	de	de	ADP	ADP	_	12	case	_	_
 12	Chiquimulilla	Chiquimulilla	PROPN	PROPN	Number=Sing	10	nmod	_	_
-13	.	.	PUNCT	PUNCT	_	1	punct	_	_
+13	.	.	PUNCT	PUNCT	_	1	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Contém uma capela em honra de São Silvestre , padroeiro de a aldeia , e uma capelinha referente a São Macário , que se situa em o cimo de um monte como que " vigiando " a nossa terra .
 1	Contém	conter	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
 2	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	3	det	_	_
 3	capela	capela	NOUN	NOUN	Gender=Fem|Number=Sing	1	obj	_	_
@@ -2524,10 +2331,8 @@
 37	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	39	det	_	_
 38	nossa	nosso	DET	DET	Gender=Fem|Number=Sing|PronType=Prs	39	det	_	_
 39	terra	terra	NOUN	NOUN	Gender=Fem|Number=Sing	35	obj	_	_
-40	.	.	PUNCT	PUNCT	_	1	punct	_	_
+40	.	.	PUNCT	PUNCT	_	1	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = A Soyuz 40 foi a última missão com a nave de o tipo Soyuz e a última nave espacial a aclopar em a em a Salyut 6 .
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
 2	Soyuz	Soyuz	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	7	nsubj	_	_
 3	40	40	PROPN	PROPN	Number=Sing	2	flat:name	_	_
@@ -2555,10 +2360,8 @@
 25	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	26	det	_	_
 26	Salyut	Salyut	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	21	obl	_	_
 27	6	6	PROPN	PROPN	Number=Sing	26	flat:name	_	_
-28	.	.	PUNCT	PUNCT	_	7	punct	_	_
+28	.	.	PUNCT	PUNCT	_	7	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O Conselho Presidencial ( em francês : Conseil Présidentiel ) foi um sistema de governo triunvirato de a República de o Daomé ( atual Benim ) que existiu entre 7 de maio de 1970 e 26 de outubro de 1972 .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	Conselho	Conselho	PROPN	PROPN	Gender=Masc|Number=Sing	13	nsubj	_	_
 3	Presidencial	Presidencial	PROPN	PROPN	Number=Sing	2	flat:name	_	_
@@ -2599,10 +2402,8 @@
 38	outubro	outubro	NOUN	NOUN	Gender=Masc|Number=Sing	36	nmod	_	_
 39	de	de	ADP	ADP	_	40	case	_	_
 40	1972	1972	NUM	NUM	NumType=Card	38	nmod	_	_
-41	.	.	PUNCT	PUNCT	_	13	punct	_	_
+41	.	.	PUNCT	PUNCT	_	13	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O realismo de o show acabou por se tornar uma barreira para a audiência , segundo o instituto Nielsen Media Research , a série tinha índices baixíssimos de audiência e foi cancelada com menos de 4 meses em o ar .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	realismo	realismo	NOUN	NOUN	Gender=Masc|Number=Sing	6	nsubj	_	_
 3	de	de	ADP	ADP	_	5	case	_	_
@@ -2643,10 +2444,8 @@
 38	em	em	ADP	ADP	_	40	case	_	_
 39	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	40	det	_	_
 40	ar	ar	NOUN	NOUN	Gender=Masc|Number=Sing	37	nmod	_	_
-41	.	.	PUNCT	PUNCT	_	9	punct	_	_
+41	.	.	PUNCT	PUNCT	_	9	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O beato Padre Eustáquio é muito famoso por todo o Brasil, sendo considerado responsável por vários milagres ocorridos por todo o país.
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	beato	beato	NOUN	NOUN	Gender=Masc|Number=Sing	7	nsubj	_	_
 3	Padre	Padre	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	2	appos	_	_
@@ -2657,7 +2456,7 @@
 8	por	por	ADP	ADP	_	11	case	_	_
 9	todo	todo	DET	DET	Gender=Masc|Number=Sing|PronType=Tot	11	det	_	_
 10	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	11	det	_	_
-11	Brasil	Brasil	PROPN	PROPN	Gender=Masc|Number=Sing	7	obl	_	SpaceAfter=No
+11	Brasil	Brasil	PROPN	PROPN	Gender=Masc|Number=Sing	7	obl	_	_
 12	,	,	PUNCT	PUNCT	_	14	punct	_	_
 13	sendo	ser	AUX	AUX	VerbForm=Ger	14	aux:pass	_	_
 14	considerado	considerar	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part|Voice=Pass	7	advcl	_	_
@@ -2669,11 +2468,9 @@
 20	por	por	ADP	ADP	_	23	case	_	_
 21	todo	todo	DET	DET	Gender=Masc|Number=Sing|PronType=Tot	23	det	_	_
 22	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	23	det	_	_
-23	país	país	NOUN	NOUN	Gender=Masc|Number=Sing	19	obl:agent	_	SpaceAfter=No
+23	país	país	NOUN	NOUN	Gender=Masc|Number=Sing	19	obl:agent	_	_
 24	.	.	PUNCT	PUNCT	_	7	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Este asteroide foi descoberto em o dia 7 de fevereiro de 1997 por Klet em Klet .
 1	Este	este	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	2	det	_	_
 2	asteroide	asteroide	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj:pass	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
@@ -2690,10 +2487,8 @@
 14	Klet	Klet	PROPN	PROPN	Gender=Masc|Number=Sing	4	obl:agent	_	_
 15	em	em	ADP	ADP	_	16	case	_	_
 16	Klet	Klet	PROPN	PROPN	Gender=Masc|Number=Sing	4	obl	_	_
-17	.	.	PUNCT	PUNCT	_	4	punct	_	_
+17	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Segundo alguns registros o casal praticava o enigmático ritual que se chamava : energia criativa sexual , largamente difundido em a parte oriental de a China , tendo influencia profunda de o taoismo de Lao Tzé , tornando se o casal mais poderoso de a época .
 1	Segundo	segundo	ADP	ADP	_	3	case	_	_
 2	alguns	algum	DET	DET	Gender=Masc|Number=Plur|PronType=Ind	3	det	_	_
 3	registros	registro	NOUN	NOUN	Gender=Masc|Number=Plur	6	obl	_	_
@@ -2740,10 +2535,8 @@
 44	de	de	ADP	ADP	_	46	case	_	_
 45	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	46	det	_	_
 46	época	época	NOUN	NOUN	Gender=Fem|Number=Sing	41	nmod	_	_
-47	.	.	PUNCT	PUNCT	_	6	punct	_	_
+47	.	.	PUNCT	PUNCT	_	6	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O seu Mestrado centrou se em o estabelecimento de competências de confronto com o stress e a ansiedade .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	3	det	_	_
 2	seu	seu	DET	DET	Gender=Masc|Number=Sing|PronType=Prs	3	det	_	_
 3	Mestrado	mestrado	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj	_	_
@@ -2762,27 +2555,23 @@
 16	e	e	CCONJ	CCONJ	_	18	cc	_	_
 17	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	18	det	_	_
 18	ansiedade	ansiedade	NOUN	NOUN	Gender=Fem|Number=Sing	15	conj	_	_
-19	.	.	PUNCT	PUNCT	_	4	punct	_	_
+19	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = A série foi cancelada em 2016, não renovando para a 5º temporada.
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
 2	série	série	NOUN	NOUN	Gender=Fem|Number=Sing	4	nsubj:pass	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
 4	cancelada	cancelar	VERB	VERB	Gender=Fem|Number=Sing|VerbForm=Part|Voice=Pass	0	root	_	_
 5	em	em	ADP	ADP	_	6	case	_	_
-6	2016	2016	NUM	NUM	NumType=Card	4	obl	_	SpaceAfter=No
+6	2016	2016	NUM	NUM	NumType=Card	4	obl	_	_
 7	,	,	PUNCT	PUNCT	_	9	punct	_	_
 8	não	não	ADV	ADV	Polarity=Neg	9	advmod	_	_
 9	renovando	renovar	VERB	VERB	VerbForm=Ger	4	advcl	_	_
 10	para	para	ADP	ADP	_	13	case	_	_
 11	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	13	det	_	_
 12	5º	5º	ADJ	ADJ	Gender=Fem|NumType=Ord|Number=Sing	13	amod	_	_
-13	temporada	temporada	NOUN	NOUN	Gender=Fem|Number=Sing	9	obl	_	SpaceAfter=No
+13	temporada	temporada	NOUN	NOUN	Gender=Fem|Number=Sing	9	obl	_	_
 14	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Dalmau IV de Rocabertí Visconde de Rocabertí foi e Duque substituto em o Ducado de Atenas entre 1381 e 1388 .
 1	Dalmau	Dalmau	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	10	nsubj	_	_
 2	IV	IV	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	de	de	ADP	ADP	_	4	case	_	_
@@ -2803,10 +2592,8 @@
 18	1381	1381	NUM	NUM	NumType=Card	10	nmod	_	_
 19	e	e	CCONJ	CCONJ	_	20	cc	_	_
 20	1388	1388	NUM	NUM	NumType=Card	18	conj	_	_
-21	.	.	PUNCT	PUNCT	_	10	punct	_	_
+21	.	.	PUNCT	PUNCT	_	10	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O diagrama seguinte representa as localidades em um raio de 64 km a o redor de Pagosa Springs .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	diagrama	diagrama	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj	_	_
 3	seguinte	seguinte	ADJ	ADJ	Gender=Masc|Number=Sing	2	amod	_	_
@@ -2825,10 +2612,8 @@
 16	de	de	ADP	ADP	_	17	case	_	_
 17	Pagosa	Pagosa	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	15	nmod	_	_
 18	Springs	Springs	PROPN	PROPN	Number=Sing	17	flat:name	_	_
-19	.	.	PUNCT	PUNCT	_	4	punct	_	_
+19	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Ela é nomeadamente a escola de os guia de montanha , de os monitor de esqui e de os pisteiro-socorrista
 1	Ela	ela	PRON	PRON	Case=Nom|Gender=Fem|Number=Sing|Person=3|PronType=Prs	5	nsubj	_	_
 2	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
 3	nomeadamente	nomeadamente	ADV	ADV	_	5	advmod	_	_
@@ -2848,10 +2633,8 @@
 17	e	e	CCONJ	CCONJ	_	20	cc	_	_
 18	de	de	ADP	ADP	_	20	case	_	_
 19	os	o	DET	DET	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	20	det	_	_
-20	pisteiro-socorrista	pisteiro-socorrista	NOUN	NOUN	Gender=Masc|Number=Plur	8	conj	_	_
+20	pisteiro-socorrista	pisteiro-socorrista	NOUN	NOUN	Gender=Masc|Number=Plur	8	conj	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Em 1943 é criada a Escola nacional de ski em Alpe d'Huez e em 1947 é transferida para Chamonix-Monte-Branco onde se torna ma Escola nacional de esqui e de alpinismo (ENSA).
 1	Em	em	ADP	ADP	_	2	case	_	_
 2	1943	1943	NUM	NUM	NumType=Card	4	obl	_	_
 3	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	aux:pass	_	_
@@ -2882,13 +2665,11 @@
 28	e	e	CCONJ	CCONJ	_	30	cc	_	_
 29	de	de	ADP	ADP	_	30	case	_	_
 30	alpinismo	alpinismo	NOUN	NOUN	Gender=Masc|Number=Sing	27	conj	_	_
-31	(	(	PUNCT	PUNCT	_	32	punct	_	SpaceAfter=No
-32	ENSA	ENSA	PROPN	PROPN	Gender=Fem|Number=Sing	24	appos	_	SpaceAfter=No
-33	)	)	PUNCT	PUNCT	_	32	punct	_	SpaceAfter=No
+31	(	(	PUNCT	PUNCT	_	32	punct	_	_
+32	ENSA	ENSA	PROPN	PROPN	Gender=Fem|Number=Sing	24	appos	_	_
+33	)	)	PUNCT	PUNCT	_	32	punct	_	_
 34	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Whitewater é uma cidade localizada em o estado americano de Kansas , em o Condado de Butler .
 1	Whitewater	Whitewater	PROPN	PROPN	Gender=Masc|Number=Sing	4	nsubj	_	_
 2	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
 3	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
@@ -2906,10 +2687,8 @@
 15	Condado	Condado	PROPN	PROPN	Gender=Masc|Number=Sing	5	obl	_	_
 16	de	de	ADP	ADP	_	17	case	_	_
 17	Butler	Butler	PROPN	PROPN	Number=Sing	15	nmod	_	_
-18	.	.	PUNCT	PUNCT	_	4	punct	_	_
+18	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = A Koyamaki foi escolhida como o kamon ( brasão ) de o Príncipe Hisahito de Akishino , actualmente o terceiro em a sucessão de o Trono de o Crisântemo .
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
 2	Koyamaki	Koyamaki	PROPN	PROPN	Gender=Fem|Number=Sing	4	nsubj:pass	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
@@ -2939,10 +2718,8 @@
 27	de	de	ADP	ADP	_	29	case	_	_
 28	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	29	det	_	_
 29	Crisântemo	Crisântemo	PROPN	PROPN	Number=Sing	26	nmod	_	_
-30	.	.	PUNCT	PUNCT	_	4	punct	_	_
+30	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Faurei é uma cidade de a Roménia com 4.626 habitantes , localizada em o judet ( distrito ) de Braila .
 1	Faurei	Faurei	PROPN	PROPN	Gender=Masc|Number=Sing	4	nsubj	_	_
 2	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
 3	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
@@ -2963,10 +2740,8 @@
 18	)	)	PUNCT	PUNCT	_	17	punct	_	_
 19	de	de	ADP	ADP	_	20	case	_	_
 20	Braila	Braila	PROPN	PROPN	Gender=Masc|Number=Sing	15	nmod	_	_
-21	.	.	PUNCT	PUNCT	_	4	punct	_	_
+21	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Está localizada em a região nordeste de o estado , atendendo a os municípios de São João de Pirabas , Santarém Novo , Maracanã , Magalhães Barata , Marapanim , São João de a Ponta , Terra Alta e Vigia .
 1	Está	estar	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	2	cop	_	_
 2	localizada	localizar	VERB	VERB	Gender=Fem|Number=Sing|VerbForm=Part	0	root	_	_
 3	em	em	ADP	ADP	_	5	case	_	_
@@ -3007,22 +2782,18 @@
 38	Alta	Alta	PROPN	PROPN	Number=Sing	37	flat:name	_	_
 39	e	e	CCONJ	CCONJ	_	40	cc	_	_
 40	Vigia	Vigia	PROPN	PROPN	Number=Sing	16	conj	_	_
-41	.	.	PUNCT	PUNCT	_	2	punct	_	_
+41	.	.	PUNCT	PUNCT	_	2	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Gambrinus é uma pilsener, surgida em 1869.
 1	Gambrinus	Gambrinus	PROPN	PROPN	Gender=Masc|Number=Sing	4	nsubj	_	_
 2	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
 3	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
-4	pilsener	pilsener	NOUN	NOUN	Gender=Fem|Number=Sing	0	root	_	SpaceAfter=No
+4	pilsener	pilsener	NOUN	NOUN	Gender=Fem|Number=Sing	0	root	_	_
 5	,	,	PUNCT	PUNCT	_	6	punct	_	_
 6	surgida	surgir	VERB	VERB	Gender=Fem|Number=Sing|VerbForm=Part	4	acl	_	_
 7	em	em	ADP	ADP	_	8	case	_	_
-8	1869	1869	NUM	NUM	NumType=Card	6	obl	_	SpaceAfter=No
+8	1869	1869	NUM	NUM	NumType=Card	6	obl	_	_
 9	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Foi o edifício mais alto de o complexo de AZCA até a a construcção de a Torre Picasso .
 1	Foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	3	cop	_	_
 2	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	3	det	_	_
 3	edifício	edifício	NOUN	NOUN	Gender=Masc|Number=Sing	0	root	_	_
@@ -3041,10 +2812,8 @@
 16	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	17	det	_	_
 17	Torre	Torre	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	14	nmod	_	_
 18	Picasso	Picasso	PROPN	PROPN	Number=Sing	17	flat:name	_	_
-19	.	.	PUNCT	PUNCT	_	3	punct	_	_
+19	.	.	PUNCT	PUNCT	_	3	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = A Constituição alemã confere a a presidência um poder de caráter fundamentalmente representativo , pois , para prevenir os problemas que se deram durante a República de Weimar , não tem capacidade de manobra alguma em o processo de eleição de o Chanceler de a Alemanha e nem pode ditar decretos de urgência .
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
 2	Constituição	constituição	NOUN	NOUN	Gender=Fem|Number=Sing	4	nsubj	_	_
 3	alemã	alemã	ADJ	ADJ	Gender=Fem|Number=Sing	2	amod	_	_
@@ -3098,10 +2867,8 @@
 51	decretos	decreto	NOUN	NOUN	Gender=Masc|Number=Plur	50	obj	_	_
 52	de	de	ADP	ADP	_	53	case	_	_
 53	urgência	urgência	NOUN	NOUN	Gender=Fem|Number=Sing	51	nmod	_	_
-54	.	.	PUNCT	PUNCT	_	4	punct	_	_
+54	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Grupo Telemundo ou Telemundo Communications Group é uma propriedade de a companhia NBC Universal para radio e televisão .
 1	Grupo	Grupo	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	9	nsubj	_	_
 2	Telemundo	Telemundo	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	ou	ou	CCONJ	CCONJ	_	4	cc	_	_
@@ -3120,20 +2887,18 @@
 16	radio	radio	NOUN	NOUN	Gender=Masc|Number=Sing	12	nmod	_	_
 17	e	e	CCONJ	CCONJ	_	18	cc	_	_
 18	televisão	televisão	NOUN	NOUN	Gender=Fem|Number=Sing	16	conj	_	_
-19	.	.	PUNCT	PUNCT	_	9	punct	_	_
+19	.	.	PUNCT	PUNCT	_	9	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Tomáš Vaclík (Ostrava, 29 de março de 1989) é um futebolista profissional checo que atua como goleiro, atualmente defende o FC Basel.
 1	Tomáš	Tomáš	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	14	nsubj	_	_
 2	Vaclík	Vaclík	PROPN	PROPN	Number=Sing	1	flat:name	_	_
-3	(	(	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
-4	Ostrava	Ostrava	PROPN	PROPN	Gender=Masc|Number=Sing	1	parataxis	_	SpaceAfter=No
+3	(	(	PUNCT	PUNCT	_	4	punct	_	_
+4	Ostrava	Ostrava	PROPN	PROPN	Gender=Masc|Number=Sing	1	parataxis	_	_
 5	,	,	PUNCT	PUNCT	_	6	punct	_	_
 6	29	29	NUM	NUM	NumType=Card	4	parataxis	_	_
 7	de	de	ADP	ADP	_	8	case	_	_
 8	março	março	NOUN	NOUN	Gender=Masc|Number=Sing	6	nmod	_	_
 9	de	de	ADP	ADP	_	10	case	_	_
-10	1989	1989	NUM	NUM	NumType=Card	8	nmod	_	SpaceAfter=No
+10	1989	1989	NUM	NUM	NumType=Card	8	nmod	_	_
 11	)	)	PUNCT	PUNCT	_	4	punct	_	_
 12	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	14	cop	_	_
 13	um	um	DET	DET	Definite=Ind|Gender=Masc|Number=Sing|PronType=Art	14	det	_	_
@@ -3143,17 +2908,15 @@
 17	que	que	PRON	PRON	Gender=Masc|Number=Sing|PronType=Rel	18	nsubj	_	_
 18	atua	atuar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	14	acl:relcl	_	_
 19	como	como	ADP	ADP	_	20	case	_	_
-20	goleiro	goleiro	NOUN	NOUN	Gender=Masc|Number=Sing	18	obl	_	SpaceAfter=No
+20	goleiro	goleiro	NOUN	NOUN	Gender=Masc|Number=Sing	18	obl	_	_
 21	,	,	PUNCT	PUNCT	_	18	punct	_	_
 22	atualmente	atualmente	ADV	ADV	_	23	advmod	_	_
 23	defende	defender	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	14	parataxis	_	_
 24	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	25	det	_	_
 25	FC	FC	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	23	obj	_	_
-26	Basel	Basel	PROPN	PROPN	Number=Sing	25	flat:name	_	SpaceAfter=No
+26	Basel	Basel	PROPN	PROPN	Number=Sing	25	flat:name	_	_
 27	.	.	PUNCT	PUNCT	_	14	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Arraiá de a Xuxa foi a décima turnê de a apresentadora e cantora Xuxa , baseada em o álbum " Arraiá de a Xuxa " .
 1	Arraiá	Arraiá	PROPN	PROPN	Gender=Masc|Number=Sing	8	nsubj	_	_
 2	de	de	ADP	ADP	_	4	case	_	_
 3	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
@@ -3179,10 +2942,8 @@
 23	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	24	det	_	_
 24	Xuxa	Xuxa	PROPN	PROPN	Number=Sing	21	nmod	_	_
 25	"	«	PUNCT	PUNCT	_	21	punct	_	_
-26	.	.	PUNCT	PUNCT	_	8	punct	_	_
+26	.	.	PUNCT	PUNCT	_	8	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Em a partida de a fase final a equipe que tiver obtido a melhor campanha em a somatória de todas as fases anteriores , em o caso o Internacional , realizará a partida em a condição de mandante .
 1	Em	em	ADP	ADP	_	3	case	_	_
 2	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	3	det	_	_
 3	partida	partida	NOUN	NOUN	Gender=Fem|Number=Sing	31	obl	_	_
@@ -3221,26 +2982,22 @@
 36	condição	condição	NOUN	NOUN	Gender=Fem|Number=Sing	31	obl	_	_
 37	de	de	ADP	ADP	_	38	case	_	_
 38	mandante	mandante	NOUN	NOUN	Gender=Masc|Number=Sing	36	nmod	_	_
-39	.	.	PUNCT	PUNCT	_	31	punct	_	_
+39	.	.	PUNCT	PUNCT	_	31	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = As águas em redor pertencem ao Cape Howe Marine National Park.
 1	As	o	DET	DET	Definite=Def|Gender=Fem|Number=Plur|PronType=Art	2	det	_	_
 2	águas	água	NOUN	NOUN	Gender=Fem|Number=Plur	5	nsubj	_	_
 3	em	em	ADP	ADP	_	4	case	_	_
 4	redor	redor	NOUN	NOUN	Gender=Masc|Number=Sing	2	nmod	_	_
 5	pertencem	pertencer	VERB	VERB	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
-6	a	a	ADP	ADP	_	8	case	_	SpaceAfter=No
+6	a	a	ADP	ADP	_	8	case	_	_
 7	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	8	det	_	_
 8	Cape	Cape	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	5	obl	_	_
 9	Howe	Howe	PROPN	PROPN	Number=Sing	8	flat:name	_	_
 10	Marine	Marine	PROPN	PROPN	Number=Sing	8	flat:name	_	_
 11	National	National	PROPN	PROPN	Number=Sing	8	flat:name	_	_
-12	Park	Park	PROPN	PROPN	Number=Sing	8	flat:name	_	SpaceAfter=No
+12	Park	Park	PROPN	PROPN	Number=Sing	8	flat:name	_	_
 13	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Situada em o rio Tocantins , a usina foi construída em 36 meses ( a previsão inicial era de 42 meses ) .
 1	Situada	situar	VERB	VERB	Gender=Fem|Number=Sing|VerbForm=Part	8	acl	_	_
 2	em	em	ADP	ADP	_	4	case	_	_
 3	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	4	det	_	_
@@ -3263,35 +3020,31 @@
 20	42	42	NUM	NUM	NumType=Card	21	nummod	_	_
 21	meses	mês	NOUN	NOUN	Gender=Masc|Number=Plur	13	nmod	_	_
 22	)	)	PUNCT	PUNCT	_	21	punct	_	_
-23	.	.	PUNCT	PUNCT	_	10	punct	_	_
+23	.	.	PUNCT	PUNCT	_	10	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Com a continuação vieram as quadras, com 20, 18 e por fim 17 metros, que é a atual.
 1	Com	com	ADP	ADP	_	3	case	_	_
 2	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	3	det	_	_
 3	continuação	continuação	NOUN	NOUN	Gender=Fem|Number=Sing	4	obl	_	_
 4	vieram	vir	VERB	VERB	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
 5	as	o	DET	DET	Definite=Def|Gender=Fem|Number=Plur|PronType=Art	6	det	_	_
-6	quadras	quadra	NOUN	NOUN	Gender=Fem|Number=Plur	4	nsubj	_	SpaceAfter=No
+6	quadras	quadra	NOUN	NOUN	Gender=Fem|Number=Plur	4	nsubj	_	_
 7	,	,	PUNCT	PUNCT	_	16	punct	_	_
 8	com	com	ADP	ADP	_	9	case	_	_
-9	20	20	NUM	NUM	NumType=Card	16	nummod	_	SpaceAfter=No
+9	20	20	NUM	NUM	NumType=Card	16	nummod	_	_
 10	,	,	PUNCT	PUNCT	_	11	punct	_	_
 11	18	18	NUM	NUM	NumType=Card	9	conj	_	_
 12	e	e	CCONJ	CCONJ	_	14	cc	_	_
 13	por	por	ADP	ADP	_	14	case	_	_
 14	fim	fim	NOUN	NOUN	Gender=Masc|Number=Sing	15	compound	_	_
 15	17	17	NUM	NUM	NumType=Card	16	nummod	_	_
-16	metros	metro	NOUN	NOUN	Gender=Masc|Number=Plur	6	nmod	_	SpaceAfter=No
+16	metros	metro	NOUN	NOUN	Gender=Masc|Number=Plur	6	nmod	_	_
 17	,	,	PUNCT	PUNCT	_	21	punct	_	_
 18	que	que	PRON	PRON	Gender=Fem|Number=Sing|PronType=Rel	21	nsubj	_	_
 19	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	21	cop	_	_
 20	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	21	det	_	_
-21	atual	atual	ADJ	ADJ	Gender=Fem|Number=Sing	16	acl:relcl	_	SpaceAfter=No
+21	atual	atual	ADJ	ADJ	Gender=Fem|Number=Sing	16	acl:relcl	_	_
 22	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Usado grande parte de a sua existência por a equipa de a Sociedade Recreativa Boa União Parchalense , ainda em as infra-estruturas antigas de campo pelado , o complexo é agora habitado por o Clube de Futebol
 1	Usado	usar	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part	29	acl	_	_
 2	grande	grande	ADJ	ADJ	Gender=Fem|Number=Sing	3	amod	_	_
 3	parte	parte	NOUN	NOUN	Gender=Fem|Number=Sing	1	nsubj	_	_
@@ -3309,16 +3062,16 @@
 15	Boa	Boa	PROPN	PROPN	Number=Sing	13	flat:name	_	_
 16	União	União	PROPN	PROPN	Number=Sing	13	flat:name	_	_
 17	Parchalense	Parchalense	PROPN	PROPN	Number=Sing	13	flat:name	_	_
-18	,	,	PUNCT	PUNCT	_	1	punct	_	_
+18	,	,	PUNCT	PUNCT	_	22	punct	_	_
 19	ainda	ainda	ADV	ADV	_	22	advmod	_	_
 20	em	em	ADP	ADP	_	22	case	_	_
 21	as	o	DET	DET	Definite=Def|Gender=Fem|Number=Plur|PronType=Art	22	det	_	_
-22	infra-estruturas	infra-estrutura	NOUN	NOUN	Gender=Fem|Number=Plur	1	obl	_	_
+22	infra-estruturas	infra-estrutura	NOUN	NOUN	Gender=Fem|Number=Plur	10	nmod	_	_
 23	antigas	antigo	ADJ	ADJ	Gender=Fem|Number=Plur	22	amod	_	_
 24	de	de	ADP	ADP	_	25	case	_	_
 25	campo	campo	NOUN	NOUN	Gender=Masc|Number=Sing	22	nmod	_	_
 26	pelado	pelar	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part	25	acl	_	_
-27	,	,	PUNCT	PUNCT	_	1	punct	_	_
+27	,	,	PUNCT	PUNCT	_	26	punct	_	_
 28	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	29	det	_	_
 29	complexo	complexo	NOUN	NOUN	Gender=Masc|Number=Sing	32	nsubj:pass	_	_
 30	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	32	aux:pass	_	_
@@ -3328,19 +3081,14 @@
 34	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	35	det	_	_
 35	Clube	Clube	PROPN	PROPN	Gender=Masc|Number=Sing	32	obl:agent	_	_
 36	de	de	ADP	ADP	_	37	case	_	_
-37	Futebol	Futebol	PROPN	PROPN	Number=Sing	35	nmod	_	_
+37	Futebol	Futebol	PROPN	PROPN	ExtPos=PROPN|Number=Sing	35	nmod	_	_
+38	Os	Os	PROPN	PROPN	Number=Sing	37	flat:name	_	_
+39	Estombarenses	Estombarenses	PROPN	PROPN	Number=Sing	37	flat:name	_	_
+40	,	,	PUNCT	PUNCT	_	32	punct	_	_
+41	desde	desde	ADP	ADP	_	42	case	_	_
+42	2006	2006	NUM	NUM	NumType=Card	32	obl	_	_
+43	.	.	PUNCT	PUNCT	_	32	punct	_	SpaceAfter=No
 
-# sent_id = 2
-# text = Os Estombarenses , desde 2006 .
-1	Os	o	DET	DET	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	2	det	_	_
-2	Estombarenses	Estombarenses	PROPN	PROPN	Gender=Masc|Number=Plur	0	root	_	_
-3	,	,	PUNCT	PUNCT	_	5	punct	_	_
-4	desde	desde	ADP	ADP	_	5	case	_	_
-5	2006	2006	NUM	NUM	NumType=Card	2	nmod	_	_
-6	.	.	PUNCT	PUNCT	_	2	punct	_	_
-
-# sent_id = 1
-# text = Este asteróide foi descoberto em 8 de Novembro de 1990 por Johann Baur.
 1	Este	este	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	2	det	_	_
 2	asteróide	asteróide	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj:pass	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
@@ -3353,11 +3101,9 @@
 10	1990	1990	NUM	NUM	NumType=Card	8	nmod	_	_
 11	por	por	ADP	ADP	_	12	case	_	_
 12	Johann	Johann	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	4	obl:agent	_	_
-13	Baur	Baur	PROPN	PROPN	Number=Sing	12	flat:name	_	SpaceAfter=No
+13	Baur	Baur	PROPN	PROPN	Number=Sing	12	flat:name	_	_
 14	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Del james ( nascido em 5 de Fevereiro de 1964 em New Rochelle , Nova Iorque , EUA ) é um escritor e jornalista conhecido por ter trabalhado com Axl Rose de a banda Guns N' Roses e com Chuck Billy de a banda Testament em o álbum The Ritual .
 1	Del	Del	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	22	nsubj	_	_
 2	james	james	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	(	(	PUNCT	PUNCT	_	4	punct	_	_
@@ -3408,10 +3154,8 @@
 48	álbum	álbum	NOUN	NOUN	Gender=Masc|Number=Sing	40	nmod	_	_
 49	The	The	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	48	appos	_	_
 50	Ritual	Ritual	PROPN	PROPN	Number=Sing	49	flat:name	_	_
-51	.	.	PUNCT	PUNCT	_	22	punct	_	_
+51	.	.	PUNCT	PUNCT	_	22	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O diagrama seguinte representa as localidades em um raio de 12 km a o redor de Odem .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	diagrama	diagrama	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj	_	_
 3	seguinte	seguinte	ADJ	ADJ	Gender=Masc|Number=Sing	2	amod	_	_
@@ -3429,10 +3173,8 @@
 15	redor	redor	NOUN	NOUN	Gender=Masc|Number=Sing	9	nmod	_	_
 16	de	de	ADP	ADP	_	17	case	_	_
 17	Odem	Odem	PROPN	PROPN	Gender=Masc|Number=Sing	15	nmod	_	_
-18	.	.	PUNCT	PUNCT	_	4	punct	_	_
+18	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Possui uma excentricidade de 0,1679193 e um período orbital de 1 289,63 dias (3,53 anos).
 1	Possui	possuir	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
 2	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	3	det	_	_
 3	excentricidade	excentricidade	NOUN	NOUN	Gender=Fem|Number=Sing	1	obj	_	_
@@ -3446,14 +3188,12 @@
 11	1	1	NUM	NUM	NumType=Card	13	nummod	_	_
 12	289,63	289,63	NUM	NUM	NumType=Card	13	nummod	_	_
 13	dias	dia	NOUN	NOUN	Gender=Masc|Number=Plur	8	nmod	_	_
-14	(	(	PUNCT	PUNCT	_	16	punct	_	SpaceAfter=No
+14	(	(	PUNCT	PUNCT	_	16	punct	_	_
 15	3,53	3,53	NUM	NUM	NumType=Card	16	nummod	_	_
-16	anos	ano	NOUN	NOUN	Gender=Masc|Number=Plur	13	appos	_	SpaceAfter=No
-17	)	)	PUNCT	PUNCT	_	16	punct	_	SpaceAfter=No
+16	anos	ano	NOUN	NOUN	Gender=Masc|Number=Plur	13	appos	_	_
+17	)	)	PUNCT	PUNCT	_	16	punct	_	_
 18	.	.	PUNCT	PUNCT	_	1	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = A Casa degli Omenoni é um palácio de Milão situado em a moderna Via degli Omenoni .
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
 2	Casa	Casa	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	7	nsubj	_	_
 3	degli	degli	PROPN	PROPN	Number=Sing	2	flat:name	_	_
@@ -3470,10 +3210,8 @@
 14	Via	Via	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	10	obl	_	_
 15	degli	degli	PROPN	PROPN	Number=Sing	14	flat:name	_	_
 16	Omenoni	Omenoni	PROPN	PROPN	Number=Sing	14	flat:name	_	_
-17	.	.	PUNCT	PUNCT	_	7	punct	_	_
+17	.	.	PUNCT	PUNCT	_	7	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Goran Višnjic ( Šibenik , 9 de Setembro de 1972 ) , é um ator croata radicado em os Estados Unidos de a América .
 1	Goran	Goran	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	15	nsubj	_	_
 2	Višnjic	Višnjic	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	(	(	PUNCT	PUNCT	_	4	punct	_	_
@@ -3498,10 +3236,8 @@
 22	de	de	ADP	ADP	_	24	case	_	_
 23	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	24	det	_	_
 24	América	América	PROPN	PROPN	Gender=Fem|Number=Sing	20	nmod	_	_
-25	.	.	PUNCT	PUNCT	_	15	punct	_	_
+25	.	.	PUNCT	PUNCT	_	15	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O Teatro Marítimo é um conjunto situado face o jardim de as bibliotecas .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	Teatro	Teatro	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	6	nsubj	_	_
 3	Marítimo	Marítimo	PROPN	PROPN	Number=Sing	2	flat:name	_	_
@@ -3515,10 +3251,8 @@
 11	de	de	ADP	ADP	_	13	case	_	_
 12	as	o	DET	DET	Definite=Def|Gender=Fem|Number=Plur|PronType=Art	13	det	_	_
 13	bibliotecas	biblioteca	NOUN	NOUN	Gender=Fem|Number=Plur	10	nmod	_	_
-14	.	.	PUNCT	PUNCT	_	6	punct	_	_
+14	.	.	PUNCT	PUNCT	_	6	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Em o fim , logicamente , tudo acaba bem :
 1	Em	em	ADP	ADP	_	3	case	_	_
 2	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	3	det	_	_
 3	fim	fim	NOUN	NOUN	Gender=Masc|Number=Sing	8	obl	_	_
@@ -3528,49 +3262,44 @@
 7	tudo	tudo	PRON	PRON	Gender=Masc|Number=Sing|PronType=Ind	8	nsubj	_	_
 8	acaba	acabar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
 9	bem	bem	ADV	ADV	_	8	advmod	_	_
-10	:	:	PUNCT	PUNCT	_	8	punct	_	_
+10	:	:	PUNCT	PUNCT	_	12	punct	_	_
+11	Segredo	segredo	NOUN	NOUN	Gender=Masc|Number=Sing	12	nsubj	_	_
+12	perde	perder	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	8	parataxis	_	_
+13	seus	seu	DET	DET	Gender=Masc|Number=Plur|PronType=Prs	14	det	_	_
+14	poderes	poder	NOUN	NOUN	Gender=Masc|Number=Plur	12	obj	_	_
+15	e	e	CCONJ	CCONJ	_	17	cc	_	_
+16	finalmente	finalmente	ADV	ADV	_	17	advmod	_	_
+17	volta	voltar	VERB	VERB	ExtPos=AUX|Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	12	conj	_	_
+18	a	a	SCONJ	SCONJ	_	21	mark	_	_
+19	ser	ser	AUX	AUX	VerbForm=Inf	21	cop	_	_
+20	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	21	det	_	_
+21	garota	garota	NOUN	NOUN	Gender=Fem|Number=Sing	17	xcomp	_	_
+22	mortal	mortal	ADJ	ADJ	Gender=Fem|Number=Sing	21	amod	_	_
+23	,	,	PUNCT	PUNCT	_	26	punct	_	_
+24	Slobo	Slobo	PROPN	PROPN	Gender=Masc|Number=Sing	26	nsubj:pass	_	_
+25	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	26	aux:pass	_	_
+26	transformado	transformar	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part|Voice=Pass	12	conj	_	_
+27	em	em	ADP	ADP	_	29	case	_	_
+28	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	29	det	_	_
+29	estátua	estátua	NOUN	NOUN	Gender=Fem|Number=Sing	26	obj	_	_
+30	em	em	ADP	ADP	_	32	case	_	_
+31	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	32	det	_	_
+32	século	século	NOUN	NOUN	Gender=Masc|Number=Sing	29	nmod	_	_
+33	853	853	NUM	NUM	NumType=Card	32	nummod	_	_
+34	por	por	ADP	ADP	_	35	case	_	_
+35	Darkseid	Darkseid	PROPN	PROPN	Gender=Masc|Number=Sing	26	obl:agent	_	_
+36	e	e	CCONJ	CCONJ	_	43	cc	_	_
+37	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	38	det	_	_
+38	restante	restante	NOUN	NOUN	Gender=Masc|Number=Sing	43	nsubj	_	_
+39	de	de	ADP	ADP	_	41	case	_	_
+40	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	41	det	_	_
+41	Justiça	Justiça	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	38	nmod	_	_
+42	Jovem	Jovem	PROPN	PROPN	Number=Sing	41	flat:name	_	_
+43	retoma	retomar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	26	conj	_	_
+44	seu	seu	DET	DET	Gender=Masc|Number=Sing|PronType=Prs	45	det	_	_
+45	dia-a-dia	dia-a-dia	NOUN	NOUN	Gender=Masc|Number=Sing	43	obj	_	_
+46	.	.	PUNCT	PUNCT	_	8	punct	_	SpaceAfter=No
 
-# sent_id = 2
-# text = Segredo perde seus poderes e finalmente volta a ser uma garota mortal , Slobo é transformado em uma estátua em o século 853 por Darkseid e o restante de a Justiça Jovem retoma seu dia-a-dia .
-1	Segredo	segredo	NOUN	NOUN	Gender=Masc|Number=Sing	2	nsubj	_	_
-2	perde	perder	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
-3	seus	seu	DET	DET	Gender=Masc|Number=Plur|PronType=Prs	4	det	_	_
-4	poderes	poder	NOUN	NOUN	Gender=Masc|Number=Plur	2	obj	_	_
-5	e	e	CCONJ	CCONJ	_	11	cc	_	_
-6	finalmente	finalmente	ADV	ADV	_	11	advmod	_	_
-7	volta	voltar	VERB	VERB	ExtPos=AUX|Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	2	conj	_	_
-8	a	a	SCONJ	SCONJ	_	11	mark	_	_
-9	ser	ser	AUX	AUX	VerbForm=Inf	11	cop	_	_
-10	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	11	det	_	_
-11	garota	garota	NOUN	NOUN	Gender=Fem|Number=Sing	7	xcomp	_	_
-12	mortal	mortal	ADJ	ADJ	Gender=Fem|Number=Sing	11	amod	_	_
-13	,	,	PUNCT	PUNCT	_	16	punct	_	_
-14	Slobo	Slobo	PROPN	PROPN	Gender=Masc|Number=Sing	16	nsubj:pass	_	_
-15	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	16	aux:pass	_	_
-16	transformado	transformar	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part|Voice=Pass	2	parataxis	_	_
-17	em	em	ADP	ADP	_	19	case	_	_
-18	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	19	det	_	_
-19	estátua	estátua	NOUN	NOUN	Gender=Fem|Number=Sing	16	obj	_	_
-20	em	em	ADP	ADP	_	22	case	_	_
-21	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	22	det	_	_
-22	século	século	NOUN	NOUN	Gender=Masc|Number=Sing	19	nmod	_	_
-23	853	853	NUM	NUM	NumType=Card	22	nummod	_	_
-24	por	por	ADP	ADP	_	25	case	_	_
-25	Darkseid	Darkseid	PROPN	PROPN	Gender=Masc|Number=Sing	16	obl:agent	_	_
-26	e	e	CCONJ	CCONJ	_	33	cc	_	_
-27	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	28	det	_	_
-28	restante	restante	NOUN	NOUN	Gender=Masc|Number=Sing	33	nsubj	_	_
-29	de	de	ADP	ADP	_	31	case	_	_
-30	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	31	det	_	_
-31	Justiça	Justiça	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	28	nmod	_	_
-32	Jovem	Jovem	PROPN	PROPN	Number=Sing	31	flat:name	_	_
-33	retoma	retomar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	2	conj	_	_
-34	seu	seu	DET	DET	Gender=Masc|Number=Sing|PronType=Prs	35	det	_	_
-35	dia-a-dia	dia-a-dia	NOUN	NOUN	Gender=Masc|Number=Sing	33	obj	_	_
-36	.	.	PUNCT	PUNCT	_	2	punct	_	_
-
-# sent_id = 1
-# text = Em o Brasil , os pianos Steinway & Sons são importados e comercializados , com exclusividade , por a Gluck Pianos .
 1	Em	em	ADP	ADP	_	3	case	_	_
 2	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	3	det	_	_
 3	Brasil	Brasil	PROPN	PROPN	Gender=Masc|Number=Sing	11	obl	_	_
@@ -3592,10 +3321,8 @@
 19	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	20	det	_	_
 20	Gluck	Gluck	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	13	obl:agent	_	_
 21	Pianos	Pianos	PROPN	PROPN	Number=Sing	20	flat:name	_	_
-22	.	.	PUNCT	PUNCT	_	11	punct	_	_
+22	.	.	PUNCT	PUNCT	_	11	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O clima é geralmente mais quente que o de Auckland, com menos humidade e chuva, e mais horas de luz.
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	clima	clima	NOUN	NOUN	Gender=Masc|Number=Sing	6	nsubj	_	_
 3	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	6	cop	_	_
@@ -3605,50 +3332,46 @@
 7	que	que	SCONJ	SCONJ	_	8	mark	_	_
 8	o	o	PRON	PRON	Gender=Masc|Number=Sing|PronType=Dem	6	obl	_	_
 9	de	de	ADP	ADP	_	10	case	_	_
-10	Auckland	Auckland	PROPN	PROPN	Gender=Masc|Number=Sing	8	nmod	_	SpaceAfter=No
+10	Auckland	Auckland	PROPN	PROPN	Gender=Masc|Number=Sing	8	nmod	_	_
 11	,	,	PUNCT	PUNCT	_	14	punct	_	_
 12	com	com	ADP	ADP	_	14	case	_	_
 13	menos	pouco	DET	DET	Gender=Fem|Number=Sing|PronType=Ind	14	det	_	_
 14	humidade	humidade	NOUN	NOUN	Gender=Fem|Number=Sing	10	nmod	_	_
 15	e	e	CCONJ	CCONJ	_	16	cc	_	_
-16	chuva	chuva	NOUN	NOUN	Gender=Fem|Number=Sing	14	conj	_	SpaceAfter=No
+16	chuva	chuva	NOUN	NOUN	Gender=Fem|Number=Sing	14	conj	_	_
 17	,	,	PUNCT	PUNCT	_	14	punct	_	_
 18	e	e	CCONJ	CCONJ	_	20	cc	_	_
 19	mais	mais	DET	DET	Gender=Fem|Number=Plur|PronType=Ind	20	det	_	_
 20	horas	hora	NOUN	NOUN	Gender=Fem|Number=Plur	14	conj	_	_
 21	de	de	ADP	ADP	_	22	case	_	_
-22	luz	luz	NOUN	NOUN	Gender=Fem|Number=Sing	20	nmod	_	SpaceAfter=No
+22	luz	luz	NOUN	NOUN	Gender=Fem|Number=Sing	20	nmod	_	_
 23	.	.	PUNCT	PUNCT	_	6	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Alice Regina Brown (Jackson, 20 de setembro de 1960) é uma ex-atleta velocista norte-americana, bicampeã olímpica e campeã mundial.
 1	Alice	Alice	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	15	nsubj	_	_
 2	Regina	Regina	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	Brown	Brown	PROPN	PROPN	Number=Sing	1	flat:name	_	_
-4	(	(	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
-5	Jackson	Jackson	PROPN	PROPN	Gender=Masc|Number=Sing	1	appos	_	SpaceAfter=No
+4	(	(	PUNCT	PUNCT	_	5	punct	_	_
+5	Jackson	Jackson	PROPN	PROPN	Gender=Masc|Number=Sing	1	appos	_	_
 6	,	,	PUNCT	PUNCT	_	7	punct	_	_
 7	20	20	NUM	NUM	NumType=Card	5	appos	_	_
 8	de	de	ADP	ADP	_	9	case	_	_
 9	setembro	setembro	NOUN	NOUN	Gender=Masc|Number=Sing	7	nmod	_	_
 10	de	de	ADP	ADP	_	11	case	_	_
-11	1960	1960	NUM	NUM	NumType=Card	9	nmod	_	SpaceAfter=No
+11	1960	1960	NUM	NUM	NumType=Card	9	nmod	_	_
 12	)	)	PUNCT	PUNCT	_	5	punct	_	_
 13	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	15	cop	_	_
 14	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	15	det	_	_
 15	ex-atleta	ex-atleta	NOUN	NOUN	Gender=Fem|Number=Sing	0	root	_	_
 16	velocista	velocista	ADJ	ADJ	Gender=Fem|Number=Sing	15	amod	_	_
-17	norte-americana	norte-americano	ADJ	ADJ	Gender=Fem|Number=Sing	15	amod	_	SpaceAfter=No
+17	norte-americana	norte-americano	ADJ	ADJ	Gender=Fem|Number=Sing	15	amod	_	_
 18	,	,	PUNCT	PUNCT	_	19	punct	_	_
 19	bicampeã	bicampeã	NOUN	NOUN	Gender=Fem|Number=Sing	15	appos	_	_
 20	olímpica	olímpico	ADJ	ADJ	Gender=Fem|Number=Sing	19	amod	_	_
 21	e	e	CCONJ	CCONJ	_	22	cc	_	_
 22	campeã	campeã	NOUN	NOUN	Gender=Fem|Number=Sing	15	conj	_	_
-23	mundial	mundial	ADJ	ADJ	Gender=Fem|Number=Sing	22	amod	_	SpaceAfter=No
+23	mundial	mundial	ADJ	ADJ	Gender=Fem|Number=Sing	22	amod	_	_
 24	.	.	PUNCT	PUNCT	_	15	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Kazimierz Funk ( 23 de fevereiro de 1884 — 19 de novembro de 1967 ) , mais conhecido por a forma americana de o seu nome , Casimir Funk , foi um bioquímico polonês que geralmente leva os créditos por a primeira formulação de o conceito de vitaminas , em 1912 .
 1	Kazimierz	Kazimierz	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	33	nsubj	_	_
 2	Funk	Funk	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	(	(	PUNCT	PUNCT	_	4	punct	_	_
@@ -3700,10 +3423,8 @@
 49	,	,	PUNCT	PUNCT	_	51	punct	_	_
 50	em	em	ADP	ADP	_	51	case	_	_
 51	1912	1912	NUM	NUM	NumType=Card	46	nmod	_	_
-52	.	.	PUNCT	PUNCT	_	33	punct	_	_
+52	.	.	PUNCT	PUNCT	_	33	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Este asteroide foi descoberto em o dia 29 de março de 1998 por LINEAR em Socorro .
 1	Este	este	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	2	det	_	_
 2	asteroide	asteroide	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj:pass	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
@@ -3720,10 +3441,8 @@
 14	LINEAR	Linear	PROPN	PROPN	Gender=Masc|Number=Sing	4	obl:agent	_	_
 15	em	em	ADP	ADP	_	16	case	_	_
 16	Socorro	Socorro	PROPN	PROPN	Gender=Masc|Number=Sing	4	obl	_	_
-17	.	.	PUNCT	PUNCT	_	4	punct	_	_
+17	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O gênero botânico de as Briofitas , Buxbaumia , foi dado em sua homenagem , assim como a espécie de o gênero Carex , Carex buxbaumii .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	gênero	gênero	NOUN	NOUN	Gender=Masc|Number=Sing	11	nsubj:pass	_	_
 3	botânico	botânico	ADJ	ADJ	Gender=Masc|Number=Sing	2	amod	_	_
@@ -3750,10 +3469,8 @@
 24	,	,	PUNCT	PUNCT	_	25	punct	_	_
 25	Carex	Carex	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	22	appos	_	_
 26	buxbaumii	buxbaumii	PROPN	PROPN	Number=Sing	25	flat:name	_	_
-27	.	.	PUNCT	PUNCT	_	11	punct	_	_
+27	.	.	PUNCT	PUNCT	_	11	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Granite Hills é uma Região censo-designada localizada em o estado americano de a Califórnia , em o Condado de San Diego .
 1	Granite	Granite	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	5	nsubj	_	_
 2	Hills	Hills	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
@@ -3775,10 +3492,8 @@
 19	de	de	ADP	ADP	_	20	case	_	_
 20	San	San	PROPN	PROPN	ExtPos=PROPN|Number=Sing	18	nmod	_	_
 21	Diego	Diego	PROPN	PROPN	Number=Sing	20	flat:name	_	_
-22	.	.	PUNCT	PUNCT	_	5	punct	_	_
+22	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Os que são punidos em o Dis são pecadores ativos : hereges , assassinos , suicidas , estelionatários e traidores .
 1	Os	o	PRON	PRON	Gender=Masc|Number=Plur|PronType=Dem	9	nsubj	_	_
 2	que	que	PRON	PRON	Gender=Masc|Number=Plur|PronType=Rel	4	nsubj:pass	_	_
 3	são	ser	AUX	AUX	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	4	aux:pass	_	_
@@ -3799,10 +3514,8 @@
 18	estelionatários	estelionatário	NOUN	NOUN	Gender=Masc|Number=Plur	12	conj	_	_
 19	e	e	CCONJ	CCONJ	_	20	cc	_	_
 20	traidores	traidor	NOUN	NOUN	Gender=Masc|Number=Plur	12	conj	_	_
-21	.	.	PUNCT	PUNCT	_	9	punct	_	_
+21	.	.	PUNCT	PUNCT	_	9	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Serinus menachensis é uma espécie de fringilídeos de a família Fringillidae .
 1	Serinus	Serinus	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	5	nsubj	_	_
 2	menachensis	menachensis	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
@@ -3814,10 +3527,8 @@
 9	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	10	det	_	_
 10	família	família	NOUN	NOUN	Gender=Fem|Number=Sing	7	nmod	_	_
 11	Fringillidae	Fringillidae	PROPN	PROPN	Gender=Fem|Number=Sing	10	appos	_	_
-12	.	.	PUNCT	PUNCT	_	5	punct	_	_
+12	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Epidendrum denticulatum , é uma espécie de orquídea , muito comum em o Brasil , que faz parte de um grupo de espécies de pertencentes a o gênero Epidendrum , todas muito parecidas , distintas apenas por pequenos detalhes , as quais de modo geral são consideradas sinônimos de o E.
 1	Epidendrum	Epidendrum	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	6	nsubj	_	_
 2	denticulatum	denticulatum	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	,	,	PUNCT	PUNCT	_	1	punct	_	_
@@ -3868,10 +3579,8 @@
 48	sinônimos	sinônimo	NOUN	NOUN	Gender=Masc|Number=Plur	47	xcomp	_	_
 49	de	de	ADP	ADP	_	51	case	_	_
 50	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	51	det	_	_
-51	E.	E.	PROPN	PROPN	Abbr=Yes|Gender=Masc|Number=Sing	48	nmod	_	_
+51	E.	E.	PROPN	PROPN	Abbr=Yes|Gender=Masc|Number=Sing	48	nmod	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Tal percepção é visível por quem transita por a principal via de a cidade de Canindé de São Francisco e condiz com a impressão que os visitantes de os mais diversos estados brasileiros têm a o visitar os cânions de o Rio São Francisco , quando notam a limpeza e organização presente em a cultura de o povo local .
 1	Tal	tal	DET	DET	Gender=Fem|Number=Sing|PronType=Ind	2	det	_	_
 2	percepção	percepção	NOUN	NOUN	Gender=Fem|Number=Sing	4	nsubj	_	_
 3	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
@@ -3931,10 +3640,8 @@
 57	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	58	det	_	_
 58	povo	povo	NOUN	NOUN	Gender=Masc|Number=Sing	55	nmod	_	_
 59	local	local	ADJ	ADJ	Gender=Masc|Number=Sing	58	amod	_	_
-60	.	.	PUNCT	PUNCT	_	4	punct	_	_
+60	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = As filmagens começaram em 11 de setembro de 2011.
 1	As	o	DET	DET	Definite=Def|Gender=Fem|Number=Plur|PronType=Art	2	det	_	_
 2	filmagens	filmagem	NOUN	NOUN	Gender=Fem|Number=Plur	3	nsubj	_	_
 3	começaram	começar	VERB	VERB	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
@@ -3943,68 +3650,62 @@
 6	de	de	ADP	ADP	_	7	case	_	_
 7	setembro	setembro	NOUN	NOUN	Gender=Masc|Number=Sing	5	nmod	_	_
 8	de	de	ADP	ADP	_	9	case	_	_
-9	2011	2011	NUM	NUM	NumType=Card	7	nmod	_	SpaceAfter=No
+9	2011	2011	NUM	NUM	NumType=Card	7	nmod	_	_
 10	.	.	PUNCT	PUNCT	_	3	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Confina com as seguintes comunas: Aquila (TI), Campo (TI), Disentis/Mustér, Ghirone (TI), Olivone (TI), Quinto (TI), Sumvitg, Tujetsch, Vrin.
 1	Confina	confenar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
 2	com	com	ADP	ADP	_	5	case	_	_
 3	as	o	DET	DET	Definite=Def|Gender=Fem|Number=Plur|PronType=Art	5	det	_	_
 4	seguintes	seguinte	ADJ	ADJ	Gender=Fem|Number=Plur	5	amod	_	_
-5	comunas	comuna	NOUN	NOUN	Gender=Fem|Number=Plur	1	obl	_	SpaceAfter=No
+5	comunas	comuna	NOUN	NOUN	Gender=Fem|Number=Plur	1	obl	_	_
 6	:	:	PUNCT	PUNCT	_	7	punct	_	_
 7	Aquila	Aquila	PROPN	PROPN	Gender=Fem|Number=Sing	5	appos	_	_
-8	(	(	PUNCT	PUNCT	_	9	punct	_	SpaceAfter=No
-9	TI	TI	PROPN	PROPN	Gender=Fem|Number=Sing	7	parataxis	_	SpaceAfter=No
-10	)	)	PUNCT	PUNCT	_	9	punct	_	SpaceAfter=No
+8	(	(	PUNCT	PUNCT	_	9	punct	_	_
+9	TI	TI	PROPN	PROPN	Gender=Fem|Number=Sing	7	parataxis	_	_
+10	)	)	PUNCT	PUNCT	_	9	punct	_	_
 11	,	,	PUNCT	PUNCT	_	12	punct	_	_
 12	Campo	Campo	PROPN	PROPN	Gender=Masc|Number=Sing	7	conj	_	_
-13	(	(	PUNCT	PUNCT	_	14	punct	_	SpaceAfter=No
-14	TI	TI	PROPN	PROPN	Gender=Fem|Number=Sing	12	parataxis	_	SpaceAfter=No
-15	)	)	PUNCT	PUNCT	_	14	punct	_	SpaceAfter=No
+13	(	(	PUNCT	PUNCT	_	14	punct	_	_
+14	TI	TI	PROPN	PROPN	Gender=Fem|Number=Sing	12	parataxis	_	_
+15	)	)	PUNCT	PUNCT	_	14	punct	_	_
 16	,	,	PUNCT	PUNCT	_	17	punct	_	_
-17	Disentis	Disentis	PROPN	PROPN	Gender=Fem|Number=Sing	7	conj	_	SpaceAfter=No
-18	/	/	PUNCT	PUNCT	_	19	punct	_	SpaceAfter=No
-19	Mustér	Mustér	PROPN	PROPN	Gender=Fem|Number=Sing	7	conj	_	SpaceAfter=No
+17	Disentis	Disentis	PROPN	PROPN	Gender=Fem|Number=Sing	7	conj	_	_
+18	/	/	PUNCT	PUNCT	_	19	punct	_	_
+19	Mustér	Mustér	PROPN	PROPN	Gender=Fem|Number=Sing	7	conj	_	_
 20	,	,	PUNCT	PUNCT	_	21	punct	_	_
 21	Ghirone	Ghirone	PROPN	PROPN	Gender=Fem|Number=Sing	7	conj	_	_
-22	(	(	PUNCT	PUNCT	_	23	punct	_	SpaceAfter=No
-23	TI	TI	PROPN	PROPN	Gender=Fem|Number=Sing	21	parataxis	_	SpaceAfter=No
-24	)	)	PUNCT	PUNCT	_	23	punct	_	SpaceAfter=No
+22	(	(	PUNCT	PUNCT	_	23	punct	_	_
+23	TI	TI	PROPN	PROPN	Gender=Fem|Number=Sing	21	parataxis	_	_
+24	)	)	PUNCT	PUNCT	_	23	punct	_	_
 25	,	,	PUNCT	PUNCT	_	26	punct	_	_
 26	Olivone	Olivone	PROPN	PROPN	Gender=Fem|Number=Sing	7	conj	_	_
-27	(	(	PUNCT	PUNCT	_	28	punct	_	SpaceAfter=No
-28	TI	TI	PROPN	PROPN	Gender=Fem|Number=Sing	26	parataxis	_	SpaceAfter=No
-29	)	)	PUNCT	PUNCT	_	28	punct	_	SpaceAfter=No
+27	(	(	PUNCT	PUNCT	_	28	punct	_	_
+28	TI	TI	PROPN	PROPN	Gender=Fem|Number=Sing	26	parataxis	_	_
+29	)	)	PUNCT	PUNCT	_	28	punct	_	_
 30	,	,	PUNCT	PUNCT	_	31	punct	_	_
 31	Quinto	quinto	PROPN	PROPN	Gender=Fem|Number=Sing	7	conj	_	_
-32	(	(	PUNCT	PUNCT	_	33	punct	_	SpaceAfter=No
-33	TI	TI	PROPN	PROPN	Gender=Fem|Number=Sing	31	parataxis	_	SpaceAfter=No
-34	)	)	PUNCT	PUNCT	_	33	punct	_	SpaceAfter=No
+32	(	(	PUNCT	PUNCT	_	33	punct	_	_
+33	TI	TI	PROPN	PROPN	Gender=Fem|Number=Sing	31	parataxis	_	_
+34	)	)	PUNCT	PUNCT	_	33	punct	_	_
 35	,	,	PUNCT	PUNCT	_	36	punct	_	_
-36	Sumvitg	Sumvitg	PROPN	PROPN	Gender=Fem|Number=Sing	7	conj	_	SpaceAfter=No
+36	Sumvitg	Sumvitg	PROPN	PROPN	Gender=Fem|Number=Sing	7	conj	_	_
 37	,	,	PUNCT	PUNCT	_	38	punct	_	_
-38	Tujetsch	Tujetsch	PROPN	PROPN	Gender=Fem|Number=Sing	7	conj	_	SpaceAfter=No
+38	Tujetsch	Tujetsch	PROPN	PROPN	Gender=Fem|Number=Sing	7	conj	_	_
 39	,	,	PUNCT	PUNCT	_	40	punct	_	_
-40	Vrin	Vrin	PROPN	PROPN	Gender=Fem|Number=Sing	7	conj	_	SpaceAfter=No
+40	Vrin	Vrin	PROPN	PROPN	Gender=Fem|Number=Sing	7	conj	_	_
 41	.	.	PUNCT	PUNCT	_	1	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O seu significado é "celeiro, despenseiro".
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	3	det	_	_
 2	seu	seu	DET	DET	Gender=Masc|Number=Sing|PronType=Prs	3	det	_	_
 3	significado	significado	NOUN	NOUN	Gender=Masc|Number=Sing	6	nsubj	_	_
 4	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	6	cop	_	_
-5	"	«	PUNCT	PUNCT	_	6	punct	_	SpaceAfter=No
-6	celeiro	celeiro	ADJ	ADJ	Gender=Masc|Number=Sing	0	root	_	SpaceAfter=No
+5	"	«	PUNCT	PUNCT	_	6	punct	_	_
+6	celeiro	celeiro	ADJ	ADJ	Gender=Masc|Number=Sing	0	root	_	_
 7	,	,	PUNCT	PUNCT	_	8	punct	_	_
-8	despenseiro	despenseiro	ADJ	ADJ	Gender=Masc|Number=Sing	6	parataxis	_	SpaceAfter=No
-9	"	«	PUNCT	PUNCT	_	6	punct	_	SpaceAfter=No
+8	despenseiro	despenseiro	ADJ	ADJ	Gender=Masc|Number=Sing	6	parataxis	_	_
+9	"	«	PUNCT	PUNCT	_	6	punct	_	_
 10	.	.	PUNCT	PUNCT	_	6	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = A Medalha Feenberg ( em inglês : Eugene Feenberg Memorial Medal , também Feenberg Award ) é um prêmio em a área de a teoria de múltiplos corpo de a mecânica quântica , denominado em memória de Eugene Feenberg .
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
 2	Medalha	Medalha	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	19	nsubj	_	_
 3	Feenberg	Feenberg	PROPN	PROPN	Number=Sing	2	flat:name	_	_
@@ -4044,17 +3745,15 @@
 37	de	de	ADP	ADP	_	38	case	_	_
 38	Eugene	Eugene	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	36	nmod	_	_
 39	Feenberg	Feenberg	PROPN	PROPN	Number=Sing	38	flat:name	_	_
-40	.	.	PUNCT	PUNCT	_	19	punct	_	_
+40	.	.	PUNCT	PUNCT	_	19	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = De acordo com o censo de 2000, a região possuía uma população de 1.052.238 habitantes
 1	De	de	ADP	ADP	_	2	case	_	_
 2	acordo	acordo	NOUN	NOUN	Gender=Masc|Number=Sing	11	obl	_	_
 3	com	com	ADP	ADP	_	5	case	_	_
 4	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	5	det	_	_
 5	censo	censo	NOUN	NOUN	Gender=Masc|Number=Sing	2	nmod	_	_
 6	de	de	ADP	ADP	_	7	case	_	_
-7	2000	2000	NUM	NUM	NumType=Card	5	nmod	_	SpaceAfter=No
+7	2000	2000	NUM	NUM	NumType=Card	5	nmod	_	_
 8	,	,	PUNCT	PUNCT	_	2	punct	_	_
 9	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	10	det	_	_
 10	região	região	NOUN	NOUN	Gender=Fem|Number=Sing	11	nsubj	_	_
@@ -4064,105 +3763,90 @@
 14	de	de	ADP	ADP	_	16	case	_	_
 15	1.052.238	1.052.238	NUM	NUM	NumType=Card	16	nummod	_	_
 16	habitantes	habitante	NOUN	NOUN	Gender=Masc|Number=Plur	13	nmod	_	_
+17	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	18	det	_	_
+18	censo	censo	NOUN	NOUN	Gender=Masc|Number=Sing	21	nsubj	_	_
+19	de	de	ADP	ADP	_	20	case	_	_
+20	2009	2009	NUM	NUM	NumType=Card	18	nmod	_	_
+21	aponta	apontar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	11	parataxis	_	_
+22	para	para	ADP	ADP	_	24	case	_	_
+23	um	um	DET	DET	Definite=Ind|Gender=Masc|Number=Sing|PronType=Art	24	det	_	_
+24	aumento	aumento	NOUN	NOUN	Gender=Masc|Number=Sing	21	obj	_	_
+25	estimado	estimar	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part	24	acl	_	_
+26	de	de	ADP	ADP	_	28	case	_	_
+27	1.212.848	1.212.848	NUM	NUM	NumType=Card	28	nummod	_	_
+28	habitantes	habitante	NOUN	NOUN	Gender=Masc|Number=Plur	25	obj	_	_
+29	.	.	PUNCT	PUNCT	_	11	punct	_	SpaceAfter=No
 
-# sent_id = 2
-# text = O censo de 2009 aponta para um aumento estimado de 1.212.848 habitantes.
-1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
-2	censo	censo	NOUN	NOUN	Gender=Masc|Number=Sing	5	nsubj	_	_
-3	de	de	ADP	ADP	_	4	case	_	_
-4	2009	2009	NUM	NUM	NumType=Card	2	nmod	_	_
-5	aponta	apontar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
-6	para	para	ADP	ADP	_	8	case	_	_
-7	um	um	DET	DET	Definite=Ind|Gender=Masc|Number=Sing|PronType=Art	8	det	_	_
-8	aumento	aumento	NOUN	NOUN	Gender=Masc|Number=Sing	5	obj	_	_
-9	estimado	estimar	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part	8	acl	_	_
-10	de	de	ADP	ADP	_	12	case	_	_
-11	1.212.848	1.212.848	NUM	NUM	NumType=Card	12	nummod	_	_
-12	habitantes	habitante	NOUN	NOUN	Gender=Masc|Number=Plur	9	obj	_	SpaceAfter=No
-13	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
-
-# sent_id = 1
-# text = Sua dispersão é uniforme, mas em baixa densidade, tanto em formações primárias quanto secundárias.
 1	Sua	seu	DET	DET	Gender=Fem|Number=Sing|PronType=Prs	2	det	_	_
 2	dispersão	dispersão	NOUN	NOUN	Gender=Fem|Number=Sing	4	nsubj	_	_
 3	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
-4	uniforme	uniforme	ADJ	ADJ	Gender=Fem|Number=Sing	0	root	_	SpaceAfter=No
+4	uniforme	uniforme	ADJ	ADJ	Gender=Fem|Number=Sing	0	root	_	_
 5	,	,	PUNCT	PUNCT	_	9	punct	_	_
 6	mas	mas	CCONJ	CCONJ	_	9	cc	_	_
 7	em	em	ADP	ADP	_	9	case	_	_
 8	baixa	baixo	ADJ	ADJ	Gender=Fem|Number=Sing	9	amod	_	_
-9	densidade	densidade	NOUN	NOUN	Gender=Fem|Number=Sing	4	obl	_	SpaceAfter=No
+9	densidade	densidade	NOUN	NOUN	Gender=Fem|Number=Sing	4	obl	_	_
 10	,	,	PUNCT	PUNCT	_	4	punct	_	_
 11	tanto	tanto	ADV	ADV	_	13	cc	_	_
 12	em	em	ADP	ADP	_	13	case	_	_
 13	formações	formação	NOUN	NOUN	Gender=Fem|Number=Plur	4	conj	_	_
 14	primárias	primário	ADJ	ADJ	Gender=Fem|Number=Plur	13	amod	_	_
 15	quanto	quanto	ADV	ADV	_	16	cc	_	_
-16	secundárias	secundário	ADJ	ADJ	Gender=Fem|Number=Plur	14	conj	_	SpaceAfter=No
+16	secundárias	secundário	ADJ	ADJ	Gender=Fem|Number=Plur	14	conj	_	_
 17	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Milita em o MUD
 1	Milita	milita	NOUN	NOUN	Gender=Masc|Number=Sing	0	root	_	_
 2	em	em	ADP	ADP	_	4	case	_	_
 3	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	4	det	_	_
-4	MUD	MUD	PROPN	PROPN	Gender=Masc|Number=Sing	1	nmod	_	_
+4	MUD	MUD	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	1	nmod	_	_
+5	Juvenil	Juvenil	PROPN	PROPN	Number=Sing	4	flat:name	_	_
+6	a	a	ADP	ADP	ExtPos=ADP	9	case	_	_
+7	partir	partir	NOUN	NOUN	_	6	fixed	_	_
+8	de	de	ADP	ADP	_	6	fixed	_	_
+9	Julho	julho	NOUN	NOUN	Gender=Masc|Number=Sing	1	nmod	_	_
+10	de	de	ADP	ADP	_	11	case	_	_
+11	1946	1946	NUM	NUM	NumType=Card	9	nmod	_	_
+12	,	,	PUNCT	PUNCT	_	13	punct	_	_
+13	fazendo	fazer	VERB	VERB	VerbForm=Ger	1	advcl	_	_
+14	parte	parte	NOUN	NOUN	Gender=Fem|Number=Sing	13	obj	_	_
+15	de	de	ADP	ADP	_	17	case	_	_
+16	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	17	det	_	_
+17	Comissão	Comissão	PROPN	PROPN	Gender=Fem|Number=Sing	14	nmod	_	_
+18	de	de	ADP	ADP	_	19	case	_	_
+19	Escola	Escola	PROPN	PROPN	Number=Sing	17	nmod	_	_
+20	de	de	ADP	ADP	_	22	case	_	_
+21	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	22	det	_	_
+22	MUD	MUD	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	19	nmod	_	_
+23	Juvenil	Juvenil	PROPN	PROPN	Number=Sing	22	flat:name	_	_
+24	de	de	ADP	ADP	_	26	case	_	_
+25	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	26	det	_	_
+26	EBAL	EBAL	PROPN	PROPN	Gender=Fem|Number=Sing	17	nmod	_	_
+27	que	que	PRON	PRON	Gender=Fem|Number=Sing|PronType=Rel	29	nsubj	_	_
+28	vai	ir	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	29	aux	_	_
+29	congregar	congregar	VERB	VERB	VerbForm=Inf	17	acl:relcl	_	_
+30	nomes	nome	NOUN	NOUN	Gender=Masc|Number=Plur	29	obj	_	_
+31	como	como	ADP	ADP	_	32	case	_	_
+32	Francisco	Francisco	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	30	nmod	_	_
+33	Castro	Castro	PROPN	PROPN	Number=Sing	32	flat:name	_	_
+34	Rodrigues	Rodrigues	PROPN	PROPN	Number=Sing	32	flat:name	_	_
+35	,	,	PUNCT	PUNCT	_	36	punct	_	_
+36	José	José	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	32	conj	_	_
+37	Dias	Dias	PROPN	PROPN	Number=Sing	36	flat:name	_	_
+38	Coelho	Coelho	PROPN	PROPN	Number=Sing	36	flat:name	_	_
+39	,	,	PUNCT	PUNCT	_	40	punct	_	_
+40	João	João	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	32	conj	_	_
+41	Abel	Abel	PROPN	PROPN	Number=Sing	40	flat:name	_	_
+42	Manta	Manta	PROPN	PROPN	Number=Sing	40	flat:name	_	_
+43	,	,	PUNCT	PUNCT	_	44	punct	_	_
+44	Lima	Lima	PROPN	PROPN	Gender=Masc|Number=Sing	32	conj	_	_
+45	de	de	ADP	ADP	_	46	case	_	_
+46	Freitas	Freitas	PROPN	PROPN	Number=Sing	44	nmod	_	_
+47	,	,	PUNCT	PUNCT	_	48	punct	_	_
+48	António	António	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	32	conj	_	_
+49	Alfredo	Alfredo	PROPN	PROPN	Number=Sing	48	flat:name	_	_
+50	,	,	PUNCT	PUNCT	_	51	punct	_	_
+51	M.	M.	PROPN	PROPN	Abbr=Yes|Gender=Masc|Number=Sing	32	conj	_	SpaceAfter=No
 
-# sent_id = 2
-# text = Juvenil a partir de Julho de 1946 , fazendo parte de a Comissão de Escola de o MUD
-1	Juvenil	juvenil	ADJ	ADJ	Gender=Fem|Number=Sing	0	root	_	_
-2	a	a	ADP	ADP	ExtPos=ADP	5	case	_	_
-3	partir	partir	NOUN	NOUN	_	2	fixed	_	_
-4	de	de	ADP	ADP	_	2	fixed	_	_
-5	Julho	julho	NOUN	NOUN	Gender=Masc|Number=Sing	1	obl	_	_
-6	de	de	ADP	ADP	_	7	case	_	_
-7	1946	1946	NUM	NUM	NumType=Card	5	nmod	_	_
-8	,	,	PUNCT	PUNCT	_	9	punct	_	_
-9	fazendo	fazer	VERB	VERB	VerbForm=Ger	1	parataxis	_	_
-10	parte	parte	NOUN	NOUN	Gender=Fem|Number=Sing	9	obj	_	_
-11	de	de	ADP	ADP	_	13	case	_	_
-12	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	13	det	_	_
-13	Comissão	Comissão	PROPN	PROPN	Gender=Fem|Number=Sing	10	nmod	_	_
-14	de	de	ADP	ADP	_	15	case	_	_
-15	Escola	Escola	PROPN	PROPN	Number=Sing	13	nmod	_	_
-16	de	de	ADP	ADP	_	18	case	_	_
-17	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	18	det	_	_
-18	MUD	MUD	PROPN	PROPN	Gender=Masc|Number=Sing	15	nmod	_	_
-
-# sent_id = 3
-# text = Juvenil de a EBAL que vai congregar nomes como Francisco Castro Rodrigues , José Dias Coelho , João Abel Manta , Lima de Freitas , António Alfredo , M.
-1	Juvenil	juvenil	NOUN	NOUN	Gender=Fem|Number=Sing	0	root	_	_
-2	de	de	ADP	ADP	_	4	case	_	_
-3	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
-4	EBAL	EBAL	PROPN	PROPN	Gender=Fem|Number=Sing	1	nmod	_	_
-5	que	que	PRON	PRON	Gender=Fem|Number=Sing|PronType=Rel	7	nsubj	_	_
-6	vai	ir	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	aux	_	_
-7	congregar	congregar	VERB	VERB	VerbForm=Inf	1	acl:relcl	_	_
-8	nomes	nome	NOUN	NOUN	Gender=Masc|Number=Plur	7	obj	_	_
-9	como	como	ADP	ADP	_	10	case	_	_
-10	Francisco	Francisco	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	8	nmod	_	_
-11	Castro	Castro	PROPN	PROPN	Number=Sing	10	flat:name	_	_
-12	Rodrigues	Rodrigues	PROPN	PROPN	Number=Sing	10	flat:name	_	_
-13	,	,	PUNCT	PUNCT	_	14	punct	_	_
-14	José	José	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	10	conj	_	_
-15	Dias	Dias	PROPN	PROPN	Number=Sing	14	flat:name	_	_
-16	Coelho	Coelho	PROPN	PROPN	Number=Sing	14	flat:name	_	_
-17	,	,	PUNCT	PUNCT	_	18	punct	_	_
-18	João	João	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	10	conj	_	_
-19	Abel	Abel	PROPN	PROPN	Number=Sing	18	flat:name	_	_
-20	Manta	Manta	PROPN	PROPN	Number=Sing	18	flat:name	_	_
-21	,	,	PUNCT	PUNCT	_	22	punct	_	_
-22	Lima	Lima	PROPN	PROPN	Gender=Masc|Number=Sing	10	conj	_	_
-23	de	de	ADP	ADP	_	24	case	_	_
-24	Freitas	Freitas	PROPN	PROPN	Number=Sing	22	nmod	_	_
-25	,	,	PUNCT	PUNCT	_	26	punct	_	_
-26	António	António	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	10	conj	_	_
-27	Alfredo	Alfredo	PROPN	PROPN	Number=Sing	26	flat:name	_	_
-28	,	,	PUNCT	PUNCT	_	29	punct	_	_
-29	M.	M.	PROPN	PROPN	Abbr=Yes|Gender=Masc|Number=Sing	10	conj	_	_
-
-# sent_id = 1
-# text = Em 1955 deram se alguns passos para restabelecer um sentido de identidade nacional para Gales quando Cardiff foi declarada a sua capital .
 1	Em	em	ADP	ADP	_	2	case	_	_
 2	1955	1955	NUM	NUM	NumType=Card	3	obl	_	_
 3	deram	dar	VERB	VERB	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
@@ -4185,10 +3869,8 @@
 20	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	22	det	_	_
 21	sua	seu	DET	DET	Gender=Fem|Number=Sing|PronType=Prs	22	det	_	_
 22	capital	capital	NOUN	NOUN	Gender=Fem|Number=Sing	19	nsubj:pass	_	_
-23	.	.	PUNCT	PUNCT	_	3	punct	_	_
+23	.	.	PUNCT	PUNCT	_	3	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Em o norte se inicia em a tríplice fronteira de os dois países com o sul de Burkina Faso e vai até o sul , em o porto ganês de Beyin , em o litoral de o Golfo de a Guiné ( Oceano Atlântico ) .
 1	Em	em	ADP	ADP	_	3	case	_	_
 2	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	3	det	_	_
 3	norte	norte	NOUN	NOUN	Gender=Masc|Number=Sing	5	obl	_	_
@@ -4234,10 +3916,8 @@
 43	Oceano	Oceano	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	38	appos	_	_
 44	Atlântico	Atlântico	PROPN	PROPN	Number=Sing	43	flat:name	_	_
 45	)	)	PUNCT	PUNCT	_	43	punct	_	_
-46	.	.	PUNCT	PUNCT	_	5	punct	_	_
+46	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Esta lista reúne os recordes olímpicos de o tiro esportivo , atualizados até os Jogos Olímpicos de Verão de 2008 .
 1	Esta	este	DET	DET	Gender=Fem|Number=Sing|PronType=Dem	2	det	_	_
 2	lista	lista	NOUN	NOUN	Gender=Fem|Number=Sing	3	nsubj	_	_
 3	reúne	reunir	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
@@ -4258,10 +3938,8 @@
 18	Verão	Verão	PROPN	PROPN	Number=Sing	15	nmod	_	_
 19	de	de	ADP	ADP	_	20	case	_	_
 20	2008	2008	NUM	NUM	NumType=Card	18	nmod	_	_
-21	.	.	PUNCT	PUNCT	_	3	punct	_	_
+21	.	.	PUNCT	PUNCT	_	3	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Estende se por uma área de 1430,55 km² , com 56 434 habitantes , segundo os censos de 2005 , com uma densidade 39,45 hab/km² .
 1	Estende	estender	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
 2	se	se	PRON	PRON	Case=Acc|Gender=Fem|Number=Sing|Person=3|PronType=Prs	1	expl	_	_
 3	por	por	ADP	ADP	_	5	case	_	_
@@ -4287,10 +3965,8 @@
 23	densidade	densidade	NOUN	NOUN	Gender=Fem|Number=Sing	1	obl	_	_
 24	39,45	39,45	NUM	NUM	NumType=Card	25	nummod	_	_
 25	hab/km²	hab/km²	NOUN	NOUN	Gender=Masc|Number=Plur	23	nmod	_	_
-26	.	.	PUNCT	PUNCT	_	1	punct	_	_
+26	.	.	PUNCT	PUNCT	_	1	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Por conta de isso Igan caiu em desgraça , não raro sendo debochada por Barrabás .
 1	Por	por	ADP	ADP	_	2	case	_	_
 2	conta	conta	NOUN	NOUN	Gender=Fem|Number=Sing	6	obl	_	_
 3	de	de	ADP	ADP	_	4	case	_	_
@@ -4306,10 +3982,8 @@
 13	debochada	debochar	VERB	VERB	Gender=Fem|Number=Sing|VerbForm=Part|Voice=Pass	6	advcl	_	_
 14	por	por	ADP	ADP	_	15	case	_	_
 15	Barrabás	Barrabás	PROPN	PROPN	Gender=Masc|Number=Sing	13	obl:agent	_	_
-16	.	.	PUNCT	PUNCT	_	6	punct	_	_
+16	.	.	PUNCT	PUNCT	_	6	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Este asteroide foi descoberto em o dia 5 de abril de 2000 por LINEAR em Socorro .
 1	Este	este	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	2	det	_	_
 2	asteroide	asteroide	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj:pass	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
@@ -4326,10 +4000,8 @@
 14	LINEAR	Linear	PROPN	PROPN	Gender=Masc|Number=Sing	4	obl:agent	_	_
 15	em	em	ADP	ADP	_	16	case	_	_
 16	Socorro	Socorro	PROPN	PROPN	Gender=Masc|Number=Sing	4	obl	_	_
-17	.	.	PUNCT	PUNCT	_	4	punct	_	_
+17	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Este asteroide foi descoberto em o dia 3 de outubro de 1999 por Spacewatch em Kitt Peak .
 1	Este	este	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	2	det	_	_
 2	asteroide	asteroide	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj:pass	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
@@ -4347,10 +4019,8 @@
 15	em	em	ADP	ADP	_	16	case	_	_
 16	Kitt	Kitt	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	4	obl	_	_
 17	Peak	Peak	PROPN	PROPN	Number=Sing	16	flat:name	_	_
-18	.	.	PUNCT	PUNCT	_	4	punct	_	_
+18	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Coyatepec foi uma cidade Asteca , em o estado de Oaxaca , colonizada por os espanhóis .
 1	Coyatepec	Coyatepec	PROPN	PROPN	Gender=Masc|Number=Sing	4	nsubj	_	_
 2	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	cop	_	_
 3	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
@@ -4367,10 +4037,8 @@
 14	por	por	ADP	ADP	_	16	case	_	_
 15	os	o	DET	DET	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	16	det	_	_
 16	espanhóis	espanhol	NOUN	NOUN	Gender=Masc|Number=Plur	13	obl:agent	_	_
-17	.	.	PUNCT	PUNCT	_	4	punct	_	_
+17	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O Museu Paroquial de Moncarapacho é uma instituição museológica , sediada em a Freguesia de Moncarapacho de o Concelho de Olhão , em o Distrito de Faro , em Portugal .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	Museu	Museu	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	8	nsubj	_	_
 3	Paroquial	Paroquial	PROPN	PROPN	Number=Sing	2	flat:name	_	_
@@ -4401,10 +4069,8 @@
 28	,	,	PUNCT	PUNCT	_	25	punct	_	_
 29	em	em	ADP	ADP	_	30	case	_	_
 30	Portugal	Portugal	PROPN	PROPN	Gender=Masc|Number=Sing	25	nmod	_	_
-31	.	.	PUNCT	PUNCT	_	8	punct	_	_
+31	.	.	PUNCT	PUNCT	_	8	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Falta amor é o segundo álbum de a banda mexicana Maná .
 1	Falta	faltar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
 2	amor	amor	NOUN	NOUN	Gender=Masc|Number=Sing	6	nsubj	_	_
 3	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	6	cop	_	_
@@ -4416,10 +4082,8 @@
 9	banda	banda	NOUN	NOUN	Gender=Fem|Number=Sing	6	nmod	_	_
 10	mexicana	mexicano	ADJ	ADJ	Gender=Fem|Number=Sing	9	amod	_	_
 11	Maná	Maná	PROPN	PROPN	Gender=Masc|Number=Sing	9	appos	_	_
-12	.	.	PUNCT	PUNCT	_	6	punct	_	_
+12	.	.	PUNCT	PUNCT	_	6	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = A FEE busca também estabelecer convênios de cooperação técnica e parcerias com outras instituições de pesquisa e acadêmicas.
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
 2	FEE	FEE	PROPN	PROPN	Gender=Fem|Number=Sing	3	nsubj	_	_
 3	busca	buscar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
@@ -4437,11 +4101,9 @@
 15	de	de	ADP	ADP	_	16	case	_	_
 16	pesquisa	pesquisa	NOUN	NOUN	Gender=Fem|Number=Sing	14	nmod	_	_
 17	e	e	CCONJ	CCONJ	_	18	cc	_	_
-18	acadêmicas	acadêmico	NOUN	NOUN	Gender=Fem|Number=Plur	16	conj	_	SpaceAfter=No
+18	acadêmicas	acadêmico	NOUN	NOUN	Gender=Fem|Number=Plur	16	conj	_	_
 19	.	.	PUNCT	PUNCT	_	3	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Este asteróide foi descoberto em 27 de Abril de 1998 por Paul Comba.
 1	Este	este	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	2	det	_	_
 2	asteróide	asteróide	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj:pass	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
@@ -4454,11 +4116,9 @@
 10	1998	1998	NUM	NUM	NumType=Card	8	nmod	_	_
 11	por	por	ADP	ADP	_	12	case	_	_
 12	Paul	Paul	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	4	obl:agent	_	_
-13	Comba	Comba	PROPN	PROPN	Number=Sing	12	flat:name	_	SpaceAfter=No
+13	Comba	Comba	PROPN	PROPN	Number=Sing	12	flat:name	_	_
 14	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Em o mesmo ano a Turma Caipira fez sua última apresentação , em Santos .
 1	Em	em	ADP	ADP	_	4	case	_	_
 2	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	4	det	_	_
 3	mesmo	mesmo	ADJ	ADJ	Gender=Masc|Number=Sing	4	amod	_	_
@@ -4473,21 +4133,17 @@
 12	,	,	PUNCT	PUNCT	_	8	punct	_	_
 13	em	em	ADP	ADP	_	14	case	_	_
 14	Santos	Santos	PROPN	PROPN	Gender=Masc|Number=Sing	8	obl	_	_
-15	.	.	PUNCT	PUNCT	_	8	punct	_	_
+15	.	.	PUNCT	PUNCT	_	8	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Sua capital é a cidade de Filipstad.
 1	Sua	seu	DET	DET	Gender=Fem|Number=Sing|PronType=Prs	2	det	_	_
 2	capital	capital	NOUN	NOUN	Gender=Fem|Number=Sing	5	nsubj	_	_
 3	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
 4	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	5	det	_	_
 5	cidade	cidade	NOUN	NOUN	Gender=Fem|Number=Sing	0	root	_	_
 6	de	de	ADP	ADP	_	7	case	_	_
-7	Filipstad	Filipstad	PROPN	PROPN	Number=Sing	5	nmod	_	SpaceAfter=No
+7	Filipstad	Filipstad	PROPN	PROPN	Number=Sing	5	nmod	_	_
 8	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Este efeito não acontece com pessoas que têm algumas formas de prosopagnosia , uma desordem em que a percepção de o rosto é prejudicada , geralmente adquirida após uma lesão ou doença cerebral .
 1	Este	este	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	2	det	_	_
 2	efeito	efeito	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj	_	_
 3	não	não	ADV	ADV	Polarity=Neg	4	advmod	_	_
@@ -4521,10 +4177,8 @@
 31	ou	ou	CCONJ	CCONJ	_	32	cc	_	_
 32	doença	doença	NOUN	NOUN	Gender=Fem|Number=Sing	30	conj	_	_
 33	cerebral	cerebral	ADJ	ADJ	Gender=Fem|Number=Sing	32	amod	_	_
-34	.	.	PUNCT	PUNCT	_	4	punct	_	_
+34	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Em 2007 , Tiago foi o goleiro com mais gols em o Brasil , foram 13 em o total , contra 10 de o rival e ídolo Rogério Ceni , sendo 9 em a disputa de a Séria B de o Campeonato Brasileiro .
 1	Em	em	ADP	ADP	_	2	case	_	_
 2	2007	2007	NUM	NUM	NumType=Card	7	nmod	_	_
 3	,	,	PUNCT	PUNCT	_	2	punct	_	_
@@ -4568,10 +4222,8 @@
 41	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	42	det	_	_
 42	Campeonato	Campeonato	PROPN	PROPN	Gender=Masc|Number=Sing	38	nmod	_	_
 43	Brasileiro	Brasileiro	PROPN	PROPN	Number=Sing	42	flat:name	_	_
-44	.	.	PUNCT	PUNCT	_	7	punct	_	_
+44	.	.	PUNCT	PUNCT	_	7	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Este asteroide foi descoberto em o dia 9 de janeiro de 1999 por Tetsuo Kagawa em Gekko .
 1	Este	este	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	2	det	_	_
 2	asteroide	asteroide	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj:pass	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
@@ -4589,10 +4241,8 @@
 15	Kagawa	Kagawa	PROPN	PROPN	Number=Sing	14	flat:name	_	_
 16	em	em	ADP	ADP	_	17	case	_	_
 17	Gekko	Gekko	PROPN	PROPN	Gender=Masc|Number=Sing	4	obl	_	_
-18	.	.	PUNCT	PUNCT	_	4	punct	_	_
+18	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = A maioria de as plantas pode ser designada como erva , trepadeira , liana , arbusto ou árvore ( com algumas subcategorias ) , ainda que algumas espécies sejam de difícil categorização .
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
 2	maioria	maioria	NOUN	NOUN	Gender=Fem|Number=Sing	6	nsubj:pass	_	_
 3	de	de	ADP	ADP	_	5	case	_	_
@@ -4625,10 +4275,8 @@
 30	de	de	ADP	ADP	_	32	case	_	_
 31	difícil	difícil	ADJ	ADJ	Gender=Fem|Number=Sing	32	amod	_	_
 32	categorização	categorização	NOUN	NOUN	Gender=Fem|Number=Sing	8	advcl	_	_
-33	.	.	PUNCT	PUNCT	_	8	punct	_	_
+33	.	.	PUNCT	PUNCT	_	8	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Thomasomys laniger é uma espécie de roedor de a família Cricetidae .
 1	Thomasomys	Thomasomys	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	5	nsubj	_	_
 2	laniger	laniger	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
@@ -4640,10 +4288,8 @@
 9	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	10	det	_	_
 10	família	família	NOUN	NOUN	Gender=Fem|Number=Sing	7	nmod	_	_
 11	Cricetidae	Cricetidae	PROPN	PROPN	Gender=Fem|Number=Sing	10	appos	_	_
-12	.	.	PUNCT	PUNCT	_	5	punct	_	_
+12	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Este asteroide foi descoberto em o dia 29 de agosto de 1987 por Eric Walter Elst em La Silla .
 1	Este	este	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	2	det	_	_
 2	asteroide	asteroide	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj:pass	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	aux:pass	_	_
@@ -4663,15 +4309,13 @@
 17	em	em	ADP	ADP	_	18	case	_	_
 18	La	La	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	4	obl	_	_
 19	Silla	Silla	PROPN	PROPN	Number=Sing	18	flat:name	_	_
-20	.	.	PUNCT	PUNCT	_	4	punct	_	_
+20	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Irving Ezra Segal (Bronx, 13 de setembro de 1918 — Lexington, 24 de dezembro de 1998) foi um matemático estadunidense.
 1	Irving	Irving	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	23	nsubj	_	_
 2	Ezra	Ezra	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	Segal	Segal	PROPN	PROPN	Number=Sing	1	flat:name	_	_
-4	(	(	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
-5	Bronx	Bronx	PROPN	PROPN	Gender=Masc|Number=Sing	1	parataxis	_	SpaceAfter=No
+4	(	(	PUNCT	PUNCT	_	5	punct	_	_
+5	Bronx	Bronx	PROPN	PROPN	Gender=Masc|Number=Sing	1	parataxis	_	_
 6	,	,	PUNCT	PUNCT	_	7	punct	_	_
 7	13	13	NUM	NUM	NumType=Card	5	appos	_	_
 8	de	de	ADP	ADP	_	9	case	_	_
@@ -4679,33 +4323,29 @@
 10	de	de	ADP	ADP	_	11	case	_	_
 11	1918	1918	NUM	NUM	NumType=Card	9	nmod	_	_
 12	—	—	PUNCT	PUNCT	_	13	punct	_	_
-13	Lexington	Lexington	PROPN	PROPN	Gender=Masc|Number=Sing	5	appos	_	SpaceAfter=No
+13	Lexington	Lexington	PROPN	PROPN	Gender=Masc|Number=Sing	5	appos	_	_
 14	,	,	PUNCT	PUNCT	_	15	punct	_	_
 15	24	24	NUM	NUM	NumType=Card	13	appos	_	_
 16	de	de	ADP	ADP	_	17	case	_	_
 17	dezembro	dezembro	NOUN	NOUN	Gender=Masc|Number=Sing	15	nmod	_	_
 18	de	de	ADP	ADP	_	19	case	_	_
-19	1998	1998	NUM	NUM	NumType=Card	17	nmod	_	SpaceAfter=No
+19	1998	1998	NUM	NUM	NumType=Card	17	nmod	_	_
 20	)	)	PUNCT	PUNCT	_	5	punct	_	_
 21	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	23	cop	_	_
 22	um	um	DET	DET	Definite=Ind|Gender=Masc|Number=Sing|PronType=Art	23	det	_	_
 23	matemático	matemático	NOUN	NOUN	Gender=Masc|Number=Sing	0	root	_	_
-24	estadunidense	estadunidense	ADJ	ADJ	Gender=Masc|Number=Sing	23	amod	_	SpaceAfter=No
+24	estadunidense	estadunidense	ADJ	ADJ	Gender=Masc|Number=Sing	23	amod	_	_
 25	.	.	PUNCT	PUNCT	_	23	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Jerônimo de Cárdia foi um historiador grego.
 1	Jerônimo	Jerônimo	PROPN	PROPN	Gender=Masc|Number=Sing	6	nsubj	_	_
 2	de	de	ADP	ADP	_	3	case	_	_
 3	Cárdia	Cárdia	PROPN	PROPN	Number=Sing	1	nmod	_	_
 4	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	6	cop	_	_
 5	um	um	DET	DET	Definite=Ind|Gender=Masc|Number=Sing|PronType=Art	6	det	_	_
 6	historiador	historiador	NOUN	NOUN	Gender=Masc|Number=Sing	0	root	_	_
-7	grego	grego	ADJ	ADJ	Gender=Masc|Number=Sing	6	amod	_	SpaceAfter=No
+7	grego	grego	ADJ	ADJ	Gender=Masc|Number=Sing	6	amod	_	_
 8	.	.	PUNCT	PUNCT	_	6	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Prionanthium é um género botânico pertencente a a família Poaceae .
 1	Prionanthium	Prionanthium	PROPN	PROPN	Gender=Masc|Number=Sing	4	nsubj	_	_
 2	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
 3	um	um	DET	DET	Definite=Ind|Gender=Masc|Number=Sing|PronType=Art	4	det	_	_
@@ -4716,10 +4356,8 @@
 8	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	9	det	_	_
 9	família	família	NOUN	NOUN	Gender=Fem|Number=Sing	6	obl	_	_
 10	Poaceae	Poaceae	PROPN	PROPN	Gender=Fem|Number=Sing	9	appos	_	_
-11	.	.	PUNCT	PUNCT	_	4	punct	_	_
+11	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Betancourt chegou a o poder , por a primeira vez , mediante um golpe de estado que derrubou o presidente Isaías Medina Angarita em 1945 .
 1	Betancourt	Betancourt	PROPN	PROPN	Gender=Masc|Number=Sing	2	nsubj	_	_
 2	chegou	chegar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
 3	a	a	ADP	ADP	_	5	case	_	_
@@ -4745,10 +4383,8 @@
 23	Angarita	Angarita	PROPN	PROPN	Number=Sing	21	flat:name	_	_
 24	em	em	ADP	ADP	_	25	case	_	_
 25	1945	1945	NUM	NUM	NumType=Card	18	obl	_	_
-26	.	.	PUNCT	PUNCT	_	2	punct	_	_
+26	.	.	PUNCT	PUNCT	_	2	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Leonor voltou para a Inglaterra deixando Berengária aos cuidados de Joana.
 1	Leonor	Leonor	PROPN	PROPN	Gender=Fem|Number=Sing	2	nsubj	_	_
 2	voltou	voltar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
 3	para	para	ADP	ADP	_	5	case	_	_
@@ -4756,15 +4392,13 @@
 5	Inglaterra	Inglaterra	PROPN	PROPN	Gender=Fem|Number=Sing	2	obl	_	_
 6	deixando	deixar	VERB	VERB	VerbForm=Ger	2	advcl	_	_
 7	Berengária	Berengária	PROPN	PROPN	Gender=Fem|Number=Sing	6	obj	_	_
-8	a	a	ADP	ADP	_	10	case	_	SpaceAfter=No
+8	a	a	ADP	ADP	_	10	case	_	_
 9	os	o	DET	DET	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	10	det	_	_
 10	cuidados	cuidado	NOUN	NOUN	Gender=Masc|Number=Plur	6	iobj	_	_
 11	de	de	ADP	ADP	_	12	case	_	_
-12	Joana	Joana	PROPN	PROPN	Gender=Fem|Number=Sing	10	nmod	_	SpaceAfter=No
+12	Joana	Joana	PROPN	PROPN	Gender=Fem|Number=Sing	10	nmod	_	_
 13	.	.	PUNCT	PUNCT	_	2	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O World Fantasy Award é entregue durante o evento.
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	World	World	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	6	nsubj:pass	_	_
 3	Fantasy	Fantasy	PROPN	PROPN	Number=Sing	2	flat:name	_	_
@@ -4773,11 +4407,9 @@
 6	entregue	entregar	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part|Voice=Pass	0	root	_	_
 7	durante	durante	ADP	ADP	_	9	case	_	_
 8	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	9	det	_	_
-9	evento	evento	NOUN	NOUN	Gender=Masc|Number=Sing	6	obl	_	SpaceAfter=No
+9	evento	evento	NOUN	NOUN	Gender=Masc|Number=Sing	6	obl	_	_
 10	.	.	PUNCT	PUNCT	_	6	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Este sucesso foi importante para fazer avançar a construção de os interferômetros Submillimeter Array e Atacama Large Millimeter Array .
 1	Este	este	DET	DET	Gender=Masc|Number=Sing|PronType=Dem	2	det	_	_
 2	sucesso	sucesso	NOUN	NOUN	Gender=Masc|Number=Sing	4	nsubj	_	_
 3	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	4	cop	_	_
@@ -4797,10 +4429,8 @@
 17	Large	Large	PROPN	PROPN	Number=Sing	16	flat:name	_	_
 18	Millimeter	Millimeter	PROPN	PROPN	Number=Sing	16	flat:name	_	_
 19	Array	Array	PROPN	PROPN	Number=Sing	16	flat:name	_	_
-20	.	.	PUNCT	PUNCT	_	4	punct	_	_
+20	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Conflyto voltou a o passado perseguindo seu arqui-inimigo Cable e foi o responsável por a liberação de o Vírus Legado , que matou inúmeros mutantes .
 1	Conflyto	Conflyto	PROPN	PROPN	Gender=Masc|Number=Sing	2	nsubj	_	_
 2	voltou	voltar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
 3	a	a	ADP	ADP	_	5	case	_	_
@@ -4826,10 +4456,8 @@
 23	matou	matar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	19	acl:relcl	_	_
 24	inúmeros	inúmero	ADJ	ADJ	Gender=Masc|Number=Plur	25	amod	_	_
 25	mutantes	mutante	NOUN	NOUN	Gender=Masc|Number=Plur	23	obj	_	_
-26	.	.	PUNCT	PUNCT	_	2	punct	_	_
+26	.	.	PUNCT	PUNCT	_	2	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Considerando sua distância de 244 anos-luz em relação a a Terra , sua magnitude absoluta é igual a 0.85 .
 1	Considerando	considerar	VERB	VERB	VerbForm=Ger	17	advcl	_	_
 2	sua	seu	DET	DET	Gender=Fem|Number=Sing|PronType=Prs	3	det	_	_
 3	distância	distância	NOUN	NOUN	Gender=Fem|Number=Sing	1	obj	_	_
@@ -4849,10 +4477,8 @@
 17	igual	igual	ADJ	ADJ	Gender=Fem|Number=Sing	0	root	_	_
 18	a	a	ADP	ADP	_	19	case	_	_
 19	0.85	0.85	NUM	NUM	NumType=Card	17	obl	_	_
-20	.	.	PUNCT	PUNCT	_	17	punct	_	_
+20	.	.	PUNCT	PUNCT	_	17	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Lançada em 1997 , a canção foi terceiro single de o álbum Everywhere .
 1	Lançada	lançar	VERB	VERB	Gender=Fem|Number=Sing|VerbForm=Part	9	advcl	_	_
 2	em	em	ADP	ADP	_	3	case	_	_
 3	1997	1997	NUM	NUM	NumType=Card	1	obl	_	_
@@ -4866,10 +4492,8 @@
 11	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	12	det	_	_
 12	álbum	álbum	NOUN	NOUN	Gender=Masc|Number=Sing	9	nmod	_	_
 13	Everywhere	Everywhere	PROPN	PROPN	Gender=Masc|Number=Sing	12	appos	_	_
-14	.	.	PUNCT	PUNCT	_	9	punct	_	_
+14	.	.	PUNCT	PUNCT	_	9	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Corani é um distrito de o Peru , departamento de Puno , localizada em a província de Carabaya .
 1	Corani	Corani	PROPN	PROPN	Gender=Masc|Number=Sing	4	nsubj	_	_
 2	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
 3	um	um	DET	DET	Definite=Ind|Gender=Masc|Number=Sing|PronType=Art	4	det	_	_
@@ -4888,10 +4512,8 @@
 16	província	província	NOUN	NOUN	Gender=Fem|Number=Sing	13	obl	_	_
 17	de	de	ADP	ADP	_	18	case	_	_
 18	Carabaya	Carabaya	PROPN	PROPN	Number=Sing	16	nmod	_	_
-19	.	.	PUNCT	PUNCT	_	4	punct	_	_
+19	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = A única esperança para os sobreviventes é Kit Latura ( Sylvester Stallone ) , um ex-bombeiro que precisará entrar em o túnel e resgatar as vítimas antes que o ar se esgote , ou que o próprio túnel desabe .
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	3	det	_	_
 2	única	único	ADJ	ADJ	Gender=Fem|Number=Sing	3	amod	_	_
 3	esperança	esperança	NOUN	NOUN	Gender=Fem|Number=Sing	8	nsubj	_	_
@@ -4931,13 +4553,11 @@
 37	próprio	próprio	DET	DET	Gender=Masc|Number=Sing|PronType=Emp	38	amod	_	_
 38	túnel	túnel	NOUN	NOUN	Gender=Masc|Number=Sing	39	nsubj	_	_
 39	desabe	desaber	VERB	VERB	Mood=Sub|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	32	conj	_	_
-40	.	.	PUNCT	PUNCT	_	8	punct	_	_
+40	.	.	PUNCT	PUNCT	_	8	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Kitty Gordon (22 de abril de 1878 – 26 de maio de 1974) foi uma atriz britânica de cinema e teatro.
 1	Kitty	Kitty	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	18	nsubj	_	_
 2	Gordon	Gordon	PROPN	PROPN	Number=Sing	1	flat:name	_	_
-3	(	(	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
+3	(	(	PUNCT	PUNCT	_	4	punct	_	_
 4	22	22	NUM	NUM	NumType=Card	1	parataxis	_	_
 5	de	de	ADP	ADP	_	6	case	_	_
 6	abril	abril	NOUN	NOUN	Gender=Masc|Number=Sing	4	nmod	_	_
@@ -4948,7 +4568,7 @@
 11	de	de	ADP	ADP	_	12	case	_	_
 12	maio	maio	NOUN	NOUN	Gender=Masc|Number=Sing	10	nmod	_	_
 13	de	de	ADP	ADP	_	14	case	_	_
-14	1974	1974	NUM	NUM	NumType=Card	12	nmod	_	SpaceAfter=No
+14	1974	1974	NUM	NUM	NumType=Card	12	nmod	_	_
 15	)	)	PUNCT	PUNCT	_	4	punct	_	_
 16	foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	18	cop	_	_
 17	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	18	det	_	_
@@ -4957,11 +4577,9 @@
 20	de	de	ADP	ADP	_	21	case	_	_
 21	cinema	cinema	NOUN	NOUN	Gender=Masc|Number=Sing	18	nmod	_	_
 22	e	e	CCONJ	CCONJ	_	23	cc	_	_
-23	teatro	teatro	NOUN	NOUN	Gender=Masc|Number=Sing	21	conj	_	SpaceAfter=No
+23	teatro	teatro	NOUN	NOUN	Gender=Masc|Number=Sing	21	conj	_	_
 24	.	.	PUNCT	PUNCT	_	18	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Exerceu várias vezes o cargo de deputado provincial por Pernambuco.
 1	Exerceu	exercer	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
 2	várias	várias	DET	DET	Gender=Fem|Number=Plur|PronType=Ind	3	det	_	_
 3	vezes	vez	NOUN	NOUN	Gender=Fem|Number=Plur	1	obl	_	_
@@ -4971,21 +4589,17 @@
 7	deputado	deputado	NOUN	NOUN	Gender=Masc|Number=Sing	5	nmod	_	_
 8	provincial	provincial	ADJ	ADJ	Gender=Masc|Number=Sing	7	amod	_	_
 9	por	por	ADP	ADP	_	10	case	_	_
-10	Pernambuco	Pernambuco	PROPN	PROPN	Gender=Masc|Number=Sing	1	obl	_	SpaceAfter=No
+10	Pernambuco	Pernambuco	PROPN	PROPN	Gender=Masc|Number=Sing	1	obl	_	_
 11	.	.	PUNCT	PUNCT	_	1	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Até 15 de dezembro de 2015.
 1	Até	até	ADP	ADP	_	2	case	_	_
 2	15	15	NUM	NUM	NumType=Card	0	root	_	_
 3	de	de	ADP	ADP	_	4	case	_	_
 4	dezembro	dezembro	NOUN	NOUN	Gender=Masc|Number=Sing	2	nmod	_	_
 5	de	de	ADP	ADP	_	6	case	_	_
-6	2015	2015	NUM	NUM	NumType=Card	4	nmod	_	SpaceAfter=No
+6	2015	2015	NUM	NUM	NumType=Card	4	nmod	_	_
 7	.	.	PUNCT	PUNCT	_	2	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Põlde é localizado em o município de Abja vald e Viljandimaa , em o sul de o país , e 150 km a o sul de a capital Tallinn .
 1	Põlde	Põlde	PROPN	PROPN	Gender=Masc|Number=Sing	3	nsubj:pass	_	_
 2	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	3	aux:pass	_	_
 3	localizado	localizar	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part|Voice=Pass	0	root	_	_
@@ -5015,10 +4629,8 @@
 27	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	28	det	_	_
 28	capital	capital	NOUN	NOUN	Gender=Fem|Number=Sing	25	nmod	_	_
 29	Tallinn	Tallinn	PROPN	PROPN	Gender=Fem|Number=Sing	28	appos	_	_
-30	.	.	PUNCT	PUNCT	_	3	punct	_	_
+30	.	.	PUNCT	PUNCT	_	3	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Pode ser encontrada em os seguintes países : Indonésia e Papua-Nova Guiné .
 1	Pode	poder	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
 2	ser	ser	AUX	AUX	VerbForm=Inf	3	aux:pass	_	_
 3	encontrada	encontrar	VERB	VERB	Gender=Fem|Number=Sing|VerbForm=Part|Voice=Pass	1	xcomp	_	_
@@ -5031,10 +4643,8 @@
 10	e	e	CCONJ	CCONJ	_	11	cc	_	_
 11	Papua-Nova	Papua-Nova	PROPN	PROPN	ExtPos=PROPN|Gender=Fem|Number=Sing	9	conj	_	_
 12	Guiné	Guiné	PROPN	PROPN	Number=Sing	11	flat:name	_	_
-13	.	.	PUNCT	PUNCT	_	3	punct	_	_
+13	.	.	PUNCT	PUNCT	_	3	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = O Instituto Luce ( em italiano : Istituto Luce , acrónimo de L'Unione Cinematografica Educativa ; em português : União Cinematográfica Educativa ) foi uma empresa italiana , criada em 1924 durante a ditadura fascista em a Itália .
 1	O	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
 2	Instituto	Instituto	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	26	nsubj	_	_
 3	Luce	Luce	PROPN	PROPN	Number=Sing	2	flat:name	_	_
@@ -5073,10 +4683,8 @@
 36	em	em	ADP	ADP	_	38	case	_	_
 37	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	38	det	_	_
 38	Itália	Itália	PROPN	PROPN	Gender=Fem|Number=Sing	34	nmod	_	_
-39	.	.	PUNCT	PUNCT	_	26	punct	_	_
+39	.	.	PUNCT	PUNCT	_	26	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = A quarta temporada de a World Poker Tour ( WPT ) foi disputada entre os anos de 2005 e 2006 com dezesseis eventos .
 1	A	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	3	det	_	_
 2	quarta	quarto	ADJ	ADJ	Gender=Fem|NumType=Ord|Number=Sing	3	amod	_	_
 3	temporada	temporada	NOUN	NOUN	Gender=Fem|Number=Sing	13	nsubj:pass	_	_
@@ -5100,23 +4708,19 @@
 21	com	com	ADP	ADP	_	23	case	_	_
 22	dezesseis	dezessel	NUM	NUM	NumType=Card	23	nummod	_	_
 23	eventos	evento	NOUN	NOUN	Gender=Masc|Number=Plur	13	obl	_	_
-24	.	.	PUNCT	PUNCT	_	13	punct	_	_
+24	.	.	PUNCT	PUNCT	_	13	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Foi aparentado com a primeira ave, o Archaeopteryx.
 1	Foi	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	2	aux:pass	_	_
 2	aparentado	aparentar	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part|Voice=Pass	0	root	_	_
 3	com	com	ADP	ADP	_	6	case	_	_
 4	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	6	det	_	_
 5	primeira	primeiro	ADJ	ADJ	Gender=Fem|NumType=Ord|Number=Sing	6	amod	_	_
-6	ave	ave	NOUN	NOUN	Gender=Fem|Number=Sing	2	obl	_	SpaceAfter=No
+6	ave	ave	NOUN	NOUN	Gender=Fem|Number=Sing	2	obl	_	_
 7	,	,	PUNCT	PUNCT	_	9	punct	_	_
 8	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	9	det	_	_
-9	Archaeopteryx	Archaeopteryx	PROPN	PROPN	Gender=Masc|Number=Sing	6	appos	_	SpaceAfter=No
+9	Archaeopteryx	Archaeopteryx	PROPN	PROPN	Gender=Masc|Number=Sing	6	appos	_	_
 10	.	.	PUNCT	PUNCT	_	2	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Para ganhar a confiança de Sophie de volta , Krusty tenta recuperar o violino de a residência de Fat Tony com a ajuda de Homer .
 1	Para	para	SCONJ	SCONJ	_	2	mark	_	_
 2	ganhar	ganhar	VERB	VERB	VerbForm=Inf	11	advcl	_	_
 3	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
@@ -5142,10 +4746,8 @@
 23	ajuda	ajuda	NOUN	NOUN	Gender=Fem|Number=Sing	12	obl	_	_
 24	de	de	ADP	ADP	_	25	case	_	_
 25	Homer	Homer	PROPN	PROPN	Gender=Masc|Number=Sing	23	nmod	_	_
-26	.	.	PUNCT	PUNCT	_	11	punct	_	_
+26	.	.	PUNCT	PUNCT	_	11	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Traz gravações feitas por a banda em 1993 .
 1	Traz	trazer	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
 2	gravações	gravação	NOUN	NOUN	Gender=Fem|Number=Plur	1	obj	_	_
 3	feitas	fazer	VERB	VERB	Gender=Fem|Number=Plur|VerbForm=Part|Voice=Pass	2	acl	_	_
@@ -5154,10 +4756,8 @@
 6	banda	banda	NOUN	NOUN	Gender=Fem|Number=Sing	3	obl:agent	_	_
 7	em	em	ADP	ADP	_	8	case	_	_
 8	1993	1993	NUM	NUM	NumType=Card	3	obl	_	_
-9	.	.	PUNCT	PUNCT	_	1	punct	_	_
+9	.	.	PUNCT	PUNCT	_	1	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Sillis ( asteróide 21627 ) é um asteróide de a cintura principal , a 2,032963 UA .
 1	Sillis	Sillis	PROPN	PROPN	Gender=Masc|Number=Sing	8	nsubj	_	_
 2	(	(	PUNCT	PUNCT	_	3	punct	_	_
 3	asteróide	asteróide	NOUN	NOUN	Gender=Masc|Number=Sing	1	appos	_	_
@@ -5174,10 +4774,8 @@
 14	a	a	ADP	ADP	_	15	case	_	_
 15	2,032963	2,032963	NUM	NUM	NumType=Card	8	nmod	_	_
 16	UA	UA	PROPN	PROPN	Gender=Masc|Number=Sing	15	appos	_	_
-17	.	.	PUNCT	PUNCT	_	8	punct	_	_
+17	.	.	PUNCT	PUNCT	_	8	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Ao saber de a dura condição de seu comandante , as tropas romanas de a região correram para Lingoes e infligiram pesadas perdas a os alamanos .
 1	Ao	ao	SCONJ	SCONJ	_	2	mark	_	_
 2	saber	saber	VERB	VERB	VerbForm=Inf	17	advcl	_	_
 3	de	de	ADP	ADP	_	6	case	_	_
@@ -5204,10 +4802,8 @@
 24	a	a	ADP	ADP	_	26	case	_	_
 25	os	o	DET	DET	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	26	det	_	_
 26	alamanos	alamano	NOUN	NOUN	Gender=Masc|Number=Plur	21	iobj	_	_
-27	.	.	PUNCT	PUNCT	_	17	punct	_	_
+27	.	.	PUNCT	PUNCT	_	17	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Hencke ( asteroide 2005 , com designação provisória 1973 RA ) é um asteroide de a cintura principal , a 2,185535 UA .
 1	Hencke	Hencke	PROPN	PROPN	Gender=Masc|Number=Sing	14	nsubj	_	_
 2	(	(	PUNCT	PUNCT	_	3	punct	_	_
 3	asteroide	asteroide	NOUN	NOUN	Gender=Masc|Number=Sing	1	appos	_	_
@@ -5230,10 +4826,8 @@
 20	a	a	ADP	ADP	_	22	case	_	_
 21	2,185535	2,185535	NUM	NUM	NumType=Card	22	nummod	_	_
 22	UA	UA	PROPN	PROPN	Gender=Masc|Number=Sing	14	nmod	_	_
-23	.	.	PUNCT	PUNCT	_	14	punct	_	_
+23	.	.	PUNCT	PUNCT	_	14	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Can't Find My Way Home , é uma canção de muito sucesso de a banda de rock clássico Blind Faith de 1969 .
 1	Can't	Can't	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	9	nsubj	_	_
 2	Find	Find	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	My	My	PROPN	PROPN	Number=Sing	1	flat:name	_	_
@@ -5256,10 +4850,8 @@
 20	Faith	Faith	PROPN	PROPN	Number=Sing	19	flat:name	_	_
 21	de	de	ADP	ADP	_	22	case	_	_
 22	1969	1969	NUM	NUM	NumType=Card	15	nmod	_	_
-23	.	.	PUNCT	PUNCT	_	9	punct	_	_
+23	.	.	PUNCT	PUNCT	_	9	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Todas as canções foram compostas por Martijn Garritsen (Martin Garrix).
 1	Todas	todo	DET	DET	Gender=Fem|Number=Plur|PronType=Tot	3	det	_	_
 2	as	o	DET	DET	Definite=Def|Gender=Fem|Number=Plur|PronType=Art	1	fixed	_	_
 3	canções	canção	NOUN	NOUN	Gender=Fem|Number=Plur	5	nsubj:pass	_	_
@@ -5268,14 +4860,12 @@
 6	por	por	ADP	ADP	_	7	case	_	_
 7	Martijn	Martijn	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	5	obl:agent	_	_
 8	Garritsen	Garritsen	PROPN	PROPN	Number=Sing	7	flat:name	_	_
-9	(	(	PUNCT	PUNCT	_	10	punct	_	SpaceAfter=No
+9	(	(	PUNCT	PUNCT	_	10	punct	_	_
 10	Martin	Martin	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	7	appos	_	_
-11	Garrix	Garrix	PROPN	PROPN	Number=Sing	10	flat:name	_	SpaceAfter=No
-12	)	)	PUNCT	PUNCT	_	10	punct	_	SpaceAfter=No
+11	Garrix	Garrix	PROPN	PROPN	Number=Sing	10	flat:name	_	_
+12	)	)	PUNCT	PUNCT	_	10	punct	_	_
 13	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Danville é uma cidade localizada em o estado americano de Indiana , em o Condado de Hendricks .
 1	Danville	Danville	PROPN	PROPN	Gender=Masc|Number=Sing	4	nsubj	_	_
 2	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
 3	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
@@ -5293,10 +4883,8 @@
 15	Condado	Condado	PROPN	PROPN	Gender=Masc|Number=Sing	5	obl	_	_
 16	de	de	ADP	ADP	_	17	case	_	_
 17	Hendricks	Hendricks	PROPN	PROPN	Number=Sing	15	nmod	_	_
-18	.	.	PUNCT	PUNCT	_	4	punct	_	_
+18	.	.	PUNCT	PUNCT	_	4	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Plethodon neomexicanus é uma espécie de salamandra de a família Plethodontidae .
 1	Plethodon	Plethodon	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	5	nsubj	_	_
 2	neomexicanus	neomexicanus	PROPN	PROPN	Number=Sing	1	flat:name	_	_
 3	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
@@ -5308,56 +4896,47 @@
 9	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	10	det	_	_
 10	família	família	NOUN	NOUN	Gender=Fem|Number=Sing	7	nmod	_	_
 11	Plethodontidae	Plethodontidae	PROPN	PROPN	Gender=Fem|Number=Sing	10	appos	_	_
-12	.	.	PUNCT	PUNCT	_	5	punct	_	_
+12	.	.	PUNCT	PUNCT	_	5	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Tudo a o Mesmo Tempo
-1	Tudo	tudo	PRON	PRON	Gender=Masc|Number=Sing|PronType=Ind	0	root	_	_
+1	Tudo	tudo	PRON	PRON	Gender=Masc|Number=Sing|PronType=Rel	10	nsubj	_	_
 2	a	a	ADP	ADP	_	4	case	_	_
 3	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	4	det	_	_
 4	Mesmo	mesmo	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	1	nmod	_	_
 5	Tempo	Tempo	PROPN	PROPN	Number=Sing	4	flat:name	_	_
+6	Agora	agora	PROPN	PROPN	Number=Sing	4	flat:name	_	_
+7	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	10	cop	_	_
+8	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	10	det	_	_
+9	sexto	sexto	ADJ	ADJ	Gender=Masc|NumType=Ord|Number=Sing	10	amod	_	_
+10	álbum	álbum	NOUN	NOUN	Gender=Masc|Number=Sing	0	root	_	_
+11	de	de	ADP	ADP	_	12	case	_	_
+12	estúdio	estúdio	NOUN	NOUN	Gender=Masc|Number=Sing	10	nmod	_	_
+13	de	de	ADP	ADP	_	15	case	_	_
+14	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	15	det	_	_
+15	banda	banda	NOUN	NOUN	Gender=Fem|Number=Sing	10	nmod	_	_
+16	brasileira	brasileiro	ADJ	ADJ	Gender=Fem|Number=Sing	15	amod	_	_
+17	de	de	ADP	ADP	_	18	case	_	_
+18	rock	rock	NOUN	NOUN	Gender=Masc|Number=Sing	15	nmod	_	_
+19	Titãs	Titãs	PROPN	PROPN	Gender=Masc|Number=Sing	18	appos	_	_
+20	,	,	PUNCT	PUNCT	_	21	punct	_	_
+21	lançado	lançar	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part	15	acl	_	_
+22	em	em	ADP	ADP	_	23	case	_	_
+23	1991	1991	NUM	NUM	NumType=Card	21	obl	_	_
+24	.	.	PUNCT	PUNCT	_	10	punct	_	SpaceAfter=No
 
-# sent_id = 2
-# text = Agora é o sexto álbum de estúdio de a banda brasileira de rock Titãs , lançado em 1991 .
-1	Agora	agora	ADV	ADV	_	5	advmod	_	_
-2	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
-3	o	o	DET	DET	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	5	det	_	_
-4	sexto	sexto	ADJ	ADJ	Gender=Masc|NumType=Ord|Number=Sing	5	amod	_	_
-5	álbum	álbum	NOUN	NOUN	Gender=Masc|Number=Sing	0	root	_	_
-6	de	de	ADP	ADP	_	7	case	_	_
-7	estúdio	estúdio	NOUN	NOUN	Gender=Masc|Number=Sing	5	nmod	_	_
-8	de	de	ADP	ADP	_	10	case	_	_
-9	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	10	det	_	_
-10	banda	banda	NOUN	NOUN	Gender=Fem|Number=Sing	5	nmod	_	_
-11	brasileira	brasileiro	ADJ	ADJ	Gender=Fem|Number=Sing	10	amod	_	_
-12	de	de	ADP	ADP	_	13	case	_	_
-13	rock	rock	NOUN	NOUN	Gender=Masc|Number=Sing	10	nmod	_	_
-14	Titãs	Titãs	PROPN	PROPN	Gender=Masc|Number=Sing	13	appos	_	_
-15	,	,	PUNCT	PUNCT	_	16	punct	_	_
-16	lançado	lançar	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part	10	acl	_	_
-17	em	em	ADP	ADP	_	18	case	_	_
-18	1991	1991	NUM	NUM	NumType=Card	16	obl	_	_
-19	.	.	PUNCT	PUNCT	_	5	punct	_	_
-
-# sent_id = 1
-# text = Kjær gravou também uma versão inglesa, intitulada "I´m chasing butterflies"
 1	Kjær	Kjær	PROPN	PROPN	Gender=Masc|Number=Sing	2	nsubj	_	_
 2	gravou	gravar	VERB	VERB	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
 3	também	também	ADV	ADV	_	2	advmod	_	_
 4	uma	um	DET	DET	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	5	det	_	_
 5	versão	versão	NOUN	NOUN	Gender=Fem|Number=Sing	2	obj	_	_
-6	inglesa	inglês	ADJ	ADJ	Gender=Fem|Number=Sing	5	amod	_	SpaceAfter=No
+6	inglesa	inglês	ADJ	ADJ	Gender=Fem|Number=Sing	5	amod	_	_
 7	,	,	PUNCT	PUNCT	_	8	punct	_	_
 8	intitulada	intitular	VERB	VERB	Gender=Fem|Number=Sing|VerbForm=Part	5	acl	_	_
-9	"	«	PUNCT	PUNCT	_	10	punct	_	SpaceAfter=No
+9	"	«	PUNCT	PUNCT	_	10	punct	_	_
 10	I´m	i´m	X	X	ExtPos=NOUN|Number=Sing	8	obj	_	_
 11	chasing	chasing	X	X	_	10	flat:foreign	_	_
-12	butterflies	butterflies	X	X	_	10	flat:foreign	_	SpaceAfter=No
+12	butterflies	butterflies	X	X	_	10	flat:foreign	_	_
 13	"	«	PUNCT	PUNCT	_	10	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = " Vi maler byen rød " , canção de a Dinamarca em o Festival Eurovisão de a Canção 1989 .
 1	"	«	PUNCT	PUNCT	_	2	punct	_	_
 2	Vi	ver	VERB	VERB	Mood=Ind|Number=Sing|Person=1|Tense=Past|VerbForm=Fin	0	root	_	_
 3	maler	maler	X	X	_	2	flat:foreign	_	_
@@ -5377,10 +4956,8 @@
 17	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	18	det	_	_
 18	Canção	Canção	PROPN	PROPN	Number=Sing	14	nmod	_	_
 19	1989	1989	NUM	NUM	NumType=Card	14	nmod	_	_
-20	.	.	PUNCT	PUNCT	_	2	punct	_	_
+20	.	.	PUNCT	PUNCT	_	2	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Em a década de 1950 , quando já se tinha a a disposição uma nova instrumentação , especialmente foguetes e sismógrafos , inspiraram a o cientista norte-americano Lloyd Berkner a propor um terceiro Ano Polar .
 1	Em	em	ADP	ADP	_	3	case	_	_
 2	a	o	DET	DET	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	3	det	_	_
 3	década	década	NOUN	NOUN	Gender=Fem|Number=Sing	23	obl	_	_
@@ -5416,10 +4993,8 @@
 33	terceiro	terceiro	ADJ	ADJ	Gender=Masc|NumType=Ord|Number=Sing	34	amod	_	_
 34	Ano	Ano	PROPN	PROPN	ExtPos=PROPN|Gender=Masc|Number=Sing	31	obj	_	_
 35	Polar	Polar	PROPN	PROPN	Number=Sing	34	flat:name	_	_
-36	.	.	PUNCT	PUNCT	_	23	punct	_	_
+36	.	.	PUNCT	PUNCT	_	23	punct	_	SpaceAfter=No
 
-# sent_id = 1
-# text = Lewis é famoso por sua habilidade em composição e foi indicado a três Grammys.
 1	Lewis	Lewis	PROPN	PROPN	Gender=Masc|Number=Sing	3	nsubj	_	_
 2	é	ser	AUX	AUX	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	3	cop	_	_
 3	famoso	famoso	ADJ	ADJ	Gender=Masc|Number=Sing	0	root	_	_
@@ -5433,6 +5008,6 @@
 11	indicado	indicar	VERB	VERB	Gender=Masc|Number=Sing|VerbForm=Part|Voice=Pass	3	conj	_	_
 12	a	a	ADP	ADP	_	14	case	_	_
 13	três	três	NUM	NUM	NumType=Card	14	nummod	_	_
-14	Grammys	Grammys	PROPN	PROPN	Gender=Masc|Number=Plur	11	obj	_	SpaceAfter=No
+14	Grammys	Grammys	PROPN	PROPN	Gender=Masc|Number=Plur	11	obj	_	_
 15	.	.	PUNCT	PUNCT	_	3	punct	_	SpaceAfter=No
 
