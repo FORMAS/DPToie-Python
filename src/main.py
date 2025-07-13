@@ -172,7 +172,7 @@ def main(input_file: str, output_type: str, conll_format: bool = False, coordina
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(description='Extract clauses from a text file.')
+    parser = argparse.ArgumentParser(description='Extract triples from sentences in a file using SpaCy and Stanza.')
 
     parser.add_argument('-input', metavar='input', type=str, help='path to the input file', default='./inputs/teste.txt')
     parser.add_argument('-output-type', metavar='output_type', type=str, choices=['json', 'csv'], help='output file type', default='json')
