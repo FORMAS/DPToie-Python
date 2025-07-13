@@ -1,5 +1,7 @@
 import logging
 
+from spacy import Language
+
 logging.basicConfig(level=logging.WARNING)
 
 import os
@@ -16,7 +18,7 @@ from src.extraction import Extractor, ExtractorConfig
 
 logging.getLogger('stanza').setLevel(logging.WARNING)
 
-def main(input_file: str, output_file: str, conll_format: bool = False, coordinating_conjunctions: bool = True, subordinating_conjunctions: bool = True, hidden_subjects: bool = True, appositive: bool = True, transitive: bool = True, debug: bool = False):
+def main(input_file: str, output_type: str, conll_format: bool = False, coordinating_conjunctions: bool = True, subordinating_conjunctions: bool = True, hidden_subjects: bool = True, appositive: bool = True, transitive: bool = True, debug: bool = False):
     extractor = Extractor(ExtractorConfig(
         coordinating_conjunctions=coordinating_conjunctions,
         subordinating_conjunctions=subordinating_conjunctions,
@@ -63,41 +65,62 @@ def main(input_file: str, output_file: str, conll_format: bool = False, coordina
 
         input_file = connl_file
 
-    extractions = {
-        'config': dict(extractor.config),
-        'sentences': []
-    }
+    output_file = f'./outputs/output.{output_type}'
+    if output_type == 'csv':
+        extract_to_csv(nlp=nlp, input_file=input_file, output_file=output_file)
+    elif output_type == 'json':
+        extrect_to_json(nlp=nlp, input_file=input_file, output_file=output_file)
 
-    for i, sentence in enumerate(read_conll_sentences(input_file), 1):
-        doc = ConllParser(nlp).parse_conll_text_as_spacy(sentence)
-        sentence = {
-            'sentence': doc.text.strip(),
-            'extractions': []
-        }
-        for extraction in doc._.extractions:
-            sentence['extractions'].append(dict(extraction))
-            if debug:
-                sentence['extractions'].append({
-                    'debug': {
-                        'subject': {
-                            'token': extraction.subject.core.text.strip(),
-                            'pieces': [token.text.strip() for token in extraction.subject.pieces],
-                        },
-                        'relation': {
-                            'token': extraction.relation.core.text.strip(),
-                            'pieces': [token.text.strip() for token in extraction.relation.pieces],
-                        },
-                        'complement': {
-                            'token': extraction.complement.core.text.strip() if extraction.complement.core else None,
-                            'pieces': [token.text.strip() for token in extraction.complement.pieces],
-                        }
-                    }
-                })
-        extractions['sentences'].append(sentence)
+def extrect_to_json(nlp: Language, input_file: str, output_file: str):
+    # meta_output_file = output_file.replace('.json', '.meta.json')
+    # with open(meta_output_file, 'w', encoding='utf-8') as f:
+    #     config_data = {'config': dict(extractor.config)}
+    #     json.dump(config_data, f, indent=2, ensure_ascii=False)
 
     with open(output_file, 'w', encoding='utf-8') as f:
-        f.write(json.dumps(extractions, indent=2, ensure_ascii=False))
 
+        sentence_iterator = read_conll_sentences(input_file)
+
+        print(f"Processando sentenças de '{input_file}' e salvando em '{output_file}'...")
+
+        for conll_sentence_block in tqdm(sentence_iterator, desc="Extraindo informações"):
+            doc = ConllParser(nlp).parse_conll_text_as_spacy(conll_sentence_block)
+
+            sentence_data = {
+                'sentence': doc.text.strip(),
+                'extractions': []
+            }
+
+            for extraction in doc._.extractions:
+                extraction_dict = dict(extraction)
+                sentence_data['extractions'].append(extraction_dict)
+            f.write(json.dumps(sentence_data, ensure_ascii=False) + '\n')
+
+    print("Processo concluído com sucesso!")
+
+def extract_to_csv(nlp: Language, input_file: str, output_file: str):
+    import csv
+
+    with open(output_file, 'w', newline='', encoding='utf-8') as csvfile:
+        fieldnames = ['sentence', 'arg1', 'rel', 'arg2']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+
+        sentence_iterator = read_conll_sentences(input_file)
+
+        print(f"Processando sentenças de '{input_file}' e salvando em '{output_file}'...")
+
+        for conll_sentence_block in tqdm(sentence_iterator, desc="Extraindo informações"):
+            doc = ConllParser(nlp).parse_conll_text_as_spacy(conll_sentence_block)
+
+            for extraction in doc._.extractions:
+                row = {
+                    'sentence': doc.text.strip(),
+                }
+                row.update(dict(extraction))
+                writer.writerow(row)
+
+    print("Processo concluído com sucesso!")
 
 def read_conll_sentences(file_path: str) -> Generator[str, Any, None]:
     """
@@ -143,8 +166,8 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Extract clauses from a text file.')
 
-    parser.add_argument('-path', metavar='path', type=str, help='path to the text file', default='./inputs/teste.txt')
-    parser.add_argument('-out', metavar='out', type=str, help='path to the output file', default='./outputs/extractions.json')
+    parser.add_argument('-input', metavar='input', type=str, help='path to the input file', default='./inputs/teste.txt')
+    parser.add_argument('-output-type', metavar='output_type', type=str, choices=['json', 'csv'], help='output file type', default='json')
     parser.add_argument('-conll', action='store_true', help='input file is in CONLL format')
     parser.add_argument('-cc', '--coordinating_conjunctions', dest='coordinating_conjunctions', action='store_true', help='enable coordinating conjunctions extraction')
     parser.add_argument('-sc', '--subordinating_conjunctions', dest='subordinating_conjunctions', action='store_true', help='enable subordinating conjunctions extraction')
@@ -155,4 +178,14 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    main(input_file=args.path, output_file=args.out, conll_format=args.conll, coordinating_conjunctions=args.coordinating_conjunctions, subordinating_conjunctions=args.subordinating_conjunctions, hidden_subjects=args.hidden_subjects, appositive=args.appositive, transitive=args.transitive, debug=args.debug)
+    main(
+        input_file=args.input,
+        output_type=args.output_type,
+        conll_format=args.conll,
+        coordinating_conjunctions=args.coordinating_conjunctions,
+        subordinating_conjunctions=args.subordinating_conjunctions,
+        hidden_subjects=args.hidden_subjects,
+        appositive=args.appositive,
+        transitive=args.transitive,
+        debug=args.debug
+    )
