@@ -1,6 +1,8 @@
 import logging
 
+import spacy
 from spacy import Language
+from stanza import DownloadMethod
 
 logging.basicConfig(level=logging.WARNING)
 
@@ -16,85 +18,82 @@ from typing import Any, Generator
 from spacy_conll.parser import ConllParser
 from src.extraction import Extractor, ExtractorConfig
 
-logging.getLogger('stanza').setLevel(logging.WARNING)
-
-def main(input_file: str, output_type: str, conll_format: bool = False, coordinating_conjunctions: bool = True, subordinating_conjunctions: bool = True, hidden_subjects: bool = True, appositive: bool = True, transitive: bool = True, debug: bool = False):
-    extractor = Extractor(ExtractorConfig(
-        coordinating_conjunctions=coordinating_conjunctions,
-        subordinating_conjunctions=subordinating_conjunctions,
-        hidden_subjects=hidden_subjects,
-        appositive=appositive,
-        transitive=transitive,
-        debug=debug,
-    ))
-
-    Doc.set_extension("extractions", getter=extractor.get_extractions_from_doc)
-
-    tokenizer = stanza.Pipeline(lang='pt', processors='tokenize, mwt', use_gpu=False)
-    nlp = spacy_stanza.load_pipeline("pt", tokenize_pretokenized=True, use_gpu=False)
+def generate_conll_file_from_sentences_file(input_file: str) -> str:
+    tokenizer = stanza.Pipeline(lang='pt', processors='tokenize, mwt', use_gpu=False,
+                                download_method=DownloadMethod.REUSE_RESOURCES)
+    nlp = spacy_stanza.load_pipeline("pt", tokenize_pretokenized=True, use_gpu=False, download_method=None)
     nlp.add_pipe("conll_formatter", last=True)
+    connl_file = './outputs/input.conll'
 
-    if not conll_format:
-        connl_file = './outputs/input.conll'
-        with open(connl_file, 'w') as f:
-            f.write('')
+    with open(connl_file, 'w') as f:
+        f.write('')
 
-        # 2. Pega o tamanho total do arquivo de entrada em bytes
-        file_size = os.path.getsize(input_file)
+    # 2. Pega o tamanho total do arquivo de entrada em bytes
+    file_size = os.path.getsize(input_file)
 
-        with open(input_file, 'r', encoding='utf-8') as f:
-            with tqdm(total=file_size,
-                      desc="Gerando árvores de dependência",
-                      unit='B',  # Define a unidade como Bytes
-                      unit_scale=True,  # Mostra KB, MB, GB automaticamente
-                      unit_divisor=1024) as pbar:
-                for line in f:
-                    if line.strip():
-                        sentence = line.strip()
-                        # Process the sentence with Stanza tokenizer
-                        doc = tokenizer(sentence)
-                        # Convert Stanza Doc to SpaCy Doc
-                        spacy_doc = nlp(' '.join([word.text for sent in doc.sentences for word in sent.words]))
+    with open(input_file, 'r', encoding='utf-8') as f:
+        with tqdm(total=file_size,
+                  desc="Gerando árvores de dependência",
+                  unit='B',  # Define a unidade como Bytes
+                  unit_scale=True,  # Mostra KB, MB, GB automaticamente
+                  unit_divisor=1024) as pbar:
+            for line in f:
+                if line.strip():
+                    sentence = line.strip()
+                    # Process the sentence with Stanza tokenizer
+                    doc = tokenizer(sentence)
+                    # Convert Stanza Doc to SpaCy Doc
+                    spacy_doc = nlp(' '.join([word.text for sent in doc.sentences for word in sent.words]))
+                    with open(connl_file, 'a', encoding='utf-8') as fout:
+                        fout.write(spacy_doc._.conll_str)
+                        fout.write('\n')
 
-                        with open(connl_file, 'a', encoding='utf-8') as fout:
-                            fout.write(spacy_doc._.conll_str)
-                            fout.write('\n')
+                # Atualiza a barra com o número de bytes da linha lida
+                pbar.update(len(line.encode('utf-8')))
 
-                    #Atualiza a barra com o número de bytes da linha lida
-                    pbar.update(len(line.encode('utf-8')))
+    return connl_file
 
-        input_file = connl_file
-
-    output_file = f'./outputs/output.{output_type}'
-    if output_type == 'csv':
-        extract_to_csv(nlp=nlp, input_file=input_file, output_file=output_file)
-    elif output_type == 'json':
-        extrect_to_json(nlp=nlp, input_file=input_file, output_file=output_file)
-
-def extrect_to_json(nlp: Language, input_file: str, output_file: str):
-    # meta_output_file = output_file.replace('.json', '.meta.json')
-    # with open(meta_output_file, 'w', encoding='utf-8') as f:
-    #     config_data = {'config': dict(extractor.config)}
-    #     json.dump(config_data, f, indent=2, ensure_ascii=False)
+def extract_to_json(nlp: Language, input_file: str, output_file: str):
+    sentence_iterator = read_conll_sentences(input_file)
+    print(f"Processando sentenças de '{input_file}' e salvando em '{output_file}'...")
 
     with open(output_file, 'w', encoding='utf-8') as f:
+        f.write('[\n')
 
-        sentence_iterator = read_conll_sentences(input_file)
-
-        print(f"Processando sentenças de '{input_file}' e salvando em '{output_file}'...")
-
+        is_first_item = True
         for conll_sentence_block in tqdm(sentence_iterator, desc="Extraindo informações"):
-            doc = ConllParser(nlp).parse_conll_text_as_spacy(conll_sentence_block)
 
-            sentence_data = {
-                'sentence': doc.text.strip(),
-                'extractions': []
-            }
+            conll_parser = ConllParser(nlp)
+            doc = conll_parser.parse_conll_text_as_spacy(conll_sentence_block)
 
-            for extraction in doc._.extractions:
-                extraction_dict = dict(extraction)
-                sentence_data['extractions'].append(extraction_dict)
-            f.write(json.dumps(sentence_data, ensure_ascii=False) + '\n')
+            extractions = doc._.extractions
+
+            # Apenas processa e escreve a sentença se ela tiver extrações
+            if extractions:
+                sentence_data = {
+                    'sentence': doc.text.strip(),
+                    'extractions': []
+                }
+
+                for extraction in extractions:
+                    # Converte cada objeto de extração para um dicionário
+                    extraction_dict = dict(extraction)
+                    sentence_data['extractions'].append(extraction_dict)
+
+                # Adiciona uma vírgula antes de cada item, exceto o primeiro
+                if not is_first_item:
+                    f.write(',\n')
+
+                # Converte o dicionário para uma string JSON e escreve no ficheiro
+                # indent=2 para manter a formatação legível
+                json_string = json.dumps(sentence_data, ensure_ascii=False, indent=2)
+                f.write(json_string)
+
+                # Atualiza a flag após o primeiro item ser escrito
+                is_first_item = False
+
+        # Fecha o array JSON
+        f.write('\n]\n')
 
     print("Processo concluído com sucesso!")
 
@@ -111,7 +110,8 @@ def extract_to_csv(nlp: Language, input_file: str, output_file: str):
         print(f"Processando sentenças de '{input_file}' e salvando em '{output_file}'...")
 
         for conll_sentence_block in tqdm(sentence_iterator, desc="Extraindo informações"):
-            doc = ConllParser(nlp).parse_conll_text_as_spacy(conll_sentence_block)
+            conll_parser = ConllParser(nlp)
+            doc = conll_parser.parse_conll_text_as_spacy(conll_sentence_block)
 
             for extraction in doc._.extractions:
                 row = {
@@ -161,6 +161,33 @@ def extract_facts_from_doc(doc: Doc) -> dict:
     output['facts'].append(sentence)
 
     return output
+
+def main(input_file: str, output_type: str, conll_format: bool = False, coordinating_conjunctions: bool = True, subordinating_conjunctions: bool = True, hidden_subjects: bool = True, appositive: bool = True, transitive: bool = True, debug: bool = False):
+    extractor = Extractor(ExtractorConfig(
+        coordinating_conjunctions=coordinating_conjunctions,
+        subordinating_conjunctions=subordinating_conjunctions,
+        hidden_subjects=hidden_subjects,
+        appositive=appositive,
+        transitive=transitive,
+        debug=debug,
+    ))
+
+    Doc.set_extension("extractions", getter=extractor.get_extractions_from_doc)
+
+    if not conll_format:
+        conll_file = generate_conll_file_from_sentences_file(input_file=input_file)
+    else:
+        conll_file = input_file
+
+    output_file = f'./outputs/output.{output_type}'
+
+    nlp = spacy.blank("pt")
+    nlp.add_pipe("conll_formatter", last=True)
+
+    if output_type == 'csv':
+        extract_to_csv(nlp=nlp, input_file=conll_file, output_file=output_file)
+    elif output_type == 'json':
+        extract_to_json(nlp=nlp, input_file=conll_file, output_file=output_file)
 
 if __name__ == "__main__":
 
