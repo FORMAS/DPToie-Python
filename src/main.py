@@ -1,19 +1,18 @@
 import logging
 
-import spacy
-from spacy import Language
-from stanza import DownloadMethod
-
 logging.basicConfig(level=logging.WARNING)
 
 import os
 import json
+import spacy
 import stanza
 import argparse
 import spacy_stanza
 
 from tqdm import tqdm
 from spacy.tokens import Doc
+from spacy import Language
+from stanza import DownloadMethod
 from typing import Any, Generator
 from spacy_conll.parser import ConllParser
 from src.extraction import Extractor, ExtractorConfig
@@ -143,24 +142,6 @@ def read_conll_sentences(file_path: str) -> Generator[str, Any, None]:
         # Retorna a última sentença se o arquivo não terminar com linha vazia
         if current_sentence:
             yield current_sentence
-
-
-def extract_facts_from_doc(doc: Doc) -> dict:
-    output = {
-        'facts': []
-    }
-
-    sentence = {
-        'text': doc.text,
-        'facts': []
-    }
-    for extraction in doc._.extractions:
-        sentence['facts'].append({
-            'subject': ' '.join([token.text for token in extraction.subject]),
-        })
-    output['facts'].append(sentence)
-
-    return output
 
 def main(input_file: str, output_type: str, conll_format: bool = False, coordinating_conjunctions: bool = True, subordinating_conjunctions: bool = True, hidden_subjects: bool = True, appositive: bool = True, transitive: bool = True, debug: bool = False):
     extractor = Extractor(ExtractorConfig(
