@@ -67,29 +67,27 @@ def extract_to_json(nlp: Language, input_file: str, output_file: str):
 
             extractions = doc._.extractions
 
-            # Apenas processa e escreve a sentença se ela tiver extrações
-            if extractions:
-                sentence_data = {
-                    'sentence': doc.text.strip(),
-                    'extractions': []
-                }
+            sentence_data = {
+                'sentence': doc.text.strip(),
+                'extractions': []
+            }
 
-                for extraction in extractions:
-                    # Converte cada objeto de extração para um dicionário
-                    extraction_dict = dict(extraction)
-                    sentence_data['extractions'].append(extraction_dict)
+            for extraction in extractions:
+                # Converte cada objeto de extração para um dicionário
+                extraction_dict = dict(extraction)
+                sentence_data['extractions'].append(extraction_dict)
 
-                # Adiciona uma vírgula antes de cada item, exceto o primeiro
-                if not is_first_item:
-                    f.write(',\n')
+            # Adiciona uma vírgula antes de cada item, exceto o primeiro
+            if not is_first_item:
+                f.write(',\n')
 
-                # Converte o dicionário para uma string JSON e escreve no ficheiro
-                # indent=2 para manter a formatação legível
-                json_string = json.dumps(sentence_data, ensure_ascii=False, indent=2)
-                f.write(json_string)
+            # Converte o dicionário para uma string JSON e escreve no ficheiro
+            # indent=2 para manter a formatação legível
+            json_string = json.dumps(sentence_data, ensure_ascii=False, indent=2)
+            f.write(json_string)
 
-                # Atualiza a flag após o primeiro item ser escrito
-                is_first_item = False
+            # Atualiza a flag após o primeiro item ser escrito
+            is_first_item = False
 
         # Fecha o array JSON
         f.write('\n]\n')
@@ -149,7 +147,7 @@ def main(input_file: str, output_type: str, conll_format: bool = False, coordina
         subordinating_conjunctions=subordinating_conjunctions,
         hidden_subjects=hidden_subjects,
         appositive=appositive,
-        transitive=transitive,
+        appositive_transitivity=transitive,
         debug=debug,
     ))
 
