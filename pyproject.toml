@@ -7,10 +7,13 @@ readme = "README.md"
 package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.12"
-spacy_stanza = "1.0.4"
-torch = {version = "2.4.1+cpu", source = "pytorch_cpu"}
+python = ">=3.12,<3.14"
+spacy_stanza = { git = "https://github.com/andrewalkermo/spacy-stanza.git",  tag = "v1.0.5" }
+torch = {version = "2.7.1+cpu", source = "pytorch_cpu"}
 spacy-conll = "^4.0.1"
+spacy = "3.8.7"
+stanza = "1.10.1"
+tqdm = "^4.67.1"
 
 [[tool.poetry.source]]
 name = "pytorch_cpu"

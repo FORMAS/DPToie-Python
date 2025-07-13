@@ -1,16 +1,20 @@
-import argparse
-import json
 import logging
-import spacy_stanza
-from typing import Any, Generator
 
+logging.basicConfig(level=logging.WARNING)
+
+import os
+import json
 import stanza
-from spacy_conll import init_parser
-from spacy_conll.parser import ConllParser
+import argparse
+import spacy_stanza
+
+from tqdm import tqdm
 from spacy.tokens import Doc
+from typing import Any, Generator
+from spacy_conll.parser import ConllParser
 from src.extraction import Extractor, ExtractorConfig
 
-logging.basicConfig(level=logging.INFO)
+logging.getLogger('stanza').setLevel(logging.WARNING)
 
 def main(input_file: str, output_file: str, conll_format: bool = False, coordinating_conjunctions: bool = True, subordinating_conjunctions: bool = True, hidden_subjects: bool = True, appositive: bool = True, transitive: bool = True, debug: bool = False):
     extractor = Extractor(ExtractorConfig(
@@ -24,28 +28,39 @@ def main(input_file: str, output_file: str, conll_format: bool = False, coordina
 
     Doc.set_extension("extractions", getter=extractor.get_extractions_from_doc)
 
-    tokenizer = stanza.Pipeline(lang='pt', processors='tokenize, mwt')
-    nlp = spacy_stanza.load_pipeline("pt", tokenize_pretokenized=True)
+    tokenizer = stanza.Pipeline(lang='pt', processors='tokenize, mwt', use_gpu=False)
+    nlp = spacy_stanza.load_pipeline("pt", tokenize_pretokenized=True, use_gpu=False)
     nlp.add_pipe("conll_formatter", last=True)
 
     if not conll_format:
         connl_file = './outputs/input.conll'
-        # clean the file if it exists
         with open(connl_file, 'w') as f:
             f.write('')
 
-        with open(input_file, 'r', encoding='utf-8') as f:
-            for line in f:
-                if line.strip():
-                    sentence = line.strip()
-                    # Process the sentence with Stanza tokenizer
-                    doc = tokenizer(sentence)
-                    # Convert Stanza Doc to SpaCy Doc
-                    spacy_doc = nlp(' '.join([word.text for sent in doc.sentences for word in sent.words]))
+        # 2. Pega o tamanho total do arquivo de entrada em bytes
+        file_size = os.path.getsize(input_file)
 
-                    with open(connl_file, 'a', encoding='utf-8') as fout:
-                        fout.write(spacy_doc._.conll_str)
-                        fout.write('\n')  # Adiciona uma linha em branco entre sentenças
+        with open(input_file, 'r', encoding='utf-8') as f:
+            with tqdm(total=file_size,
+                      desc="Gerando árvores de dependência",
+                      unit='B',  # Define a unidade como Bytes
+                      unit_scale=True,  # Mostra KB, MB, GB automaticamente
+                      unit_divisor=1024) as pbar:
+                for line in f:
+                    if line.strip():
+                        sentence = line.strip()
+                        # Process the sentence with Stanza tokenizer
+                        doc = tokenizer(sentence)
+                        # Convert Stanza Doc to SpaCy Doc
+                        spacy_doc = nlp(' '.join([word.text for sent in doc.sentences for word in sent.words]))
+
+                        with open(connl_file, 'a', encoding='utf-8') as fout:
+                            fout.write(spacy_doc._.conll_str)
+                            fout.write('\n')
+
+                    #Atualiza a barra com o número de bytes da linha lida
+                    pbar.update(len(line.encode('utf-8')))
+
         input_file = connl_file
 
     extractions = {
