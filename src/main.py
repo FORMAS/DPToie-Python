@@ -15,7 +15,8 @@ from spacy import Language
 from stanza import DownloadMethod
 from typing import Any, Generator
 from spacy_conll.parser import ConllParser
-from src.extraction import Extractor, ExtractorConfig
+from src.extraction import Extractor, ExtractorConfig, Extraction
+
 
 def generate_conll_file_from_sentences_file(input_file: str) -> str:
     tokenizer = stanza.Pipeline(lang='pt', processors='tokenize, mwt', use_gpu=False,
@@ -84,6 +85,8 @@ def extract_to_json(nlp: Language, input_file: str, output_file: str):
             # Converte o dicionário para uma string JSON e escreve no ficheiro
             # indent=2 para manter a formatação legível
             json_string = json.dumps(sentence_data, ensure_ascii=False, indent=2)
+            # adiciona identação de 2 espaços
+            json_string = '  ' + json_string.replace('\n', '\n  ')
             f.write(json_string)
 
             # Atualiza a flag após o primeiro item ser escrito
@@ -98,7 +101,7 @@ def extract_to_csv(nlp: Language, input_file: str, output_file: str):
     import csv
 
     with open(output_file, 'w', newline='', encoding='utf-8') as csvfile:
-        fieldnames = ['sentence', 'arg1', 'rel', 'arg2']
+        fieldnames = ['id', 'sentence', 'arg1', 'rel', 'arg2']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
 
@@ -109,13 +112,30 @@ def extract_to_csv(nlp: Language, input_file: str, output_file: str):
         for conll_sentence_block in tqdm(sentence_iterator, desc="Extraindo informações"):
             conll_parser = ConllParser(nlp)
             doc = conll_parser.parse_conll_text_as_spacy(conll_sentence_block)
+            extractions: list[Extraction] = doc._.extractions
 
-            for extraction in doc._.extractions:
+            for indice, extraction in enumerate(extractions):
+                indice_output = indice + 1
+                extraction_dict = dict(extraction)
                 row = {
+                    'id': str(indice_output) + '.0',
                     'sentence': doc.text.strip(),
+                    'arg1': extraction_dict['arg1'],
+                    'rel': extraction_dict['rel'],
+                    'arg2': extraction_dict['arg2'],
                 }
-                row.update(dict(extraction))
                 writer.writerow(row)
+
+                for indice_sub, sub_extraction in enumerate(extraction.sub_extractions):
+                    sub_extraction_dict = dict(sub_extraction)
+                    sub_row = {
+                        'id': str(indice_output) + '.' + str(indice_sub + 1),
+                        'sentence': doc.text.strip(),
+                        'arg1': sub_extraction_dict['arg1'],
+                        'rel': sub_extraction_dict['rel'],
+                        'arg2': sub_extraction_dict['arg2'],
+                    }
+                    writer.writerow(sub_row)
 
     print("Processo concluído com sucesso!")
 
