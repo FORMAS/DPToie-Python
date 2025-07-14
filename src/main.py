@@ -12,16 +12,14 @@ import spacy_stanza
 from tqdm import tqdm
 from spacy.tokens import Doc
 from spacy import Language
-from stanza import DownloadMethod
 from typing import Any, Generator
 from spacy_conll.parser import ConllParser
 from src.extraction import Extractor, ExtractorConfig, Extraction
 
 
 def generate_conll_file_from_sentences_file(input_file: str) -> str:
-    tokenizer = stanza.Pipeline(lang='pt', processors='tokenize, mwt', use_gpu=False,
-                                download_method=DownloadMethod.REUSE_RESOURCES)
-    nlp = spacy_stanza.load_pipeline("pt", tokenize_pretokenized=True, use_gpu=False, download_method=None)
+    tokenizer = stanza.Pipeline(lang='pt', processors='tokenize, mwt', use_gpu=False)
+    nlp = spacy_stanza.load_pipeline("pt", tokenize_pretokenized=True, use_gpu=False)
     nlp.add_pipe("conll_formatter", last=True)
     connl_file = './outputs/input.conll'
 
@@ -198,6 +196,7 @@ if __name__ == "__main__":
     parser.add_argument('-cc', '--coordinating_conjunctions', dest='coordinating_conjunctions', action='store_true', help='enable coordinating conjunctions extraction')
     parser.add_argument('-sc', '--subordinating_conjunctions', dest='subordinating_conjunctions', action='store_true', help='enable subordinating conjunctions extraction')
     parser.add_argument('-hs', '--hidden_subjects', dest='hidden_subjects', action='store_true', help='enable hidden subjects extraction')
+    parser.add_argument('-a', '--appositive', dest='appositive', action='store_true', help='enable appositive extraction')
     parser.add_argument('-a', '--appositive', dest='appositive', action='store_true', help='enable appositive extraction')
     parser.add_argument('-t', '--transitive', dest='transitive', action='store_true', help='enable transitive extraction(only for appositive)')
     parser.add_argument('-debug', action='store_true', help='enable debug mode')
