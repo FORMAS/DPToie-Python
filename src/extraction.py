@@ -1,3 +1,4 @@
+import logging
 from collections import deque
 from typing import List, Optional, Set, Tuple, Any, Generator
 from spacy.tokens import Span, Doc, Token
@@ -22,7 +23,8 @@ class TripleElement:
         self.core: Optional[Token] = token
         self.pieces: List[Token] = []
         self._text: Optional[str] = text
-        self.is_from_appositive = False  # Flag para identificar elementos de aposto
+        self.is_sinthetic = True if text else False
+        self.is_from_appositive = False
 
     def __str__(self):
         """Retorna a representação textual do elemento, limpando pontuações e conectores nas bordas."""
@@ -45,12 +47,17 @@ class TripleElement:
         if not tokens:
             return []
 
+        _PARANTHESES = {'[', ']', '(', ')', '{', '}'}
+        # remove parenteses e colchetes do início e do fim, apenas se os mesmos forem o primeiro ou último token
+        if (tokens[0].text, tokens[-1].text) in {('[', ']'), ('(', ')'), ('{', '}')}:
+            tokens = tokens[1:-1]
+
         # Remove conectores e pontuações do início
-        while tokens and (tokens[0].pos_ == 'PUNCT' or tokens[0].dep_ == 'cc'):
+        while tokens and ((tokens[0].pos_ == 'PUNCT' and tokens[0].text not in _PARANTHESES) or tokens[0].dep_ == 'cc'):
             tokens.pop(0)
 
-        # Remove pontuações do final
-        while tokens and tokens[-1].pos_ == 'PUNCT':
+        # Remove pontuações do final, mantendo apenas as que são necessárias
+        while tokens and (tokens[-1].pos_ == 'PUNCT' and tokens[-1].text not in _PARANTHESES):
             tokens.pop(-1)
 
         return tokens
@@ -96,40 +103,51 @@ class Extraction:
         self.subject = subject
         self.relation = relation
         self.complement = complement
+        self.sub_extractions: List['Extraction'] = []  # Lista para extrações aninhadas (ccomp/advcl)
 
-    def __iter__(self) -> Generator[tuple[str, str], Any, None]:
-        """Permite a conversão da extração para um dicionário, facilitando a serialização."""
+    def __iter__(self) -> Generator[tuple[str, Any], Any, None]:
+        """
+        Permite a conversão da extração para um dicionário, facilitando a serialização.
+        """
         yield 'arg1', str(self.subject) if self.subject and not self.subject.is_empty() else ''
         yield 'rel', str(self.relation) if self.relation and not self.relation.is_empty() else ''
         yield 'arg2', str(self.complement) if self.complement and not self.complement.is_empty() else ''
+        if self.sub_extractions:
+            yield 'sub_extractions', [dict(extr) for extr in self.sub_extractions]
 
     def is_valid(self) -> bool:
         """
-        Verifica se a extração é válida. Uma extração válida deve ter:
-        1. Sujeito e Relação não vazios.
-        2. A Relação deve conter um verbo.
-        3. O Sujeito não pode ser apenas um pronome relativo ou conjunção.
+        Verifica se a extração é válida.
         """
+        # Uma extração principal precisa de sujeito (ou sujeito oculto permitido) e relação.
         if not self.subject or self.subject.is_empty() or not self.relation or self.relation.is_empty():
+            # Permite extrações que são apenas um container para sub-extrações válidas.
+            if not self.sub_extractions:
+                return False
+
+        # A relação deve conter um verbo.
+        if self.relation and not self.relation.is_sinthetic and not any(t.pos_ in ['VERB', 'AUX'] for t in self.relation.get_all_tokens()):
             return False
 
-        # (Filtro de Coerência): Garante que a relação contenha um verbo.
-        if not any(t.pos_ in ['VERB', 'AUX'] for t in self.relation.get_all_tokens()):
-            return False
-
-        # (Filtro de Lixo Sintático): Evita extrações onde o sujeito é apenas um pronome relativo.
-        subject_tokens = self.subject.get_all_tokens()
-        if len(subject_tokens) == 1 and subject_tokens[0].pos_ in ['PRON', 'SCONJ'] and 'Rel' in subject_tokens[0].morph.get("PronType", []):
-            return False
+        # O sujeito não pode ser apenas um pronome relativo.
+        if self.subject and not self.subject.is_empty():
+            subject_tokens = self.subject.get_all_tokens()
+            if len(subject_tokens) == 1 and subject_tokens[0].pos_ in ['PRON', 'SCONJ'] and 'Rel' in subject_tokens[
+                0].morph.get("PronType", []):
+                return False
 
         return True
 
-    def to_tuple(self) -> Tuple[str, str, str]:
-        """Retorna a extração como uma tupla de strings, útil para comparação e remoção de duplicatas."""
+    def to_tuple(self) -> Tuple:
+        """
+        Retorna a extração como uma tupla de strings, útil para comparação e remoção de duplicatas.
+        """
+        sub_tuples = tuple(extr.to_tuple() for extr in self.sub_extractions)
         return (
             str(self.subject) if self.subject else '',
             str(self.relation) if self.relation else '',
-            str(self.complement) if self.complement else ''
+            str(self.complement) if self.complement else '',
+            sub_tuples
         )
 
 
@@ -169,13 +187,16 @@ class Extractor:
     _RELATION_ADVERBS = {"não", "ja", "ainda", "também", "nunca"}
 
     # Dependências que tipicamente iniciam um complemento
-    _COMPLEMENT_HEAD_DEPS = {"obj", "iobj", "xcomp", "ccomp", "advcl", "obl"}
+    _COMPLEMENT_HEAD_DEPS = {"obj", "iobj", "xcomp", "obl", "advmod"}
+
+    # Dependências que iniciam orações subordinadas
+    _SUBORDINATE_CLAUSE_DEPS = {"advcl", "ccomp"}
 
     # Dependências que NUNCA devem ser parte de um complemento (pois têm suas próprias funções)
     _COMPLEMENT_IGNORE_DEPS = {'nsubj', 'nsubj:pass', 'csubj', 'csubj:pass'}
 
     # A busca por complemento deve PARAR ao encontrá-las para evitar que o arg2 se estenda demais.
-    _COMPLEMENT_BOUNDARY_DEPS = {"advcl", "ccomp", "mark"}
+    _COMPLEMENT_BOUNDARY_DEPS = {"mark"}
 
     # Dependências que identificam um sujeito
     _SUBJECT_DEPS = {"nsubj", "nsubj:pass", "csubj", "csubj:pass"}
@@ -199,7 +220,7 @@ class Extractor:
         O processo principal itera sobre os tokens, identifica predicados (verbos),
         e a partir deles, busca por sujeitos, relações e complementos.
         """
-        final_extractions = []
+        final_extractions: List[Extraction] = []
         processed_tokens = set()
 
         # 1. Extração baseada em predicados verbais
@@ -207,17 +228,21 @@ class Extractor:
             if token.i in processed_tokens:
                 continue
 
+            # Isso evita extrações duplicadas
+            if token.dep_.startswith('csubj'):
+                continue
+
             is_verb_head = token.pos_ in ['VERB', 'AUX']
 
             # Ignora verbos que estão em orações relativas, pois eles funcionam como
             # modificadores e a lógica atual não consegue resolver seu sujeito corretamente.
-            is_in_relative_clause = token.dep_ in ['acl', 'acl:relcl']
+            is_in_relative_conjunction = token.dep_ in ['acl', 'acl:relcl']
 
             is_nominal_predicate_root = token.dep_ == 'ROOT' and token.pos_ in ['ADJ', 'NOUN'] and any(
                 c.dep_ == 'cop' for c in token.children)
 
             # A condição principal agora impede o início da extração para verbos em orações relativas.
-            if (is_verb_head and not is_in_relative_clause) or is_nominal_predicate_root:
+            if (is_verb_head and not is_in_relative_conjunction) or is_nominal_predicate_root:
                 start_node = token
 
                 if is_nominal_predicate_root:
@@ -225,28 +250,32 @@ class Extractor:
                     if not copula_candidates: continue
                     start_node = copula_candidates[0]
 
-                subject_element = self.__find_subject(start_node)
+                base_extractions = self.__process_conjunction(start_node)
+                logging.debug(f"Extrações encontradas: {[extr.to_tuple() for extr in base_extractions]}")
+                final_extractions.extend(base_extractions)
 
-                if subject_element is None and not self.config.hidden_subjects:
-                    continue
-
-                if subject_element is None and self.config.hidden_subjects:
-                    subject_element = TripleElement()  # Sujeito oculto
-
-                # Extrai a relação e os complementos associados
-                for rel_extr, effective_verb in self.__extract_relation_and_conjunctions(subject_element, start_node):
-                    final_extractions.extend(self.__extract_complements(rel_extr, effective_verb))
-                    if rel_extr.relation and rel_extr.relation.core:
-                        for t in rel_extr.relation.get_all_tokens():
-                            processed_tokens.add(t.i)
+                for extr in base_extractions:
+                    # Adiciona todos os tokens da extração e sub-extrações para evitar reprocessamento
+                    q = deque([extr])
+                    while q:
+                        current_extr = q.popleft()
+                        for el in [current_extr.subject, current_extr.relation, current_extr.complement]:
+                            if el:
+                                for t in el.get_all_tokens():
+                                    processed_tokens.add(t.i)
+                        q.extend(current_extr.sub_extractions)
 
         # 2. Extração baseada em apostos
         if self.config.appositive:
             appositive_extractions = self.__extract_from_appositives(sentence)
+            logging.debug(f"Extrações de aposto encontradas: {[extr.to_tuple() for extr in appositive_extractions]}")
             if self.config.appositive_transitivity:
                 # Aplica a regra de transitividade usando as extrações de aposto e as já encontradas
-                final_extractions.extend(
-                    self.__apply_appositive_transitivity(appositive_extractions, final_extractions))
+                transitive_extractions = self.__apply_appositive_transitivity(appositive_extractions, final_extractions)
+                logging.debug(f"Extrações transitivas aplicadas: {[extr.to_tuple() for extr in transitive_extractions]}")
+                final_extractions.extend(transitive_extractions)
+
+
             final_extractions.extend(appositive_extractions)
 
         # 3. Remove duplicatas e retorna extrações válidas
@@ -257,8 +286,34 @@ class Extractor:
             if representation not in seen and extr.is_valid():
                 seen.add(representation)
                 unique_extractions.append(extr)
+            else:
+                logging.debug(f"Extração duplicada ou inválida ignorada: {representation}")
+
+        logging.debug(f"Extrações finais únicas: {[extr.to_tuple() for extr in unique_extractions]}")
 
         return unique_extractions
+
+    def __process_conjunction(self, start_node: Token) -> List[Extraction]:
+        """
+        Processa uma conjunção (principal ou subordinada), permitindo recursão.
+        """
+        subject_element = self.__find_subject(start_node)
+        logging.debug(f"Encontrado sujeito: {subject_element} para o verbo {start_node.text}")
+
+        if subject_element is None:
+            if not self.config.hidden_subjects:
+                # Permite extração se for uma oração impessoal (sem sujeito) como "choveu".
+                is_impersonal = start_node.morph.get("Person") == ["3"] and not any(
+                    c.dep_ in self._SUBJECT_DEPS for c in start_node.children)
+                if not is_impersonal:
+                    return []
+            subject_element = TripleElement()  # Sujeito oculto ou impessoal
+
+        extractions = []
+        for rel_extr, effective_verb in self.__extract_relation_and_conjunctions(subject_element, start_node):
+            extractions.extend(self.__extract_complements(rel_extr, effective_verb))
+
+        return extractions
 
     def __find_subject(self, verb_token: Token) -> Optional[TripleElement]:
         """Encontra o sujeito de um determinado verbo, lidando com voz passiva, orações relativas e verbos existenciais."""
@@ -269,17 +324,19 @@ class Extractor:
         if verb_token.dep_ in ['cop', 'aux', 'aux:pass']:
             search_node = verb_token.head
             is_passive = is_passive or any(c.dep_ == 'aux:pass' for c in search_node.children)
+            logging.debug(f"Verbo auxiliar ou cópula encontrado: {verb_token.text}, buscando sujeito no head: {search_node.text}")
 
         # Busca por sujeito (nsubj, csubj)
         for child in search_node.children:
             if child.dep_ in self._SUBJECT_DEPS:
+                logging.debug(f"Encontrado sujeito: {child.text} (dep: {child.dep_})")
                 # Se o sujeito for um pronome relativo, busca o seu antecedente
                 if child.pos_ == 'PRON' and 'Rel' in child.morph.get("PronType", []):
                     return self.__dfs_for_nominal_phrase(child.head, is_subject=True)
-                # Se for uma oração subjetiva, trata como um complemento
+                # Trata o sujeito oracional (csubj) construindo-o como um complemento.
                 if child.dep_.startswith('csubj'):
                     return self.__dfs_for_complement(child, set())
-                return self.__dfs_for_nominal_phrase(child, is_subject=True)
+                return self.__dfs_for_nominal_phrase(child, is_subject=True, ignore_appos=self.config.appositive)
 
         # Lógica para voz passiva e verbos existenciais (ex: "vende-se casas", "há vagas")
         if is_passive or search_node.lemma_ in self._EXISTENTIAL_VERBS:
@@ -305,8 +362,7 @@ class Extractor:
         extraction = Extraction(subject=subject, relation=base_relation)
         extractions_found = [(extraction, effective_verb)]
 
-        # Lógica para tratar conjunções coordenativas de verbos.
-        if self.config.coordinating_conjunctions:
+        if self.config.coordinating_conjunctions and effective_verb:
             for child in effective_verb.children:
                 if child.dep_ == 'conj' and child.pos_ in ['VERB', 'AUX']:
                     # Verifica se o verbo conjugado tem seu próprio sujeito. Se não, herda o da oração principal.
@@ -319,7 +375,9 @@ class Extractor:
         return extractions_found
 
     def __extract_complements(self, extraction: Extraction, complement_root: Token) -> List[Extraction]:
-        """Extrai os complementos a partir do verbo efetivo da relação."""
+        """
+        Extrai complementos, identificando e tratando `ccomp` e `advcl` de forma especial.
+        """
         if not extraction.relation or not extraction.relation.core:
             return [extraction] if extraction.subject and extraction.is_valid() else []
 
@@ -329,29 +387,90 @@ class Extractor:
 
         # Identifica as "cabeças" de cada complemento (ex: múltiplos objetos)
         complement_heads = []
+        subordinate_conjunction_heads = []
+
         for child in sorted(complement_root.children, key=lambda t: t.i):
             if child.i in base_visited:
                 continue
             if child.dep_ in self._COMPLEMENT_HEAD_DEPS:
                 complement_heads.append(child)
+            # Separa as orações subordinadas para tratamento especial
+            elif self.config.subordinating_conjunctions and child.dep_ in self._SUBORDINATE_CLAUSE_DEPS:
+                subordinate_conjunction_heads.append(child)
 
-        # Constrói cada complemento separadamente
+        # Processa complementos nominais/verbais normais e suas conjunções
         complement_parts = []
         processed_in_this_run = set()
         for head in complement_heads:
+            if head.i in processed_in_this_run:
+                continue
+
+            # Encontra todos os complementos coordenados a partir da cabeça atual.
+            # Ex: "banana, pera e maça"
+            conjuncts = [head]
+            q = deque([head])
+            # Garante que não entramos em loop e coletamos cada conjunção apenas uma vez
+            visited_conj_indices = {head.i}
+
+            while q:
+                token = q.popleft()
+                for child in token.children:
+                    # Adiciona tokens ligados por 'conj'
+                    if child.dep_ == 'conj' and child.i not in visited_conj_indices:
+                        conjuncts.append(child)
+                        visited_conj_indices.add(child.i)
+                        q.append(child)
+
+            # Marca todas as conjunções encontradas como processadas para evitar trabalho duplicado
+            processed_in_this_run.update(visited_conj_indices)
+
+            # Para cada elemento da coordenação, cria uma parte de complemento separada.
+            # Ex: uma para "de banana", uma para "pera", uma para "maça"
+            main_case_token = next((child for child in head.children if child.dep_ == 'case'), None)
+
+            for conjunct_head in conjuncts:
+                # Isola a parte atual, ignorando as outras conjunções na busca
+                temp_visited = base_visited.union(visited_conj_indices - {conjunct_head.i})
+                component = self.__dfs_for_complement(conjunct_head, temp_visited)
+
+                if not component.is_empty():
+                    # Propaga a preposição (ex: "de") do elemento principal para os outros, se necessário.
+                    # Isso garante que a extração seja "(gosto, de pera)" e não "(gosto, pera)".
+                    if conjunct_head != head and main_case_token:
+                        # Verifica se o componente já não possui sua própria preposição.
+                        has_own_case = any(t.dep_ == 'case' for t in component.get_all_tokens())
+                        if not has_own_case:
+                            component.add_piece(main_case_token)
+
+                    complement_parts.append(component)
+
+        # Processa as orações subordinadas
+        for head in subordinate_conjunction_heads:
             if head.i in processed_in_this_run: continue
 
-            # Ignora as outras cabeças de complemento para não misturar as extrações
-            temp_visited = base_visited.union({h.i for h in complement_heads if h.i != head.i})
-            component = self.__dfs_for_complement(head, temp_visited)
+            # ALTERAÇÃO: Usa a função __find_subject para uma verificação mais robusta.
+            conjunction_subject = self.__find_subject(head)
 
-            if not component.is_empty():
-                complement_parts.append(component)
-                processed_in_this_run.update(t.i for t in component.get_all_tokens())
+            if conjunction_subject is not None:
+                # Caso 1: Oração com sujeito próprio. Gera uma sub-extração.
+                # Adiciona o 'mark' (ex: "que") ao complemento da extração principal.
+                mark_token = next((c for c in head.children if c.dep_ == 'mark'), None)
+                if mark_token:
+                    mark_complement = TripleElement(mark_token)
+                    complement_parts.append(mark_complement)
+
+                sub_extrs = self.__process_conjunction(head)
+                extraction.sub_extractions.extend(sub_extrs)
+            else:
+                # Caso 2: Oração sem sujeito. Trata como um complemento normal.
+                component = self.__dfs_for_complement(head, base_visited)
+                if not component.is_empty():
+                    complement_parts.append(component)
+
+            processed_in_this_run.add(head.i)
 
         final_extractions = []
-        if not complement_parts:
-            # Se não houver complementos, mas sujeito e relação são válidos, retorna a extração intransitiva
+        if not complement_parts and not extraction.sub_extractions:
             if extraction.is_valid():
                 final_extractions.append(extraction)
             return final_extractions
@@ -361,9 +480,9 @@ class Extractor:
         for part in complement_parts:
             full_complement.merge(part)
 
-        if not full_complement.is_empty():
-            complete_extraction = Extraction(extraction.subject, extraction.relation, full_complement)
-            final_extractions.append(complete_extraction)
+        if not full_complement.is_empty() or extraction.sub_extractions:
+            extraction.complement = full_complement
+            final_extractions.append(extraction)
 
         # Se houver múltiplos complementos, decompõe em extrações menores.
         if len(complement_parts) > 1 and self.config.coordinating_conjunctions:
@@ -383,14 +502,20 @@ class Extractor:
         for token in sentence:
             if token.dep_ == 'appos':
                 subject_head = token.head
+
+                logging.debug(f"Encontrado aposto: {token.text} (head: {subject_head.text})")
+
                 # Evita extrair apostos de complementos de oração
-                if subject_head.dep_ in ['ccomp', 'xcomp']: continue
+                if subject_head.dep_ in ['ccomp', 'xcomp']:
+                    logging.debug(f"Ignorando aposto em complemento de oração: {token.text}")
+                    continue
 
-                subject = self.__dfs_for_nominal_phrase(subject_head, is_subject=True, ignore_appos=True)
+                subject = self.__dfs_for_nominal_phrase(subject_head, is_subject=True, ignore_appos=True, ignore_conjunctions=True)
                 complement = self.__dfs_for_nominal_phrase(token, is_subject=False)
-
                 # Cria uma relação sintética "é"
                 relation = TripleElement(text="é")
+
+                logging.debug(f"Extração de aposto: {subject} é {complement}")
 
                 if subject and complement:
                     extraction = Extraction(subject, relation, complement)
@@ -408,17 +533,22 @@ class Extractor:
         for appos_extr in appositive_extractions:
             # A é o sujeito da extração de aposto (ex: "O diretor do hospital")
             # B é o complemento (ex: "Júlio")
-            subj_A_core = appos_extr.subject.core
-            subj_B = appos_extr.complement
+            subj_a_core = appos_extr.subject.core
+            subj_b = appos_extr.complement
+
+            logging.debug(f"Aplicando transitividade: {subj_a_core} é {subj_b}")
 
             for clausal_extr in clausal_extractions:
-                if clausal_extr.subject and clausal_extr.subject.core == subj_A_core:
-                    # Cria a nova extração (B, faz, C)
+                if clausal_extr.subject and clausal_extr.subject.core == subj_a_core:
+                    logging.debug(f"Encontrada extração transitiva: {subj_a_core} {clausal_extr.relation} {clausal_extr.complement}")
+                    # Cria a nova extração (B, rel, C)
                     new_extraction = Extraction(
-                        subject=subj_B,
+                        subject=subj_b,
                         relation=clausal_extr.relation,
                         complement=clausal_extr.complement
                     )
+                    # Propaga as sub-extrações também
+                    new_extraction.sub_extractions = clausal_extr.sub_extractions
                     transitive_extractions.append(new_extraction)
         return transitive_extractions
 
@@ -456,13 +586,13 @@ class Extractor:
                     stack.append(child)
                     local_visited.add(child.i)
                     if child.i > effective_verb.i:
-                        effective_verb = child  # O verbo mais à direita é geralmente o principal
+                        effective_verb = child
                 elif is_rel_adverb or is_extra_rel_dep:
                     relation.add_piece(child)
                     local_visited.add(child.i)
 
-        # Garante que o verbo principal (head) de uma cópula ou auxiliar seja incluído
-        if effective_verb.dep_ in ['aux', 'aux:pass', 'cop'] and effective_verb.head not in relation.get_all_tokens():
+        if effective_verb and effective_verb.dep_ in ['aux', 'aux:pass',
+                                                      'cop'] and effective_verb.head not in relation.get_all_tokens():
             relation.add_piece(effective_verb.head)
             effective_verb = effective_verb.head
 
@@ -472,15 +602,18 @@ class Extractor:
 
     @classmethod
     def __dfs_for_nominal_phrase(cls, start_token: Token, is_subject: bool = False,
-                                 ignore_appos: bool = False) -> TripleElement:
+                                 ignore_appos: bool = False, ignore_conjunctions: bool = False) -> TripleElement:
         """Realiza uma busca em profundidade para construir um sintagma nominal completo."""
         element = TripleElement(start_token)
         stack = deque([start_token])
         local_visited = {start_token.i}
 
         valid_deps = cls._NOMINAL_PHRASE_DEPS.copy()
-        valid_deps.add("conj")
-        valid_deps.add("cc")
+
+        if not ignore_conjunctions:
+            valid_deps.add("conj")
+            valid_deps.add("cc")
+
         if not ignore_appos:
             valid_deps.add("appos")
 
@@ -509,11 +642,15 @@ class Extractor:
         local_visited = visited_indices.copy()
         local_visited.add(start_token.i)
 
-        # Combina as dependências que devem ser ignoradas com as que delimitam uma cláusula
+        # Combina as dependências que devem ser ignoradas com as que delimitam uma conjunção
         boundary_and_ignore_deps = cls._COMPLEMENT_IGNORE_DEPS | cls._COMPLEMENT_BOUNDARY_DEPS
 
         while stack:
             current_token = stack.pop()
+            # Adiciona o token atual se ele não tiver sido visitado
+            if current_token not in complement.get_all_tokens():
+                complement.add_piece(current_token)
+
             for child in sorted(current_token.children, key=lambda t: t.i):
                 if child.i not in local_visited and child.dep_ not in boundary_and_ignore_deps:
                     complement.add_piece(child)
