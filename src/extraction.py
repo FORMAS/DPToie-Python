@@ -295,25 +295,49 @@ class Extractor:
 
     def __process_conjunction(self, start_node: Token) -> List[Extraction]:
         """
-        Processa uma conjunção (principal ou subordinada), permitindo recursão.
+        Processa uma conjunção (principal ou subordinada), permitindo recursão e
+        distribuindo complementos compartilhados em verbos coordenados.
         """
         subject_element = self.__find_subject(start_node)
         logging.debug(f"Encontrado sujeito: {subject_element} para o verbo {start_node.text}")
 
         if subject_element is None:
             if not self.config.hidden_subjects:
-                # Permite extração se for uma oração impessoal (sem sujeito) como "choveu".
                 is_impersonal = start_node.morph.get("Person") == ["3"] and not any(
                     c.dep_ in self._SUBJECT_DEPS for c in start_node.children)
                 if not is_impersonal:
                     return []
-            subject_element = TripleElement()  # Sujeito oculto ou impessoal
+            subject_element = TripleElement()
 
-        extractions = []
-        for rel_extr, effective_verb in self.__extract_relation_and_conjunctions(subject_element, start_node):
-            extractions.extend(self.__extract_complements(rel_extr, effective_verb))
+        # Passo 1: Obter todas as relações coordenadas (ex: [compro, empresto, vendo])
+        sr_pairs = self.__extract_relation_and_conjunctions(subject_element, start_node)
 
-        return extractions
+        # Passo 2: Para cada relação, encontrar seus complementos de forma independente
+        completed_extractions = []
+        for rel_extr, effective_verb in sr_pairs:
+            processed_list = self.__extract_complements(rel_extr, effective_verb)
+            # Se __extract_complements não encontrar nada, usa a extração original (S-R)
+            if not processed_list:
+                completed_extractions.append(rel_extr)
+            else:
+                # Adiciona todas as extrações encontradas (geralmente uma, mas pode haver mais)
+                completed_extractions.extend(processed_list)
+
+        # Passo 3: Lógica de distribuição do complemento
+        # Se houver mais de uma extração (implica conjunção de verbos) e a configuração permitir
+        if len(completed_extractions) > 1 and self.config.coordinating_conjunctions:
+            # Pega o complemento da ÚLTIMA extração da cadeia
+            last_complement = completed_extractions[-1].complement
+
+            # Se o último complemento for válido
+            if last_complement and not last_complement.is_empty():
+                # Itera sobre as extrações ANTERIORES
+                for i in range(len(completed_extractions) - 1):
+                    # Se uma extração anterior não tiver complemento, ela herda o último
+                    if not completed_extractions[i].complement or completed_extractions[i].complement.is_empty():
+                        completed_extractions[i].complement = last_complement
+
+        return completed_extractions
 
     def __find_subject(self, verb_token: Token) -> Optional[TripleElement]:
         """Encontra o sujeito de um determinado verbo, lidando com voz passiva, orações relativas e verbos existenciais."""
@@ -363,15 +387,13 @@ class Extractor:
         extractions_found = [(extraction, effective_verb)]
 
         if self.config.coordinating_conjunctions and effective_verb:
-            for child in effective_verb.children:
-                if child.dep_ == 'conj' and child.pos_ in ['VERB', 'AUX']:
-                    # Verifica se o verbo conjugado tem seu próprio sujeito. Se não, herda o da oração principal.
-                    has_own_subject = any(c.dep_.startswith("nsubj") for c in child.children)
-                    if not has_own_subject:
-                        new_relation, new_effective_verb = self.__build_relation_element(child, set())
-                        if new_relation:
-                            new_extraction = Extraction(subject=subject, relation=new_relation)
-                            extractions_found.append((new_extraction, new_effective_verb))
+            for child in sorted(effective_verb.children, key=lambda t: t.i):
+                if self._is_valid_verbal_conjunction(child):
+                    new_relation, new_effective_verb = self.__build_relation_element(child, set())
+                    if new_relation:
+                        new_extraction = Extraction(subject=subject, relation=new_relation)
+                        extractions_found.append((new_extraction, new_effective_verb))
+
         return extractions_found
 
     def __extract_complements(self, extraction: Extraction, complement_root: Token) -> List[Extraction]:
@@ -448,7 +470,6 @@ class Extractor:
         for head in subordinate_conjunction_heads:
             if head.i in processed_in_this_run: continue
 
-            # ALTERAÇÃO: Usa a função __find_subject para uma verificação mais robusta.
             conjunction_subject = self.__find_subject(head)
 
             if conjunction_subject is not None:
@@ -657,3 +678,25 @@ class Extractor:
                     local_visited.add(child.i)
                     stack.append(child)
         return complement
+
+    def _is_valid_verbal_conjunction(self, token: Token) -> bool:
+        """
+        Verifica se um token é um verbo em uma relação de conjunção coordenativa
+        que deve ser expandida para uma nova extração.
+        Ex: "comprou e vendeu", "canta ou dança".
+        """
+        if not (token.dep_ == 'conj' and token.pos_ in ['VERB', 'AUX']):
+            return False
+
+        # Heurística: Verifica o tipo de conector (cc). Se não houver, assume que é válido.
+        # Isso melhora a precisão para casos simples como "e" e "ou".
+        cc_token = next((child for child in token.children if child.dep_ == 'cc'), None)
+        if cc_token and cc_token.lemma_.lower() not in ['e', 'ou']:
+            return False
+
+        # Heurística: Se o verbo conjugado tiver seu próprio sujeito explícito,
+        # ele iniciará uma nova extração independente, então não deve ser tratado aqui.
+        if any(c.dep_.startswith("nsubj") for c in token.children):
+            return False
+
+        return True
