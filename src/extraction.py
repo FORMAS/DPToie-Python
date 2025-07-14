@@ -187,7 +187,7 @@ class Extractor:
     _RELATION_ADVERBS = {"não", "ja", "ainda", "também", "nunca"}
 
     # Dependências que tipicamente iniciam um complemento
-    _COMPLEMENT_HEAD_DEPS = {"obj", "iobj", "xcomp", "obl", "advmod"}
+    _COMPLEMENT_HEAD_DEPS = {"obj", "iobj", "xcomp", "obl", "advmod", "nmod"}
 
     # Dependências que iniciam orações subordinadas
     _SUBORDINATE_CLAUSE_DEPS = {"advcl", "ccomp"}
@@ -309,35 +309,42 @@ class Extractor:
                     return []
             subject_element = TripleElement()
 
-        # Passo 1: Obter todas as relações coordenadas (ex: [compro, empresto, vendo])
         sr_pairs = self.__extract_relation_and_conjunctions(subject_element, start_node)
 
-        # Passo 2: Para cada relação, encontrar seus complementos de forma independente
-        completed_extractions = []
+        # precisamos manter o verbo raiz de cada extração.
+        completed_sr_pairs = []
         for rel_extr, effective_verb in sr_pairs:
             processed_list = self.__extract_complements(rel_extr, effective_verb)
-            # Se __extract_complements não encontrar nada, usa a extração original (S-R)
             if not processed_list:
-                completed_extractions.append(rel_extr)
+                completed_sr_pairs.append((rel_extr, effective_verb))
             else:
-                # Adiciona todas as extrações encontradas (geralmente uma, mas pode haver mais)
-                completed_extractions.extend(processed_list)
+                for ex in processed_list:
+                    completed_sr_pairs.append((ex, effective_verb))
 
-        # Passo 3: Lógica de distribuição do complemento
-        # Se houver mais de uma extração (implica conjunção de verbos) e a configuração permitir
-        if len(completed_extractions) > 1 and self.config.coordinating_conjunctions:
-            # Pega o complemento da ÚLTIMA extração da cadeia
-            last_complement = completed_extractions[-1].complement
+        # Lógica de distribuição de complementos
+        if len(completed_sr_pairs) > 1 and self.config.coordinating_conjunctions:
+            # Pega a última extração e seu verbo raiz
+            last_extraction, last_verb = completed_sr_pairs[-1]
+            last_complement = last_extraction.complement
 
-            # Se o último complemento for válido
+            # Verifica se o último complemento é válido para propagação
             if last_complement and not last_complement.is_empty():
-                # Itera sobre as extrações ANTERIORES
-                for i in range(len(completed_extractions) - 1):
-                    # Se uma extração anterior não tiver complemento, ela herda o último
-                    if not completed_extractions[i].complement or completed_extractions[i].complement.is_empty():
-                        completed_extractions[i].complement = last_complement
 
-        return completed_extractions
+                # Só propague complementos de um verbo de ação (VERB).
+                if last_verb.pos_ == 'VERB':
+                    # Itera sobre as extrações/verbos anteriores
+                    for i in range(len(completed_sr_pairs) - 1):
+                        current_extraction, current_verb = completed_sr_pairs[i]
+
+                        # Se a extração atual não tiver complemento E seu verbo raiz também for VERB
+                        if (
+                            not current_extraction.complement or current_extraction.complement.is_empty()) and current_verb.pos_ == 'VERB':
+                            # Propaga o complemento
+                            current_extraction.complement = last_complement
+
+        # Extrai apenas os objetos de extração para retornar
+        final_extractions = [ex for ex, _ in completed_sr_pairs]
+        return final_extractions
 
     def __find_subject(self, verb_token: Token) -> Optional[TripleElement]:
         """Encontra o sujeito de um determinado verbo, lidando com voz passiva, orações relativas e verbos existenciais."""
