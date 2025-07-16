@@ -197,7 +197,6 @@ if __name__ == "__main__":
     parser.add_argument('-sc', '--subordinating_conjunctions', dest='subordinating_conjunctions', action='store_true', help='enable subordinating conjunctions extraction')
     parser.add_argument('-hs', '--hidden_subjects', dest='hidden_subjects', action='store_true', help='enable hidden subjects extraction')
     parser.add_argument('-a', '--appositive', dest='appositive', action='store_true', help='enable appositive extraction')
-    parser.add_argument('-a', '--appositive', dest='appositive', action='store_true', help='enable appositive extraction')
     parser.add_argument('-t', '--transitive', dest='transitive', action='store_true', help='enable transitive extraction(only for appositive)')
     parser.add_argument('-debug', action='store_true', help='enable debug mode')
 
