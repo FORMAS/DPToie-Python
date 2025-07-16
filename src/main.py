@@ -137,6 +137,36 @@ def extract_to_csv(nlp: Language, input_file: str, output_file: str):
 
     print("Processo concluído com sucesso!")
 
+def extract_to_txt(nlp: Language, input_file: str, output_file: str):
+    """
+    Extrai informações de um arquivo CONLL e salva em um arquivo de texto.
+    A saída será no formato:
+    sentence
+        id | arg1 | rel | arg2 (extraction)
+            id | arg1 | rel | arg2 (sub_extraction)
+    """
+    sentence_iterator = read_conll_sentences(input_file)
+    print(f"Processando sentenças de '{input_file}' e salvando em '{output_file}'...")
+
+    with open(output_file, 'w', encoding='utf-8') as f:
+
+        indice_output = 0
+        for conll_sentence_block in tqdm(sentence_iterator, desc="Extraindo informações"):
+            conll_parser = ConllParser(nlp)
+            doc = conll_parser.parse_conll_text_as_spacy(conll_sentence_block)
+
+            f.write(f"{doc.text.strip()}\n")
+            extractions = doc._.extractions
+            for index, extraction in enumerate(extractions):
+                extraction_dict = dict(extraction)
+                indice_output += 1
+                f.write(f"    {extraction_dict['arg1']} | {extraction_dict['rel']} | {extraction_dict['arg2']}\n")
+                for sub_index, sub_extraction in enumerate(extraction.sub_extractions):
+                    sub_extraction_dict = dict(sub_extraction)
+                    f.write(f"      {sub_extraction_dict['arg1']} | {sub_extraction_dict['rel']} | {sub_extraction_dict['arg2']}\n")
+
+    print("Processo concluído com sucesso!")
+
 def read_conll_sentences(file_path: str) -> Generator[str, Any, None]:
     """
     Lê um arquivo CONLL onde sentenças são separadas por linhas vazias
@@ -159,7 +189,17 @@ def read_conll_sentences(file_path: str) -> Generator[str, Any, None]:
         if current_sentence:
             yield current_sentence
 
-def main(input_file: str, output_type: str, conll_format: bool = False, coordinating_conjunctions: bool = True, subordinating_conjunctions: bool = True, hidden_subjects: bool = True, appositive: bool = True, transitive: bool = True, debug: bool = False):
+def main(
+    input_file: str,
+    input_type: str,
+    output_file: str,
+    output_type: str,
+    coordinating_conjunctions: bool = True,
+    subordinating_conjunctions: bool = True,
+    hidden_subjects: bool = True,
+    appositive: bool = True,
+    transitive: bool = True,
+    debug: bool = False):
     extractor = Extractor(ExtractorConfig(
         coordinating_conjunctions=coordinating_conjunctions,
         subordinating_conjunctions=subordinating_conjunctions,
@@ -171,12 +211,10 @@ def main(input_file: str, output_type: str, conll_format: bool = False, coordina
 
     Doc.set_extension("extractions", getter=extractor.get_extractions_from_doc)
 
-    if not conll_format:
+    if input_type == 'txt':
         conll_file = generate_conll_file_from_sentences_file(input_file=input_file)
     else:
         conll_file = input_file
-
-    output_file = f'./outputs/output.{output_type}'
 
     nlp = spacy.blank("pt")
     nlp.add_pipe("conll_formatter", last=True)
@@ -185,13 +223,17 @@ def main(input_file: str, output_type: str, conll_format: bool = False, coordina
         extract_to_csv(nlp=nlp, input_file=conll_file, output_file=output_file)
     elif output_type == 'json':
         extract_to_json(nlp=nlp, input_file=conll_file, output_file=output_file)
+    elif output_type == 'txt':
+        extract_to_txt(nlp=nlp, input_file=conll_file, output_file=output_file)
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='Extract triples from sentences in a file using SpaCy and Stanza.')
 
-    parser.add_argument('-input', metavar='input', type=str, help='path to the input file', default='./inputs/teste.txt')
-    parser.add_argument('-output-type', metavar='output_type', type=str, choices=['json', 'csv'], help='output file type', default='json')
+    parser.add_argument('-i', '--input', metavar='input', type=str, help='path to the input file', default='./inputs/teste.txt')
+    parser.add_argument('-it', '--input-type', metavar='input_type', type=str, choices=['txt', 'conll'], help='input file type', default='txt')
+    parser.add_argument('-o', '--output', metavar='output', type=str, help='path to the output file', default='./outputs/output.json')
+    parser.add_argument('-ot', '--output-type', metavar='output_type', type=str, choices=['json', 'csv', 'txt'], help='output file type', default='json')
     parser.add_argument('-conll', action='store_true', help='input file is in CONLL format')
     parser.add_argument('-cc', '--coordinating_conjunctions', dest='coordinating_conjunctions', action='store_true', help='enable coordinating conjunctions extraction')
     parser.add_argument('-sc', '--subordinating_conjunctions', dest='subordinating_conjunctions', action='store_true', help='enable subordinating conjunctions extraction')
@@ -204,8 +246,9 @@ if __name__ == "__main__":
 
     main(
         input_file=args.input,
+        output_file=args.output,
+        input_type=args.input_type,
         output_type=args.output_type,
-        conll_format=args.conll,
         coordinating_conjunctions=args.coordinating_conjunctions,
         subordinating_conjunctions=args.subordinating_conjunctions,
         hidden_subjects=args.hidden_subjects,
