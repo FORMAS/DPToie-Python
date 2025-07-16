@@ -126,7 +126,8 @@ class Extraction:
                 return False
 
         # A relação deve conter um verbo.
-        if self.relation and not self.relation.is_sinthetic and not any(t.pos_ in ['VERB', 'AUX'] for t in self.relation.get_all_tokens()):
+        if self.relation and not self.relation.is_sinthetic and not any(
+            t.pos_ in ['VERB', 'AUX'] for t in self.relation.get_all_tokens()):
             return False
 
         # O sujeito não pode ser apenas um pronome relativo.
@@ -187,7 +188,7 @@ class Extractor:
     _RELATION_ADVERBS = {"não", "ja", "ainda", "também", "nunca"}
 
     # Dependências que tipicamente iniciam um complemento
-    _COMPLEMENT_HEAD_DEPS = {"obj", "iobj", "xcomp", "obl", "advmod", "nmod"}
+    _COMPLEMENT_HEAD_DEPS = {"obj", "iobj", "xcomp", "obl", "advmod", "nmod", "ROOT"}
 
     # Dependências que iniciam orações subordinadas
     _SUBORDINATE_CLAUSE_DEPS = {"advcl", "ccomp"}
@@ -274,7 +275,6 @@ class Extractor:
                 transitive_extractions = self.__apply_appositive_transitivity(appositive_extractions, final_extractions)
                 logging.debug(f"Extrações transitivas aplicadas: {[extr.to_tuple() for extr in transitive_extractions]}")
                 final_extractions.extend(transitive_extractions)
-
 
             final_extractions.extend(appositive_extractions)
 
@@ -418,10 +418,19 @@ class Extractor:
         complement_heads = []
         subordinate_conjunction_heads = []
 
+        # Lógica para identificar a cabeça do complemento em orações de cópula
+        # Se a relação é uma cópula, o seu head (predicado nominal) é a cabeça do complemento.
+        relation_core = extraction.relation.core
+        if relation_core and relation_core.dep_ == 'cop':
+            nominal_predicate = relation_core.head
+            if nominal_predicate.i not in base_visited:
+                complement_heads.append(nominal_predicate)
+
         for child in sorted(complement_root.children, key=lambda t: t.i):
             if child.i in base_visited:
                 continue
-            if child.dep_ in self._COMPLEMENT_HEAD_DEPS:
+            # Adiciona a cabeça do complemento se não for o predicado já adicionado
+            if child.dep_ in self._COMPLEMENT_HEAD_DEPS and child not in complement_heads:
                 complement_heads.append(child)
             # Separa as orações subordinadas para tratamento especial
             elif self.config.subordinating_conjunctions and child.dep_ in self._SUBORDINATE_CLAUSE_DEPS:
@@ -460,7 +469,12 @@ class Extractor:
             for conjunct_head in conjuncts:
                 # Isola a parte atual, ignorando as outras conjunções na busca
                 temp_visited = base_visited.union(visited_conj_indices - {conjunct_head.i})
-                component = self.__dfs_for_complement(conjunct_head, temp_visited)
+
+                # Usa a função de construção de sintagma nominal para complementos de cópula
+                if relation_core and relation_core.dep_ == 'cop' and conjunct_head == relation_core.head:
+                    component = self.__dfs_for_nominal_phrase(conjunct_head, is_subject=False)
+                else:
+                    component = self.__dfs_for_complement(conjunct_head, temp_visited)
 
                 if not component.is_empty():
                     # Propaga a preposição (ex: "de") do elemento principal para os outros, se necessário.
@@ -538,7 +552,8 @@ class Extractor:
                     logging.debug(f"Ignorando aposto em complemento de oração: {token.text}")
                     continue
 
-                subject = self.__dfs_for_nominal_phrase(subject_head, is_subject=True, ignore_appos=True, ignore_conjunctions=True)
+                subject = self.__dfs_for_nominal_phrase(subject_head, is_subject=True, ignore_appos=True,
+                                                        ignore_conjunctions=True)
                 complement = self.__dfs_for_nominal_phrase(token, is_subject=False)
                 # Cria uma relação sintética "é"
                 relation = TripleElement(text="é")
@@ -568,7 +583,8 @@ class Extractor:
 
             for clausal_extr in clausal_extractions:
                 if clausal_extr.subject and clausal_extr.subject.core == subj_a_core:
-                    logging.debug(f"Encontrada extração transitiva: {subj_a_core} {clausal_extr.relation} {clausal_extr.complement}")
+                    logging.debug(
+                        f"Encontrada extração transitiva: {subj_a_core} {clausal_extr.relation} {clausal_extr.complement}")
                     # Cria a nova extração (B, rel, C)
                     new_extraction = Extraction(
                         subject=subj_b,
@@ -592,11 +608,10 @@ class Extractor:
         local_visited = visited_tokens.copy()
         local_visited.add(start_token.i)
 
-        # Se for uma cópula, o predicado nominal também faz parte da relação
+        # Se for uma cópula, o verbo efetivo é o seu head, mas NÃO o adicionamos à relação.
+        # A lógica de complemento irá tratar o head da cópula.
         if start_token.dep_ == 'cop':
             effective_verb = start_token.head
-            relation.add_piece(effective_verb)
-            local_visited.add(effective_verb.i)
 
         while stack:
             current = stack.pop()
