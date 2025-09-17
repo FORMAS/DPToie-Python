@@ -135,6 +135,12 @@ jobs:
         run: |
           docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -input ./inputs/ceten-200.conll -conll -cc -sc -hs -a -t  -output-type csv
           mv ./outputs/output.csv ./outputs/ceten-200-all.csv
+            - name: Run CETEN200-ALL CSV
+      - name: Run BIA-ALL CSV
+        run: |
+          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -input ./inputs/bia.txt -txt -cc -sc -hs -a -t  -output-type csv
+          mv ./outputs/output.csv ./outputs/bia.csv
+      
 
       # --- Upload de todos os artefatos ---
       - name: Upload artifacts
@@ -172,3 +178,4 @@ jobs:
             ./outputs/ceten-200-a-t.csv
             ./outputs/wiki-200-all.csv
             ./outputs/ceten-200-all.csv
+            ./outputs/bia.csv
