@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "ptoie_dep"
+name = "ptoie_python"
 version = "0.1.0"
-description = "PTOIE-Dep is an Open Information Extractor for Portuguese language that employs Dependence Parser and Part of Speech Tagger models with Stanford CoreNLP."
+description = "DPToie-Python is an Open Information Extractor for Portuguese language that employs Dependence Parser and Part of Speech Tagger models with Stanford CoreNLP."
 authors = ["André Walker <andre.walker@ufba.br>", "Daniela Barreiro Claro <dclaro.@ufba.br>", "Larrissa Silva <larrissasilva@ufba.br>"]
 readme = "README.md"
 package-mode = false

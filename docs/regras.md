@@ -1,4 +1,4 @@
-# Documentação da Heurística de Extração do PTOIE-Dep
+# Documentação da Heurística de Extração do DPToie-Python
 
 Heurística e os algoritmos usado no extrator de Informação Aberta (OIE), a partir de documentos processados pelo spaCy.
 O extrator utiliza uma abordagem baseada em dependências sintáticas e busca em profundidade (DFS) para construir os elementos da tripla e gerenciar a complexidade de sentenças com coordenação e subordinação.
