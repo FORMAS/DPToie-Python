@@ -135,7 +135,6 @@ jobs:
         run: |
           docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/ceten-200.conll -it conll -cc -sc -hs -a -t  -o ./outputs/output.csv -ot csv
           mv ./outputs/output.csv ./outputs/ceten-200-all.csv
-            - name: Run CETEN200-ALL CSV
       - name: Run BIA-ALL CSV
         run: |
           docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/bia.txt --input-type txt -cc -sc -hs -a -t  -o ./outputs/output.csv -ot csv
