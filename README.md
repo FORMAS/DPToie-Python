@@ -16,6 +16,7 @@ This guide shows all ways to run the project via `src/main.py`, with all argumen
 - [How to run with Docker Compose](#how-to-run-with-docker-compose)
 - [Quick references](#quick-references)
 - [How to cite this project](#how-to-cite)
+- [Authors](#authors)
 
 ## Installation (Poetry)
 
@@ -151,3 +152,8 @@ If you find this repo helpful, please consider citing:
 ```bibtex
 @Article{dptoie2025, author={xxx xxx}, title={xxxx}, journal={dddd}, year={xxx}, month={x}, day={cc}, issn={xxx}, doi={xxxxx}, url={asas} }
 ```
+
+## Authors
+* Andre Walker
+* Rafael Glauber
+* [Daniela Barreiro Claro](http://formas.ufba.br/dclaro/)
