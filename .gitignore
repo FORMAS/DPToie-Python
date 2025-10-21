@@ -1,0 +1,8 @@
+.idea
+.vscode
+.hypothesis
+out.txt
+/outputs/*
+!/outputs/.gitkeep
+/models/*
+!/models/.gitkeep

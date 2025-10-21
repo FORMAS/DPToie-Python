@@ -1,0 +1,25 @@
+# Arquivo: .dockerignore
+
+# Ignorar pastas de ambiente virtual
+.venv/
+venv/
+env/
+
+# Ignorar cache do Python
+__pycache__/
+*.pyc
+
+# Ignorar cache e pastas do Git
+.git/
+.gitignore
+
+# Ignorar arquivos do Docker
+Dockerfile
+.dockerignore
+
+# Outros
+.idea/
+.vscode/
+dist/
+build/
+*.egg-info/

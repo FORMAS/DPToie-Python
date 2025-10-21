@@ -1,0 +1,11 @@
+services:
+  ptoie_python:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ptoie_python
+    volumes:
+      - .:/ptoie_python
+    command: poetry run python3 src/main.py -i /ptoie_python/inputs/teste.conll -it conll -o /ptoie_python/outputs/output.json -ot json -cc -sc -hs -a -t
+    environment:
+      - STANZA_RESOURCES_DIR=/ptoie_python/models/.stanza_resources
