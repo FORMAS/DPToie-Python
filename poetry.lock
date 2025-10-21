@@ -329,6 +329,22 @@ testing = ["covdefaults (>=2.3)", "coverage (>=7.6.10)", "diff-cover (>=9.2.1)",
 typing = ["typing-extensions (>=4.12.2) ; python_version < \"3.11\""]
 
 [[package]]
+name = "formas-spacy-stanza"
+version = "1.0.5"
+description = "Use the latest Stanza (StanfordNLP) research models directly in spaCy"
+optional = false
+python-versions = ">=3.6"
+groups = ["main"]
+files = [
+    {file = "formas_spacy_stanza-1.0.5-py3-none-any.whl", hash = "sha256:c1629091def1de9496e365632a70741d069e2098409dc9623c82fc61bda7daad"},
+    {file = "formas_spacy_stanza-1.0.5.tar.gz", hash = "sha256:01e87ed0808ef1d6e7b82c935637b4aad91b5dd96deea42c3d6591eaeef52403"},
+]
+
+[package.dependencies]
+spacy = ">=3.0.0,<4.0.0"
+stanza = ">=1.2.0,<=1.10.1"
+
+[[package]]
 name = "fsspec"
 version = "2025.5.1"
 description = "File-system specification"
@@ -1245,26 +1261,6 @@ files = [
 ]
 
 [[package]]
-name = "spacy-stanza"
-version = "1.0.5"
-description = "Use the latest Stanza (StanfordNLP) research models directly in spaCy"
-optional = false
-python-versions = ">=3.6"
-groups = ["main"]
-files = []
-develop = false
-
-[package.dependencies]
-spacy = ">=3.0.0,<4.0.0"
-stanza = ">=1.2.0,<=1.10.1"
-
-[package.source]
-type = "git"
-url = "https://github.com/FORMAS/spacy-stanza.git"
-reference = "v1.0.5"
-resolved_reference = "cc982dc3f58d40746c5e3136b520e27974c5d6eb"
-
-[[package]]
 name = "srsly"
 version = "2.4.8"
 description = "Modern high-performance serialization utilities for Python"
@@ -1706,4 +1702,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<3.14"
-content-hash = "4a7df1251f3436d81ddc6540638f1d5058c6519664b20f9ef903e60ca3a04fee"
+content-hash = "469de4cc1ef513a3cb9c2057f9a769011f19e552380cfe2609e20e0c75131efd"
