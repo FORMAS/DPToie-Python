@@ -8,6 +8,17 @@ Este guia mostra todas as formas de rodar o projeto pelo `src/main.py`, com toda
 - Requisitos mínimos: Python 3.12+, Poetry, ou Docker (opcional)
 - Modelos: o Stanza faz o download automático na primeira execução. Você pode definir `STANZA_RESOURCES_DIR` para usar um diretório local de modelos (ex.: `./models/.stanza_resources`).
 
+
+## Sumário
+- [Instalação (Poetry)](#instalação-poetry)
+- [Como executar (local, via Poetry)](#como-executar-local-via-poetry)
+  - [Argumentos suportados](#argumentos-suportados)
+  - [Exemplos práticos](#exemplos-práticos)
+- [Como executar com Docker (sem Compose)](#como-executar-com-docker-sem-compose)
+- [Como executar com Docker Compose](#como-executar-com-docker-compose)
+- [Referências rápidas](#referências-rápidas)
+- [Como citar este projeto](#como-citar-este-projeto)
+
 ## Instalação (Poetry)
 
 ```bash
