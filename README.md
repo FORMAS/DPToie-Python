@@ -1,99 +1,99 @@
 # PTOIE-Dep
 
-Extrator de Informação Aberta para língua portuguesa baseado em análise de dependências (SpaCy + Stanza).
+Open Information Extractor for Portuguese based on dependency analysis (SpaCy + Stanza).
 
-Este guia mostra todas as formas de rodar o projeto pelo `src/main.py`, com todas as variações de argumentos, tanto localmente (Poetry) quanto com Docker/Docker Compose.
+This guide shows all ways to run the project via `src/main.py`, with all argument variations, both locally (Poetry) and with Docker / Docker Compose.
 
-- Requisitos mínimos: Python 3.12+, Poetry, ou Docker (opcional)
-- Modelos: o Stanza faz o download automático na primeira execução. Você pode definir `STANZA_RESOURCES_DIR` para usar um diretório local de modelos (ex.: `./models/.stanza_resources`).
+- Minimum requirements: Python 3.12+, Poetry, or Docker (optional)
+- Models: Stanza downloads models automatically on first run. You can set `STANZA_RESOURCES_DIR` to use a local models directory (e.g., `./models/.stanza_resources`).
 
-## Instalação (Poetry)
+## Installation (Poetry)
 
 ```bash
 poetry install
 ```
 
-## Como executar (local, via Poetry)
+## How to run (local, via Poetry)
 
-Forma geral:
+General form:
 
 ```bash
 poetry run python3 src/main.py \
-  -i <caminho_entrada> \
+  -i <input_path> \
   -it <txt|conll> \
-  -o <caminho_saida> \
+  -o <output_path> \
   -ot <json|csv|txt> \
   [-cc] [-sc] [-hs] [-a] [-t] [-debug]
 ```
 
-### Argumentos suportados
+### Supported arguments
 
-- -i, --input: caminho do arquivo de entrada. Padrão: `./inputs/teste.txt`
-- -it, --input-type: tipo do arquivo de entrada. Opções: `txt` ou `conll`. Padrão: `txt`
-  - Na entrada `txt`: cada linha do arquivo é uma sentença; o sistema gera um `.conll` temporário.
-  - Na entrada `conll`: o arquivo de entrada já está no formato CoNLL-U (uma sentença por bloco, separado por linha vazia).
-- -o, --output: caminho do arquivo de saída. Padrão: `./outputs/output.json`
-- -ot, --output-type: formato de saída. Opções: `json`, `csv`, `txt`. Padrão: `json`
-- -cc, --coordinating_conjunctions: ativa extrações com conjunções coordenativas
-- -sc, --subordinating_conjunctions: ativa extrações com conjunções subordinativas
-- -hs, --hidden_subjects: ativa extrações com sujeito oculto (Não implementado)
-- -a, --appositive: ativa extrações apositivas
-- -t, --transitive: ativa a transitividade para apositivas (só tem efeito quando `-a` está ativo)
-- -debug: modo verbose para depuração
+- -i, --input: path to the input file. Default: `./inputs/teste.txt`
+- -it, --input-type: input file type. Options: `txt` or `conll`. Default: `txt`
+  - For `txt` input: each line in the file is a sentence; the system generates a temporary `.conll`.
+  - For `conll` input: the input file is already in CoNLL-U format (one sentence per block, separated by an empty line).
+- -o, --output: path to the output file. Default: `./outputs/output.json`
+- -ot, --output-type: output format. Options: `json`, `csv`, `txt`. Default: `json`
+- -cc, --coordinating_conjunctions: enable extractions using coordinating conjunctions
+- -sc, --subordinating_conjunctions: enable extractions using subordinating conjunctions
+- -hs, --hidden_subjects: enable extractions with hidden subjects (Not implemented)
+- -a, --appositive: enable appositive extractions
+- -t, --transitive: enable transitivity for appositives (only has effect when `-a` is active)
+- -debug: verbose debug mode
 
-Importante:
-- Os módulos de extração são desativados por padrão. Ative os que deseja usando as flags `-cc -sc -a -t`.
+Important:
+- Extraction modules are disabled by default. Enable the ones you want using the flags `-cc -sc -a -t`.
 
-### Exemplos práticos
+### Practical examples
 
-1) TXT de entrada, JSON de saída (padrões):
-    ```bash
-    poetry run python3 src/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/out.json -ot json
-    ```
+1) TXT input, JSON output (defaults):
+```bash
+poetry run python3 src/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/out.json -ot json
+```
 
-2) TXT de entrada, CSV de saída, ativando coordenação e sujeito oculto:
-    ```bash
-    poetry run python3 src/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/out.csv -ot csv -cc
-    ```
+2) TXT input, CSV output, enabling coordination and hidden subject (flag example):
+```bash
+poetry run python3 src/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/out.csv -ot csv -cc
+```
 
-3) TXT de entrada, saída em texto legível:
-    ```bash
-    poetry run python3 src/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/out.txt -ot txt -cc -sc -a -t
-    ```
+3) TXT input, human-readable text output:
+```bash
+poetry run python3 src/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/out.txt -ot txt -cc -sc -a -t
+```
 
-4) Entrada já em CoNLL-U, JSON de saída:
-    ```bash
-    poetry run python3 src/main.py -i ./inputs/teste.conll -it conll -o ./outputs/out.json -ot json -cc -sc -a -t
-    ```
+4) Input already in CoNLL-U, JSON output:
+```bash
+poetry run python3 src/main.py -i ./inputs/teste.conll -it conll -o ./outputs/out.json -ot json -cc -sc -a -t
+```
 
-5) Somente conjunções coordenativas:
-    ```bash
-    poetry run python3 src/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/cc.json -ot json -cc
-    ```
+5) Only coordinating conjunctions:
+```bash
+poetry run python3 src/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/cc.json -ot json -cc
+```
 
-6) Modo debug para inspeção detalhada:
-    ```bash
-    poetry run python3 src/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/out.json -ot json -cc -debug
-    ```
+6) Debug mode for detailed inspection:
+```bash
+poetry run python3 src/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/out.json -ot json -cc -debug
+```
 
-7) Ver lista de argumentos:
-    ```bash
-    poetry run python3 src/main.py -h
-    ```
+7) Show arguments list:
+```bash
+poetry run python3 src/main.py -h
+```
 
-Saídas esperadas:
-- JSON: lista de objetos por sentença, com as extrações dentro de `extractions` e possíveis `sub_extractions`.
-- CSV: colunas `id`, `sentence`, `arg1`, `rel`, `arg2` (inclui subextrações com ids hierárquicos como `1.1`).
-- TXT: sentença seguida das extrações e subextrações formatadas em linhas.
+Expected outputs:
+- JSON: a list of objects per sentence, with extractions inside `extractions` and possible `sub_extractions`.
+- CSV: columns `id`, `sentence`, `arg1`, `rel`, `arg2` (includes sub-extractions with hierarchical ids like `1.1`).
+- TXT: the sentence followed by extractions and sub-extractions formatted as lines.
 
-## Como executar com Docker (sem Compose)
+## How to run with Docker (without Compose)
 
-Build da imagem (na raiz do projeto):
+Build the image (from the project root):
 ```bash
 docker build -t ptoie_dep .
 ```
 
-Executar um comando pontual (mapeando o diretório atual e apontando para os arquivos dentro do container):
+Run a one-off command (mounting the current directory and pointing to files inside the container):
 ```bash
 docker run --rm -it \
   -e STANZA_RESOURCES_DIR=/ptoie_dep/models/.stanza_resources \
@@ -103,36 +103,41 @@ docker run --rm -it \
   poetry run python3 src/main.py -i /ptoie_dep/inputs/teste.conll -it conll -o /ptoie_dep/outputs/out.json -ot json -cc -sc -a -t
 ```
 
-Observação: ajuste os caminhos de `-i` e `-o` conforme necessário; use `-it txt` quando a entrada for texto linha-a-linha.
+Note: adjust the `-i` and `-o` paths as needed; use `-it txt` when the input is line-by-line text.
 
-## Como executar com Docker Compose
+## How to run with Docker Compose
 
-O arquivo `docker-compose.yml` já inclui o serviço `ptoie_dep`. Você pode editar a linha `command:` para o cenário desejado. Exemplo de comando recomendado:
+The `docker-compose.yml` file already includes the `ptoie_dep` service. You can edit the `command:` line for the desired scenario. Example recommended command:
 
 ```yaml
 command: poetry run python3 src/main.py -i /ptoie_dep/inputs/teste.conll -it conll -o /ptoie_dep/outputs/out.json -ot json -cc -sc -a -t
 ```
 
-Então rode:
+Then run:
 ```bash
 docker compose up --build
 ```
 
-Use o comando `run` para executar outros comandos personalizados:
+Use `run` to execute other custom commands:
 ```bash
 docker compose run ptoie_dep poetry run python3 src/main.py -i /ptoie_dep/inputs/ceten-200.txt -it txt -o /ptoie_dep/outputs/out.csv -ot csv -cc
 ```
 
+Tips:
+- The volume `.:/ptoie_dep` allows using local files inside the container.
+- `STANZA_RESOURCES_DIR` (exposed in the compose file) can point to `models/.stanza_resources` to avoid repeated downloads.
+
+## Quick references
+
+- TXT input: each line is a sentence; the system creates a temporary `.conll`.
+- CoNLL-U input: use `-it conll` and ensure sentences are separated by an empty line.
+- Rule activation: all rules are disabled by default; add the desired flags.
+- Relative paths are interpreted from the project root; in Docker, use absolute paths inside the container (e.g., `/ptoie_dep/...`).
 
 
-Dicas:
-- O volume `.:/ptoie_dep` permite usar arquivos da pasta local dentro do container.
-- `STANZA_RESOURCES_DIR` (exposto no compose) pode apontar para `models/.stanza_resources` para evitar downloads repetidos.
+## How to cite
+If you find this repo helpful, please consider citing:
 
-## Referências rápidas
-
-- Entrada TXT: cada linha é uma sentença; o sistema cria um `.conll` temporário.
-- Entrada CoNLL-U: use `-it conll` e garanta sentenças separadas por linha vazia.
-- Ativação das regras: todas desativadas por padrão; adicione as flags desejadas.
-- Caminhos relativos são interpretados a partir da raiz do projeto; no Docker, use caminhos absolutos dentro do container (ex.: `/ptoie_dep/...`).
-
+```bibtex
+@Article{dptoie2025, author={xxx xxx}, title={xxxx}, journal={dddd}, year={xxx}, month={x}, day={cc}, issn={xxx}, doi={xxxxx}, url={asas} }
+```
