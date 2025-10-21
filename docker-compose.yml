@@ -6,6 +6,6 @@ services:
     container_name: dptoie_python
     volumes:
       - .:/dptoie_python
-    command: poetry run python3 src/main.py -i /dptoie_python/inputs/teste.conll -it conll -o /dptoie_python/outputs/output.json -ot json -cc -sc -hs -a -t
+    command: poetry run python3 src/dptoie_python/main.py -i /dptoie_python/inputs/teste.conll -it conll -o /dptoie_python/outputs/output.json -ot json -cc -sc -hs -a -t
     environment:
       - STANZA_RESOURCES_DIR=/dptoie_python/models/.stanza_resources

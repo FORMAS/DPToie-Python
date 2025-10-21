@@ -37,7 +37,7 @@ jobs:
               echo "[JSON] input=$filename flags=[$flags]"
               # remove stale json output if any
               rm -f ./outputs/output.json
-              docker run --rm -v "$(pwd)":/dptoie_python dptoie_python poetry run python3 src/main.py -i "$input_path" $input_args $flags || echo "json-run-failed for $filename $flags"
+              docker run --rm -v "$(pwd)":/dptoie_python dptoie_python poetry run python3 src/dptoie_python/main.py -i "$input_path" $input_args $flags || echo "json-run-failed for $filename $flags"
 
               # compute cleaned suffix for filename (empty => base name only)
               if [[ -z "$flags" ]]; then
@@ -58,7 +58,7 @@ jobs:
               echo "[CSV] input=$filename flags=[$flags]"
               # remove stale csv output if any
               rm -f ./outputs/output.csv
-              docker run --rm -v "$(pwd)":/dptoie_python dptoie_python poetry run python3 src/main.py -i "$input_path" $input_args $flags -o ./outputs/output.csv -ot csv || echo "csv-run-failed for $filename $flags"
+              docker run --rm -v "$(pwd)":/dptoie_python dptoie_python poetry run python3 src/dptoie_python/main.py -i "$input_path" $input_args $flags -o ./outputs/output.csv -ot csv || echo "csv-run-failed for $filename $flags"
 
               if [[ -z "$flags" ]]; then
                 out_csv="./outputs/${name}.csv"

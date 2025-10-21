@@ -14,7 +14,7 @@ from spacy.tokens import Doc
 from spacy import Language
 from typing import Any, Generator
 from spacy_conll.parser import ConllParser
-from src.extraction import Extractor, ExtractorConfig, Extraction
+from src.dptoie_python.extraction import Extractor, ExtractorConfig, Extraction
 
 
 def generate_conll_file_from_sentences_file(input_file: str) -> str:

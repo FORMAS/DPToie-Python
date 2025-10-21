@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "DPToie-Python is an Open Information Extractor for Portuguese language that employs Dependence Parser and Part of Speech Tagger models with Stanford CoreNLP."
 authors = ["André Walker <andre.walker@ufba.br>", "Rafael Glauber <rafaelglauber@gmail.com>", "Daniela Barreiro Claro <dclaro.@ufba.br>"]
 readme = "README.md"
-package-mode = false
+package-mode = true
 
 [tool.poetry.dependencies]
 python = ">=3.12,<3.14"

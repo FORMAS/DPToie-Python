@@ -6,3 +6,4 @@ out.txt
 !/outputs/.gitkeep
 /models/*
 !/models/.gitkeep
+/dist/
