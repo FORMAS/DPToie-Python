@@ -7,7 +7,7 @@ RUN pip install poetry  \
     && poetry config virtualenvs.create false \
     && poetry install --only main --no-root --no-directory
 COPY . /dptoie_python
-RUN poetry install --only main
+RUN poetry install --only main --no-root
 
 ENV PYTHONPATH="$PYTHONPATH:/dptoie_python"
 

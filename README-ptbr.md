@@ -3,7 +3,7 @@
 
 Extrator de Informação Aberta para língua portuguesa baseado em análise de dependências (SpaCy + Stanza).
 
-Este guia mostra todas as formas de rodar o projeto pelo `src/dptoie_python/main.py`, com todas as variações de argumentos, tanto localmente (Poetry) quanto com Docker/Docker Compose.
+Este guia mostra todas as formas de rodar o projeto pelo `src/dptoie/main.py`, com todas as variações de argumentos, tanto localmente (Poetry) quanto com Docker/Docker Compose.
 
 - Requisitos mínimos: Python 3.12+, Poetry, ou Docker (opcional)
 - Modelos: o Stanza faz o download automático na primeira execução. Você pode definir `STANZA_RESOURCES_DIR` para usar um diretório local de modelos (ex.: `./models/.stanza_resources`).
@@ -30,7 +30,7 @@ poetry install
 Forma geral:
 
 ```bash
-poetry run python3 src/dptoie_python/main.py \
+poetry run python3 src/dptoie/main.py \
   -i <caminho_entrada> \
   -it <txt|conll> \
   -o <caminho_saida> \
@@ -60,37 +60,37 @@ Importante:
 
 1) TXT de entrada, JSON de saída (padrões):
     ```bash
-    poetry run python3 src/dptoie_python/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/out.json -ot json
+    poetry run python3 src/dptoie/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/out.json -ot json
     ```
 
 2) TXT de entrada, CSV de saída, ativando coordenação e sujeito oculto:
     ```bash
-    poetry run python3 src/dptoie_python/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/out.csv -ot csv -cc
+    poetry run python3 src/dptoie/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/out.csv -ot csv -cc
     ```
 
 3) TXT de entrada, saída em texto legível:
     ```bash
-    poetry run python3 src/dptoie_python/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/out.txt -ot txt -cc -sc -a -t
+    poetry run python3 src/dptoie/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/out.txt -ot txt -cc -sc -a -t
     ```
 
 4) Entrada já em CoNLL-U, JSON de saída:
     ```bash
-    poetry run python3 src/dptoie_python/main.py -i ./inputs/teste.conll -it conll -o ./outputs/out.json -ot json -cc -sc -a -t
+    poetry run python3 src/dptoie/main.py -i ./inputs/teste.conll -it conll -o ./outputs/out.json -ot json -cc -sc -a -t
     ```
 
 5) Somente conjunções coordenativas:
     ```bash
-    poetry run python3 src/dptoie_python/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/cc.json -ot json -cc
+    poetry run python3 src/dptoie/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/cc.json -ot json -cc
     ```
 
 6) Modo debug para inspeção detalhada:
     ```bash
-    poetry run python3 src/dptoie_python/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/out.json -ot json -cc -debug
+    poetry run python3 src/dptoie/main.py -i ./inputs/ceten-200.txt -it txt -o ./outputs/out.json -ot json -cc -debug
     ```
 
 7) Ver lista de argumentos:
     ```bash
-    poetry run python3 src/dptoie_python/main.py -h
+    poetry run python3 src/dptoie/main.py -h
     ```
 
 Saídas esperadas:
@@ -112,7 +112,7 @@ docker run --rm -it \
   -v "$(pwd)":/dptoie_python \
   -w /dptoie_python \
   dptoie_python \
-  poetry run python3 src/dptoie_python/main.py -i /dptoie_python/inputs/teste.conll -it conll -o /dptoie_python/outputs/out.json -ot json -cc -sc -a -t
+  poetry run python3 src/dptoie/main.py -i /dptoie_python/inputs/teste.conll -it conll -o /dptoie_python/outputs/out.json -ot json -cc -sc -a -t
 ```
 
 Observação: ajuste os caminhos de `-i` e `-o` conforme necessário; use `-it txt` quando a entrada for texto linha-a-linha.
@@ -122,7 +122,7 @@ Observação: ajuste os caminhos de `-i` e `-o` conforme necessário; use `-it t
 O arquivo `docker-compose.yml` já inclui o serviço `dptoie_python`. Você pode editar a linha `command:` para o cenário desejado. Exemplo de comando recomendado:
 
 ```yaml
-command: poetry run python3 src/dptoie_python/main.py -i /dptoie_python/inputs/teste.conll -it conll -o /dptoie_python/outputs/out.json -ot json -cc -sc -a -t
+command: poetry run python3 src/dptoie/main.py -i /dptoie_python/inputs/teste.conll -it conll -o /dptoie_python/outputs/out.json -ot json -cc -sc -a -t
 ```
 
 Então rode:
@@ -132,7 +132,7 @@ docker compose up --build
 
 Use o comando `run` para executar outros comandos personalizados:
 ```bash
-docker compose run dptoie_python poetry run python3 src/dptoie_python/main.py -i /dptoie_python/inputs/ceten-200.txt -it txt -o /dptoie_python/outputs/out.csv -ot csv -cc
+docker compose run dptoie_python poetry run python3 src/dptoie/main.py -i /dptoie_python/inputs/ceten-200.txt -it txt -o /dptoie_python/outputs/out.csv -ot csv -cc
 ```
 
 
