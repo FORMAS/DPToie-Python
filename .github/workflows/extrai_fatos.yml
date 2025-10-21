@@ -10,171 +10,74 @@ jobs:
       - name: Build container
         run: DOCKER_BUILDKIT=1 docker build --tag ptoie_dep .
 
-      # --- JSON ---
-      - name: Run TESTE JSON
+      - name: Run all inputs with all configurations
         run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/teste.txt --input-type txt
-          mv ./outputs/output.json ./outputs/teste.json
-      - name: Run CETEN200 (base) JSON
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/ceten-200.conll -it conll
-          mv ./outputs/output.json ./outputs/ceten-200.json
-      - name: Run WIKI200 (base) JSON
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/wiki-200.conll -it conll
-          mv ./outputs/output.json ./outputs/wiki-200.json
+          set -euo pipefail
+          mkdir -p outputs
 
-      - name: Run WIKI200-CC JSON
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/wiki-200.conll -it conll -cc
-          mv ./outputs/output.json ./outputs/wiki-200-cc.json
-      - name: Run CETEN200-CC JSON
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/ceten-200.conll -it conll -cc
-          mv ./outputs/output.json ./outputs/ceten-200-cc.json
-      - name: Run WIKI200-SC JSON
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/wiki-200.conll -it conll -sc
-          mv ./outputs/output.json ./outputs/wiki-200-sc.json
-      - name: Run CETEN200-SC JSON
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/ceten-200.conll -it conll -sc
-          mv ./outputs/output.json ./outputs/ceten-200-sc.json
-      - name: Run WIKI200-HS JSON
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/wiki-200.conll -it conll -hs
-          mv ./outputs/output.json ./outputs/wiki-200-hs.json
-      - name: Run CETEN200-HS JSON
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/ceten-200.conll -it conll -hs
-          mv ./outputs/output.json ./outputs/ceten-200-hs.json
-      - name: Run WIKI200-A JSON
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/wiki-200.conll -it conll -a
-          mv ./outputs/output.json ./outputs/wiki-200-a.json
-      - name: Run CETEN200-A JSON
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/ceten-200.conll -it conll -a
-          mv ./outputs/output.json ./outputs/ceten-200-a.json
-      - name: Run WIKI200-A-T JSON
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/wiki-200.conll -it conll -a -t
-          mv ./outputs/output.json ./outputs/wiki-200-a-t.json
-      - name: Run CETEN200-A-T JSON
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/ceten-200.conll -it conll -a -t
-          mv ./outputs/output.json ./outputs/ceten-200-a-t.json
-      - name: Run WIKI200-ALL JSON
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/wiki-200.conll -it conll -cc -sc -hs -a -t
-          mv ./outputs/output.json ./outputs/wiki-200-all.json
-      - name: Run CETEN200-ALL JSON
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/ceten-200.conll -it conll -cc -sc -hs -a -t
-          mv ./outputs/output.json ./outputs/ceten-200-all.json
+          # Define flag combinations to run (same for JSON and CSV)
+          FLAGS_LIST=("" "-cc" "-sc" "-hs" "-a" "-a -t" "-cc -sc -hs -a -t")
 
-      # --- CSV ---
-      - name: Run TESTE CSV
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/teste.txt  -o ./outputs/output.csv -ot csv
-          mv ./outputs/output.csv ./outputs/teste.csv
-      - name: Run CETEN200 (base) CSV
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/ceten-200.conll -it conll  -o ./outputs/output.csv -ot csv
-          mv ./outputs/output.csv ./outputs/ceten-200.csv
-      - name: Run WIKI200 (base) CSV
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/wiki-200.conll -it conll  -o ./outputs/output.csv -ot csv
-          mv ./outputs/output.csv ./outputs/wiki-200.csv
+          for input_path in inputs/*; do
+            [ -f "$input_path" ] || continue
+            filename=$(basename "$input_path")
+            # strip last extension only (handles names like ceten-200.conll)
+            name="${filename%.*}"
 
-      - name: Run WIKI200-CC CSV
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/wiki-200.conll -it conll -cc  -o ./outputs/output.csv -ot csv
-          mv ./outputs/output.csv ./outputs/wiki-200-cc.csv
-      - name: Run CETEN200-CC CSV
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/ceten-200.conll -it conll -cc  -o ./outputs/output.csv -ot csv
-          mv ./outputs/output.csv ./outputs/ceten-200-cc.csv
-      - name: Run WIKI200-SC CSV
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/wiki-200.conll -it conll -sc  -o ./outputs/output.csv -ot csv
-          mv ./outputs/output.csv ./outputs/wiki-200-sc.csv
-      - name: Run CETEN200-SC CSV
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/ceten-200.conll -it conll -sc  -o ./outputs/output.csv -ot csv
-          mv ./outputs/output.csv ./outputs/ceten-200-sc.csv
-      - name: Run WIKI200-HS CSV
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/wiki-200.conll -it conll -hs  -o ./outputs/output.csv -ot csv
-          mv ./outputs/output.csv ./outputs/wiki-200-hs.csv
-      - name: Run CETEN200-HS CSV
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/ceten-200.conll -it conll -hs  -o ./outputs/output.csv -ot csv
-          mv ./outputs/output.csv ./outputs/ceten-200-hs.csv
-      - name: Run WIKI200-A CSV
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/wiki-200.conll -it conll -a  -o ./outputs/output.csv -ot csv
-          mv ./outputs/output.csv ./outputs/wiki-200-a.csv
-      - name: Run CETEN200-A CSV
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/ceten-200.conll -it conll -a  -o ./outputs/output.csv -ot csv
-          mv ./outputs/output.csv ./outputs/ceten-200-a.csv
-      - name: Run WIKI200-A-T CSV
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/wiki-200.conll -it conll -a -t  -o ./outputs/output.csv -ot csv
-          mv ./outputs/output.csv ./outputs/wiki-200-a-t.csv
-      - name: Run CETEN200-A-T CSV
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/ceten-200.conll -it conll -a -t  -o ./outputs/output.csv -ot csv
-          mv ./outputs/output.csv ./outputs/ceten-200-a-t.csv
-      - name: Run WIKI200-ALL CSV
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/wiki-200.conll -it conll -cc -sc -hs -a -t  -o ./outputs/output.csv -ot csv
-          mv ./outputs/output.csv ./outputs/wiki-200-all.csv
-      - name: Run CETEN200-ALL CSV
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/ceten-200.conll -it conll -cc -sc -hs -a -t  -o ./outputs/output.csv -ot csv
-          mv ./outputs/output.csv ./outputs/ceten-200-all.csv
-      - name: Run BIA-ALL CSV
-        run: |
-          docker run --rm -v $(pwd):/ptoie_dep ptoie_dep poetry run python3 src/main.py -i ./inputs/bia.txt --input-type txt -cc -sc -hs -a -t  -o ./outputs/output.csv -ot csv
-          mv ./outputs/output.csv ./outputs/bia.csv
-      
+            # detect input type: .txt -> --input-type txt, otherwise assume conll
+            if [[ "$filename" == *.txt ]]; then
+              input_args="--input-type txt"
+            else
+              input_args="-it conll"
+            fi
 
-      # --- Upload de todos os artefatos ---
+            for flags in "${FLAGS_LIST[@]}"; do
+              # --- JSON ---
+              echo "[JSON] input=$filename flags=[$flags]"
+              # remove stale json output if any
+              rm -f ./outputs/output.json
+              docker run --rm -v "$(pwd)":/ptoie_dep ptoie_dep poetry run python3 src/main.py -i "$input_path" $input_args $flags || echo "json-run-failed for $filename $flags"
+
+              # compute cleaned suffix for filename (empty => base name only)
+              if [[ -z "$flags" ]]; then
+                out_json="./outputs/${name}.json"
+              else
+                cleaned=$(echo "$flags" | sed -E "s/^\s*-//; s/\s+-/ /g; s/\s+/-/g; s/^-//")
+                # remove any leading/trailing hyphens/spaces
+                cleaned=$(echo "$cleaned" | sed -E 's/^[ -]+//; s/[ -]+$//; s/\s+/-/g')
+                out_json="./outputs/${name}-${cleaned}.json"
+              fi
+              if [[ -f ./outputs/output.json ]]; then
+                mv ./outputs/output.json "$out_json"
+              else
+                echo "Warning: JSON output not produced for $filename with flags [$flags]"
+              fi
+
+              # --- CSV ---
+              echo "[CSV] input=$filename flags=[$flags]"
+              # remove stale csv output if any
+              rm -f ./outputs/output.csv
+              docker run --rm -v "$(pwd)":/ptoie_dep ptoie_dep poetry run python3 src/main.py -i "$input_path" $input_args $flags -o ./outputs/output.csv -ot csv || echo "csv-run-failed for $filename $flags"
+
+              if [[ -z "$flags" ]]; then
+                out_csv="./outputs/${name}.csv"
+              else
+                cleaned=$(echo "$flags" | sed -E "s/^\s*-//; s/\s+-/ /g; s/\s+/-/g; s/^-//")
+                cleaned=$(echo "$cleaned" | sed -E 's/^[ -]+//; s/[ -]+$//; s/\s+/-/g')
+                out_csv="./outputs/${name}-${cleaned}.csv"
+              fi
+              if [[ -f ./outputs/output.csv ]]; then
+                mv ./outputs/output.csv "$out_csv"
+              else
+                echo "Warning: CSV output not produced for $filename with flags [$flags]"
+              fi
+
+            done
+          done
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: extrai_fatos_outputs
           path: |
-            ./outputs/teste.json
-            ./outputs/ceten-200.json
-            ./outputs/wiki-200.json
-            ./outputs/ceten-200-cc.json
-            ./outputs/wiki-200-cc.json
-            ./outputs/ceten-200-sc.json
-            ./outputs/wiki-200-sc.json
-            ./outputs/ceten-200-hs.json
-            ./outputs/wiki-200-hs.json
-            ./outputs/ceten-200-a.json
-            ./outputs/wiki-200-a.json
-            ./outputs/ceten-200-a-t.json
-            ./outputs/wiki-200-a-t.json
-            ./outputs/ceten-200-all.json
-            ./outputs/wiki-200-all.json
-            ./outputs/teste.csv
-            ./outputs/ceten-200.csv
-            ./outputs/wiki-200.csv
-            ./outputs/wiki-200-cc.csv
-            ./outputs/ceten-200-cc.csv
-            ./outputs/wiki-200-sc.csv
-            ./outputs/ceten-200-sc.csv
-            ./outputs/wiki-200-hs.csv
-            ./outputs/ceten-200-hs.csv
-            ./outputs/wiki-200-a.csv
-            ./outputs/ceten-200-a.csv
-            ./outputs/wiki-200-a-t.csv
-            ./outputs/ceten-200-a-t.csv
-            ./outputs/wiki-200-all.csv
-            ./outputs/ceten-200-all.csv
-            ./outputs/bia.csv
+            ./outputs

@@ -4,6 +4,5 @@
 out.txt
 /outputs/*
 !/outputs/.gitkeep
-/inputs
 /models/*
 !/models/.gitkeep
