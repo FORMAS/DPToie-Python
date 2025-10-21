@@ -208,6 +208,10 @@ def main(
         debug=debug,
     ))
 
+    # Remove a extensão se ela existir
+    if Doc.has_extension("extractions"):
+        Doc.remove_extension("extractions")
+
     Doc.set_extension("extractions", getter=extractor.get_extractions_from_doc)
 
     if input_type == 'txt':
