@@ -8,7 +8,7 @@ package-mode = true
 
 [tool.poetry.dependencies]
 python = ">=3.12,<3.14"
-spacy_stanza = { git = "https://github.com/andrewalkermo/spacy-stanza.git",  tag = "v1.0.5" }
+spacy_stanza = { git = "https://github.com/FORMAS/spacy-stanza.git",  tag = "v1.0.5" }
 torch = {version = "2.7.1+cpu", source = "pytorch_cpu"}
 spacy-conll = "^4.0.1"
 spacy = "3.8.7"
