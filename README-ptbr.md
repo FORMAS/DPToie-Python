@@ -102,27 +102,27 @@ Saídas esperadas:
 
 Build da imagem (na raiz do projeto):
 ```bash
-docker build -t ptoie_python .
+docker build -t dptoie_python .
 ```
 
 Executar um comando pontual (mapeando o diretório atual e apontando para os arquivos dentro do container):
 ```bash
 docker run --rm -it \
-  -e STANZA_RESOURCES_DIR=/ptoie_python/models/.stanza_resources \
-  -v "$(pwd)":/ptoie_python \
-  -w /ptoie_python \
-  ptoie_python \
-  poetry run python3 src/main.py -i /ptoie_python/inputs/teste.conll -it conll -o /ptoie_python/outputs/out.json -ot json -cc -sc -a -t
+  -e STANZA_RESOURCES_DIR=/dptoie_python/models/.stanza_resources \
+  -v "$(pwd)":/dptoie_python \
+  -w /dptoie_python \
+  dptoie_python \
+  poetry run python3 src/main.py -i /dptoie_python/inputs/teste.conll -it conll -o /dptoie_python/outputs/out.json -ot json -cc -sc -a -t
 ```
 
 Observação: ajuste os caminhos de `-i` e `-o` conforme necessário; use `-it txt` quando a entrada for texto linha-a-linha.
 
 ## Como executar com Docker Compose
 
-O arquivo `docker-compose.yml` já inclui o serviço `ptoie_python`. Você pode editar a linha `command:` para o cenário desejado. Exemplo de comando recomendado:
+O arquivo `docker-compose.yml` já inclui o serviço `dptoie_python`. Você pode editar a linha `command:` para o cenário desejado. Exemplo de comando recomendado:
 
 ```yaml
-command: poetry run python3 src/main.py -i /ptoie_python/inputs/teste.conll -it conll -o /ptoie_python/outputs/out.json -ot json -cc -sc -a -t
+command: poetry run python3 src/main.py -i /dptoie_python/inputs/teste.conll -it conll -o /dptoie_python/outputs/out.json -ot json -cc -sc -a -t
 ```
 
 Então rode:
@@ -132,13 +132,13 @@ docker compose up --build
 
 Use o comando `run` para executar outros comandos personalizados:
 ```bash
-docker compose run ptoie_python poetry run python3 src/main.py -i /ptoie_python/inputs/ceten-200.txt -it txt -o /ptoie_python/outputs/out.csv -ot csv -cc
+docker compose run dptoie_python poetry run python3 src/main.py -i /dptoie_python/inputs/ceten-200.txt -it txt -o /dptoie_python/outputs/out.csv -ot csv -cc
 ```
 
 
 
 Dicas:
-- O volume `.:/ptoie_python` permite usar arquivos da pasta local dentro do container.
+- O volume `.:/dptoie_python` permite usar arquivos da pasta local dentro do container.
 - `STANZA_RESOURCES_DIR` (exposto no compose) pode apontar para `models/.stanza_resources` para evitar downloads repetidos.
 
 ## Referências rápidas
@@ -146,7 +146,7 @@ Dicas:
 - Entrada TXT: cada linha é uma sentença; o sistema cria um `.conll` temporário.
 - Entrada CoNLL-U: use `-it conll` e garanta sentenças separadas por linha vazia.
 - Ativação das regras: todas desativadas por padrão; adicione as flags desejadas.
-- Caminhos relativos são interpretados a partir da raiz do projeto; no Docker, use caminhos absolutos dentro do container (ex.: `/ptoie_python/...`).
+- Caminhos relativos são interpretados a partir da raiz do projeto; no Docker, use caminhos absolutos dentro do container (ex.: `/dptoie_python/...`).
 
 ## Como citar este projeto
 Se você utilizar este projeto em sua pesquisa, por favor, cite-o da seguinte forma:

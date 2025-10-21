@@ -1,14 +1,14 @@
 FROM python:3.12-slim
 
-WORKDIR /ptoie_python
+WORKDIR /dptoie_python
 
-COPY pyproject.toml poetry.lock /ptoie_python/
+COPY pyproject.toml poetry.lock /dptoie_python/
 RUN pip install poetry  \
     && poetry config virtualenvs.create false \
     && poetry install --only main --no-root --no-directory
-COPY . /ptoie_python
+COPY . /dptoie_python
 RUN poetry install --only main
 
-ENV PYTHONPATH="$PYTHONPATH:/ptoie_python"
+ENV PYTHONPATH="$PYTHONPATH:/dptoie_python"
 
 CMD [ "poetry", "run", "python3", "src/noie.py" ]
