@@ -3,6 +3,10 @@ name: run_main
 on:
   workflow_dispatch:
     inputs:
+      sentences:
+        description: "Sentenças de entrada (uma por linha). Se preenchido, usa -it txt e ignora o arquivo padrão."
+        required: false
+        type: string
       input_type:
         description: "Tipo da entrada (usa arquivo padrão conforme o tipo)"
         type: choice
@@ -12,39 +16,20 @@ on:
         default: txt
       cc:
         description: "Ativar conjunções coordenativas (-cc)"
-        type: choice
-        options:
-          - Sim
-          - Não
-        default: Sim
+        type: boolean
+        default: true
       sc:
         description: "Ativar conjunções subordinativas (-sc)"
-        type: choice
-        options:
-          - Sim
-          - Não
-        default: Sim
-      hs:
-        description: "Ativar sujeito oculto (-hs)"
-        type: choice
-        options:
-          - Sim
-          - Não
-        default: Sim
+        type: boolean
+        default: true
       a:
         description: "Ativar apositivas (-a)"
-        type: choice
-        options:
-          - Sim
-          - Não
-        default: Sim
+        type: boolean
+        default: true
       t:
         description: "Ativar transitividade p/ apositivas (-t)"
-        type: choice
-        options:
-          - Sim
-          - Não
-        default: Sim
+        type: boolean
+        default: true
       output_type:
         description: "Tipo da saída (arquivo de saída padrão: ./outputs/output.json)"
         type: choice
@@ -63,7 +48,7 @@ jobs:
       - name: Build container
         run: DOCKER_BUILDKIT=1 docker build --tag ptoie_dep .
 
-      - name: Preparar flags
+      - name: Preparar entradas e flags
         id: prep
         shell: bash
         run: |
@@ -73,26 +58,32 @@ jobs:
           INPUT_TYPE="${{ inputs.input_type }}"
           OUTPUT_TYPE="${{ inputs.output_type }}"
 
-          # Seleciona arquivo de entrada padrão conforme tipo
-          case "$INPUT_TYPE" in
-            txt) INPUT_FILE="./inputs/teste.txt" ;;
-            conll) INPUT_FILE="./inputs/teste.conll" ;;
-            *) echo "Tipo de entrada inválido: $INPUT_TYPE"; exit 1 ;;
-          esac
+          SENTENCES="${{ inputs.sentences }}"
+          if [ -n "$SENTENCES" ]; then
+            INPUT_FILE="./inputs/gh-sentences.txt"
+            printf "%s\n" "$SENTENCES" > "$INPUT_FILE"
+            INPUT_TYPE="txt"
+            echo "Usando sentenças fornecidas (forçando -it txt) em $INPUT_FILE"
+          else
+            case "$INPUT_TYPE" in
+              txt) INPUT_FILE="./inputs/teste.txt" ;;
+              conll) INPUT_FILE="./inputs/teste.conll" ;;
+              *) echo "Tipo de entrada inválido: $INPUT_TYPE"; exit 1 ;;
+            esac
+          fi
 
           FLAGS=""
-          [ "${{ inputs.cc }}" = "Sim" ] && FLAGS="$FLAGS -cc"
-          [ "${{ inputs.sc }}" = "Sim" ] && FLAGS="$FLAGS -sc"
-          [ "${{ inputs.hs }}" = "Sim" ] && FLAGS="$FLAGS -hs"
-          [ "${{ inputs.a }}" = "Sim" ] && FLAGS="$FLAGS -a"
-          [ "${{ inputs.t }}" = "Sim" ] && FLAGS="$FLAGS -t"
+          [ "${{ inputs.cc }}" = "true" ] && FLAGS="$FLAGS -cc"
+          [ "${{ inputs.sc }}" = "true" ] && FLAGS="$FLAGS -sc"
+          [ "${{ inputs.a }}" = "true" ] && FLAGS="$FLAGS -a"
+          [ "${{ inputs.t }}" = "true" ] && FLAGS="$FLAGS -t"
 
           echo "INPUT_FILE=$INPUT_FILE" >> "$GITHUB_ENV"
           echo "INPUT_TYPE=$INPUT_TYPE" >> "$GITHUB_ENV"
           echo "OUTPUT_TYPE=$OUTPUT_TYPE" >> "$GITHUB_ENV"
           echo "FLAGS=$FLAGS" >> "$GITHUB_ENV"
 
-          echo "Usando arquivo de entrada padrão: $INPUT_FILE"
+          echo "Arquivo de entrada: $INPUT_FILE (tipo: $INPUT_TYPE)"
           echo "Usando arquivo de saída padrão: ./outputs/output.json"
           echo "Flags: $FLAGS"
 
