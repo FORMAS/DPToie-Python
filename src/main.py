@@ -234,7 +234,6 @@ if __name__ == "__main__":
     parser.add_argument('-it', '--input-type', metavar='input_type', type=str, choices=['txt', 'conll'], help='input file type', default='txt')
     parser.add_argument('-o', '--output', metavar='output', type=str, help='path to the output file', default='./outputs/output.json')
     parser.add_argument('-ot', '--output-type', metavar='output_type', type=str, choices=['json', 'csv', 'txt'], help='output file type', default='json')
-    parser.add_argument('-conll', action='store_true', help='input file is in CONLL format')
     parser.add_argument('-cc', '--coordinating_conjunctions', dest='coordinating_conjunctions', action='store_true', help='enable coordinating conjunctions extraction')
     parser.add_argument('-sc', '--subordinating_conjunctions', dest='subordinating_conjunctions', action='store_true', help='enable subordinating conjunctions extraction')
     parser.add_argument('-hs', '--hidden_subjects', dest='hidden_subjects', action='store_true', help='enable hidden subjects extraction')

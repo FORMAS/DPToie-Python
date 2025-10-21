@@ -1,0 +1,123 @@
+name: run_main
+
+on:
+  workflow_dispatch:
+    inputs:
+      input_type:
+        description: "Tipo da entrada (usa arquivo padrão conforme o tipo)"
+        type: choice
+        options:
+          - txt
+          - conll
+        default: txt
+      cc:
+        description: "Ativar conjunções coordenativas (-cc)"
+        type: choice
+        options:
+          - Sim
+          - Não
+        default: Sim
+      sc:
+        description: "Ativar conjunções subordinativas (-sc)"
+        type: choice
+        options:
+          - Sim
+          - Não
+        default: Sim
+      hs:
+        description: "Ativar sujeito oculto (-hs)"
+        type: choice
+        options:
+          - Sim
+          - Não
+        default: Sim
+      a:
+        description: "Ativar apositivas (-a)"
+        type: choice
+        options:
+          - Sim
+          - Não
+        default: Sim
+      t:
+        description: "Ativar transitividade p/ apositivas (-t)"
+        type: choice
+        options:
+          - Sim
+          - Não
+        default: Sim
+      output_type:
+        description: "Tipo da saída (arquivo de saída padrão: ./outputs/output.json)"
+        type: choice
+        options:
+          - json
+          - csv
+          - txt
+        default: json
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build container
+        run: DOCKER_BUILDKIT=1 docker build --tag ptoie_dep .
+
+      - name: Preparar flags
+        id: prep
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p inputs outputs
+
+          INPUT_TYPE="${{ inputs.input_type }}"
+          OUTPUT_TYPE="${{ inputs.output_type }}"
+
+          # Seleciona arquivo de entrada padrão conforme tipo
+          case "$INPUT_TYPE" in
+            txt) INPUT_FILE="./inputs/teste.txt" ;;
+            conll) INPUT_FILE="./inputs/teste.conll" ;;
+            *) echo "Tipo de entrada inválido: $INPUT_TYPE"; exit 1 ;;
+          esac
+
+          FLAGS=""
+          [ "${{ inputs.cc }}" = "Sim" ] && FLAGS="$FLAGS -cc"
+          [ "${{ inputs.sc }}" = "Sim" ] && FLAGS="$FLAGS -sc"
+          [ "${{ inputs.hs }}" = "Sim" ] && FLAGS="$FLAGS -hs"
+          [ "${{ inputs.a }}" = "Sim" ] && FLAGS="$FLAGS -a"
+          [ "${{ inputs.t }}" = "Sim" ] && FLAGS="$FLAGS -t"
+
+          echo "INPUT_FILE=$INPUT_FILE" >> "$GITHUB_ENV"
+          echo "INPUT_TYPE=$INPUT_TYPE" >> "$GITHUB_ENV"
+          echo "OUTPUT_TYPE=$OUTPUT_TYPE" >> "$GITHUB_ENV"
+          echo "FLAGS=$FLAGS" >> "$GITHUB_ENV"
+
+          echo "Usando arquivo de entrada padrão: $INPUT_FILE"
+          echo "Usando arquivo de saída padrão: ./outputs/output.json"
+          echo "Flags: $FLAGS"
+
+      - name: Executar extrator
+        shell: bash
+        run: |
+          docker run --rm \
+            -e STANZA_RESOURCES_DIR=/ptoie_dep/models/.stanza_resources \
+            -v "$(pwd)":/ptoie_dep \
+            -w /ptoie_dep \
+            ptoie_dep \
+            poetry run python3 src/main.py -i "$INPUT_FILE" -it "$INPUT_TYPE" -ot "$OUTPUT_TYPE" $FLAGS
+
+      - name: Prévia do output
+        shell: bash
+        run: |
+          set -e
+          OUTPUT_FILE="./outputs/output.json"
+          echo "Gerado: $OUTPUT_FILE"
+          ls -lh "$OUTPUT_FILE" || true
+          echo "Prévia:" || true
+          head -n 50 "$OUTPUT_FILE" || true
+
+      - name: Upload do arquivo de saída
+        uses: actions/upload-artifact@v4
+        with:
+          name: ptoie_dep_output
+          path: ./outputs/output.json
