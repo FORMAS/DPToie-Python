@@ -9,7 +9,7 @@ package-mode = true
 [tool.poetry.dependencies]
 python = ">=3.12,<3.14"
 formas-spacy-stanza = "^1.0.5"
-torch = {version = "2.7.1+cpu", source = "pytorch_cpu"}
+torch = "2.7.1"
 spacy-conll = "^4.0.1"
 spacy = "3.8.7"
 stanza = "1.10.1"
